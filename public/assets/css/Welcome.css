@@ -1,0 +1,85 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  ;
+}
+
+  .b-example-divider {
+    height: 3rem;
+    background-color:rgb(22, 22, 77);
+    border: solid  1px rgb(22, 22, 77);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em  rgb(22, 22, 77), inset 0 .125em .5em rgb(22, 22, 77);
+    
+  }
+
+  .divPrincipal{
+    /* box-shadow: 0px 10px 30px 1px  blueviolet; */
+    box-shadow: 0px 10px 34px -3px blueviolet;
+  }
+  
+  .bouttonDeux{
+    font-family: calibri;
+    color:#edeaf2;
+    background-color:blueviolet;
+    border-color:blueviolet; 
+    border: 1px blueviolet solid;
+    border-radius: 4px;
+    font-size: 25px;
+    transition: 0.5s;
+   }
+   .bouttonDeux:hover,
+   .bouttonDeux:active
+   {
+    background-color:rgb(22, 22, 77);
+    border-color:rgb(22, 22, 77); 
+    color:white;
+   }
+   .bouttonOne{
+    font-family: calibri;
+    color:blueviolet;
+    background-color:transparent;
+    border-color:blueviolet; 
+    border-radius: 4px;
+    font-size: 25px;
+    border: 1px blueviolet solid;
+    transition: 0.5s;
+   }
+   .bouttonOne:hover,
+   .bouttonOne:active
+   {
+    background-color:rgb(22, 22, 77);
+    border-color:blueviolet; 
+    color: #edeaf2;
+   }
+   img{
+    border-radius: 7px;
+   }
+   h1{
+    font-family: redressed;
+    color: blueviolet;
+   }
+   h1 span{
+    color: rgb(22, 22, 77);
+    font-size: 100px;
+   }
+   .footer{
+    height: 30px;
+   }
+   .footerSpan{
+    color: rgb(22, 22, 77);
+   }
+   footer p a{
+    height:40px ;
+    margin-left: 20px;
+    width: 40px;
+    color: white;
+    background-color: rgb(22, 22, 77); 
+    border-radius: 50px;
+    text-decoration: none;
+     font-size: 20px;
+    
+   }
+   
+  
