@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/Welcome.css') }}"  />
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/login.css') }}"  />
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/loginRegister.css') }}"  />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,6 +25,8 @@
     @yield('contentLogin')
 
     @yield('contentRegister')
+
+    @yield('contentEntreprise')
    
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">

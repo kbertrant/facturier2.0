@@ -25,12 +25,15 @@
     <div class="divPrincipal row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border ">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
         <h1 class="display-4 fw-bold lh-1"><span>F</span>acturier...</h1>
-        <p class="lead">Bienvenue dans notre application de facturation qui vous simplifira la gestion de vos depenses et stockera vos données liées a tout activité de vente en vers vos clients. par la nous vous souhaitons bonne utilisation et profiter a font de notre plate forme...</p>
-        <p>connectez vous a votre compte. si vous n'en avez pas inscrivez vous!!!</p>
+        <p class="lead">Bienvenue dans notre application de facturation... <br>
+        Pour commencer créer votre Entreprise.Déja? connecter vous a votre compte!!
+        <a href="{{ url('/entreprise') }}"><button type="" class="bouttonDeux btn-lg px-4 ">Créer</button></a>
+       </p>
+        <p class="lead">Connectez vous à votre compte. si vous n'en avez pas inscrivez vous après la création de votre Entrprise sur la plate forme!!</p>
 @if (Route::has('login'))
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
     @auth
-        <a href="{{ url('/home') }}"><button type="" class="bouttonOne btn-lg px-4 me-md-2 ">Aceuil</buttoln></a>
+    <a href="{{ url('/home') }}"><button type="" class="bouttonOne  btn-lg px-4 ">Aceuil</button></a>
         @else
         <a href="{{ route('login') }}"><button type="" class="bouttonDeux btn-lg px-4 ">Connexion</button></a>
           @if (Route::has('register'))

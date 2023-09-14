@@ -17,7 +17,7 @@ id="layout-navbar">
       <input
         type="text"
         class="form-control border-0 shadow-none"
-        placeholder="Search..."
+        placeholder="recherche..."
         aria-label="Search..."
       />
     </div>
@@ -26,7 +26,7 @@ id="layout-navbar">
 
   <ul class="navbar-nav flex-row align-items-center ms-auto">
     <!-- Place this tag where you want the button to render. -->
-    <li class="nav-item lh-1 me-3">
+    <!-- <li class="nav-item lh-1 me-3">
       <a
         class="github-button"
         href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -36,26 +36,26 @@ id="layout-navbar">
         aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
         >Star</a
       >
-    </li>
+    </li> -->
 
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
       <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
         <div class="avatar avatar-online">
-          <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+          <img src="/storage/{{$user->image}}" alt class="w-px-40  rounded-circle" />
         </div>
       </a>
       <ul class="dropdown-menu dropdown-menu-end">
         <li>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="#"> 
             <div class="d-flex">
               <div class="flex-shrink-0 me-3">
                 <div class="avatar avatar-online">
-                  <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                  <img src="/storage/{{$user->image}}" alt class="w-px-40  rounded-circle" />
                 </div>
               </div>
               <div class="flex-grow-1">
-                <span class="fw-semibold d-block">John Doe</span>
+                <span class="fw-semibold d-block">{{$user->name}}</span>
                 <small class="text-muted">Admin</small>
               </div>
             </div>
@@ -67,7 +67,7 @@ id="layout-navbar">
         <li>
           <a class="dropdown-item" href="{{ route('profile') }}">
             <i class="bx bx-user me-2"></i>
-            <span class="align-middle">My Profile</span>
+            <span class="align-middle">Mon profil</span>
           </a>
         </li>
         <li>
