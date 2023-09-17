@@ -117,7 +117,7 @@
 		            <div class="form-group">
 		            	<button type="submit" class="form-control btn btn-primary submi px-3 mb-4 mt-5">Inscription</button>
 		            </div>
-		            <div class="form-group d-md-flex">
+		            <div class="form-group d-md-flex">  
 		            	
 									<div class="w-50 text-md-right">Deja inscris?
 									<a href="{{ route('login') }}">
