@@ -7,7 +7,9 @@
   top: 0px;
   z-index: 10;
 }
-
+.layout-menu{
+  background-color: #595cd9;
+}
 .bg-menu-theme .menu-header {
   position: relative;
 }

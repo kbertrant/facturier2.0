@@ -14,7 +14,7 @@
         
         <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
           <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-            <img src="{{ asset('assets/img/avatars/1.png')}}" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+            <img src="/storage/{{$user->image}}"  class="image my-2 ms-0 ms-sm-4 rounded">
           </div>
           <div class="flex-grow-1 mt-3 mt-sm-5">
             <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">

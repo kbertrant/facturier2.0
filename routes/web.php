@@ -18,15 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile',  [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile',  [App\Http\Controllers\HomeController::class, 'profile'])->name('profile'); 
+Route::get('/entreprise', [App\Http\Controllers\EntrepriseController::class, 'index'])->name('entreprise');
+Route::post('/store_ent', [App\Http\Controllers\EntrepriseController::class, 'store'])->name('store_ent');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

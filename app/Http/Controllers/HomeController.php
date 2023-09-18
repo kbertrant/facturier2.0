@@ -23,8 +23,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    { 
+        
+      /** @var Application $application */
+        $id = Auth::user()->id;
+        $user = Auth::user();
+       
+        return view('home',['user'=>$user]);
     }
 
     public function profile()
@@ -35,4 +40,6 @@ class HomeController extends Controller
 
         return view('user.profile', ['user'=> $user]);
     }
+    
+    
 }

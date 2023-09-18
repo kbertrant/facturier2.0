@@ -1,0 +1,10 @@
+/* css pour la photos de profil sur la vue profile  */
+.image{
+    height: 300px; 
+    width:250px ;
+   
+}
+/* #595cd9 #6467f2 */
+.divPrincipal{
+    background-color: blueviolet;
+}

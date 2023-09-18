@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
+use App\Models\Entreprise;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -53,6 +57,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['string', 'min:9'],
+            'ville' => ['string'],
+            'name_ent' => ['string'],
+            'rc_ent' => ['string'],
+            'image' => ['image'],
         ]);
     }
 
@@ -64,10 +73,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+    
+         
+        if($data['image'] !== null){
+          $imagePath = ($data['image'])->store('images', 'public');
+        }
+        $ent = Entreprise::create([
+            'name_ent'=> $data['name_ent'],
+            'rc_ent'=> $data['rc_ent'],
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'ville' => $data['ville'],
+            'image'=>  $imagePath,
+            'ent_id'=>$ent->id,
+            'password' => Hash::make($data['password'])
         ]);
+           
+          
+          
+         //$imagePath = $request->file('image')->store('image','public');
     }
 }
