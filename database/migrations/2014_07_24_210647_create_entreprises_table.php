@@ -17,12 +17,12 @@ class CreateEntreprisesTable extends Migration
             $table->id();
             $table->string('name_ent')->unique();
             $table->string('rc_ent')->unique();
-            $table->string('nc_ent')->unique();
-            $table->string('phone_ent');
-            $table->string('address_ent');
-            $table->string('owner_ent');
-            $table->string('bank_ent');
-            $table->string('logo_ent');
+            $table->string('nc_ent')->unique()->nullable();
+            $table->string('phone_ent')->nullable();
+            $table->string('address_ent')->nullable();
+            $table->string('owner_ent')->nullable();
+            $table->string('bank_ent')->nullable();
+            $table->string('logo_ent')->nullable();
             $table->timestamps();
         });
     }

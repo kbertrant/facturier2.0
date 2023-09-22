@@ -121,21 +121,21 @@
       <li class="menu-header small text-uppercase"><span class="menu-header-text">COMMERCE</span></li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="{{route('listClient')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Clients</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="{{route('listCat_produit')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Categories</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="{{route('listProduit')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Produits</div>
         </a>
@@ -173,7 +173,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="{{route('entreprise')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Entreprises</div>
         </a>

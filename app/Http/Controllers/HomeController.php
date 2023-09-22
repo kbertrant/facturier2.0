@@ -25,17 +25,14 @@ class HomeController extends Controller
     public function index()
     { 
         
-      /** @var Application $application */
-        $id = Auth::user()->id;
-        $user = Auth::user();
-       
-        return view('home',['user'=>$user]);
+        return view('home');
     }
+
 
     public function profile()
     {
         /** @var Application $application */
-        $id = Auth::user()->id;
+     
         $user = Auth::user();
 
         return view('user.profile', ['user'=> $user]);

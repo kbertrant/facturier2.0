@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+    
 
     <!-- Page CSS -->
 
@@ -62,7 +63,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         
-        @include('inc.sidebar')
+            @include('inc.sidebar')
 
         <!-- Layout container -->
         <div class="layout-page">

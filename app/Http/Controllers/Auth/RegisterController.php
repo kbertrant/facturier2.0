@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\Models\Entreprise;
+use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -54,14 +55,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['string', 'min:9'],
+            'phone' => ['string', 'min:9','unique:users'],
             'ville' => ['string'],
-            'name_ent' => ['string'],
-            'rc_ent' => ['string'],
-            'image' => ['image'],
+            'name_ent' => ['string','unique:entreprises'],
+            'rc_ent' => ['string','unique:entreprises'],
+            'image' => ['required','image'],
         ]);
     }
 
@@ -74,27 +75,31 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
     
-         
-        if($data['image'] !== null){
-          $imagePath = ($data['image'])->store('images', 'public');
-        }
         $ent = Entreprise::create([
             'name_ent'=> $data['name_ent'],
             'rc_ent'=> $data['rc_ent'],
-        ]);
+        ]); 
+        
+        
+        if($data['image']){
+          $imagePath = ($data['image'])->store('images', 'public');
+        }
 
-        return User::create([
+         $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'ville' => $data['ville'],
-            'image'=>  $imagePath,
-            'ent_id'=>$ent->id,
+            'image'=> $imagePath,
+            'id_ent'=>$ent->id,
             'password' => Hash::make($data['password'])
         ]);
+
+        
+        $user->notify(new UserNotification());
+       
+        return $user;
            
-          
-          
-         //$imagePath = $request->file('image')->store('image','public');
+         
     }
 }
