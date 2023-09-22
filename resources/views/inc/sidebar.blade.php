@@ -128,7 +128,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="{{route('listCat_produit')}}" class="menu-link">
+        <a href="{{route('catproduit.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Categories</div>
         </a>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cat_produitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,8 +41,10 @@ Route::get('/listProduit',[App\Http\Controllers\ProduitController::class, 'index
 Route::post('/addProduit',[App\Http\Controllers\ProduitController::class, 'create'])->name('addProduit');
 
 // route cat_produit
-Route::get('/listCat_produit',[App\Http\Controllers\Cat_produitController::class, 'index'])->name('listCat_produit');
-Route::post('/addCat_produit',[App\Http\Controllers\Cat_produitController::class, 'create'])->name('addCat_produit');
+Route::post('/cat/produit/store',[Cat_produitController::class, 'store'])->name('catproduit.store');
+Route::get('/cat/produit', [Cat_produitController::class, 'index'])->name('catproduit.main');
+Route::get('/cat/produit/list', [Cat_produitController::class, 'index'])->name('catproduit.list');
+Route::get('/cat/produit/destroy/{id}',[Cat_produitController::class,'destroy'])->name('catproduit.destroy');
 
 
 
