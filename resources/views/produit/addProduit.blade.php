@@ -1,139 +1,114 @@
-
-
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-md modal-simple">
+    <div class="modal-content p-0 p-md-2 p-xl-5">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Informations sur le produit</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un produit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       
-      <form class="mb-3" method="POST" action="{{ route('addProduit') }}">
+        <form class="mb-3" method="POST" action="{{ route('produit.store') }}">
                 @csrf
-                <div class="mb-3">
-                <label for="name" class="form-label">Noms</label>
-                <input
-                  type="text"
-                  class="form-control @error('name') is-invalid @enderror"
-                  id="name"
-                  name="name"
-                  placeholder="Entrer votre nom"
+          <div class="mb-3">
+            <label for="code_prod" class="form-label">Code produit</label>
+            <input type="text" class="form-control @error('code_prod') is-invalid @enderror"
+                  id="code_prod" name="code_prod" placeholder="Code du produit"
                   autofocus
-                  required
-                  value="{{ old('name') }}"
-                />
-                @error('name')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Ce nom est deja aquis</strong>
-							   </span>
-							  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" 
-                required 
-                class="form-control @error('email') is-invalid @enderror" 
-                id="email" 
-                name="email" 
-                placeholder="Entrer votre email"
-                value="{{ old('email') }}" />
-                @error('email')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Cet email est deja aquis</strong>
-							   </span>
-							  @enderror
-              </div>
-              <div class="mb-3 form-password-toggle">
-                <label class="form-label" for="password">Mot de passe</label>
-                <div class="input-group input-group-merge">
-                  <input
-                    type="password"
-                    id="password"
-                    class="form-control @error('password') is-invalid @enderror"
-                    name="password"
-                    placeholder="Mot de passe"
-                    aria-describedby="password"
-                    required
-                  />
-                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  @error('password')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Au moins 8 carractère pour le mot de passe</strong>
-							   </span>
-							  @enderror
-                </div>
-              </div>
-              <div class="mb-3 form-password-toggle">
-                <label class="form-label " for="password">Confirmer mot de passe</label>
-                <div class="input-group input-group-merge">
-                  <input
-                    type="password"
-                    id="confirm_password"
-                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                    name="password_confirmation"
-                    placeholder="Confirmer mot de passe"
-                    required
-                  />
-                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  @error('password_confirmation')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">se password ne correspond pas</strong>
-							   </span>
-							  @enderror
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="phone" class="form-label ">Telephone</label>
-                <input type="text" required class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone" name="phone" placeholder="Entrer votre numero" />
-                @error('phone')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Ce numero est deja aquis</strong>
-							   </span>
-							  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="ville" class="form-label">Ville</label>
-                <input type="text" required class="form-control  @error('ville') is-invalid @enderror" id="ville" value="{{ old('ville') }}" name="ville" placeholder="Entrer votre ville" />
-              </div>
-              <div class="mb-3">
-                <label for="name_ent" class="form-label">Le nom de votre entrreprise</label>
-                <input type="text"  required class="form-control @error('name_ent') is-invalid @enderror" id="name_ent" value="{{ old('name_ent') }}" name="name_ent" placeholder="Entrer votre entreprise" />
-                @error('name_ent')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Ce champ est deja aquis</strong>
-							   </span>
-							  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="rc_ent" class="form-label">Registre commerce entrreprise</label>
-                <input type="text" required class="form-control @error('rc_ent') is-invalid @enderror" id="rc_ent" value="{{ old('name_ent') }}" name="rc_ent" placeholder="Entrer votre registre de commerce" />
-                @error('rc_ent')
-							   <span class="invalid-feedback" role="alert">
-								<strong class="strong">Se champ est deja aquis</strong>
-							   </span>
-							  @enderror
-              </div>
-              <div class="mb-3">
-                <label for="image" class="form-label">image</label>
-                <input type="file"  accept="image/png, image/jpg, image/jpeg" class="form-control" id="image" required name="image" placeholder="Entrer votre image" />   
-              </div>
-              <div class="mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                  <label class="form-check-label" for="terms-conditions">
-                    J'accepte les
-                    <a href="javascript:void(0);">conditions et accords</a>
-                  </label>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary d-grid w-100">Inscription </button>
-            </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-       
+                  required />
+            @error('code_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Ce code est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="name_prod" class="form-label">Nom produit</label>
+            <input type="text" class="form-control @error('name_prod') is-invalid @enderror"
+                  id="name_prod" name="name_prod" placeholder="Nom du produit"
+                  
+                  required />
+            @error('name_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Ce nom est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="desc_prod" class="form-label">Description produit</label>
+            <input type="text" class="form-control @error('desc_prod') is-invalid @enderror"
+                  id="desc_prod" name="desc_prod" placeholder="Description du produit"
+                  
+                  required />
+            @error('desc_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Ce nom est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="price_prod" class="form-label">Prix du produit</label>
+            <input type="text" class="form-control @error('price_prod') is-invalid @enderror"
+                  id="price_prod" name="price_prod" placeholder="Prix du produit"
+                  
+                  required />
+            @error('price_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Ce nom est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="qty_prod" class="form-label">Qte du produit</label>
+            <input type="text" class="form-control @error('qty_prod') is-invalid @enderror"
+                  id="qty_prod" name="qty_prod" placeholder="Quantite du produit"
+                  
+                  required />
+            @error('qty_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Quantite est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="color_prod" class="form-label">Qte du produit</label>
+            <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
+                  id="color_prod" name="color_prod" placeholder="Couleur du produit"
+                  
+                  required />
+            @error('color_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Quantite est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="size_prod" class="form-label">Dimension du produit</label>
+            <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
+                  id="size_prod" name="size_prod" placeholder="Dimension du produit"
+                  
+                  required />
+            @error('size_prod')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Quantite est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="id_cat" class="form-label">Categorie du produit</label>
+            <select class="form-select" id="id_cat" name="id_cat" aria-label="Categorie du produit">
+              <option selected>Choisir categorie</option>
+              @foreach ($cats as $cat)
+                <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>
+              @endforeach
+            </select>
+            @error('id_cat')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Categorie est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
+        </form>
       </div>
     </div>
   </div>

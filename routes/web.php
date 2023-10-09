@@ -37,8 +37,10 @@ Route::get('/listClient',[App\Http\Controllers\ClienteController::class, 'index'
 Route::post('/addClient',[App\Http\Controllers\ClienteController::class, 'create'])->name('addClient');
 
 // route produit
-Route::get('/listProduit',[App\Http\Controllers\ProduitController::class, 'index'])->name('listProduit');
+Route::get('/produit',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.main');
+Route::get('/produit/list',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.list');
 Route::post('/addProduit',[App\Http\Controllers\ProduitController::class, 'create'])->name('addProduit');
+Route::post('/produit/store',[App\Http\Controllers\ProduitController::class, 'store'])->name('produit.store');
 
 // route cat_produit
 Route::post('/cat/produit/store',[Cat_produitController::class, 'store'])->name('catproduit.store');

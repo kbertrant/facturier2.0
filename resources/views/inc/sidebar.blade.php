@@ -135,7 +135,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="{{route('listProduit')}}" class="menu-link">
+        <a href="{{route('produit.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Produits</div>
         </a>
