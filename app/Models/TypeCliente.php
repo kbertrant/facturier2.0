@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tresorerie extends Model
+class TypeCliente extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
+        'name_tc',
+        'status',
         'id_ent'
+        
     ];
 
-    public function entreprise(){
-        return $this->belongsTo(Entreprise::class,'id_ent');
+    public function clientes(){
+        
+        return $this->hasMany(Cliente::class);
     }
 }

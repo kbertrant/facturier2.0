@@ -9,7 +9,6 @@ class Facture extends Model
 {
     use HasFactory;
 
-    
     protected $fillable = [
  
            'date_fac',
@@ -19,6 +18,7 @@ class Facture extends Model
            'tva_price',
            'reduction',
            'status',
+           'stat_fac',
            'id_cli',
            'id_ent',
            'id_pro',
@@ -27,7 +27,7 @@ class Facture extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
     public function cliente(){
         
@@ -37,11 +37,14 @@ class Facture extends Model
     public function produit(){
         
         return $this->belongsTo(Produit::class,'id_pro');
-        }
+    }
 
+    public function ElementFactures(){
+        
+        return $this->hasMany(ElementFacture::class);
+    }
 
-
-    public function paiement(){
+    public function paiements(){
         
         return $this->hasMany(Paiement::class);
        }

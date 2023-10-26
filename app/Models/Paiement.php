@@ -47,8 +47,8 @@ class Paiement extends Model
 
     
 
-    public function remboursement(){
+    public function remboursements(){
         
         return $this->hasMany(Remboursement::class);
-       }
+    }
 }

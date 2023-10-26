@@ -19,6 +19,7 @@ class CreateLivraisonsTable extends Migration
             $table->date('lf_date')->nullable();
             $table->integer('lf_qte')->nullable();
             $table->string('lf_stat')->default('A');
+            $table->string('status');
             $table->unsignedBigInteger('id_four');
             $table->unsignedBigInteger('id_prod');
             $table->unsignedBigInteger('id_ent')->nullable();

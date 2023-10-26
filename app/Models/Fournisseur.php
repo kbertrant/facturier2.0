@@ -16,17 +16,20 @@ class Fournisseur extends Model
         'four_phone',
         'four_stat',
         'resp_name',
+        'four_rccm',
+        'four_nui',
+        'four_email',
         'id_ent'    
     ];
 
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
-    public function livraison(){
+    public function livraisons(){
         
         return $this->hasMany(Livraison::class);
-       }
+    }
     
 }

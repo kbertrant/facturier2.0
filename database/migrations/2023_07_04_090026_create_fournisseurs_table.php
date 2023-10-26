@@ -21,6 +21,9 @@ class CreateFournisseursTable extends Migration
             $table->string('four_phone')->nullable();
             $table->string('four_stat')->default('A');
             $table->string('resp_name')->nullable();
+            $table->string('four_rccm')->nullable();
+            $table->string('four_nui')->nullable();
+            $table->string('four_email')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();
 

@@ -25,6 +25,7 @@ class CreateProformasTable extends Migration
             $table->integer('tva_price');
             $table->integer('reduction');
             $table->string('status');
+            $table->string('stat_pro');
             $table->timestamps();
 
             $table->foreign('id_cli')->references('id')->on('clientes');

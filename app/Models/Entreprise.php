@@ -20,65 +20,64 @@ class Entreprise extends Model
         'logo_ent',
     ];
 
-        public function cat_produit(){
+    public function cat_produit(){
         
-            return $this->hasMany(Cat_produit::class);
-        }
+        return $this->hasMany(Cat_produit::class);
+    }
     
-        public function cliente(){
+    public function cliente(){
         
-         return $this->hasMany(Cliente::class);
-        }    
+        return $this->hasMany(Cliente::class);
+    }    
     
-        public function depense(){
+    public function depense(){
         
          return $this->hasMany(Depense::class);
-       }    
+    }    
 
-        public function facture(){
+    public function facture(){
         
-         return $this->hasMany(Facture::class);
-       }
+        return $this->hasMany(Facture::class);
+    }
        
-       public function fournisseur(){
+    public function fournisseur(){
         
         return $this->hasMany(Fournisseur::class);
-       }
+    }
        
-       public function historic(){
+    public function historics(){
         
         return $this->hasMany(Historic::class);
-       } 
+    } 
        
-       public function livraison(){
+    public function livraisons(){
         
         return $this->hasMany(Livraison::class);
-       } 
+    } 
        
-       public function paiement(){
+    public function paiements(){
         
         return $this->hasMany(Paiement::class);
-       } 
+    } 
        
-       public function produit(){
+    public function produits(){
         
         return $this->hasMany(Produit::class);
-       } 
+    } 
        
-       public function proformas(){
+    public function proformas(){
         
         return $this->hasMany(Proformas::class);
-       }
+    }
        
-       public function remboursement(){
+    public function remboursements(){
         
         return $this->hasMany(Remboursement::class);
-       }
+    }
        
-       public function user(){
-        
+    public function user(){
         return $this->hasMany(User::class);
-       }  
+    }  
        
        
 }

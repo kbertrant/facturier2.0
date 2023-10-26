@@ -50,10 +50,10 @@ class User extends Authenticatable
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
     public function historic(){
         
         return $this->hasMany(Historic::class);
-       }
+    }
 }

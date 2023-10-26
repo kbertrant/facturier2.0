@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFacturesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,20 @@ class CreateFacturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('factures', function (Blueprint $table) {
+        Schema::create('element_proformas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_cli');
             $table->unsignedBigInteger('id_ent')->nullable();
+            $table->unsignedBigInteger('id_prod')->nullable();
             $table->unsignedBigInteger('id_pro')->nullable();
-            $table->datetime('date_fac');
-            $table->string('ref_fac')->unique();
-            $table->integer('amount_fac');
-            $table->integer('qty_fac');
-            $table->integer('tva_price');
-            $table->integer('reduction');
-            $table->string('status')->default('A');
-            $table->string('stat_fac');
+            $table->integer('ep_qty')->nullable();
+            $table->float('ep_pu')->nullable();
+            $table->float('ep_ttval')->nullable();
+            $table->string('ep_stat')->default('Pending');
             $table->timestamps();
 
-            $table->foreign('id_cli')->references('id')->on('clientes');
             $table->foreign('id_ent')->references('id')->on('entreprises');
+            $table->foreign('id_prod')->references('id')->on('produits');
             $table->foreign('id_pro')->references('id')->on('proformas');
-            
         });
     }
 
@@ -42,6 +37,6 @@ class CreateFacturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factures');
+        Schema::dropIfExists('element_proformas');
     }
-}
+};

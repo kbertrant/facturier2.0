@@ -23,22 +23,18 @@ class Remboursement extends Model
     ];
 
     public function entreprise(){
-        
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
-     public function cliente(){
-        
+    public function cliente(){
         return $this->belongsTo(Cliente::class,'id_cli');
-        }
+    }
 
     public function paiement(){
-        
         return $this->belongsTo(Paiement::class,'id_pay');
-        }
+    }
 
     public function facture(){
-        
         return $this->belongsTo(Facture::class,'id_fac');
-        }
+    }
 }

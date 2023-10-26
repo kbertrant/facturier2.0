@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cat_produit;
 use App\Models\Produit;
+use App\Services\ProduitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,10 @@ class ProduitController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            $tasks = Produit::all();
+
+            $tasks = Produit::select('produits.id','code_prod','name_prod','desc_prod','price_prod','qty_prod','cat_name','type_content','detail','status')
+            ->join('cat_produits','cat_produits.id','=','produits.id_cat')
+            ->where('produits.id_ent','=',Auth::user()->id_ent)->get();
             
             return datatables()->of($tasks)
             ->addColumn('action', function($row){
@@ -69,20 +73,12 @@ class ProduitController extends Controller
             'id_cat' => ['required'],
             'qty_prod' => ['required'],
         ]); 
-        $catpro = new Produit();
-        $catpro->code_prod = $request->code_prod;
-        $catpro->name_prod = $request->name_prod;
-        $catpro->desc_prod = $request->desc_prod;
-        $catpro->price_prod = $request->price_prod;
-        $catpro->qty_prod = $request->qty_prod;
-        $catpro->color_prod = $request->color_prod;
-        $catpro->size_prod = $request->size_prod;
-        $catpro->status = 'A';
-        $catpro->id_cat = $request->id_cat;
-        $catpro->id_ent = Auth::user()->id_ent;
-        $catpro->save();
+        $pro = new ProduitService();
+        $pro->CreateProduit($request->code_prod,$request->name_prod,$request->desc_prod,$request->price_prod,$request->color_prod,$request->size_prod,
+        $request->type_content,$request->detail,$request->qty_prod,$request->id_cat);
 
-        return redirect()->back()->with('success','Produit ajoutée');
+
+        return redirect()->back()->with('success','Produit ajouté');
     }
 
     /**
@@ -116,6 +112,8 @@ class ProduitController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }//
+        $prod = Produit::find($id);
+        $prod->delete();
+        return redirect()->back()->with('success','Produit supprimé');
+    }
 }

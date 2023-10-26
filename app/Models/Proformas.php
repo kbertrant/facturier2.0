@@ -18,6 +18,7 @@ class Proformas extends Model
         'tva_price',
         'reduction',
         'status',
+        'stat_pro',
         'id_cli',
         'id_ent'
         
@@ -26,10 +27,15 @@ class Proformas extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
     public function cliente(){
         
         return $this->belongsTo(Cliente::class,'id_cli');
-        }
+    }
+
+    public function elementProformas(){
+        
+        return $this->hasMany(ElementProforma::class);
+    }
 }

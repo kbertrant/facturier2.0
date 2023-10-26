@@ -25,12 +25,12 @@ class Depense extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
     
     public function year_exercice(){
         
         return $this->belongsTo(Year_exercice::class,'id_exe');
-        }
+    }
     
     
 }

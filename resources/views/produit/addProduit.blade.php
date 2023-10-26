@@ -70,14 +70,14 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="color_prod" class="form-label">Qte du produit</label>
+            <label for="color_prod" class="form-label">Couleur du produit</label>
             <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
                   id="color_prod" name="color_prod" placeholder="Couleur du produit"
                   
                   required />
             @error('color_prod')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Quantite est deja aquis</strong>
+							  <strong class="strong">Couleur est deja aquis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -93,6 +93,35 @@
 						  </span>
 				    @enderror
           </div>
+          <div class="mb-3">
+            <label for="detail" class="form-label">Detaillable</label>
+            <input type="radio" class="form-check-input @error('detail') is-invalid @enderror"
+                  id="detail" name="detail" required />
+            <label for="detail" class="form-check-label">oui</label>
+            <input type="radio" class="form-check-input @error('detail') is-invalid @enderror"
+                  id="detail" name="detail" required />
+            <label for="detail" class="form-check-label">non</label>
+            @error('detail')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Detail est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          <div class="mb-3">
+            <label for="type_content" class="form-label">Contenance</label>
+            <select class="form-select" id="type_content" name="type_content" aria-label="Contenance du produit">
+              <option selected>Choisir la contenance</option>
+              <option value="Litres" selected>Litres (l)</option>
+              <option value="Carton" selected>Carton</option>
+              <option value="Poids" selected>Poids (kg)</option>
+            </select>
+            @error('type_content')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Contenance est deja aquis</strong>
+						  </span>
+				    @enderror
+          </div>
+          
           <div class="mb-3">
             <label for="id_cat" class="form-label">Categorie du produit</label>
             <select class="form-select" id="id_cat" name="id_cat" aria-label="Categorie du produit">

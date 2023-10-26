@@ -77,14 +77,14 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{route('proforma.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Proformas</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{route('facture.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Factures</div>
         </a>
@@ -119,27 +119,46 @@
       </li>
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">COMMERCE</span></li>
-      <!-- Cards -->
+      <!-- Layouts -->
       <li class="menu-item">
-        <a href="{{route('listClient')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Clients</div>
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Clients">Clients</div>
         </a>
+
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{route('listTypeClient')}}" class="menu-link">
+              <div data-i18n="Types de client">Types de client</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{route('listClient')}}" class="menu-link">
+              <div data-i18n="Liste de client">Liste de clients</div>
+            </a>
+          </li>
+        </ul>
       </li>
-      <!-- Cards -->
-      <li class="menu-item">
-        <a href="{{route('catproduit.main')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Categories</div>
+      <li class="menu-item active open">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Produits">Produits</div>
         </a>
+
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{route('catproduit.main')}}" class="menu-link">
+              <div data-i18n="Categories de produit">Categories de produit</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="{{route('produit.main')}}" class="menu-link">
+              <div data-i18n="Liste de produits">Liste de produits</div>
+            </a>
+          </li>
+        </ul>
       </li>
-      <!-- Cards -->
-      <li class="menu-item">
-        <a href="{{route('produit.main')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Produits</div>
-        </a>
-      </li>
+      
       <!-- Cards -->
       <li class="menu-item">
         <a href="cards-basic.html" class="menu-link">

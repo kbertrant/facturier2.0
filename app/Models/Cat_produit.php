@@ -17,14 +17,12 @@ class Cat_produit extends Model
     ];
 
     public function entreprise(){
-
-    return $this->belongsTo(Entreprise::class,'id_ent');
+        return $this->belongsTo(Entreprise::class,'id_ent');
     }
 
 
 
-    public function produit(){
-        
+    public function produits(){
         return $this->hasMany(Produit::class);
-       }
+    }
 }

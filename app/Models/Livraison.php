@@ -25,17 +25,17 @@ class Livraison extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
     
     public function fournisseur(){
         
         return $this->belongsTo(Fournisseur::class,'id_four');
-        }
+    }
 
     public function produit(){
         
         return $this->belongsTo(Entreprise::class,'id_prod');
-        }
+    }
 
     
 }

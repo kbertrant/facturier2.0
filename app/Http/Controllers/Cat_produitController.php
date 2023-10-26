@@ -27,7 +27,7 @@ class Cat_produitController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            $tasks = Cat_produit::all();
+            $tasks = Cat_produit::where('id_ent','=',Auth::user()->id_ent)->get();
             
             return datatables()->of($tasks)
             ->addColumn('action', function($row){

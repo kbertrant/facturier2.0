@@ -22,7 +22,9 @@ class CreateProduitsTable extends Migration
             $table->integer('qty_prod');
             $table->string('color_prod')->nullable();
             $table->integer('size_prod')->nullable();
-            $table->string('status');
+            $table->string('type_content')->nullable();
+            $table->string('detail')->default('N');
+            $table->string('status')->default('A');
             $table->unsignedBigInteger('id_cat')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();

@@ -24,6 +24,7 @@ class CreatePaiementsTable extends Migration
             $table->integer('solde_pay');
             $table->string('mode_pay');
             $table->string('status');
+            $table->string('stat_pay');
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();
 

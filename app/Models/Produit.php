@@ -18,6 +18,8 @@ class Produit extends Model
         'qty_prod',
         'color_prod',
         'size_prod',
+        'type_content',
+        'detail',
         'status',
         'id_cat',
         'id_ent'
@@ -27,22 +29,22 @@ class Produit extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
-        }
+    }
 
     public function cat_produit(){
         
         return $this->belongsTo(Cat_produit::class,'id_cat');
-        }
+    }
 
         
     
-    public function facture(){
+    public function factures(){
         
          return $this->hasMany(Facture::class);
-       }
+    }
 
-    public function livraison(){
+    public function livraisons(){
         
         return $this->hasMany(Livraison::class);
-       }
+    }
 }
