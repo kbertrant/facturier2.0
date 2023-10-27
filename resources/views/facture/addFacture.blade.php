@@ -23,47 +23,45 @@
                 </span>
                 @enderror
             </div>
+            
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Liste des produits</legend>
+              <div class="row">
+                  <div class="col-lg-8 col-md-8 col-xs-8">
+                      <select id="id_prod[]" name="id_prod[]" class="form-control prod shadow" required>
+                          <option value="">Choisir produit</option>
+                          @foreach ($produits as $produit)
+                              <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-xs-2">
+                    <input type="number" class="form-control @error('quantity') is-invalid @enderror"
+                    id="quantity[]" name="quantity[]" placeholder="Qte" required />
+                  </div>
+                  
+                  <div class="col-lg-2 col-md-2 col-xs-2">
+                    <a href="javascript:void(0);" class="add_buttonPP" title="Ajouter">
+                    <img src="{{ asset('assets/img/add-icon.png') }}"/></a>
+                  </div>
+              </div>
+              <br/>
+              <div class="row">
+                  <div class="field_wrapperPP" style="width: 100%;"><div>
+              </div>
+              </div>
+              </div>
+            </fieldset>
             <div class="mb-3">
-              <label for="code_prod" class="form-label">Code produit</label>
-              <input type="text" class="form-control @error('code_prod') is-invalid @enderror"
-                    id="code_prod" name="code_prod" placeholder="Code du produit"
-                    autofocus
-                    required />
-              @error('code_prod')
+              <label for="reduction" class="form-label">Reduction </label>
+              <input type="number" class="form-control @error('reduction') is-invalid @enderror"
+                    id="reduction" name="reduction" placeholder="Reduction en %" />
+              @error('reduction')
                             <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce code est deja aquis</strong>
+                                <strong class="strong">Reduction est deja aquis</strong>
                             </span>
                       @enderror
             </div>
-            <div class="mb-3">
-              <label for="name_prod" class="form-label">Nom produit</label>
-              <input type="text" class="form-control @error('name_prod') is-invalid @enderror"
-                    id="name_prod" name="name_prod" placeholder="Nom du produit"
-                    
-                    required />
-              @error('name_prod')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
-            </div>
-            <div class="mb-3">
-              <label for="desc_prod" class="form-label">Description produit</label>
-              <input type="text" class="form-control @error('desc_prod') is-invalid @enderror"
-                    id="desc_prod" name="desc_prod" placeholder="Description du produit"
-                    
-                    required />
-              @error('desc_prod')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
-            </div>
-            
-            
-            
-            
-            
             <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
           </form>
         </div>

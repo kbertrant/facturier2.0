@@ -66,9 +66,11 @@ Route::get('/cat/produit/destroy/{id}',[Cat_produitController::class,'destroy'])
 // route facture
 Route::get('/facture',[App\Http\Controllers\FactureController::class, 'index'])->name('facture.main');
 Route::get('/facture/list',[App\Http\Controllers\FactureController::class, 'index'])->name('facture.list');
+Route::get('/facture/show/{id}',[App\Http\Controllers\FactureController::class, 'show'])->name('facture.show');
 Route::post('/addFacture',[App\Http\Controllers\FactureController::class, 'create'])->name('addFacture');
 Route::post('/facture/store',[App\Http\Controllers\FactureController::class, 'store'])->name('facture.store');
 Route::get('/facture/destroy/{id}',[App\Http\Controllers\FactureController::class,'destroy'])->name('facture.destroy');
+Route::get('/facture/generate/{id}', [App\Http\Controllers\FactureController::class, 'generatePDF'])->name('facture.generate');
 
 
 // route proforma
@@ -77,6 +79,16 @@ Route::get('/proforma/list',[App\Http\Controllers\ProformasController::class, 'i
 Route::post('/addProforma',[App\Http\Controllers\ProformasController::class, 'create'])->name('addProforma');
 Route::post('/proforma/store',[App\Http\Controllers\ProformasController::class, 'store'])->name('proforma.store');
 Route::get('/proforma/destroy/{id}',[App\Http\Controllers\ProformasController::class,'destroy'])->name('proforma.destroy');
+Route::get('/proforma/generate/{id}', [App\Http\Controllers\ProformasController::class, 'generatePDF'])->name('proforma.generate');
+Route::get('/proforma/show/{id}',[App\Http\Controllers\ProformasController::class, 'show'])->name('proforma.show');
+
+
+// route fournisseur
+Route::get('/fournisseur',[App\Http\Controllers\FournisseurController::class, 'index'])->name('fournisseur.main');
+Route::get('/fournisseur/list',[App\Http\Controllers\FournisseurController::class, 'index'])->name('fournisseur.list');
+Route::post('/addProforma',[App\Http\Controllers\FournisseurController::class, 'create'])->name('addFournisseur');
+Route::post('/fournisseur/store',[App\Http\Controllers\FournisseurController::class, 'store'])->name('fournisseur.store');
+Route::get('/fournisseur/destroy/{id}',[App\Http\Controllers\FournisseurController::class,'destroy'])->name('fournisseur.destroy');
 
 
 

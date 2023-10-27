@@ -7,7 +7,7 @@
           document.write(new Date().getFullYear());
         </script>
         , Powered by
-        <a href="#" class="footer-link fw-bolder">KPAB Tech</a>
+        <a href="#" class="footer-link fw-bolder">KPAB Technologies</a>
       </div>
       
     </div>

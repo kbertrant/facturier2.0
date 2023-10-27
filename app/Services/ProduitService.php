@@ -29,4 +29,15 @@ class ProduitService
         return $catpro;
 
     }
+
+    public function decrementQteProduct($qte,$id_prod){
+        $product = Produit::find($id_prod);
+        $product->qty_prod = ($product->qty_prod - $qte);
+        $product->save();
+    }
+
+    public function getPriceProduct($id_prod){
+        $prod = Produit::find($id_prod);
+        return $prod->price_prod;
+    }
 }

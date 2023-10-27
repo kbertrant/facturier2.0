@@ -6,7 +6,7 @@ use App\Models\ElementFacture;
 use App\Models\Facture;
 use Illuminate\Support\Facades\Auth;
 
-class ProduitService
+class FactureService
 {
     public function CreateFacture($id_cli,$id_pro,$ref_fac,$amount_fac,$qty_fac,$tva_price,$reduction){
 
@@ -27,14 +27,23 @@ class ProduitService
         return $fac;
     }
 
-    public function SetPriceFacture($id_fac,$amount,$qty,$tva){
+    public function SetPriceFacture($id_fac,$amount,$qty,$tva,$reduct){
 
         $fac = Facture::find($id_fac);
-        $fac->amount_fac = $amount;
+        $fac->amount_fac = $amount - $reduct;
         $fac->qty_fac = $qty;
         $fac->tva_price = $tva;
+        $fac->reduction = $reduct;
         $fac->save();
 
         return $fac;
+    }
+
+    public function GetTVAValue($somme){
+        return $tva = $somme * 0.1925;
+    }
+
+    public function GetReduction($somme,$reduction){
+        return $red = ($somme * $reduction)/100;
     }
 }

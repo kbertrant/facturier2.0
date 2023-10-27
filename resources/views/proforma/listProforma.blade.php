@@ -52,7 +52,7 @@
               serverSide: true,
               ajax: '{{ route('proforma.list') }}',
               columns: [
-                  { data: 'id', name: 'id','visible':true },
+                  { data: 'id', name: 'id','visible':false },
                   { data: 'pro_ref', name: 'pro_ref' },
                   { data: 'date_pro', name: 'date_pro' },
                   { data: 'amount_pro', name: 'amount_pro' },

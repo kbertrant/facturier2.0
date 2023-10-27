@@ -14,7 +14,7 @@ class EltFactureService
         $ef->id_fac = $id_fac;
         $ef->ef_qty = $ef_qty;
         $ef->ef_pu = $ef_pu;
-        $ef->ef_ttval = $ef_ttval;
+        $ef->ef_ttval = $ef_pu * $ef_qty;
         $ef->ef_stat = 'Pending';
         $ef->id_ent = Auth::user()->id_ent;
         $ef->save();
