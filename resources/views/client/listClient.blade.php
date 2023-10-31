@@ -54,7 +54,7 @@
               serverSide: true,
               ajax: '{{ route('cliente.list') }}',
               columns: [
-                  { data: 'id', name: 'id','visible':true },
+                  { data: 'id', name: 'id','visible':false },
                   { data: 'name_cli', name: 'name_cli' },
                   { data: 'phone_cli', name: 'phone_cli' },
                   { data: 'address_cli', name: 'address_cli' },

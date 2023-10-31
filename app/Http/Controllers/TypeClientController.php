@@ -23,11 +23,11 @@ class TypeClientController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' data-id='".$row->id."' data-bs-toggle='modal'><i data-lucide='plus' class='w-5 h-5'>Clients</i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' data-id='".$row->id."' data-bs-toggle='modal'><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/type/client/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/type/client/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/type/client/destroy/".$row->id."'><i data-lucide='trash' class='w-5 h-5'>Suppr</i></a>";
+                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/type/client/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
                 return $updateButton." ".$deleteButton." ".$showButton;
                  

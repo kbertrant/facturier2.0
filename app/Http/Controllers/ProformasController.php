@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ProformasController extends Controller
 {
@@ -51,11 +52,11 @@ class ProformasController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/proforma/show/".$row->id."'><i data-lucide='plus' class='w-5 h-5'>Details</i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/proforma/show/".$row->id."'><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/proforma/edit/".$row->id."' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/proforma/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/proforma/destroy/".$row->id."'><i data-lucide='trash' class='w-5 h-5'>Suppr</i></a>";
+                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/proforma/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
                 return $updateButton." ".$deleteButton." ".$showButton;
                  
@@ -128,7 +129,8 @@ class ProformasController extends Controller
      */
     public function show($id)
     {
-        $pro = Proformas::find($id);
+        $decoded_id = Hashids::decode($id);
+        $pro = Proformas::find($decoded_id[0]);
         $ent = Entreprise::find(Auth::user()->id_ent);
         $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$id)->get();
         $cl = Cliente::find($pro->id_cli);

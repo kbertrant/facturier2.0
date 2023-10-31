@@ -63,6 +63,30 @@
                   {data: 'action', name: 'action', orderable: false}
                     ],order: [[0, 'desc']]
            });
+           $(document).ready(function(){
+            var maxField = 10; //Input fields increment limitation
+            var addButton = $('.add_button'); //Add button selector
+            var wrapper = $('.field_wrapper'); //Input field wrapper
+            var fieldHTML = '<div class="row" style="margin:5px"><div class=" col-lg-8 col-md-8 col-xs-8 field"><select class="prod form-control shadow" id="id_prod[]" name="id_prod[]"><option value="">Choisir produit</option> @foreach ($produits as $produit) <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option> @endforeach</select></div><div class="col-lg-2 col-md-2 col-xs-2 field"><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" placeholder="Qte" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> <a href="javascript:void(0);" class=""><img src="{{ asset('assets/img/remove-icon.png') }}"/></a></div></div>';
+
+            var x = 1; //Initial field counter is 1
+            
+            //Once add button is clicked
+            $(addButton).click(function(){
+                //Check maximum number of input fields
+                if(x < maxField){
+                    x++; //Increment field counter
+                    $(wrapper).append(fieldHTML); //Add field html
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapper).on('click', '.remove_button', function(e){
+                e.preventDefault();
+                $(this).parent('div').remove(); //Remove field html
+                x--; //Decrement field counter
+            });
+          });
       });
   
   }

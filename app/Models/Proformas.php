@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+
+use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,5 +40,17 @@ class Proformas extends Model
     public function elementProformas(){
         
         return $this->hasMany(ElementProforma::class);
+    }
+
+    /**
+     * Hash the blog ids
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function id(): Attribute
+    {
+        return  Attribute::make(
+            get: fn ($value) => Hashids::encode($value)
+        );
     }
 }

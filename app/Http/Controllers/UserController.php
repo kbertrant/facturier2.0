@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +23,62 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-     
+    public function index(){
+        if(request()->ajax()) {
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat')
+            ->join('entreprises','entreprises.id','=','users.id_ent')->get();
+            
+            return datatables()->of($tasks)
+            ->addColumn('action', function($row){
+   
+                // Update Button
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/user/show/".$row->id."' ><i data-lucide='plus' class='w-5 h-5'>Details </i></a>";
+                // Update Button
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/user/edit/".$row->id."' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
+                // Delete Button
+                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/user/destroy/".$row->id."'><i data-lucide='trash' class='w-5 h-5'>Suppr</i></a>";
+
+                return $updateButton." ".$deleteButton." ".$showButton;
+                 
+         })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+       return view('user.listUser');
+    }
     
+
+    protected function store(Request $request)
+    {
+    
+        $ent = Entreprise::create([
+            'name_ent'=> $request->name_ent,
+            'rc_ent'=> $request->rc_ent,
+        ]); 
+        
+        
+        if($request->image){
+          $imagePath = ($request->imag)->store('images', 'public');
+        }
+
+         $user=User::create([
+            'name' => $request->name,
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'ville' => $request['ville'],
+            'image'=> $imagePath,
+            'id_ent'=>$ent->id,
+            'password' => Hash::make($request->password)
+        ]);
+
+        
+        $user->notify(new UserNotification());
+       
+        return view('user.listUser');
+
+    }
+
 
     public function update(Request $request){
         

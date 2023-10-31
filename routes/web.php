@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('lang/home', [App\Http\Controllers\LangController::class, 'index']);
+Route::get('lang/change', [App\Http\Controllers\LangController::class, 'change'])->name('changeLang');
 
 
 Auth::routes();
@@ -90,6 +92,19 @@ Route::post('/addProforma',[App\Http\Controllers\FournisseurController::class, '
 Route::post('/fournisseur/store',[App\Http\Controllers\FournisseurController::class, 'store'])->name('fournisseur.store');
 Route::get('/fournisseur/destroy/{id}',[App\Http\Controllers\FournisseurController::class,'destroy'])->name('fournisseur.destroy');
 
+
+// route paiement
+Route::get('/payment',[App\Http\Controllers\PaiementController::class, 'index'])->name('payment.main');
+Route::get('/payment/list',[App\Http\Controllers\PaiementController::class, 'index'])->name('payment.list');
+Route::post('/addaPayment',[App\Http\Controllers\PaiementController::class, 'create'])->name('addPayment');
+Route::post('/payment/store',[App\Http\Controllers\PaiementController::class, 'store'])->name('payment.store');
+
+// route user
+Route::get('/user',[App\Http\Controllers\UserController::class, 'index'])->name('user.main');
+Route::get('/user/list',[App\Http\Controllers\UserController::class, 'index'])->name('user.list');
+Route::post('/addUser',[App\Http\Controllers\UserController::class, 'create'])->name('addUser');
+Route::post('/user/store',[App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+Route::get('/user/destroy/{id}',[App\Http\Controllers\UserController::class,'destroy'])->name('user.destroy');
 
 
 

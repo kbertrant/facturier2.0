@@ -14,6 +14,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Vinkla\Hashids\Facades\Hashids;
 
 class FactureController extends Controller
 {
@@ -50,9 +51,9 @@ class FactureController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/facture/show/".$row->id."' ><i data-lucide='plus' class='w-5 h-5'>Details</i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/facture/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/facture/edit/".$row->id."' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/facture/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
                 
                 return $updateButton." ".$showButton;
                  
@@ -125,7 +126,8 @@ class FactureController extends Controller
      */
     public function show($id)
     {
-        $fac = Facture::find($id);
+        $decoded_id = Hashids::decode($id);
+        $fac = Facture::find($decoded_id[0]);
         $ent = Entreprise::find(Auth::user()->id_ent);
         $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$id)->get();
         $cl = Cliente::find($fac->id_cli);

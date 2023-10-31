@@ -54,7 +54,7 @@
               serverSide: true,
               ajax: '{{ route('fournisseur.list') }}',
               columns: [
-                  { data: 'id', name: 'id','visible':true },
+                  { data: 'id', name: 'id','visible':false },
                   { data: 'four_name', name: 'four_name' },
                   { data: 'four_code', name: 'four_code' },
                   { data: 'four_adress', name: 'four_adress' },

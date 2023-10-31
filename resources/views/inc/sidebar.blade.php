@@ -67,7 +67,7 @@
       <li class="menu-item active">
         <a href="{{route('home')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
-          <div data-i18n="Analytics">Accueil</div>
+          <div data-i18n="Analytics">{{ __('sidebar.myAccueil') }}</div>
         </a>
       </li>
 
@@ -78,42 +78,42 @@
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('proforma.main')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-receipt"></i>
           <div data-i18n="Basic">Proformas</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('facture.main')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-cart"></i>
           <div data-i18n="Basic">Factures</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-credit-card"></i>
           <div data-i18n="Basic">Depenses</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Paiements</div>
+        <a href="{{route('payment.main')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-money"></i>
+          <div data-i18n="Basic">{{ __('sidebar.myPaiements') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-coin-stack"></i>
           <div data-i18n="Basic">Remboursements</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-buildings"></i>
           <div data-i18n="Basic">Tresorerie</div>
         </a>
       </li>
@@ -142,7 +142,7 @@
       <li class="menu-item active open">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
-          <div data-i18n="Produits">Produits</div>
+          <div data-i18n="Produits">{{ __('sidebar.myProduits') }}</div>
         </a>
 
         <ul class="menu-sub">
@@ -162,7 +162,7 @@
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('fournisseur.main')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <i class="menu-icon tf-icons bx bx-store"></i>
           <div data-i18n="Basic">Fournisseurs</div>
         </a>
       </li>
@@ -178,8 +178,8 @@
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Parametres</span></li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
+        <a href="{{route('user.main')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-id-card"></i>
           <div data-i18n="Basic">Utilisateurs</div>
         </a>
       </li>

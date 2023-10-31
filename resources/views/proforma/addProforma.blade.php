@@ -41,13 +41,13 @@
                   </div>
                   
                   <div class="col-lg-2 col-md-2 col-xs-2">
-                    <a href="javascript:void(0);" class="add_buttonPP" title="Ajouter">
+                    <a href="javascript:void(0);" class="add_button" title="Ajouter">
                     <img src="{{ asset('assets/img/add-icon.png') }}"/></a>
                   </div>
               </div>
               <br/>
               <div class="row">
-                  <div class="field_wrapperPP" style="width: 100%;"><div>
+                  <div class="field_wrapper" style="width: 100%;"><div>
               </div>
               </div>
               </div>

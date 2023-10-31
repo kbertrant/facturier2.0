@@ -180,7 +180,7 @@
                 <div class="card-body">
                     <a href="/facture/generate/{{$fac->id}}">
                         <button class="btn btn-primary d-grid w-100 mb-3">
-                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="bx bx-paper-plane bx-xs me-1"></i>Telecharger</span>
+                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="bx bx-download bx-xs me-1"></i>Telecharger</span>
                         </button>
                     </a>
                     <a href="#">

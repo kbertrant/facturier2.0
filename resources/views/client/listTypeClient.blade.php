@@ -47,7 +47,7 @@
               serverSide: true,
               ajax: '{{ route('typecliente.list') }}',
               columns: [
-                  { data: 'id', name: 'id','visible':true },
+                  { data: 'id', name: 'id','visible':false },
                   { data: 'name_tc', name: 'name_tc' },
                   { data: 'status', name: 'status' },
                   {data: 'action', name: 'action', orderable: false}

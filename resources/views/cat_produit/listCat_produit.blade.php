@@ -48,7 +48,7 @@
               serverSide: true,
               ajax: '{{ route('catproduit.list') }}',
               columns: [
-                  { data: 'id', name: 'id','visible':true },
+                  { data: 'id', name: 'id','visible':false },
                   { data: 'cat_name', name: 'cat_name' },
                   { data: 'cat_stat', name: 'cat_stat' },
                   {data: 'action', name: 'action', orderable: false}

@@ -37,7 +37,13 @@ id="layout-navbar">
         >Star</a
       >
     </li> -->
-
+    <!-- Nav Item - Alerts -->
+    <li class="nav-item dropdown no-arrow mx-1">
+      <select class="nav-link selectpicker show-menu-arrow changeLang">
+        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>EN</option>
+      <option value="fr" {{ session()->get('locale') == 'fr' ? 'selected' : '' }}>FR</option>
+    </select>
+    </li>
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
       <a class="nav-link dropdown-toggle hide-arrow"  data-bs-toggle="dropdown">
