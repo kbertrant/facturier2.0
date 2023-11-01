@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Vinkla\Hashids\Facades\Hashids;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +33,18 @@ class Fournisseur extends Model
     public function livraisons(){
         
         return $this->hasMany(Livraison::class);
+    }
+
+    /**
+     * Hash the blog ids
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function id(): Attribute
+    {
+        return  Attribute::make(
+            get: fn ($value) => Hashids::encode($value)
+        );
     }
     
 }
