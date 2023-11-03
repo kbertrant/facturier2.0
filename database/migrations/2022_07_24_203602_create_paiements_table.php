@@ -20,7 +20,9 @@ class CreatePaiementsTable extends Migration
             $table->unsignedBigInteger('id_fac')->nullable();
             $table->string('ref_pay')->unique();
             $table->datetime('date_pay');
-            $table->integer('amount_pay');
+            $table->decimal('mttc_pay');
+            $table->decimal('mht_pay');
+            $table->decimal('tva_pay');
             $table->integer('solde_pay');
             $table->string('mode_pay');
             $table->string('status');

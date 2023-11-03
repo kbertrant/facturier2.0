@@ -38,6 +38,7 @@ class ProduitService
 
     public function getPriceProduct($id_prod){
         $prod = Produit::find($id_prod);
+        //dd($prod);
         return $prod->price_prod;
     }
 }

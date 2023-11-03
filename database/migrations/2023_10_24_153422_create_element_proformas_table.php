@@ -20,7 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pro')->nullable();
             $table->integer('ep_qty')->nullable();
             $table->float('ep_pu')->nullable();
-            $table->float('ep_ttval')->nullable();
+            $table->float('ep_ttc')->nullable();
+            $table->decimal('ep_mht')->nullable();
+            $table->decimal('ep_tva')->nullable();
             $table->string('ep_stat')->default('Pending');
             $table->timestamps();
 

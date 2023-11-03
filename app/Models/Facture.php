@@ -16,9 +16,10 @@ class Facture extends Model
  
            'date_fac',
            'ref_fac',
-           'amount_fac',
+           'mttc_fac',
+           'mht_fac',
+           'tva_fac',
            'qty_fac',
-           'tva_price',
            'reduction',
            'status',
            'stat_fac',

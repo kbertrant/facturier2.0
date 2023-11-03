@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ProformaService
 {
-    public function CreateProforma($id_cli,$pro_ref,$amount_pro,$qty_pro,$tva_price,$reduction){
+    public function CreateProforma($id_cli,$pro_ref,$mttc_pro,$mht_pro,$tva_pro,$qty_pro,$reduction){
 
         $pro = new Proformas();
         $pro->id_cli = $id_cli;
         $pro->date_pro = now();
         $pro->pro_ref = $pro_ref;
-        $pro->amount_pro = $amount_pro;
+        $pro->mttc_pro = $mttc_pro;
+        $pro->mht_pro = $mht_pro;
+        $pro->tva_pro = $tva_pro;
         $pro->qty_pro = $qty_pro;
-        $pro->tva_price = $tva_price;
         $pro->reduction = $reduction;
         $pro->status = 'A';
         $pro->stat_pro = 'Pending';
@@ -26,12 +27,13 @@ class ProformaService
         return $pro;
     }
 
-    public function SetPriceProforma($id_pro,$amount,$qty,$tva,$reduct){
+    public function SetPriceProforma($id_pro,$mttc,$mht,$qty,$tva,$reduct){
 
         $pro = Proformas::find($id_pro);
-        $pro->amount_pro = $amount - $reduct;
+        $pro->mttc_pro = $mttc - $reduct;
         $pro->qty_pro = $qty;
-        $pro->tva_price = $tva;
+        $pro->mht_pro = $mht;
+        $pro->tva_pro = $tva;
         $pro->reduction = $reduct;
         $pro->save();
 

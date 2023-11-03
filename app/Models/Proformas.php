@@ -16,9 +16,10 @@ class Proformas extends Model
     protected $fillable = [
         'date_pro',
         'pro_ref',
-        'amount_pro',
+        'mttc_pro',
+        'mht_pro',
+        'tva_pro',
         'qty_pro',
-        'tva_price',
         'reduction',
         'status',
         'stat_pro',

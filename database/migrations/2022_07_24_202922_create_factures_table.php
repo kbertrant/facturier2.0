@@ -20,10 +20,11 @@ class CreateFacturesTable extends Migration
             $table->unsignedBigInteger('id_pro')->nullable();
             $table->datetime('date_fac');
             $table->string('ref_fac')->unique();
-            $table->integer('amount_fac');
+            $table->decimal('mht_fac');
+            $table->decimal('mttc_fac');
             $table->integer('qty_fac');
-            $table->integer('tva_price');
-            $table->integer('reduction');
+            $table->integer('tva_fac');
+            $table->decimal('reduction');
             $table->string('status')->default('A');
             $table->string('stat_fac');
             $table->timestamps();

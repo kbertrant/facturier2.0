@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class FactureService
 {
-    public function CreateFacture($id_cli,$id_pro,$ref_fac,$amount_fac,$qty_fac,$tva_price,$reduction){
+    public function CreateFacture($id_cli,$id_pro,$ref_fac,$mttc_fac,$mht_fac,$tva_fac,$qty_fac,$reduction){
 
         $fac = new Facture();
         $fac->id_cli = $id_cli;
         $fac->id_pro = $id_pro;
         $fac->date_fac = now();
         $fac->ref_fac = $ref_fac;
-        $fac->amount_fac = $amount_fac;
+        $fac->mttc_fac = $mttc_fac;
+        $fac->mht_fac = $mht_fac;
+        $fac->tva_fac = $tva_fac;
         $fac->qty_fac = $qty_fac;
-        $fac->tva_price = $tva_price;
         $fac->reduction = $reduction;
         $fac->status = 'A';
         $fac->stat_fac = 'Pending';
@@ -27,15 +28,16 @@ class FactureService
         return $fac;
     }
 
-    public function SetPriceFacture($id_fac,$amount,$qty,$tva,$reduct){
-
+    public function SetPriceFacture($id_fac,$mttc,$mht,$tva,$qty,$reduct){
+        //dd($id_fac);
         $fac = Facture::find($id_fac);
-        $fac->amount_fac = $amount - $reduct;
+        $fac->mttc_fac = $mttc ;
+        $fac->mht_fac = $mht;
         $fac->qty_fac = $qty;
-        $fac->tva_price = $tva;
+        $fac->tva_fac = $tva;
         $fac->reduction = $reduct;
         $fac->save();
-
+        
         return $fac;
     }
 

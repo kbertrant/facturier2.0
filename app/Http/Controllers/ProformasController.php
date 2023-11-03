@@ -8,6 +8,7 @@ use App\Models\ElementProforma;
 use App\Models\Entreprise;
 use App\Models\Produit;
 use App\Models\Proformas;
+use App\Services\DecodeService;
 use App\Services\EltProformaService;
 use App\Services\ProduitService;
 use App\Services\ProformaService;
@@ -38,7 +39,7 @@ class ProformasController extends Controller
     {
         if(request()->ajax()) {
 
-            $tasks = Proformas::select('proformas.id','pro_ref','date_pro','amount_pro','qty_pro','tva_price','stat_pro',
+            $tasks = Proformas::select('proformas.id','pro_ref','date_pro','mttc_pro','qty_pro','stat_pro',
             'name_cli')
             ->join('clientes','clientes.id','=','proformas.id_cli')
             ->where('proformas.id_ent','=',Auth::user()->id_ent)->get();
@@ -88,15 +89,17 @@ class ProformasController extends Controller
             'reduction' => ['required']
         ]); 
 
+        $decode = new DecodeService();
+
         $date = now();
         $result = $date->format('YmdHis');
+        $dcod_cli_id = $decode->DecodeId($request->id_cli);
         $prof = new ProformaService();
-        $new_prof = $prof->CreateProforma($request->id_cli,$result,0,0,0,$request->reduction);
-
-        $somme = array();
-        $all_qty = array();
+        $new_prof = $prof->CreateProforma($dcod_cli_id,$result,0,0,0,$request->reduction);
+        $dcode_pro_id = $decode->DecodeId($new_prof->id);
         $s = 0;
-        foreach ($request->id_prod as $p) {
+        foreach ($request->id_prod as $pr) {
+            $p = $decode->DecodeId($pr);
             $i = $s++;
             if($p!=null){
 
@@ -106,17 +109,17 @@ class ProformasController extends Controller
                 $prix_unit = $pro->getPriceProduct($p);
 
                 $ep = new EltProformaService();
-                $ep->CreateEltProforma($p,$new_prof->id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+                $ep->CreateEltProforma($p,$dcode_pro_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
                 
-                array_push($somme, $prix_unit * $request->quantity[$i]);
-                array_push($all_qty,  $request->quantity[$i]);
             }
         }
-        //dd($somme[0]);
-        $tva = $prof->GetTVAValue($somme[0]);
-        $red = $prof->GetReduction($somme[0],$request->reduction);
+        $somme = ElementProforma::where('id_pro','=',$dcode_pro_id)->sum('ep_ttval');
+        $all_qty = ElementProforma::where('id_pro','=',$dcode_pro_id)->sum('ep_qty');
 
-        $up_pro = $prof->SetPriceProforma($new_prof->id,$somme[0],$all_qty[0],$tva,$red);
+        $tva = $prof->GetTVAValue($somme);
+        $red = $prof->GetReduction($somme,$request->reduction);
+
+        $up_pro = $prof->SetPriceProforma($dcode_pro_id,$somme,$all_qty,$tva,$red);
 
         return redirect()->back()->with('success','Proforma ajoutée');
     }
@@ -129,10 +132,11 @@ class ProformasController extends Controller
      */
     public function show($id)
     {
-        $decoded_id = Hashids::decode($id);
-        $pro = Proformas::find($decoded_id[0]);
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $pro = Proformas::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$id)->get();
+        $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
 
         //dd($ent);
@@ -164,9 +168,11 @@ class ProformasController extends Controller
 
     public function generatePDF($id){
 
-        $pro = Proformas::find($id);
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $pro = Proformas::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$id)->get();
+        $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
 
         $pdf = Pdf::loadView('print.propdf', [

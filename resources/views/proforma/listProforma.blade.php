@@ -30,7 +30,6 @@
                     <th scope="col">DATE</th>
                     <th scope="col">TTC</th>
                     <th scope="col">QTY</th>
-                    <th scope="col">TVA</th>
                     <th scope="col">CLIENT</th>
                     <th scope="col">ETAT</th>
                     <th scope="col">Action</th>
@@ -55,9 +54,8 @@
                   { data: 'id', name: 'id','visible':false },
                   { data: 'pro_ref', name: 'pro_ref' },
                   { data: 'date_pro', name: 'date_pro' },
-                  { data: 'amount_pro', name: 'amount_pro' },
+                  { data: 'mttc_pro', name: 'mttc_pro' },
                   { data: 'qty_pro', name: 'qty_pro' },
-                  { data: 'tva_price', name: 'tva_price' },
                   { data: 'name_cli', name: 'name_cli' },
                   { data: 'stat_pro', name: 'stat_pro' },
                   {data: 'action', name: 'action', orderable: false}

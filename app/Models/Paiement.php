@@ -17,9 +17,12 @@ class Paiement extends Model
         
         'ref_pay',
         'date_pay',
-        'amount_pay',
+        'mttc_pay',
+        'mht_pay',
+        'tva_pay',
         'solde_pay',
         'mode_pay',
+        'stat_pay',
         'status',
         'id_cli',
         'id_exe',

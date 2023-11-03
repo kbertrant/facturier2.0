@@ -12,7 +12,9 @@ class ElementProforma extends Model
     protected $fillable = [
         'ep_qty',
         'ep_pu',
-        'ep_ttval',
+        'ep_ttc',
+        'ep_mht',
+        'ep_tva',
         'ep_stat',
         'id_pro',
         'id_prod',

@@ -7,6 +7,7 @@ use App\Models\ElementFacture;
 use App\Models\Entreprise;
 use App\Models\Facture;
 use App\Models\Produit;
+use App\Services\DecodeService;
 use App\Services\EltFactureService;
 use App\Services\FactureService;
 use App\Services\ProduitService;
@@ -37,7 +38,7 @@ class FactureController extends Controller
     {
         if(request()->ajax()) {
 
-            $tasks = Facture::select('factures.id','ref_fac','date_fac','amount_fac','qty_fac','tva_price','stat_fac',
+            $tasks = Facture::select('factures.id','ref_fac','date_fac','mttc_fac','qty_fac','stat_fac',
             'name_cli')
             ->join('clientes','clientes.id','=','factures.id_cli')
             ->where('factures.id_ent','=',Auth::user()->id_ent)->get();
@@ -84,16 +85,19 @@ class FactureController extends Controller
             'quantity' => ['required'],
             'reduction' => ['required']
         ]); 
-
+        $decode = new DecodeService();
+        
         $date = now();
         $result = $date->format('YmdHis');
+        $dcod_cli_id = $decode->DecodeId($request->id_cli);
         $fac = new FactureService();
-        $new_fac = $fac->CreateFacture($request->id_cli,null,$result,0,0,0,$request->reduction);
+        $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
+        $dcod_fac_id = $decode->DecodeId($new_fac->id);
 
-        $somme = array();
-        $all_qty = array();
         $s = 0;
-        foreach ($request->id_prod as $p) {
+        foreach ($request->id_prod as $pr) {
+            $p = $decode->DecodeId($pr);
+            
             $i = $s++;
             if($p!=null){
 
@@ -103,17 +107,18 @@ class FactureController extends Controller
                 $prix_unit = $pro->getPriceProduct($p);
 
                 $ef = new EltFactureService();
-                $ef->CreateEltFacture($p,$new_fac->id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+                //$dcode_fac_id = Hashids::decode($new_fac->id);
+                $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
                 
-                array_push($somme, $prix_unit * $request->quantity[$i]);
-                array_push($all_qty,  $request->quantity[$i]);
             }
         }
-        //dd($somme[0]);
-        $tva = $fac->GetTVAValue($somme[0]);
-        $red = $fac->GetReduction($somme[0],$request->reduction);
+        $somme = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
+        $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
+        $tva = $fac->GetTVAValue($somme);
+        $mht = $somme - $tva;
+        $red = $fac->GetReduction($somme,$request->reduction);
 
-        $up_fac = $fac->SetPriceFacture($new_fac->id,$somme[0],$all_qty[0],$tva,$red);
+        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$somme,$mht,$tva,$all_qty,$red);
 
         return redirect()->back()->with('success','Facture ajoutée');
     }
@@ -126,10 +131,12 @@ class FactureController extends Controller
      */
     public function show($id)
     {
-        $decoded_id = Hashids::decode($id);
-        $fac = Facture::find($decoded_id[0]);
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $fac = Facture::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$id)->get();
+        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
+        
         $cl = Cliente::find($fac->id_cli);
 
         //dd($ent);
@@ -160,10 +167,11 @@ class FactureController extends Controller
     }
 
     public function generatePDF($id){
-
-        $fac = Facture::find($id);
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $fac = Facture::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$id)->get();
+        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
         $cl = Cliente::find($fac->id_cli);
 
         $pdf = Pdf::loadView('print.facpdf', [

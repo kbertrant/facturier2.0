@@ -10,6 +10,7 @@ use App\Models\Entreprise;
 use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use App\Services\DecodeService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
@@ -85,18 +86,20 @@ class RegisterController extends Controller
           $imagePath = ($data['image'])->store('images', 'public');
         }
 
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($ent->id);
          $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'ville' => $data['ville'],
             'image'=> $imagePath,
-            'id_ent'=>$ent->id,
+            'id_ent'=>$decoded_id,
             'password' => Hash::make($data['password'])
         ]);
 
         
-        $user->notify(new UserNotification());
+        //$user->notify(new UserNotification());
        
         return $user;
            

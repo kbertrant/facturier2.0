@@ -19,8 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('id_prod')->nullable();
             $table->unsignedBigInteger('id_fac')->nullable();
             $table->integer('ef_qty')->nullable();
-            $table->float('ef_pu')->nullable();
-            $table->float('ef_ttval')->nullable();
+            $table->decimal('ef_pu')->nullable();
+            $table->decimal('ef_mht')->nullable();
+            $table->decimal('ef_ttc')->nullable();
+            $table->decimal('ef_tva')->nullable();
             $table->string('ef_stat')->default('Pending');
             $table->timestamps();
 

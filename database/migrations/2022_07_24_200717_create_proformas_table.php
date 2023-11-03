@@ -20,10 +20,11 @@ class CreateProformasTable extends Migration
             
             $table->datetime('date_pro');
             $table->string('pro_ref')->unique();
-            $table->integer('amount_pro');
+            $table->decimal('mttc_pro');
             $table->integer('qty_pro');
-            $table->integer('tva_price');
+            $table->decimal('tva_pro');
             $table->integer('reduction');
+            $table->decimal('mht_pro');
             $table->string('status');
             $table->string('stat_pro');
             $table->timestamps();
