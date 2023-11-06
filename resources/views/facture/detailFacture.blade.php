@@ -99,7 +99,7 @@
                         <tbody>
                             <tr>
                                 <td class="pe-3">Total Due:</td>
-                                <td>{{$fac->amount_fac}} XAF</td>
+                                <td>{{$fac->mttc_fac}} XAF</td>
                             </tr>
                             <tr>
                                 <td class="pe-3">Client:</td>
@@ -133,14 +133,14 @@
                             <td class="text-nowrap">{{ $ef->desc_prod }}</td>
                             <td>{{ $ef->ef_pu }}</td>
                             <td>{{ $ef->ef_qty }}</td>
-                            <td>{{ $ef->ef_ttval }}</td>
+                            <td>{{ $ef->ef_ttc }}</td>
                         </tr>
                         @endforeach
                     <tr>
                         <td colspan="3" class="align-top px-4 py-5">
                           <p class="mb-2">
-                            <span class="me-1 fw-medium">Salesperson:</span>
-                            <span>Alfie Solomons</span>
+                            <span class="me-1 fw-medium">Executé par:</span>
+                            <span><b>{{ $usr->name }}</b></span>
                           </p>
                           <span>Thanks for your business</span>
                         </td>
@@ -151,10 +151,10 @@
                           <p class="mb-0">Total:</p>
                         </td>
                         <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$fac->amount_fac - $fac->reduction}}</p>
+                          <p class="fw-medium mb-2">{{$fac->mttc_fac - $fac->reduction}}</p>
                           <p class="fw-medium mb-2">{{$fac->reduction}}</p>
-                          <p class="fw-medium mb-2">{{$fac->tva_price}}</p>
-                          <p class="fw-medium mb-0">{{$fac->amount_fac}} XAF</p> 
+                          <p class="fw-medium mb-2">{{$fac->tva_fac}}</p>
+                          <p class="fw-medium mb-0">{{$fac->mttc_fac}} XAF</p> 
                         </td>
                       </tr>
                     </tbody>

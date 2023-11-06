@@ -22,6 +22,7 @@ class Remboursement extends Model
         'id_cli',
         'id_ent',
         'id_fac',
+        'id_usr',
         'id_pay'        
     ];
 

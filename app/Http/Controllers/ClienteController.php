@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\TypeCliente;
 use App\Services\ClienteService;
+use App\Services\DecodeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -72,9 +73,11 @@ class ClienteController extends Controller
             'address_cli' => ['required'],
             'id_tc' => ['required'],
         ]); 
-        
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id_tc);
         $cli = new ClienteService();
-        $cli->CreateCliente($request->name_cli,$request->phone_cli,$request->address_cli,$request->raison_sociale,$request->cl_rccm,$request->cl_nui,$request->cl_email,$request->id_tc);
+        $cli->CreateCliente($request->name_cli,$request->phone_cli,$request->address_cli,
+        $request->raison_sociale,$request->cl_rccm,$request->cl_nui,$request->cl_email,$decoded_id);
 
         return redirect()->back()->with('success','Client ajouté');
     }

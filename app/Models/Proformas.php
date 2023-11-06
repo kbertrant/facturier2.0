@@ -24,6 +24,7 @@ class Proformas extends Model
         'status',
         'stat_pro',
         'id_cli',
+        'id_usr',
         'id_ent'
         
     ];

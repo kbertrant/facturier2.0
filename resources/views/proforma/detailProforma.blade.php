@@ -99,7 +99,7 @@
                         <tbody>
                             <tr>
                                 <td class="pe-3">Total Due:</td>
-                                <td>{{$pro->amount_pro}} XAF</td>
+                                <td>{{$pro->mttc_pro}} XAF</td>
                             </tr>
                             <tr>
                                 <td class="pe-3">Client:</td>
@@ -133,7 +133,7 @@
                             <td class="text-nowrap">{{ $ep->desc_prod }}</td>
                             <td>{{ $ep->ep_pu }}</td>
                             <td>{{ $ep->ep_qty }}</td>
-                            <td>{{ $ep->ep_ttval }}</td>
+                            <td>{{ $ep->ep_ttc }}</td>
                         </tr>
                         @endforeach
                     <tr>
@@ -151,10 +151,10 @@
                           <p class="mb-0">Total:</p>
                         </td>
                         <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$pro->amount_pro - $pro->reduction}}</p>
+                          <p class="fw-medium mb-2">{{$pro->mttc_pro}}</p>
                           <p class="fw-medium mb-2">{{$pro->reduction}}</p>
-                          <p class="fw-medium mb-2">{{$pro->tva_price}}</p>
-                          <p class="fw-medium mb-0">{{$pro->amount_pro}} XAF</p> 
+                          <p class="fw-medium mb-2">{{$pro->tva_pro}}</p>
+                          <p class="fw-medium mb-0">{{$pro->mttc_pro}} XAF</p> 
                         </td>
                       </tr>
                     </tbody>

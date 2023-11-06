@@ -15,7 +15,7 @@ class CreateTresoreriesTable extends Migration
     {
         Schema::create('tresoreries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_exe');
+            $table->unsignedBigInteger('id_exe')->nullable();
             $table->integer('amount_tres');
             $table->dateTime('date_tres');
             $table->string('mouvement');

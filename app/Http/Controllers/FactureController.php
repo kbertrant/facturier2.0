@@ -7,6 +7,7 @@ use App\Models\ElementFacture;
 use App\Models\Entreprise;
 use App\Models\Facture;
 use App\Models\Produit;
+use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\EltFactureService;
 use App\Services\FactureService;
@@ -137,10 +138,10 @@ class FactureController extends Controller
         $ent = Entreprise::find(Auth::user()->id_ent);
         $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
         
+        $usr = User::find($fac->id_usr);
         $cl = Cliente::find($fac->id_cli);
 
-        //dd($ent);
-        return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent]);
+        return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
     }
 
     /**

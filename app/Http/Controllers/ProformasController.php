@@ -95,7 +95,7 @@ class ProformasController extends Controller
         $result = $date->format('YmdHis');
         $dcod_cli_id = $decode->DecodeId($request->id_cli);
         $prof = new ProformaService();
-        $new_prof = $prof->CreateProforma($dcod_cli_id,$result,0,0,0,$request->reduction);
+        $new_prof = $prof->CreateProforma($dcod_cli_id,$result,0,0,0,0,$request->reduction);
         $dcode_pro_id = $decode->DecodeId($new_prof->id);
         $s = 0;
         foreach ($request->id_prod as $pr) {
@@ -113,13 +113,14 @@ class ProformasController extends Controller
                 
             }
         }
-        $somme = ElementProforma::where('id_pro','=',$dcode_pro_id)->sum('ep_ttval');
+        $somme = ElementProforma::where('id_pro','=',$dcode_pro_id)->sum('ep_ttc');
         $all_qty = ElementProforma::where('id_pro','=',$dcode_pro_id)->sum('ep_qty');
 
         $tva = $prof->GetTVAValue($somme);
+        $mht = $somme - $tva;
         $red = $prof->GetReduction($somme,$request->reduction);
 
-        $up_pro = $prof->SetPriceProforma($dcode_pro_id,$somme,$all_qty,$tva,$red);
+        $up_pro = $prof->SetPriceProforma($dcode_pro_id,$somme,$mht,$tva,$all_qty,$red);
 
         return redirect()->back()->with('success','Proforma ajoutée');
     }

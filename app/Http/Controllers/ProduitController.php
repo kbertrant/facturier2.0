@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cat_produit;
 use App\Models\Produit;
+use App\Services\DecodeService;
 use App\Services\ProduitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,8 @@ class ProduitController extends Controller
     {
         if(request()->ajax()) {
 
-            $tasks = Produit::select('produits.id','code_prod','name_prod','desc_prod','price_prod','qty_prod','cat_name','type_content','detail','status')
+            $tasks = Produit::select('produits.id','code_prod','name_prod','desc_prod',
+            'price_prod','qty_prod','cat_name','detail','status')
             ->join('cat_produits','cat_produits.id','=','produits.id_cat')
             ->where('produits.id_ent','=',Auth::user()->id_ent)->get();
             
@@ -38,9 +40,9 @@ class ProduitController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' data-id='".$row->id."' data-bs-toggle='modal'><i class='bx bxs-detail'></i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/produit/show/".$row->id."'><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/produit/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i class='bx bxs-edit'></i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/produit/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
                 // Delete Button
                 $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/produit/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
@@ -73,9 +75,12 @@ class ProduitController extends Controller
             'id_cat' => ['required'],
             'qty_prod' => ['required'],
         ]); 
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id_cat);
+
         $pro = new ProduitService();
-        $pro->CreateProduit($request->code_prod,$request->name_prod,$request->desc_prod,$request->price_prod,$request->color_prod,$request->size_prod,
-        $request->type_content,$request->detail,$request->qty_prod,$request->id_cat);
+        $pro->CreateProduit($request->code_prod,$request->name_prod,$request->desc_prod,$request->price_prod,$request->qty_prod,$request->color_prod,
+        $request->size_prod,$request->detail,$decoded_id,$request->volume,$request->poids,$request->is_stock,$request->neuf);
 
 
         return redirect()->back()->with('success','Produit ajouté');
@@ -89,7 +94,12 @@ class ProduitController extends Controller
      */
     public function show($id)
     {
-        //
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $prod = Produit::find($decoded_id);
+        
+        //dd($ent);
+        return view('produit.detailProduit',['prod'=>$prod]);
     }
 
     /**

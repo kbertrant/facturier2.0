@@ -31,7 +31,6 @@
                     <th scope="col">DESC</th>
                     <th scope="col">PRICE</th>
                     <th scope="col">QTY</th>
-                    <th scope="col">CONTENT</th>
                     <th scope="col">DETAIL</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">CATEGORIE</th>
@@ -60,7 +59,6 @@
                   { data: 'desc_prod', name: 'desc_prod' },
                   { data: 'price_prod', name: 'price_prod' },
                   { data: 'qty_prod', name: 'qty_prod' },
-                  { data: 'type_content', name: 'type_content' },
                   { data: 'detail', name: 'detail' },
                   { data: 'status', name: 'status' },
                   { data: 'cat_name', name: 'cat_name' },

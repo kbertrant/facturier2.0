@@ -21,6 +21,7 @@ class Livraison extends Model
         'lf_stat',
         'id_four',
         'id_prod',
+        'id_usr',
         'id_ent'
         
     ];

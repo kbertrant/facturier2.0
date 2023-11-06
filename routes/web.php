@@ -54,6 +54,7 @@ Route::get('/type/cliente/destroy/{id}',[App\Http\Controllers\TypeClientControll
 // route produit
 Route::get('/produit',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.main');
 Route::get('/produit/list',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.list');
+Route::get('/produit/show/{id}',[App\Http\Controllers\ProduitController::class, 'show'])->name('produit.show');
 Route::post('/addProduit',[App\Http\Controllers\ProduitController::class, 'create'])->name('addProduit');
 Route::post('/produit/store',[App\Http\Controllers\ProduitController::class, 'store'])->name('produit.store');
 Route::get('/produit/destroy/{id}',[App\Http\Controllers\ProduitController::class,'destroy'])->name('produit.destroy');

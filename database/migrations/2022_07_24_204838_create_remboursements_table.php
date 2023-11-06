@@ -18,6 +18,7 @@ class CreateRemboursementsTable extends Migration
             $table->unsignedBigInteger('id_cli');
             $table->unsignedBigInteger('id_fac')->nullable();
             $table->unsignedBigInteger('id_pay')->nullable();
+            $table->unsignedBigInteger('id_usr')->nullable();
             $table->datetime('date_remb');
             $table->string('ref_remb')->unique();
             $table->integer('amount_remb');
@@ -30,6 +31,7 @@ class CreateRemboursementsTable extends Migration
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_fac')->references('id')->on('factures');
             $table->foreign('id_pay')->references('id')->on('paiements');
+            $table->foreign('id_usr')->references('id')->on('users');
             
         });
     }
