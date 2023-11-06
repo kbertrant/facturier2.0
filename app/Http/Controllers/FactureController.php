@@ -2,7 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\ElementFacture;
+use App\Models\Entreprise;
+use App\Models\Facture;
+use App\Models\Produit;
+use App\Models\User;
+use App\Services\DecodeService;
+use App\Services\EltFactureService;
+use App\Services\FactureService;
+use App\Services\ProduitService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Vinkla\Hashids\Facades\Hashids;
 
 class FactureController extends Controller
 {
@@ -23,7 +37,38 @@ class FactureController extends Controller
      */
     public function index()
     {
-        //
+        if(request()->ajax()) {
+
+            $tasks = Facture::select('factures.id','ref_fac','date_fac','mttc_fac','qty_fac','stat_fac',
+            'name_cli')
+            ->join('clientes','clientes.id','=','factures.id_cli')
+            ->where('factures.id_ent','=',Auth::user()->id_ent)->get();
+            
+            return datatables()->of($tasks)
+            ->addColumn('stat_fac', function ($row) {
+                if($row->stat_fac == "Pending"){
+                $span = "<span class='badge bg-label-danger'>".$row->stat_fac."</span>";
+                }else{$span = "<span class='badge bg-label-success'>".$row->stat_fac."</span>";}
+                return  $span;})
+            ->addColumn('action', function($row){
+   
+                // Update Button
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/facture/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
+                // Update Button
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/facture/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
+                
+                return $updateButton." ".$showButton;
+                 
+         })
+         
+            ->rawColumns(['stat_fac','action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();;
+        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();;
+        
+        return view('facture.listFacture',['clients'=>$clients,'produits'=>$produits]);
     }
 
     /**
@@ -34,7 +79,49 @@ class FactureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        Validator::make($request->all(),[
+            'id_cli' => ['required'],
+            'id_prod' => ['required'],
+            'quantity' => ['required'],
+            'reduction' => ['required']
+        ]); 
+        $decode = new DecodeService();
+        
+        $date = now();
+        $result = $date->format('YmdHis');
+        $dcod_cli_id = $decode->DecodeId($request->id_cli);
+        $fac = new FactureService();
+        $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
+        $dcod_fac_id = $decode->DecodeId($new_fac->id);
+
+        $s = 0;
+        foreach ($request->id_prod as $pr) {
+            $p = $decode->DecodeId($pr);
+            
+            $i = $s++;
+            if($p!=null){
+
+                $pro = new ProduitService();
+                $pro->decrementQteProduct($request->quantity[$i],$p);
+
+                $prix_unit = $pro->getPriceProduct($p);
+
+                $ef = new EltFactureService();
+                //$dcode_fac_id = Hashids::decode($new_fac->id);
+                $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+                
+            }
+        }
+        $somme = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
+        $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
+        $tva = $fac->GetTVAValue($somme);
+        $mht = $somme - $tva;
+        $red = $fac->GetReduction($somme,$request->reduction);
+
+        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$somme,$mht,$tva,$all_qty,$red);
+
+        return redirect()->back()->with('success','Facture ajoutée');
     }
 
     /**
@@ -45,7 +132,16 @@ class FactureController extends Controller
      */
     public function show($id)
     {
-        //
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $fac = Facture::find($decoded_id);
+        $ent = Entreprise::find(Auth::user()->id_ent);
+        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
+        
+        $usr = User::find($fac->id_usr);
+        $cl = Cliente::find($fac->id_cli);
+
+        return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
     }
 
     /**
@@ -69,5 +165,24 @@ class FactureController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function generatePDF($id){
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $fac = Facture::find($decoded_id);
+        $ent = Entreprise::find(Auth::user()->id_ent);
+        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
+        $cl = Cliente::find($fac->id_cli);
+
+        $pdf = Pdf::loadView('print.facpdf', [
+            'fac' => $fac,
+            'ent' => $ent,
+            'efs' => $efs,
+            'cl' => $cl,
+        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        
+        return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
+        
     }
 }

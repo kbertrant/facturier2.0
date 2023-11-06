@@ -18,18 +18,22 @@ class CreateFacturesTable extends Migration
             $table->unsignedBigInteger('id_cli');
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->unsignedBigInteger('id_pro')->nullable();
+            $table->unsignedBigInteger('id_usr')->nullable();
             $table->datetime('date_fac');
             $table->string('ref_fac')->unique();
-            $table->integer('amount_fac');
+            $table->decimal('mht_fac');
+            $table->decimal('mttc_fac');
             $table->integer('qty_fac');
-            $table->integer('tva_price');
-            $table->integer('reduction');
-            $table->string('status');
+            $table->integer('tva_fac');
+            $table->decimal('reduction');
+            $table->string('status')->default('A');
+            $table->string('stat_fac');
             $table->timestamps();
 
             $table->foreign('id_cli')->references('id')->on('clientes');
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_pro')->references('id')->on('proformas');
+            $table->foreign('id_usr')->references('id')->on('users');
             
         });
     }

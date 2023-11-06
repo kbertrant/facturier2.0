@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Vinkla\Hashids\Facades\Hashids;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,9 +17,12 @@ class Paiement extends Model
         
         'ref_pay',
         'date_pay',
-        'amount_pay',
+        'mttc_pay',
+        'mht_pay',
+        'tva_pay',
         'solde_pay',
         'mode_pay',
+        'stat_pay',
         'status',
         'id_cli',
         'id_exe',
@@ -47,8 +53,20 @@ class Paiement extends Model
 
     
 
-    public function remboursement(){
+    public function remboursements(){
         
         return $this->hasMany(Remboursement::class);
-       }
+    }
+
+    /**
+     * Hash the blog ids
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function id(): Attribute
+    {
+        return  Attribute::make(
+            get: fn ($value) => Hashids::encode($value)
+        );
+    }
 }

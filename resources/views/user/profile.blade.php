@@ -22,12 +22,6 @@
                 <h4>{{$user->name}}</h4>
                 <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                   <li class="list-inline-item fw-medium">
-                    <i class='bx bx-pen'></i> Occupation
-                  </li>
-                  <li class="list-inline-item fw-medium">
-                    <i class='bx bx-map'></i> {{$user->ville}}
-                  </li>
-                  <li class="list-inline-item fw-medium">
                     <i class='bx bx-calendar-alt'></i> {{$user->created_at}}
                   </li>
                 </ul>
@@ -47,10 +41,11 @@
   <div class="row">
     <div class="col-md-12">
       <ul class="nav nav-pills flex-column flex-sm-row mb-4">
-        <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class='bx bx-user me-1'></i> Profile</a></li>
+
+        @include('user.profileUpdate')
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class='bx bx-user me-1'></i>Modifer</button>
         <li class="nav-item"><a class="nav-link" href="pages-profile-teams.html"><i class='bx bx-group me-1'></i> Teams</a></li>
-        <li class="nav-item"><a class="nav-link" href="pages-profile-projects.html"><i class='bx bx-grid-alt me-1'></i> Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="pages-profile-connections.html"><i class='bx bx-link-alt me-1'></i> Connections</a></li>
+        
       </ul>
     </div>
   </div>
@@ -62,11 +57,11 @@
       <!-- About User -->
       <div class="card mb-4">
         <div class="card-body">
-          <small class="text-muted text-uppercase">About</small>
+          <small class="text-muted text-uppercase">A propos</small>
           <ul class="list-unstyled mb-4 mt-3">
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Full Name:</span> <span>{{$user->name}}</span></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Nom complet:</span> <span>{{$user->name}}</span></li>
             <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Status:</span> <span>{{$user->stat}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">Role:</span> <span>Occupation</span></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Ville:</span> <span>{{$user->ville}}</span></li>
           </ul>
           <small class="text-muted text-uppercase">Contacts</small>
           <ul class="list-unstyled mb-4 mt-3">

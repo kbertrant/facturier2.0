@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class EntrepriseController extends Controller
@@ -13,42 +16,35 @@ class EntrepriseController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function index()
     {
-        // if(request()->ajax()) {
-        //     $tasks = Entreprise::all();
-        //     return datatables()->of($tasks)
-        //     ->addColumn('action', function($row){
-   
-        //         // Update Button
-        //         $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' data-id='".$row->id."' data-bs-toggle='modal'><i data-lucide='plus' class='w-5 h-5'>Voir</i></a>";
-        //         // Update Button
-        //         $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/ent/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
-        //         // Delete Button
-        //         $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/ent/destroy/".$row->id."'><i data-lucide='trash' class='w-5 h-5'>Suppr</i></a>";
-
-        //         return $updateButton." ".$deleteButton."".$showButton;
-                 
-        //  })
+       /** @var Application $application */
          
-        //     ->rawColumns(['action'])
-        //     ->addIndexColumn()
-        //     ->make(true);
-        // }
-        return view('entreprise.ent');
+          $user= Auth::user();
+
+        //  $entreprise = DB::table('entreprises')
+        //                 ->select()
+        //                 ->join($user,'entrprises.id','=',$user->ent_id)
+        //                 ;
+       $entreprise =Entreprise::where('id','=',$user->id_ent)->first();
+    
+        return view('entreprise.ent',[
+            
+            'entreprise'=>$entreprise
+        ]);
 
     }
 
 
     
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        $request->validate([
+        Validator::make($request->all(),[
 
             'name_ent' => ['required','unique:entreprises'],
             'rc_ent' => ['required','unique:entreprises'],
@@ -60,9 +56,19 @@ class EntrepriseController extends Controller
             'logo_ent' => ['required'],
 
         ]); 
-        $logoPath = $request->file('logo_ent')->store('logo','public');
 
-        Entreprise::create([
+        $entreprise =Entreprise::find($request->id) ;
+    
+        
+        if($entreprise->logo_ent){Storage::disk('public')->delete($entreprise->logo_ent);}
+        
+        if($request->logo_ent){
+        $logoPath = $request->file('logo_ent')->store('logo','public');
+        $entreprise->logo_ent=$logoPath;
+        }
+        
+
+        $entreprise->update([
              'name_ent'=>$request->name_ent,
              'rc_ent'=>$request->rc_ent,
              'nc_ent'=>$request->nc_ent,
@@ -74,7 +80,7 @@ class EntrepriseController extends Controller
 
         ]);
         
-        return redirect('/')->with('success','Entreprise Ajoutée !');
+         return redirect()->route('entreprise')->with('success','Entreprise Ajoutée !');
     }
 
     /**
@@ -108,7 +114,7 @@ class EntrepriseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function yt(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name_ent' => ['required'],

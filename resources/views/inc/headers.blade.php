@@ -37,12 +37,21 @@ id="layout-navbar">
         >Star</a
       >
     </li> -->
-
+    <!-- Nav Item - Alerts -->
+    <li class="nav-item dropdown no-arrow mx-1">
+      <select class="nav-link selectpicker show-menu-arrow changeLang">
+        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>EN</option>
+      <option value="fr" {{ session()->get('locale') == 'fr' ? 'selected' : '' }}>FR</option>
+    </select>
+    </li>
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
-      <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-        <div class="avatar avatar-online">
-          <img src="/storage/{{$user->image}}" alt class="w-px-40  rounded-circle" />
+      <a class="nav-link dropdown-toggle hide-arrow"  data-bs-toggle="dropdown">
+        <div class="avatar avatar-online" >
+          @auth
+          <img src="/storage/{{Auth::user()->image}}" alt class="w-px-40  rounded-circle" /> 
+      
+         
         </div>
       </a>
       <ul class="dropdown-menu dropdown-menu-end">
@@ -51,16 +60,17 @@ id="layout-navbar">
             <div class="d-flex">
               <div class="flex-shrink-0 me-3">
                 <div class="avatar avatar-online">
-                  <img src="/storage/{{$user->image}}" alt class="w-px-40  rounded-circle" />
+                  <img src="/storage/{{Auth::user()->image}}" alt class="w-px-40  rounded-circle" />
                 </div>
               </div>
               <div class="flex-grow-1">
-                <span class="fw-semibold d-block">{{$user->name}}</span>
+                <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
                 <small class="text-muted">Admin</small>
               </div>
             </div>
           </a>
         </li>
+        @endauth
         <li>
           <div class="dropdown-divider"></div>
         </li>

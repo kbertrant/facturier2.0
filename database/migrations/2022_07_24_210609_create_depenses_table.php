@@ -16,6 +16,7 @@ class CreateDepensesTable extends Migration
         Schema::create('depenses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_exe')->nullable();
+            $table->unsignedBigInteger('id_usr')->nullable();
             $table->string('ref_dep')->unique();
             $table->datetime('date_dep');
             $table->integer('amount_dep');
@@ -24,7 +25,8 @@ class CreateDepensesTable extends Migration
             $table->string('status');
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();
-
+            
+            $table->foreign('id_usr')->references('id')->on('users');
             $table->foreign('id_ent')->references('id')->on('entreprises');
         });
     }

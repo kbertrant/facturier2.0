@@ -17,17 +17,20 @@ class CreateProformasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_cli');
             $table->unsignedBigInteger('id_ent')->nullable();
-            
+            $table->unsignedBigInteger('id_usr')->nullable();
             $table->datetime('date_pro');
             $table->string('pro_ref')->unique();
-            $table->integer('amount_pro');
+            $table->decimal('mttc_pro');
             $table->integer('qty_pro');
-            $table->integer('tva_price');
+            $table->decimal('tva_pro');
             $table->integer('reduction');
+            $table->decimal('mht_pro');
             $table->string('status');
+            $table->string('stat_pro');
             $table->timestamps();
 
             $table->foreign('id_cli')->references('id')->on('clientes');
+            $table->foreign('id_usr')->references('id')->on('users');
             $table->foreign('id_ent')->references('id')->on('entreprises');
 
         });

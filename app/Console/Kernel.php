@@ -15,7 +15,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // $schedule->call(function () {
+        //     $users = User::where('created_at', '<=', now()->subHours(2))->get();
+        //     foreach ($users as $user) {
+        //         $user->notify(new NotificationName);
+        //     }
+        // })->hourly();
+    
     }
 
     /**

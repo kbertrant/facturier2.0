@@ -18,11 +18,16 @@ class CreateProduitsTable extends Migration
             $table->string('code_prod')->unique();
             $table->string('name_prod');
             $table->string('desc_prod');
-            $table->integer('price_prod');
+            $table->decimal('price_prod');
             $table->integer('qty_prod');
             $table->string('color_prod')->nullable();
             $table->integer('size_prod')->nullable();
-            $table->string('status');
+            $table->string('volume')->nullable();
+            $table->string('poids')->nullable();
+            $table->string('detail')->default('N');
+            $table->string('neuf')->default('Y');
+            $table->string('is_stock')->default('N');
+            $table->string('status')->default('A');
             $table->unsignedBigInteger('id_cat')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();
