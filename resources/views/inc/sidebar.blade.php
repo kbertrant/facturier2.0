@@ -73,27 +73,27 @@
 
       
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Facturation</span>
+        <span class="menu-header-text">{{ __('sidebar.sideFacturation') }}</span>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('proforma.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-receipt"></i>
-          <div data-i18n="Basic">Proformas</div>
+          <div data-i18n="Basic">{{ __('sidebar.myProformas') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('facture.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cart"></i>
-          <div data-i18n="Basic">Factures</div>
+          <div data-i18n="Basic">{{ __('sidebar.myFactures') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-credit-card"></i>
-          <div data-i18n="Basic">Depenses</div>
+          <div data-i18n="Basic">{{ __('sidebar.myDepenses') }}</div>
         </a>
       </li>
       <!-- Cards -->
@@ -107,18 +107,18 @@
       <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-coin-stack"></i>
-          <div data-i18n="Basic">Remboursements</div>
+          <div data-i18n="Basic">{{ __('sidebar.myRemboursement') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-buildings"></i>
-          <div data-i18n="Basic">Tresorerie</div>
+          <div data-i18n="Basic">{{ __('sidebar.myTersorerie') }}</div>
         </a>
       </li>
       <!-- Components -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">COMMERCE</span></li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideCommerce') }}</span></li>
       <!-- Layouts -->
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -129,12 +129,12 @@
         <ul class="menu-sub">
           <li class="menu-item">
             <a href="{{route('listTypeClient')}}" class="menu-link">
-              <div data-i18n="Types de client">Types de client</div>
+              <div data-i18n="Types de client">{{ __('sidebar.myTypeClient') }}</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="{{route('listClient')}}" class="menu-link">
-              <div data-i18n="Liste de client">Liste de clients</div>
+              <div data-i18n="Liste de client">{{ __('sidebar.myListClient') }}</div>
             </a>
           </li>
         </ul>
@@ -148,12 +148,12 @@
         <ul class="menu-sub">
           <li class="menu-item">
             <a href="{{route('catproduit.main')}}" class="menu-link">
-              <div data-i18n="Categories de produit">Categories de produit</div>
+              <div data-i18n="Categories de produit">{{ __('sidebar.myCategory') }}</div>
             </a>
           </li>
           <li class="menu-item active">
             <a href="{{route('produit.main')}}" class="menu-link">
-              <div data-i18n="Liste de produits">Liste de produits</div>
+              <div data-i18n="Liste de produits">{{ __('sidebar.myListProduit') }}</div>
             </a>
           </li>
         </ul>
@@ -163,24 +163,24 @@
       <li class="menu-item">
         <a href="{{route('fournisseur.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-store"></i>
-          <div data-i18n="Basic">Fournisseurs</div>
+          <div data-i18n="Basic">{{ __('sidebar.myFournisseurs') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="cards-basic.html" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Livraisons</div>
+          <div data-i18n="Basic">{{ __('sidebar.myLivraisons') }}</div>
         </a>
       </li>
      
       <!-- Forms & Tables -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Parametres</span></li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideParametre') }}</span></li>
       <!-- Cards -->
       <li class="menu-item">
         <a href="{{route('user.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-id-card"></i>
-          <div data-i18n="Basic">Utilisateurs</div>
+          <div data-i18n="Basic">{{ __('sidebar.myUser') }}</div>
         </a>
       </li>
       <!-- Cards -->
@@ -194,14 +194,21 @@
       <li class="menu-item">
         <a href="{{route('entreprise')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Entreprises</div>
+          <div data-i18n="Basic">{{ __('sidebar.myEntreprise') }}</div>
         </a>
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Statistiques</div>
+          <div data-i18n="Basic">{{ __('sidebar.myEtat') }}</div>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <div data-i18n="Basic">{{ __('sidebar.myParam') }}</div>
         </a>
       </li>
     </ul>

@@ -73,7 +73,10 @@
                             </span>
                       @enderror
             </div>
-            
+            <div class="mb-3">
+              <label for="image" class="form-label">Logo de l'entreprise</label>
+              <input type="file"  accept="image/png, image/jpg, image/jpeg" class="form-control" id="image" required name="image" placeholder="Entrer votre logo" />   
+            </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>

@@ -151,7 +151,7 @@
                           <p class="mb-0">Total:</p>
                         </td>
                         <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$fac->mttc_fac - $fac->reduction}}</p>
+                          <p class="fw-medium mb-2">{{$fac->mht_fac }}</p>
                           <p class="fw-medium mb-2">{{$fac->reduction}}</p>
                           <p class="fw-medium mb-2">{{$fac->tva_fac}}</p>
                           <p class="fw-medium mb-0">{{$fac->mttc_fac}} XAF</p> 

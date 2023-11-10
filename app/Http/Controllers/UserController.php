@@ -32,11 +32,11 @@ class UserController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/user/show/".$row->id."' ><i data-lucide='plus' class='w-5 h-5'>Details </i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/user/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/user/edit/".$row->id."' ><i data-lucide='trash' class='w-5 h-5'>Modif</i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/user/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/user/destroy/".$row->id."'><i data-lucide='trash' class='w-5 h-5'>Suppr</i></a>";
+                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/user/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
                 return $updateButton." ".$deleteButton." ".$showButton;
                  
@@ -57,17 +57,19 @@ class UserController extends Controller
             'rc_ent'=> $request->rc_ent,
         ]); 
         
-        
-        if($request->image){
-          $imagePath = ($request->imag)->store('images', 'public');
-        }
+        $path = public_path('images/');
+        !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move($path, $imageName);
 
          $user=User::create([
             'name' => $request->name,
             'email' => $request['email'],
             'phone' => $request['phone'],
             'ville' => $request['ville'],
-            'image'=> $imagePath,
+            'image'=> $imageName,
             'id_ent'=>$ent->id,
             'password' => Hash::make($request->password)
         ]);

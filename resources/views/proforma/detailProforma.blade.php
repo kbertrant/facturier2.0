@@ -139,8 +139,8 @@
                     <tr>
                         <td colspan="3" class="align-top px-4 py-5">
                           <p class="mb-2">
-                            <span class="me-1 fw-medium">Salesperson:</span>
-                            <span>Alfie Solomons</span>
+                            <span class="me-1 fw-medium">Executé par:</span>
+                            <span><b>{{ $usr->name }}</b></span>
                           </p>
                           <span>Thanks for your business</span>
                         </td>
@@ -151,7 +151,7 @@
                           <p class="mb-0">Total:</p>
                         </td>
                         <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$pro->mttc_pro}}</p>
+                          <p class="fw-medium mb-2">{{$pro->mht_pro}}</p>
                           <p class="fw-medium mb-2">{{$pro->reduction}}</p>
                           <p class="fw-medium mb-2">{{$pro->tva_pro}}</p>
                           <p class="fw-medium mb-0">{{$pro->mttc_pro}} XAF</p> 

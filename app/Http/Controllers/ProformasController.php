@@ -8,6 +8,7 @@ use App\Models\ElementProforma;
 use App\Models\Entreprise;
 use App\Models\Produit;
 use App\Models\Proformas;
+use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\EltProformaService;
 use App\Services\ProduitService;
@@ -93,9 +94,10 @@ class ProformasController extends Controller
 
         $date = now();
         $result = $date->format('YmdHis');
-        $dcod_cli_id = $decode->DecodeId($request->id_cli);
+        $cli_id = Cliente::where('name_cli','=',$request->id_cli)->get();
+        //dd($cli_id);
         $prof = new ProformaService();
-        $new_prof = $prof->CreateProforma($dcod_cli_id,$result,0,0,0,0,$request->reduction);
+        $new_prof = $prof->CreateProforma($cli_id->id,$result,0,0,0,0,$request->reduction);
         $dcode_pro_id = $decode->DecodeId($new_prof->id);
         $s = 0;
         foreach ($request->id_prod as $pr) {
@@ -139,9 +141,10 @@ class ProformasController extends Controller
         $ent = Entreprise::find(Auth::user()->id_ent);
         $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
+        $usr = User::find($pro->id_usr);
 
         //dd($ent);
-        return view('proforma.detailProforma',['pro'=>$pro,'eps'=>$eps,'cl'=>$cl,'ent'=>$ent]);
+        return view('proforma.detailProforma',['pro'=>$pro,'eps'=>$eps,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
     }
 
     /**
@@ -175,13 +178,15 @@ class ProformasController extends Controller
         $ent = Entreprise::find(Auth::user()->id_ent);
         $eps = ElementProforma::join('produits','produits.id','=','element_proformas.id_prod')->where('id_pro','=',$decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
+        $usr = User::find(Auth::user()->id);
 
         $pdf = Pdf::loadView('print.propdf', [
             'pro' => $pro,
             'ent' => $ent,
             'eps' => $eps,
             'cl' => $cl,
-        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+            'usr' => $usr,
+        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         
         return $pdf->download('PRO_'.$pro->pro_ref.'.pdf');
         

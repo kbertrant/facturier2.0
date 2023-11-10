@@ -10,16 +10,16 @@
         <form class="mb-3" method="POST" action="{{ route('facture.store') }}">
                   @csrf
             <div class="mb-3">
-                <label for="id_cli" class="form-label">CLIENT</label>
-                <select class="form-select" id="id_cli" name="id_cli" aria-label="Client">
-                    <option selected>Choisir le client</option>
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->name_cli }}</option>
-                    @endforeach
-                </select>
-                @error('id_cli')
+              <label for="exampleDataList" class="form-label">Client</label>
+              <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="search" placeholder="Saisir pour rechercher">
+              <datalist id="datalistOptions">
+                @foreach ($clients as $client)
+                  <option value="{{ $client->name_cli }}">{{ $client->name_cli }}</option>
+                @endforeach
+              </datalist>
+              @error('id_cli')
                 <span class="invalid-feedback" role="alert">
-                    <strong class="strong">Le client est deja aquis</strong>
+                  <strong class="strong">Le client est deja aquis</strong>
                 </span>
                 @enderror
             </div>

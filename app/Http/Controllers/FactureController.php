@@ -90,9 +90,9 @@ class FactureController extends Controller
         
         $date = now();
         $result = $date->format('YmdHis');
-        $dcod_cli_id = $decode->DecodeId($request->id_cli);
+        $cli_id = Cliente::where('name_cli','=',$request->id_cli)->get();
         $fac = new FactureService();
-        $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
+        $new_fac = $fac->CreateFacture($cli_id->id,null,$result,0,0,0,0,$request->reduction);
         $dcod_fac_id = $decode->DecodeId($new_fac->id);
 
         $s = 0;
@@ -174,13 +174,15 @@ class FactureController extends Controller
         $ent = Entreprise::find(Auth::user()->id_ent);
         $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
         $cl = Cliente::find($fac->id_cli);
+        $usr = User::find(Auth::user()->id);
 
         $pdf = Pdf::loadView('print.facpdf', [
             'fac' => $fac,
             'ent' => $ent,
             'efs' => $efs,
             'cl' => $cl,
-        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+            'usr' => $usr,
+        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         
         return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
         

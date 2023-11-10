@@ -67,6 +67,7 @@ Route::get('/cat/produit/destroy/{id}',[Cat_produitController::class,'destroy'])
 
 
 // route facture
+Route::get('client/autocomplete', [App\Http\Controllers\FactureController::class,'autocomplete'])->name('autocomplete');
 Route::get('/facture',[App\Http\Controllers\FactureController::class, 'index'])->name('facture.main');
 Route::get('/facture/list',[App\Http\Controllers\FactureController::class, 'index'])->name('facture.list');
 Route::get('/facture/show/{id}',[App\Http\Controllers\FactureController::class, 'show'])->name('facture.show');

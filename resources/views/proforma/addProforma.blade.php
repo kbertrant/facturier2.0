@@ -9,27 +9,27 @@
         
         <form class="mb-3" method="POST" action="{{ route('proforma.store') }}">
                   @csrf
-            <div class="mb-3">
-                <label for="id_cli" class="form-label">CLIENT</label>
-                <select class="form-select" id="id_cli" name="id_cli" aria-label="Client">
-                    <option selected>Choisir le client</option>
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->name_cli }}</option>
-                    @endforeach
-                </select>
-                @error('id_cli')
-                <span class="invalid-feedback" role="alert">
-                    <strong class="strong">Le client est deja aquis</strong>
-                </span>
-                @enderror
-            </div>
+                  <div class="mb-3">
+                    <label for="id_cli" class="form-label">Client</label>
+                    <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher">
+                    <datalist id="datalistOptions">
+                      @foreach ($clients as $client)
+                        <option value="{{ $client->name_cli }}"></option>
+                      @endforeach
+                    </datalist>
+                    @error('id_cli')
+                      <span class="invalid-feedback" role="alert">
+                        <strong class="strong">Le client est deja aquis</strong>
+                      </span>
+                      @enderror
+                  </div>
             
             <fieldset class="scheduler-border">
               <legend class="scheduler-border">Liste des produits</legend>
               <div class="row">
                   <div class="col-lg-8 col-md-8 col-xs-8">
-                      <select id="id_prod[]" name="id_prod[]" class="form-control prod shadow" required>
-                          <option value="">Choisir produit</option>
+                      <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
+                          <option value="">Choisir l'article</option>
                           @foreach ($produits as $produit)
                               <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
                           @endforeach

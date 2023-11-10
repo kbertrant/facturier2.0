@@ -46,6 +46,7 @@
 @endsection
 <script type="text/javascript">
   window.onload = function(){
+    
        $(document).ready(function(){
               $('#factable').DataTable({
               serverSide: true,
