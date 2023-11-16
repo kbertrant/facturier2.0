@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Entreprise;
+use App\Models\Facture;
+use App\Models\Proformas;
 use App\Models\TypeCliente;
 use App\Services\ClienteService;
 use App\Services\DecodeService;
@@ -40,9 +43,9 @@ class ClienteController extends Controller
             ->addColumn('action', function($row){
    
                 // Update Button
-                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' data-id='".$row->id."' data-bs-toggle='modal'><i class='bx bxs-receipt'></i></a>";
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/cliente/show/".$row->id."'><i class='bx bxs-receipt'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/cliente/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i class='bx bxs-edit'></i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/cliente/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
                 // Delete Button
                 $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/cliente/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
@@ -90,7 +93,18 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        //dd($id);
+        
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $pro = Proformas::where('id_cli','=',$decoded_id)->get();
+        $fac = Facture::where('id_cli','=',$decoded_id)->get();
+        $ent = Entreprise::find(Auth::user()->id_ent);
+        $cl = Cliente::find($decoded_id);
+
+        //dd($cl);
+        return view('client.detailClient',['pro'=>$pro,'fac'=>$fac,'cl'=>$cl,'ent'=>$ent]);
+   
     }
 
     /**

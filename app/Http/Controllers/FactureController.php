@@ -90,9 +90,11 @@ class FactureController extends Controller
         
         $date = now();
         $result = $date->format('YmdHis');
-        $cli_id = Cliente::where('name_cli','=',$request->id_cli)->get();
+        $cli = Cliente::where('name_cli','like',$request->id_cli)->first();
         $fac = new FactureService();
-        $new_fac = $fac->CreateFacture($cli_id->id,null,$result,0,0,0,0,$request->reduction);
+        $dcod_cli_id = $decode->DecodeId($cli->id);
+        //dd($cli->id);
+        $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
         $dcod_fac_id = $decode->DecodeId($new_fac->id);
 
         $s = 0;
@@ -186,5 +188,36 @@ class FactureController extends Controller
         
         return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
         
+    }
+
+
+    public function facturesClient($cli_id)
+    {
+        if(request()->ajax()) {
+            //dd($cli_id);
+            $tasks = Facture::select('factures.id','ref_fac','date_fac','mttc_fac','stat_fac')
+            ->where('factures.id_cli','=',1)->get();
+            
+            return datatables()->of($tasks)
+            ->addColumn('stat_fac', function ($row) {
+                if($row->stat_fac == "Pending"){
+                $span = "<span class='badge bg-label-danger'>".$row->stat_fac."</span>";
+                }else{$span = "<span class='badge bg-label-success'>".$row->stat_fac."</span>";}
+                return  $span;})
+            ->addColumn('action', function($row){
+   
+                // Update Button
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/facture/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
+                
+                return $showButton;
+                 
+         })
+         
+            ->rawColumns(['stat_fac','action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+        
+        return view('client.detailClient');
     }
 }

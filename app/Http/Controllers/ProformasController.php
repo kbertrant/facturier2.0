@@ -94,10 +94,10 @@ class ProformasController extends Controller
 
         $date = now();
         $result = $date->format('YmdHis');
-        $cli_id = Cliente::where('name_cli','=',$request->id_cli)->get();
-        //dd($cli_id);
+        $cli = Cliente::where('name_cli','like',$request->id_cli)->first();
+        $dcod_cli_id = $decode->DecodeId($cli->id);
         $prof = new ProformaService();
-        $new_prof = $prof->CreateProforma($cli_id->id,$result,0,0,0,0,$request->reduction);
+        $new_prof = $prof->CreateProforma($dcod_cli_id,$result,0,0,0,0,$request->reduction);
         $dcode_pro_id = $decode->DecodeId($new_prof->id);
         $s = 0;
         foreach ($request->id_prod as $pr) {

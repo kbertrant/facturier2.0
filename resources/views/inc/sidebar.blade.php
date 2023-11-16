@@ -139,7 +139,7 @@
           </li>
         </ul>
       </li>
-      <li class="menu-item active open">
+      <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Produits">{{ __('sidebar.myProduits') }}</div>
@@ -151,7 +151,7 @@
               <div data-i18n="Categories de produit">{{ __('sidebar.myCategory') }}</div>
             </a>
           </li>
-          <li class="menu-item active">
+          <li class="menu-item">
             <a href="{{route('produit.main')}}" class="menu-link">
               <div data-i18n="Liste de produits">{{ __('sidebar.myListProduit') }}</div>
             </a>

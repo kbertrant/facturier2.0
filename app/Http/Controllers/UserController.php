@@ -62,7 +62,7 @@ class UserController extends Controller
             mkdir($path, 0777, true);
 
         $imageName = time() . '.' . $request->image->extension();
-        $request->image->move($path, $imageName);
+        $request->file('image')->move($path, $imageName);
 
          $user=User::create([
             'name' => $request->name,

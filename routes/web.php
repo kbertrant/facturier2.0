@@ -41,6 +41,8 @@ Route::get('/cliente', [App\Http\Controllers\ClienteController::class, 'index'])
 Route::get('/cliente/list', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.list');
 Route::post('/cliente/store',[App\Http\Controllers\ClienteController::class, 'store'])->name('cliente.store');
 Route::get('/cliente/destroy/{id}',[App\Http\Controllers\ClienteController::class,'destroy'])->name('cliente.destroy');
+Route::get('/cliente/show/{id}',[App\Http\Controllers\ClienteController::class, 'show'])->name('cliente.show');
+
 
 // route type client
 Route::get('/listTypeClient',[App\Http\Controllers\TypeClientController::class, 'index'])->name('listTypeClient');
@@ -75,6 +77,7 @@ Route::post('/addFacture',[App\Http\Controllers\FactureController::class, 'creat
 Route::post('/facture/store',[App\Http\Controllers\FactureController::class, 'store'])->name('facture.store');
 Route::get('/facture/destroy/{id}',[App\Http\Controllers\FactureController::class,'destroy'])->name('facture.destroy');
 Route::get('/facture/generate/{id}', [App\Http\Controllers\FactureController::class, 'generatePDF'])->name('facture.generate');
+Route::get('/cliente/factures/list/{id}', [App\Http\Controllers\FactureController::class, 'facturesClient'])->name('clfacture.list');
 
 
 // route proforma
