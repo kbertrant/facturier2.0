@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TypeCliente;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,10 @@ class TypeClientController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
+
+        $historic = new HistoricService();
+        $historic->Add('List type client');
+
         return view('client.listTypeClient');
     }
 
@@ -67,6 +72,9 @@ class TypeClientController extends Controller
         $cli->name_tc = $request->name_tc;
         $cli->status = "A";
         $cli->save();
+
+        $historic = new HistoricService();
+        $historic->Add('Add new type client');
 
         return redirect()->back()->with('success','Type Client ajouté');
     }

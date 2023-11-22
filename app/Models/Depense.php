@@ -18,9 +18,12 @@ class Depense extends Model
         'date_dep',
         'amount_dep',
         'solde_dep',
+        'label_dep',
         'mode_dep',
         'status',
         'id_exe',
+        'id_four',
+        'id_usr',
         'id_ent' 
         
     ];

@@ -9,6 +9,7 @@ use App\Models\Proformas;
 use App\Models\TypeCliente;
 use App\Services\ClienteService;
 use App\Services\DecodeService;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,10 @@ class ClienteController extends Controller
             ->make(true);
         }
         $list_tcs = TypeCliente::all();
+
+        $historic = new HistoricService();
+        $historic->Add('List client');
+        
        return view('client.listClient',['list_tcs'=>$list_tcs]);
     }
 
@@ -82,6 +87,9 @@ class ClienteController extends Controller
         $cli->CreateCliente($request->name_cli,$request->phone_cli,$request->address_cli,
         $request->raison_sociale,$request->cl_rccm,$request->cl_nui,$request->cl_email,$decoded_id);
 
+        $historic = new HistoricService();
+        $historic->Add('Add new client');
+
         return redirect()->back()->with('success','Client ajouté');
     }
 
@@ -93,17 +101,19 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //dd($id);
         
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($id);
-        $pro = Proformas::where('id_cli','=',$decoded_id)->get();
+        $count = Facture::where('id_cli','=',$decoded_id)->count();
+        $sum_pay = Facture::where('id_cli','=',$decoded_id)->where('stat_fac','=','PAID')->sum('mttc_fac');
+        $sum_to_pay = Facture::where('id_cli','=',$decoded_id)->where('stat_fac','=','PENDING')->sum('mttc_fac');
         $fac = Facture::where('id_cli','=',$decoded_id)->get();
         $ent = Entreprise::find(Auth::user()->id_ent);
         $cl = Cliente::find($decoded_id);
 
-        //dd($cl);
-        return view('client.detailClient',['pro'=>$pro,'fac'=>$fac,'cl'=>$cl,'ent'=>$ent]);
+        //dd($count);
+        return view('client.detailClient',['fac'=>$fac,'cl'=>$cl,'ent'=>$ent,
+        'id_cli'=>$decoded_id, 'count'=>$count, 'sum_pay'=>$sum_pay,'sum_to_pay'=>$sum_to_pay]);
    
     }
 

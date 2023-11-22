@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\EltFactureService;
 use App\Services\FactureService;
+use App\Services\HistoricService;
 use App\Services\ProduitService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -65,8 +66,11 @@ class FactureController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
-        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();;
-        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();;
+        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
+        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();
+
+        $historic = new HistoricService();
+        $historic->Add('List invoices');
         
         return view('facture.listFacture',['clients'=>$clients,'produits'=>$produits]);
     }
@@ -90,7 +94,7 @@ class FactureController extends Controller
         
         $date = now();
         $result = $date->format('YmdHis');
-        $cli = Cliente::where('name_cli','like',$request->id_cli)->first();
+        $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
         $fac = new FactureService();
         $dcod_cli_id = $decode->DecodeId($cli->id);
         //dd($cli->id);
@@ -122,6 +126,9 @@ class FactureController extends Controller
         $red = $fac->GetReduction($somme,$request->reduction);
 
         $up_fac = $fac->SetPriceFacture($dcod_fac_id,$somme,$mht,$tva,$all_qty,$red);
+
+        $historic = new HistoricService();
+        $historic->Add('Add new invoice');
 
         return redirect()->back()->with('success','Facture ajoutée');
     }
@@ -196,7 +203,7 @@ class FactureController extends Controller
         if(request()->ajax()) {
             //dd($cli_id);
             $tasks = Facture::select('factures.id','ref_fac','date_fac','mttc_fac','stat_fac')
-            ->where('factures.id_cli','=',1)->get();
+            ->where('factures.id_cli','=',$cli_id)->get();
             
             return datatables()->of($tasks)
             ->addColumn('stat_fac', function ($row) {

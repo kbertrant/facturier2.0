@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,11 @@ class HomeController extends Controller
      
         $user = Auth::user();
 
-        return view('user.profile', ['user'=> $user]);
+        $historic = new HistoricService();
+        $historic->Add('View profile');
+        $lst_histos = $historic->HistoricsUser($user->id);
+
+        return view('user.profile', ['user'=> $user,'lst_histos'=>$lst_histos]);
     }
     
     

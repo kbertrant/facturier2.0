@@ -21,7 +21,7 @@
                     <div class="card-body">
                       <div class="customer-avatar-section">
                         <div class="d-flex align-items-center flex-column">
-                          <img class="img-fluid rounded my-3" src="/storage/{{Auth::user()->image}}" height="110" width="110" alt="User avatar">
+                          <img class="img-fluid rounded my-3" src="/images/default_client.png" height="110" width="110" alt="User avatar">
                           <div class="customer-info text-center">
                             <h4 class="mb-1"> {{$cl->name_cli}}</h4>
                             <small>Created #{{$cl->created_at}}</small>
@@ -35,7 +35,7 @@
                             </div>
                           </div>
                           <div>
-                            <h5 class="mb-0">184</h5>
+                            <h5 class="mb-0">{{$count}}</h5>
                             <span>Commandes</span>
                           </div>
                         </div>
@@ -45,7 +45,7 @@
                             </div>
                           </div>
                           <div>
-                            <h5 class="mb-0">$12,378</h5>
+                            <h5 class="mb-0">{{$sum_pay}} XAF</h5>
                             <span>Depenses</span>
                           </div>
                         </div>
@@ -111,10 +111,10 @@
                           <div class="card-danger">
                             <h4 class="card-title mb-3">Montants impayés</h4>
                             <div class="d-flex align-items-end mb-1 gap-1">
-                              <h4 class="text-danger mb-0">xxx xxxx xxx XAF</h4>
+                              <h4 class="text-danger mb-0">{{$sum_to_pay}} XAF</h4>
                               <p class="mb-0">A payer</p>
                             </div>
-                            <p class="text-muted mb-0 text-truncate">Account balance for next purchase</p>
+                            <p class="text-muted mb-0 text-truncate">Solde du compte avant le prochain achat</p>
                           </div>
                         </div>
                       </div>
@@ -131,7 +131,7 @@
                           <div class="card-info">
                             <h4 class="card-title mb-3">Nombre de factures impayées </h4>
                             <span class="badge bg-label-success mb-1">Platinum member</span>
-                            <p class="text-muted mb-0">32 factures</p>
+                            <p class="text-muted mb-0">{{$count}} factures</p>
                           </div>
                         </div>
                       </div>
@@ -169,20 +169,23 @@
 <script type="text/javascript">
   window.onload = function(){
        $(document).ready(function(){
-        
-              $('#clientfacture').DataTable({
+        //alert(ids);
+        let ids = {!! json_encode($id_cli) !!};
+        var url = '{{ route("clfacture.list", ":id") }}';
+        url = url.replace(':id', ids);
+
+            $('#clientfacture').DataTable({
               serverSide: true,
-              ajax: '{!! route('clfacture.list', ['id' => '1']) !!}',
+              ajax: url,
               columns: [
                 { data: 'id', name: 'id','visible':false },
                   { data: 'ref_fac', name: 'ref_fac' },
                   { data: 'date_fac', name: 'date_fac' },
                   { data: 'mttc_fac', name: 'mttc_fac' },
                   { data: 'stat_fac', name: 'stat_fac' },
-                  {data: 'action', name: 'action', orderable: false}
+                  {data: 'action', name: 'action', orderable: true}
                     ],order: [[0, 'desc']]
-           });
+          });
       });
-  
   }
 </script>

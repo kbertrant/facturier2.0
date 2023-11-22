@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class EntrepriseController extends Controller
         //                 ->join($user,'entrprises.id','=',$user->ent_id)
         //                 ;
        $entreprise =Entreprise::where('id','=',$user->id_ent)->first();
-    
+       $historic = new HistoricService();
+       $historic->Add('List entreprises');
         return view('entreprise.ent',[
             
             'entreprise'=>$entreprise

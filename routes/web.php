@@ -111,6 +111,13 @@ Route::post('/addUser',[App\Http\Controllers\UserController::class, 'create'])->
 Route::post('/user/store',[App\Http\Controllers\UserController::class, 'store'])->name('user.store');
 Route::get('/user/destroy/{id}',[App\Http\Controllers\UserController::class,'destroy'])->name('user.destroy');
 
+//depenses
+Route::get('/depense',[App\Http\Controllers\DepenseController::class, 'index'])->name('depense.main');
+Route::get('/depense/list',[App\Http\Controllers\DepenseController::class, 'index'])->name('depense.list');
+Route::post('/addDepense',[App\Http\Controllers\DepenseController::class, 'create'])->name('addDepense');
+Route::post('/depense/store',[App\Http\Controllers\DepenseController::class, 'store'])->name('depense.store');
+Route::get('/depense/destroy/{id}',[App\Http\Controllers\DepenseController::class,'destroy'])->name('depense.destroy');
+Route::get('/depense/show/{id}',[App\Http\Controllers\DepenseController::class, 'show'])->name('depense.show');
 
 
 

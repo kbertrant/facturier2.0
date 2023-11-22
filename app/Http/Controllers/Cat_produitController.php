@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cat_produit;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -47,6 +48,9 @@ class Cat_produitController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
+        $historic = new HistoricService();
+        $historic->Add('List cat product');
+
         return view('cat_produit.listCat_produit');
     }
 
@@ -67,6 +71,9 @@ class Cat_produitController extends Controller
         $catpro->cat_stat = 'A';
         $catpro->id_ent = Auth::user()->id_ent;
         $catpro->save();
+
+        $historic = new HistoricService();
+        $historic->Add('Add Category product');
 
         return redirect()->back()->with('success','Categorie ajoutée');
     }

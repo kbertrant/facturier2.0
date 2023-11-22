@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fournisseur;
 use App\Services\FournisseurService;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -49,6 +50,10 @@ class FournisseurController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
+
+        $historic = new HistoricService();
+        $historic->Add('List providers');
+
        return view('fournisseur.listFour');
     }
 
@@ -75,6 +80,9 @@ class FournisseurController extends Controller
         $four->CreateFournisseur($request->four_name,$request->four_code,$request->resp_name,
         $request->four_rccm,$request->four_nui,$request->four_phone,$request->four_email,
         $request->four_adress);
+
+        $historic = new HistoricService();
+        $historic->Add('Add new provider');
 
         return redirect()->back()->with('success','Fournisseur ajouté');
     }

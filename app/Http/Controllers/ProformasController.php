@@ -11,6 +11,7 @@ use App\Models\Proformas;
 use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\EltProformaService;
+use App\Services\HistoricService;
 use App\Services\ProduitService;
 use App\Services\ProformaService;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -68,8 +69,11 @@ class ProformasController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
-        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();;
-        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();;
+        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
+        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();
+
+        $historic = new HistoricService();
+        $historic->Add('List proformas');
         
         return view('proforma.listProforma',['clients'=>$clients,'produits'=>$produits]);
     }
@@ -124,6 +128,9 @@ class ProformasController extends Controller
 
         $up_pro = $prof->SetPriceProforma($dcode_pro_id,$somme,$mht,$tva,$all_qty,$red);
 
+        $historic = new HistoricService();
+        $historic->Add('Add new proforma');
+
         return redirect()->back()->with('success','Proforma ajoutée');
     }
 
@@ -143,7 +150,8 @@ class ProformasController extends Controller
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find($pro->id_usr);
 
-        //dd($ent);
+        $historic = new HistoricService();
+        $historic->Add('Detail proforma ');
         return view('proforma.detailProforma',['pro'=>$pro,'eps'=>$eps,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
     }
 
@@ -187,7 +195,8 @@ class ProformasController extends Controller
             'cl' => $cl,
             'usr' => $usr,
         ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
-        
+        $historic = new HistoricService();
+        $historic->Add('Print proformas');
         return $pdf->download('PRO_'.$pro->pro_ref.'.pdf');
         
     }

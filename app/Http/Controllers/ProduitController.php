@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cat_produit;
 use App\Models\Produit;
 use App\Services\DecodeService;
+use App\Services\HistoricService;
 use App\Services\ProduitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,9 @@ class ProduitController extends Controller
             ->make(true);
         }
         $cats = Cat_produit::all();
+        $historic = new HistoricService();
+        $historic->Add('List products');
+
         return view('produit.listProduit',['cats'=>$cats]);
     }
 
@@ -82,6 +86,8 @@ class ProduitController extends Controller
         $pro->CreateProduit($request->code_prod,$request->name_prod,$request->desc_prod,$request->price_prod,$request->qty_prod,$request->color_prod,
         $request->size_prod,$request->detail,$decoded_id,$request->volume,$request->poids,$request->is_stock,$request->neuf);
 
+        $historic = new HistoricService();
+        $historic->Add('Add new product');
 
         return redirect()->back()->with('success','Produit ajouté');
     }
@@ -97,6 +103,9 @@ class ProduitController extends Controller
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($id);
         $prod = Produit::find($decoded_id);
+
+        $historic = new HistoricService();
+        $historic->Add('View detail product');
         
         //dd($ent);
         return view('produit.detailProduit',['prod'=>$prod]);

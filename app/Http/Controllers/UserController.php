@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +46,10 @@ class UserController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
+
+        $historic = new HistoricService();
+        $historic->Add('List users');
+        
        return view('user.listUser');
     }
     
@@ -74,8 +79,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        
-        $user->notify(new UserNotification());
+        $historic = new HistoricService();
+        $historic->Add('Add new user');
+        //$user->notify(new UserNotification());
        
         return view('user.listUser');
 
@@ -121,6 +127,10 @@ class UserController extends Controller
                 'image'=>$imagePath
             ]);
         } 
+
+        $historic = new HistoricService();
+        $historic->Add('Update client');
+
          return redirect()->route('profile');
     }
 }
