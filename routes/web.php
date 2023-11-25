@@ -103,7 +103,8 @@ Route::get('/payment',[App\Http\Controllers\PaiementController::class, 'index'])
 Route::get('/payment/list',[App\Http\Controllers\PaiementController::class, 'index'])->name('payment.list');
 Route::post('/addaPayment',[App\Http\Controllers\PaiementController::class, 'create'])->name('addPayment');
 Route::post('/payment/store',[App\Http\Controllers\PaiementController::class, 'store'])->name('payment.store');
-
+Route::get('/payment/show/{id}',[App\Http\Controllers\PaiementController::class, 'show'])->name('payment.show');
+Route::get('/payment/generate/{id}', [App\Http\Controllers\PaiementController::class, 'generatePDF'])->name('payment.generate');
 // route user
 Route::get('/user',[App\Http\Controllers\UserController::class, 'index'])->name('user.main');
 Route::get('/user/list',[App\Http\Controllers\UserController::class, 'index'])->name('user.list');
@@ -118,6 +119,7 @@ Route::post('/addDepense',[App\Http\Controllers\DepenseController::class, 'creat
 Route::post('/depense/store',[App\Http\Controllers\DepenseController::class, 'store'])->name('depense.store');
 Route::get('/depense/destroy/{id}',[App\Http\Controllers\DepenseController::class,'destroy'])->name('depense.destroy');
 Route::get('/depense/show/{id}',[App\Http\Controllers\DepenseController::class, 'show'])->name('depense.show');
+Route::get('/depense/generate/{id}', [App\Http\Controllers\DepenseController::class, 'generatePDF'])->name('depense.generate');
 
 
 

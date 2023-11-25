@@ -55,7 +55,7 @@
                   { data: 'mttc_pay', name: 'mttc_pay' },
                   { data: 'stat_pay', name: 'stat_pay' },
                   { data: 'name_cli', name: 'name_cli' },
-                  {data: 'action', name: 'action', orderable: false}
+                  {data: 'action', name: 'action', orderable: true}
                     ],order: [[0, 'desc']]
            });
       });

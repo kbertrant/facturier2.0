@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('payment.store') }}">
                   @csrf
             <div class="mb-3">
-              <label for="exampleDataList" class="form-label">Numero Facture</label>
+              <label for="num_fac" class="form-label">Numero Facture</label>
               <input type="text" class="form-control" name="num_fac" list="datalistOptions" id="num_fac" placeholder="Saisir pour rechercher">
               <datalist id="datalistOptions">
                 @foreach ($facs as $fac)

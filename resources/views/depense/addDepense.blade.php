@@ -35,7 +35,7 @@
             </div>
             <div class="mb-3">
               <label for="amount_dep" class="form-label">Montant à payer </label>
-              <input type="text" class="form-control @error('amount_dep') is-invalid @enderror"
+              <input type="number" class="form-control @error('amount_dep') is-invalid @enderror"
                     id="amount_dep" name="amount_dep" placeholder="Montant à payer" required />
                 @error('amount_dep')
                     <span class="invalid-feedback" role="alert">
@@ -46,15 +46,30 @@
             
             <div class="mb-3">
               <label for="solde_dep" class="form-label">Solde</label>
-              <input type="integer" class="form-control @error('solde_dep') is-invalid @enderror"
+              <input type="number" class="form-control @error('solde_dep') is-invalid @enderror"
                     id="solde_dep" name="solde_dep" placeholder="Dimension du produit" required />
                 @error('solde_dep')
                     <span class="invalid-feedback" role="alert">
-                        <strong class="strong">Quantite est deja aquis</strong>
+                        <strong class="strong">Sole est deja aquis</strong>
                     </span>
                 @enderror
             </div>
-            
+            <div class="mb-3">
+                <label for="pay_mode" class="form-label">Mode de paiement </label>
+                <select class="form-select" id="mode_dep" name="mode_dep" aria-label="Mode de paiement">
+                    <option selected>Choisir mode de paiement</option>
+                    <option value="CASH">CASH/ESPECES </option>
+                    <option value="MTN MOMO">MTN MOMO</option>
+                    <option value="ORANGE MONEY">ORANGE MONEY</option>
+                    <option value="CHEQUE">CHEQUE </option>
+                    <option value="VIREMENT">VIREMENT</option>
+                </select>
+                @error('mode_dep')
+                    <span class="invalid-feedback" role="alert">
+                        <strong class="strong">Mode de paiement est deja aquis</strong>
+                    </span>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>

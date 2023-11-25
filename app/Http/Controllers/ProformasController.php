@@ -153,6 +153,7 @@ class ProformasController extends Controller
         $historic = new HistoricService();
         $historic->Add('Detail proforma ');
         return view('proforma.detailProforma',['pro'=>$pro,'eps'=>$eps,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
+    
     }
 
     /**

@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Depense;
+use App\Models\Entreprise;
 use App\Models\Fournisseur;
+use App\Models\User;
+use App\Services\DecodeService;
+use App\Services\DepenseService;
 use App\Services\HistoricService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DepenseController extends Controller
 {
@@ -45,10 +51,8 @@ class DepenseController extends Controller
    
                 // Update Button
                 $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/depense/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
-                // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/depense/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
                 
-                return $updateButton." ".$showButton;
+                return $showButton;
                  
          })
          
@@ -72,7 +76,26 @@ class DepenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        Validator::make($request->all(),[
+            'amount_dep' => ['required'],
+            'label_dep' => ['required'],
+            'solde_dep' => ['required'],
+            'mode_dep' => ['required'],
+            'id_four' => ['required'],
+        ]); 
+        $date = now();
+        $ref_dep = $date->format('ymdHis');
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id_four);
+        $cli = new DepenseService();
+        $cli->CreateDepense($ref_dep,$request->amount_dep,$request->label_dep,$request->solde_dep,
+        $request->mode_dep,$decoded_id);
+
+        $historic = new HistoricService();
+        $historic->Add('Add new expense');
+
+        return redirect()->back()->with('success','Nouvelle depense');
     }
 
     /**
@@ -83,7 +106,17 @@ class DepenseController extends Controller
      */
     public function show($id)
     {
-        //
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $dep = Depense::find($decoded_id);
+        $ent = Entreprise::find(Auth::user()->id_ent);
+        $four = Fournisseur::find($dep->id_four);
+        $usr = User::find($dep->id_usr);
+
+        $historic = new HistoricService();
+        $historic->Add('Detail expense ');
+        return view('depense.detailDepense',['dep'=>$dep,'four'=>$four,'ent'=>$ent,'usr'=>$usr]);
+    
     }
 
     /**
@@ -108,5 +141,25 @@ class DepenseController extends Controller
     {
         //
     }
-    //
+    
+    public function generatePDF($id){
+
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $dep = Depense::find($decoded_id);
+        $ent = Entreprise::find(Auth::user()->id_ent);
+        $four = Fournisseur::find($dep->id_four);
+        $usr = User::find(Auth::user()->id);
+
+        $pdf = Pdf::loadView('print.deppdf', [
+            'dep' => $dep,
+            'ent' => $ent,
+            'four' => $four,
+            'usr' => $usr,
+        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        $historic = new HistoricService();
+        $historic->Add('Print depense');
+        return $pdf->download('DEP_'.$dep->ref_dep.'.pdf');
+        
+    }
 }
