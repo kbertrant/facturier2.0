@@ -16,30 +16,30 @@
                     autofocus
                     required />
               @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
+              <span class="invalid-feedback" role="alert">
+                <strong class="strong">Ce nom est deja aquis</strong>
+              </span>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Adresse email </label>
               <input type="email" class="form-control @error('email') is-invalid @enderror"
                     id="email" name="email" placeholder="Email" required />
               @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce telephone est deja aquis</strong>
-                            </span>
-                      @enderror
+                <span class="invalid-feedback" role="alert">
+                  <strong class="strong">Ce telephone est deja aquis</strong>
+                </span>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Mot de passe</label>
               <input type="password" class="form-control @error('password') is-invalid @enderror"
                     id="password" name="password" placeholder="Mot de passe" required />
               @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
+                <span class="invalid-feedback" role="alert">
+                  <strong class="strong">Ce nom est deja aquis</strong>
+                </span>
+              @enderror
             </div>
   
             <div class="mb-3">
@@ -47,36 +47,22 @@
               <input type="text" class="form-control @error('ville') is-invalid @enderror"
                     id="ville" name="ville" placeholder="Ville"required />
               @error('ville')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
-            </div>
-            <div class="mb-3">
-              <label for="name_ent" class="form-label">NOM ENTREPRISE</label>
-              <input type="text" class="form-control @error('name_ent') is-invalid @enderror"
-                    id="name_ent" name="name_ent" placeholder="Nom de l'entreprise"required />
-              @error('name_ent')
                 <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
+                  <strong class="strong">Ce nom est deja aquis</strong>
                 </span>
-            @enderror
-            </div>
-  
-            <div class="mb-3">
-              <label for="rc_ent" class="form-label">Registre commerce</label>
-              <input type="text" class="form-control @error('rc_ent') is-invalid @enderror"
-                    id="rc_ent" name="rc_ent" placeholder="Registre commerce "required />
-              @error('rc_ent')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Ce nom est deja aquis</strong>
-                            </span>
-                      @enderror
+              @enderror
             </div>
             <div class="mb-3">
-              <label for="image" class="form-label">Logo de l'entreprise</label>
-              <input type="file"  accept="image/png, image/jpg, image/jpeg" class="form-control" id="image" required name="image" placeholder="Entrer votre logo" />   
+              <label for="phone" class="form-label">TELEPHONE </label>
+              <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                    id="phone" name="phone" placeholder="Telephone"required />
+              @error('phone')
+                <span class="invalid-feedback" role="alert">
+                  <strong class="strong">Ce telephone est deja aquis</strong>
+                </span>
+              @enderror
             </div>
+            
             <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>

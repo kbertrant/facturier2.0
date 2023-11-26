@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use App\Services\DecodeService;
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -57,25 +59,12 @@ class UserController extends Controller
     protected function store(Request $request)
     {
     
-        $ent = Entreprise::create([
-            'name_ent'=> $request->name_ent,
-            'rc_ent'=> $request->rc_ent,
-        ]); 
-        
-        $path = public_path('images/');
-        !is_dir($path) &&
-            mkdir($path, 0777, true);
-
-        $imageName = time() . '.' . $request->image->extension();
-        $request->file('image')->move($path, $imageName);
-
-         $user=User::create([
+        $user=User::create([
             'name' => $request->name,
             'email' => $request['email'],
             'phone' => $request['phone'],
             'ville' => $request['ville'],
-            'image'=> $imageName,
-            'id_ent'=>$ent->id,
+            'id_ent'=> Auth::user()->id_ent,
             'password' => Hash::make($request->password)
         ]);
 
@@ -83,7 +72,7 @@ class UserController extends Controller
         $historic->Add('Add new user');
         //$user->notify(new UserNotification());
        
-        return view('user.listUser');
+        return redirect()->back()->with('success','Utilisateur ajouté');
 
     }
 
@@ -95,7 +84,7 @@ class UserController extends Controller
             'name' => ['required','string','unique:users'],
             'email' => ['required','string','unique:users'],
             'anc_password' => ['required','string'],
-            'new_password' => ['required','min:8','string'],
+            'new_password' => ['required','min:6','string'],
             'ville' => ['required','string'],
             'phone' => ['required','string','unique:users'],
             'image'=>['required']
