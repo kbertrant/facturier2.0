@@ -26,6 +26,7 @@ class User extends Authenticatable
         'phone',
         'stat',
         'ville',
+        'role',
         'id_ent',
         'image'
     ];

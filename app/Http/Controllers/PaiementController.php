@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\HistoricService;
 use App\Services\PaiementService;
+use App\Services\TresorService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ class PaiementController extends Controller
             $tasks = Paiement::select('paiements.id as id','ref_pay','date_pay','mttc_pay','stat_pay',
             'name_cli')
             ->join('clientes','clientes.id','=','paiements.id_cli')
-            //->where('paiements.id_ent','=',Auth::user()->id_ent)
+            ->where('paiements.id_ent','=',Auth::user()->id_ent)
             //->published()
             ->get();
             
@@ -86,6 +87,9 @@ class PaiementController extends Controller
         ]); 
         $decode = new DecodeService();
 
+        $tresor = new TresorService();
+        $tresor->transac($request->mttc_pay,"IN");
+
         $date = now();
         $ref_pay = $date->format('ymdHis');
 
@@ -100,6 +104,7 @@ class PaiementController extends Controller
         $payment = new PaiementService();
         $pay = $payment->Paid($ref_pay,$decoded_id,$request->mttc_pay,$request->pay_mode,$solde_pay,$fac->id_cli);
         //dd($pay);
+
         $historic = new HistoricService();
         $historic->Add('Add new payment');
         

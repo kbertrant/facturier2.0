@@ -13,10 +13,10 @@ class Tresorerie extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
+        'amount',
+        'amount_tres',
+        'date_tres',
+        'mouvement',
         'id_ent'
     ];
 

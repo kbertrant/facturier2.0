@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\DecodeService;
 use App\Services\DepenseService;
 use App\Services\HistoricService;
+use App\Services\TresorService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +89,10 @@ class DepenseController extends Controller
         $ref_dep = $date->format('ymdHis');
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($request->id_four);
+
+        $tresor = new TresorService();
+        $tresor->transac($request->amount_dep,"OUT");
+
         $cli = new DepenseService();
         $cli->CreateDepense($ref_dep,$request->amount_dep,$request->label_dep,$request->solde_dep,
         $request->mode_dep,$decoded_id);

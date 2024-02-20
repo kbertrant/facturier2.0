@@ -34,6 +34,7 @@
                     <th scope="col">DETAIL</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">CATEGORIE</th>
+                    <th scope="col">IMAGE</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -62,6 +63,12 @@
                   { data: 'detail', name: 'detail' },
                   { data: 'status', name: 'status' },
                   { data: 'cat_name', name: 'cat_name' },
+                  {
+                    "data": "ImagePath",
+                    "render": function (data) {
+                        return '<img src="'data'" class="avatar" width="50" height="50"/>';
+                        }
+                  },
                   {data: 'action', name: 'action', orderable: false}
                     ],order: [[0, 'desc']]
            });

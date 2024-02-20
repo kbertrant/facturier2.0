@@ -27,6 +27,7 @@ class Produit extends Model
         'is_stock',
         'detail',
         'status',
+        'img',
         'id_cat',
         'id_ent'
 

@@ -86,32 +86,18 @@
                 <div class="card-body">
                   <div class="row p-sm-3 p-0">
                     <div class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+                      
+                    </div>
+                    <div class="col-xl-6 col-md-12 col-sm-7 col-12">
+                      <h6 class="pb-2">Bill To:</h6>
                       <h6 class="pb-2">Invoice To:</h6>
                       <p class="mb-1">{{$cl->name_cli}}</p>
                       <p class="mb-1">{{$cl->raison_sociale}}</p>
                       <p class="mb-1">{{$cl->address_cli}}</p>
                       <p class="mb-1">{{$cl->phone_cli}}</p>
                       <p class="mb-0">{{$cl->cl_email}}</p>
-                    </div>
-                    <div class="col-xl-6 col-md-12 col-sm-7 col-12">
-                      <h6 class="pb-2">Bill To:</h6>
-                      <table>
-                        <tbody>
-                            <tr>
-                                <td class="pe-3">Total Due:</td>
-                                <td>{{$fac->mttc_fac}} XAF</td>
-                            </tr>
-                            <tr>
-                                <td class="pe-3">Client:</td>
-                                <td>{{$cl->raison_sociale}}</td>
-                            </tr>
-                            <tr>
-                                <td class="pe-3">Registre commerce:</td>
-                                <td>{{$cl->cl_rccm}}</td>
-                            </tr>
-                          
-                        </tbody>
-                      </table>
+                      <p class="mb-0">{{$cl->cl_rccm}}</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -142,7 +128,7 @@
                             <span class="me-1 fw-medium">Executé par:</span>
                             <span><b>{{ $usr->name }}</b></span>
                           </p>
-                          <span>Thanks for your business</span>
+                          <span>Thanks for your business. Nous restons à votre disposition</span>
                         </td>
                         <td class="text-end px-4 py-5">
                           <p class="mb-2">Subtotal:</p>
@@ -165,8 +151,7 @@
                   <div class="row">
                     <div class="col-12">
                       <span class="fw-medium">Note:</span>
-                      <span>It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance
-                        projects. Thank You!</span>
+                      <span>Une validité de 7 jours à compter de sa date d'emission.</span>
                     </div>
                   </div>
                 </div>

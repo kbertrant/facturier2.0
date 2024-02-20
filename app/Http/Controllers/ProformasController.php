@@ -195,7 +195,7 @@ class ProformasController extends Controller
             'eps' => $eps,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print proformas');
         return $pdf->download('PRO_'.$pro->pro_ref.'.pdf');

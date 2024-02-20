@@ -28,6 +28,7 @@ class CreateProduitsTable extends Migration
             $table->string('neuf')->default('Y');
             $table->string('is_stock')->default('N');
             $table->string('status')->default('A');
+            $table->string('img')->default('product.png');
             $table->unsignedBigInteger('id_cat')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();

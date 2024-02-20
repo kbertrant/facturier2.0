@@ -112,7 +112,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="#" class="menu-link">
+        <a href="{{route('tresor.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-buildings"></i>
           <div data-i18n="Basic">{{ __('sidebar.myTersorerie') }}</div>
         </a>
@@ -168,7 +168,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">{{ __('sidebar.myLivraisons') }}</div>
         </a>
@@ -185,7 +185,7 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
+        <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">Roles</div>
         </a>

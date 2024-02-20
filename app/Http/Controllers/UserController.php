@@ -64,14 +64,14 @@ class UserController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'ville' => $request['ville'],
+            'role' => $request['role'],
             'id_ent'=> Auth::user()->id_ent,
             'password' => Hash::make($request->password)
         ]);
 
         $historic = new HistoricService();
         $historic->Add('Add new user');
-        //$user->notify(new UserNotification());
-       
+        
         return redirect()->back()->with('success','Utilisateur ajouté');
 
     }
@@ -113,7 +113,8 @@ class UserController extends Controller
                 'password'=>Hash::make($new_password),
                 'ville'=>$request->ville,
                 'phone'=>$request->phone,
-                'image'=>$imagePath
+                'image'=>$imagePath,
+                'role' => $request->role,
             ]);
         } 
 

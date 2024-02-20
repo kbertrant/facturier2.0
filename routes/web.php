@@ -121,5 +121,11 @@ Route::get('/depense/destroy/{id}',[App\Http\Controllers\DepenseController::clas
 Route::get('/depense/show/{id}',[App\Http\Controllers\DepenseController::class, 'show'])->name('depense.show');
 Route::get('/depense/generate/{id}', [App\Http\Controllers\DepenseController::class, 'generatePDF'])->name('depense.generate');
 
+//tresorerie
+Route::get('/tresor',[App\Http\Controllers\TresorerieController::class, 'index'])->name('tresor.main');
+Route::get('/tresor/list',[App\Http\Controllers\TresorerieController::class, 'index'])->name('tresor.list');
+Route::post('/tresor/store',[App\Http\Controllers\TresorerieController::class, 'store'])->name('tresor.store');
+Route::get('/tresor/generate/{id}', [App\Http\Controllers\TresorerieController::class, 'generatePDF'])->name('tresor.generate');
+
 
 

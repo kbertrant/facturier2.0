@@ -10,6 +10,7 @@ use App\Services\ProduitService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Image;
 
 class ProduitController extends Controller
 {
@@ -33,7 +34,7 @@ class ProduitController extends Controller
         if(request()->ajax()) {
 
             $tasks = Produit::select('produits.id','code_prod','name_prod','desc_prod',
-            'price_prod','qty_prod','cat_name','detail','status')
+            'price_prod','qty_prod','cat_name','detail','status','img')
             ->join('cat_produits','cat_produits.id','=','produits.id_cat')
             ->where('produits.id_ent','=',Auth::user()->id_ent)->get();
             
@@ -78,13 +79,28 @@ class ProduitController extends Controller
             'price_prod' => ['required'],
             'id_cat' => ['required'],
             'qty_prod' => ['required'],
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]); 
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($request->id_cat);
 
+        $image = $request->file('img');
+        $imageName = time().'.'.$image->extension();
+       
+        $destinationPathThumbnail = public_path('/thumbnail');
+        $img = Image::make($image->path());
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPathThumbnail.'/'.$imageName);
+     
+        $destinationPath = public_path('/products/images');
+        $image->move($destinationPath, $imageName);
+        //dd($request);
+
+        //insert product datas
         $pro = new ProduitService();
         $pro->CreateProduit($request->code_prod,$request->name_prod,$request->desc_prod,$request->price_prod,$request->qty_prod,$request->color_prod,
-        $request->size_prod,$request->detail,$decoded_id,$request->volume,$request->poids,$request->is_stock,$request->neuf);
+        $request->size_prod,$request->detail,$decoded_id,$request->volume,$request->poids,$request->is_stock,$request->neuf,$imageName);
 
         $historic = new HistoricService();
         $historic->Add('Add new product');

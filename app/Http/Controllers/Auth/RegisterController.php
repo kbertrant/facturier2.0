@@ -94,6 +94,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'ville' => $data['ville'],
             'image'=> $imagePath,
+            'role'=> 'admin',
             'id_ent'=>$decoded_id,
             'password' => Hash::make($data['password'])
         ]);

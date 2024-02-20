@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
       
-        <form class="mb-3" method="POST" action="{{ route('produit.store') }}">
+        <form class="mb-3" method="POST" action="{{ route('produit.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
             <label for="id_cat" class="form-label">Categorie du produit</label>
@@ -141,7 +141,15 @@
 						  </span>
 				    @enderror
           </div>
-          
+          <div class="mb-3">
+            <label for="img" class="form-label">Image</label>
+            <input type="file" class="form-control @error('img') is-invalid @enderror" name="img" id="img">
+            @error('img')
+						  <span class="invalid-feedback" role="alert">
+							  <strong class="strong">Une image est requise</strong>
+						  </span>
+				    @enderror
+          </div>
           <div class="mb-3">
             <label for="is_stock" class="form-label">Produit stockable</label>
             <select class="form-select" id="is_stock" name="is_stock">
