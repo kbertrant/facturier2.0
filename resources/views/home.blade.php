@@ -14,7 +14,7 @@
                 <div class="card-body">
                   <h5 class="card-title text-primary">Bienvenue {{$user->name}}! 🎉</h5>
                   <p class="mb-4">
-                    Vous avez effectué <span class="fw-bold">72</span> ventes ce mois. Voir les detailsplus bas.
+                    Vous avez effectué <span class="fw-bold">72</span> ventes ce mois. Voir les details plus bas.
                   </p>
                 </div>
               </div>
