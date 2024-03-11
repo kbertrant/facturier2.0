@@ -88,6 +88,9 @@ Route::post('/proforma/store',[App\Http\Controllers\ProformasController::class, 
 Route::get('/proforma/destroy/{id}',[App\Http\Controllers\ProformasController::class,'destroy'])->name('proforma.destroy');
 Route::get('/proforma/generate/{id}', [App\Http\Controllers\ProformasController::class, 'generatePDF'])->name('proforma.generate');
 Route::get('/proforma/show/{id}',[App\Http\Controllers\ProformasController::class, 'show'])->name('proforma.show');
+Route::get('/proforma/validate/{id}', [App\Http\Controllers\ProformasController::class, 'validPro'])->name('proforma.validate');
+Route::get('/proforma/edit/{id}', [App\Http\Controllers\ProformasController::class, 'edit'])->name('proforma.edit');
+Route::post('/proforma/update',[App\Http\Controllers\ProformasController::class, 'update'])->name('proforma.update');
 
 
 // route fournisseur

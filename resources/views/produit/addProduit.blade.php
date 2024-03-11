@@ -86,7 +86,7 @@
           <div class="mb-3">
             <label for="size_prod" class="form-label">Dimension du produit</label>
             <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
-                  id="size_prod" name="size_prod" placeholder="Dimension du produit" required />
+                  id="size_prod" name="size_prod" placeholder="en cm..." required />
             @error('size_prod')
 						  <span class="invalid-feedback" role="alert">
 							  <strong class="strong">Quantite est deja aquis</strong>
@@ -124,7 +124,7 @@
           <div class="mb-3">
             <label for="volume" class="form-label">Volume</label>
             <input type="text" class="form-control @error('volume') is-invalid @enderror"
-                  id="volume" name="volume" placeholder="Volume du produit" required />
+                  id="volume" name="volume" placeholder="en cm3" required />
             @error('volume')
 						  <span class="invalid-feedback" role="alert">
 							  <strong class="strong">Volume est deja aquis</strong>

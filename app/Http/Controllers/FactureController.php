@@ -43,7 +43,7 @@ class FactureController extends Controller
             $tasks = Facture::select('factures.id','ref_fac','date_fac','mttc_fac','qty_fac','stat_fac',
             'name_cli')
             ->join('clientes','clientes.id','=','factures.id_cli')
-            ->where('factures.id_ent','=',Auth::user()->id_ent)->get();
+            ->where('factures.id_ent','=',Auth::user()->id_ent)->orderBy('date_fac', 'desc')->get();
             
             return datatables()->of($tasks)
             ->addColumn('stat_fac', function ($row) {
@@ -56,9 +56,9 @@ class FactureController extends Controller
                 // Update Button
                 $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2' href='/facture/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/facture/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
+                //$updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/facture/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
                 
-                return $updateButton." ".$showButton;
+                return $showButton;
                  
          })
          
