@@ -2,6 +2,7 @@
 @section('title', ' - Bienvenue')
 
 @section('content')
+LOGICIEL DE FACTURATION
     
 <style>
   .py-4{

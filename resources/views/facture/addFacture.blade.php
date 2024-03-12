@@ -62,6 +62,13 @@
                             </span>
                       @enderror
             </div>
+            <div class="mb-3">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" id="tva_apply" name="tva_apply" checked="">
+                <label class="form-check-label" for="tva_apply">TVA appliquée</label>
+              </div>
+              
+            </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
           </form>
         </div>

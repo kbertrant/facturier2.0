@@ -127,13 +127,13 @@ class ProformasController extends Controller
                 $prix_unit = $pro->getPriceProduct($p);
 
                 $ep = new EltProformaService();
-                $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit);
+                $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
             }
         }
         $somme = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_ttc');
         $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
 
-        $tva = $prof->GetTVAValue($somme);
+        if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($somme);}else{$tva = 0;} 
         $mht = $somme - $tva;
         $red = $prof->GetReduction($somme, $request->reduction);
 

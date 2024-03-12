@@ -55,12 +55,19 @@
             <div class="mb-3">
               <label for="reduction" class="form-label">Reduction </label>
               <input type="number" class="form-control @error('reduction') is-invalid @enderror"
-                    id="reduction" name="reduction" placeholder="Reduction en %" />
+                    id="reduction" name="reduction" value="0" />
               @error('reduction')
                             <span class="invalid-feedback" role="alert">
                                 <strong class="strong">Reduction est deja aquis</strong>
                             </span>
                       @enderror
+            </div>
+            <div class="mb-3">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" id="tva_apply" name="tva_apply" checked="">
+                <label class="form-check-label" for="tva_apply">TVA appliquée</label>
+              </div>
+              
             </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
           </form>

@@ -121,7 +121,8 @@ class FactureController extends Controller
         }
         $somme = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
         $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
-        $tva = $fac->GetTVAValue($somme);
+        if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($somme);}else{$tva = 0;} 
+        
         $mht = $somme - $tva;
         $red = $fac->GetReduction($somme,$request->reduction);
 

@@ -75,8 +75,9 @@
           </div>
           <div class="mb-3">
             <label for="color_prod" class="form-label">Couleur du produit</label>
-            <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
-                  id="color_prod" name="color_prod" placeholder="Couleur du produit" required />
+            <input type="text"  />
+                  <input type="color" value="#666EE8" class="form-control @error('color_prod') is-invalid @enderror"
+                  id="color_prod" name="color_prod" placeholder="Couleur du produit" required>
             @error('color_prod')
 						  <span class="invalid-feedback" role="alert">
 							  <strong class="strong">Couleur est deja aquis</strong>

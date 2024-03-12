@@ -151,10 +151,10 @@
                                                 <span>Thanks for your business. Nous restons à votre disposition</span>
                                             </td>
                                             <td class="text-end px-4 py-5">
-                                                <p class="mb-2">Subtotal:</p>
-                                                <p class="mb-2">Discount:</p>
-                                                <p class="mb-2">Tax:</p>
-                                                <p class="mb-0">Total:</p>
+                                                <p class="mb-2">Subtotal :</p>
+                                                <p class="mb-2">Remise :</p>
+                                                <p class="mb-2">Tax (19,25%) :</p>
+                                                <p class="mb-0">Total :</p>
                                             </td>
                                             <td class="px-4 py-5">
                                                 <p class="fw-medium mb-2">{{ $pro->mht_pro }}</p>
