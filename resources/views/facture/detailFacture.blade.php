@@ -16,7 +16,7 @@
       <div class="flex-grow-1 mt-3 mt-sm-5">
         <div class="row invoice-preview">
             <!-- Invoice -->
-            <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
+            <div class="col-xl-12 col-md-12 col-12 mb-md-0 mb-4">
               <div class="card invoice-preview-card">
                 <div class="card-body">
                   <div class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
@@ -160,7 +160,7 @@
             <!-- /Invoice -->
           
             <!-- Invoice Actions -->
-            <div class="col-xl-3 col-md-4 col-12 invoice-actions">
+            <div class="col-xl-12 col-md-12 col-12 invoice-actions">
               <div class="card">
                 <div class="card-body">
                     <a href="/facture/generate/{{$fac->id}}">
