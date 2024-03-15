@@ -150,7 +150,7 @@ class FactureController extends Controller
         
         $usr = User::find($fac->id_usr);
         $cl = Cliente::find($fac->id_cli);
-
+        //dd($efs);
         return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
     }
 
@@ -192,10 +192,10 @@ class FactureController extends Controller
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         
         return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
-        
+        //return $pdf->stream();
     }
 
 

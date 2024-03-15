@@ -57,7 +57,7 @@
           </span>
                         <span class="app-brand-text demo text-body fw-bold">{{$ent->name_ent}}</span>
                       </div>
-                      <p class="mb-1">{{$ent->owner_ent}}</p>
+                      <p class="mb-1">{{$ent->rc_ent}}</p>
                       <p class="mb-1">{{$ent->phone_ent}}</p>
                       <p class="mb-0">{{$ent->address_ent}}</p>
                     </div>
@@ -89,7 +89,6 @@
                       
                     </div>
                     <div class="col-xl-6 col-md-12 col-sm-7 col-12">
-                      <h6 class="pb-2">Bill To:</h6>
                       <h6 class="pb-2">Invoice To:</h6>
                       <p class="mb-1">{{$cl->name_cli}}</p>
                       <p class="mb-1">{{$cl->raison_sociale}}</p>
