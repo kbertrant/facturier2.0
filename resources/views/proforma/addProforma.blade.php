@@ -29,7 +29,7 @@
               <div class="row">
                   <div class="col-lg-8 col-md-8 col-xs-8">
                       <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
-                          <option value="">Choisir l'article</option>
+                          <option value="">Choisir l'article ou la prestation</option>
                           @foreach ($produits as $produit)
                               <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
                           @endforeach
@@ -57,10 +57,10 @@
               <input type="number" class="form-control @error('reduction') is-invalid @enderror"
                     id="reduction" name="reduction" value="0" />
               @error('reduction')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="strong">Reduction est deja aquis</strong>
-                            </span>
-                      @enderror
+                <span class="invalid-feedback" role="alert">
+                  <strong class="strong">Reduction est deja aquis</strong>
+                </span>
+              @enderror
             </div>
             <div class="mb-3">
               <div class="form-check form-switch mb-2">

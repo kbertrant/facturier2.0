@@ -115,9 +115,6 @@
         Montant H.T: {{$pay->mht_pay}} XAF
       </div>
       <div class="total">
-        Remise : {{$pay->reduction}} XAF
-      </div>
-      <div class="total">
         Tax(19,25%): {{$pay->tva_pay}} XAF
       </div>
       <div class="total">

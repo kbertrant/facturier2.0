@@ -185,7 +185,7 @@ class ProformasController extends Controller
         $usr = User::find($pro->id_usr);
         $clients = Cliente::where('clientes.id_ent', '=', Auth::user()->id_ent)->get();
         $produits = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->get();
-
+        //dd($produits);
         $historic = new HistoricService();
         $historic->Add('Edit proforma');
         return view('proforma.editProforma', ['pro' => $pro, 'eps' => $eps, 'cl' => $cl, 
