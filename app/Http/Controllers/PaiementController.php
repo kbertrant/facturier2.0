@@ -87,9 +87,6 @@ class PaiementController extends Controller
         ]); 
         $decode = new DecodeService();
 
-        $tresor = new TresorService();
-        $tresor->transac($request->mttc_pay,"IN");
-
         $date = now();
         $ref_pay = $date->format('ymdHis');
 
@@ -104,6 +101,8 @@ class PaiementController extends Controller
         $payment = new PaiementService();
         $pay = $payment->Paid($ref_pay,$decoded_id,$request->mttc_pay,$request->pay_mode,$solde_pay,$fac->id_cli);
         //dd($pay);
+        $tresor = new TresorService();
+        $tresor->transac($request->mttc_pay,"IN");
 
         $historic = new HistoricService();
         $historic->Add('Add new payment');

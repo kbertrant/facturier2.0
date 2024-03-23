@@ -26,18 +26,12 @@ class TresorerieController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            $tasks = Tresorerie::all();
-            
-            return datatables()->of($tasks)
-            ->addIndexColumn()
-            ->make(true);
-        }
+        
         $tresors = Tresorerie::orderByDesc('date_tres')->take(5)
         ->where('id_ent','=',Auth::user()->id_ent)->get();
         $actuel = Tresorerie::orderByDesc('date_tres')->take(1)
         ->where('id_ent','=',Auth::user()->id_ent)->first();
-
+        
         $historic = new HistoricService();
         $historic->Add('List Treasure');
 
