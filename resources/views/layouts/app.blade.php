@@ -57,6 +57,7 @@
       </style>
 </head>
 <body>
+    <div  class="pageLoader" id="pageLoaders"></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -135,10 +136,10 @@
 </body>
 <script type="text/javascript">
     $(window).on('beforeunload', function(){
-          $('#pageLoader').show();
+          $('#pageLoaders').show();
       });
       $(function () {
-          $('#pageLoader').hide();
+          $('#pageLoaders').hide();
       });
    $(document).ready(function() { 
         let token = $('#csrf').html();
