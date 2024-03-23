@@ -131,7 +131,7 @@
                         </td>
                         <td class="text-end px-4 py-5">
                           <p class="mb-2">Subtotal :</p>
-                          <p class="mb-2">Remise :</p>
+                          <p class="mb-2">Discount ({{round(100*($fac->reduction/$fac->mht_fac))}}%) :</p>
                           <p class="mb-2">Tax (19,25%) :</p>
                           <p class="mb-0">Total :</p>
                         </td>

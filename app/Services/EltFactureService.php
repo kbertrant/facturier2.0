@@ -16,12 +16,12 @@ class EltFactureService
         $ef->ef_pu = $ef_pu;
         if($tva_apply=="on"){
             $ef->ef_tva = $ef_pu*$ef_qty*0.1925;  
-            $ef->ef_mht = ($ef_pu*$ef_qty) - ($ef_pu*$ef_qty*0.1925);
+            $ef->ef_mht = $ef_pu*$ef_qty;
         }else{
             $ef->ef_tva = 0;  
             $ef->ef_mht = $ef_pu*$ef_qty;
         }
-        $ef->ef_ttc = $ef_pu*$ef_qty;
+        $ef->ef_ttc = $ef->ef_mht + $ef->ef_tva;
         $ef->ef_stat = 'Pending';
         $ef->id_ent = Auth::user()->id_ent;
         $ef->save();

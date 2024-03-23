@@ -130,14 +130,14 @@ class ProformasController extends Controller
                 $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
             }
         }
-        $somme = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_ttc');
+        $somme = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
         $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
 
         if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($somme);}else{$tva = 0;} 
-        $mht = $somme - $tva;
+        $mht = $somme;
         $red = $prof->GetReduction($somme, $request->reduction);
 
-        $up_pro = $prof->SetPriceProforma($dcode_pro_id, $somme, $mht, $tva, $all_qty, $red);
+        $up_pro = $prof->SetPriceProforma($dcode_pro_id, $mht, $tva, $all_qty, $red);
 
         $historic = new HistoricService();
         $historic->Add('Add new proforma');

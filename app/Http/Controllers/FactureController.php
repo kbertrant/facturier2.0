@@ -123,10 +123,10 @@ class FactureController extends Controller
         $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
         if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($somme);}else{$tva = 0;} 
         
-        $mht = $somme - $tva;
+        $mht = $somme;
         $red = $fac->GetReduction($somme,$request->reduction);
 
-        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$somme,$mht,$tva,$all_qty,$red);
+        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$mht,$tva,$all_qty,$red);
 
         $historic = new HistoricService();
         $historic->Add('Add new invoice');
