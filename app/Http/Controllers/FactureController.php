@@ -93,7 +93,7 @@ class FactureController extends Controller
         $decode = new DecodeService();
         
         $date = now();
-        $result = $date->format('YmdHis');
+        $result = $date->format('ymdHis');
         $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
         $fac = new FactureService();
         $dcod_cli_id = $decode->DecodeId($cli->id);
@@ -119,14 +119,14 @@ class FactureController extends Controller
                 
             }
         }
-        $somme = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
+        $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
         $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
-        if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($somme);}else{$tva = 0;} 
         
-        $mht = $somme;
-        $red = $fac->GetReduction($somme,$request->reduction);
+        $red = $fac->GetReduction($mht, $request->reduction);
+        $amountRed = $mht - $red; 
+        if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($amountRed);}else{$tva = 0;} 
 
-        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$mht,$tva,$all_qty,$red);
+        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountRed,$mht,$tva,$all_qty,$red);
 
         $historic = new HistoricService();
         $historic->Add('Add new invoice');

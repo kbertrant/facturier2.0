@@ -29,10 +29,10 @@ class FactureService
         return $fac;
     }
 
-    public function SetPriceFacture($id_fac,$mht,$tva,$qty,$reduct){
+    public function SetPriceFacture($id_fac,$amountRed,$mht,$tva,$qty,$reduct){
         //dd($id_fac);
         $fac = Facture::find($id_fac);
-        $fac->mttc_fac = ($mht+$tva) - $reduct;
+        $fac->mttc_fac = ($amountRed+$tva);
         $fac->mht_fac = $mht;
         $fac->qty_fac = $qty;
         $fac->tva_fac = $tva;

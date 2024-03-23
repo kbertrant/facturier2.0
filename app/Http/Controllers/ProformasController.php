@@ -109,8 +109,9 @@ class ProformasController extends Controller
         $decode = new DecodeService();
 
         $date = now();
-        $result = $date->format('YmdHis');
+        $result = $date->format('ymdHis');
         $cli = Cliente::where('name_cli', 'like', $request->id_cli)->first();
+        //dd($cli);
         $dcod_cli_id = $decode->DecodeId($cli->id);
         $prof = new ProformaService();
         $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, $request->reduction);
@@ -130,14 +131,14 @@ class ProformasController extends Controller
                 $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
             }
         }
-        $somme = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
+        $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
         $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
 
-        if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($somme);}else{$tva = 0;} 
-        $mht = $somme;
-        $red = $prof->GetReduction($somme, $request->reduction);
+        $red = $prof->GetReduction($mht, $request->reduction);
+        $amountRed = $mht - $red; 
+        if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountRed);}else{$tva = 0;} 
 
-        $up_pro = $prof->SetPriceProforma($dcode_pro_id, $mht, $tva, $all_qty, $red);
+        $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountRed, $mht, $tva, $all_qty, $red);
 
         $historic = new HistoricService();
         $historic->Add('Add new proforma');

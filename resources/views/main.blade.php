@@ -59,9 +59,23 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js')}}"></script>
+    <style>
+      .pageLoader{
+        background: url(assets/img/Iphone-spinner-2.gif) no-repeat center center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999999;
+        background-color: #ffffff8c;
+
+      }
+    </style>
   </head>
 
   <body>
+    <div  class="pageLoader" id="pageLoader"></div>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -113,7 +127,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script type="text/javascript">
-    
+      $(window).on('beforeunload', function(){
+          $('#pageLoader').show();
+      });
+      $(function () {
+          $('#pageLoader').hide();
+      });
         var url = "{{ route('changeLang') }}";
         $(".changeLang").change(function(){
             window.location.href = url + "?lang="+ $(this).val();

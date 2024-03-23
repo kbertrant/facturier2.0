@@ -42,6 +42,19 @@
     <script src="../assets/js/config.js"></script>
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    <style>
+        .pageLoader{
+          background: url(assets/img/Iphone-spinner-2.gif) no-repeat center center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          z-index: 9999999;
+          background-color: #ffffff8c;
+  
+        }
+      </style>
 </head>
 <body>
     <div id="app">
@@ -121,6 +134,12 @@
     <!-- Page JS -->
 </body>
 <script type="text/javascript">
+    $(window).on('beforeunload', function(){
+          $('#pageLoader').show();
+      });
+      $(function () {
+          $('#pageLoader').hide();
+      });
    $(document).ready(function() { 
         let token = $('#csrf').html();
         $.ajax({ 

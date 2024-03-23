@@ -30,10 +30,10 @@ class ProformaService
         return $pro;
     }
 
-    public function SetPriceProforma($id_pro,$mht,$tva,$qty,$reduct){
+    public function SetPriceProforma($id_pro,$amountRed,$mht,$tva,$qty,$reduct){
 
         $pro = Proformas::find($id_pro);
-        $pro->mttc_pro = ($mht + $tva)- $reduct;
+        $pro->mttc_pro = ($amountRed + $tva);
         $pro->qty_pro = $qty;
         $pro->mht_pro = $mht;
         $pro->tva_pro = $tva;
