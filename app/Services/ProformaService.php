@@ -55,9 +55,11 @@ class ProformaService
 
     public function ValidateProforma($idpro){
 
+        $decode = new DecodeService();
         $pro = Proformas::find($idpro);
+        $dcd_pro_id = $decode->DecodeId($pro->id);
         $eps = ElementProforma::where('id_pro',$idpro)->get();
-        //dd($pro);
+        //dd($eps);
         //change proforma status
         $pro->stat_pro = "VALIDATED";
         $pro->save();
@@ -65,12 +67,17 @@ class ProformaService
         $date = now();
         $result = $date->format('YmdHis');
         $facSvc = new FactureService();
-        $fac = $facSvc->CreateFacture($pro->id_cli,$pro->id_pro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->qty_pro,$pro->reduction);
+        $fac = $facSvc->CreateFacture($pro->id_cli,$idpro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->qty_pro,$pro->reduction);
+        //decode receive is form http
+        
+        $dcd_fac_id = $decode->DecodeId($fac->id);
         //set elements facturation
+        //dd($fac);
         foreach ($eps as $ep) {
+            
             $ef = new ElementFacture();
             $ef->id_prod =$ep->id_prod;
-            $ef->id_fac = $fac->id_fac;
+            $ef->id_fac = $dcd_fac_id;
             $ef->ef_qty = $ep->ep_qty;
             $ef->ef_pu = $ep->ep_pu;
             $ef->ef_tva = $ep->ep_tva; 
