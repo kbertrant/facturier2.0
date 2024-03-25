@@ -81,9 +81,9 @@ class RegisterController extends Controller
             'rc_ent'=> $data['rc_ent'],
         ]); 
         
-        
+        $myimage = $data['image']->getClientOriginalName();
         if($data['image']){
-          $imagePath = ($data['image'])->store('images', 'public');
+          $imagePath = ($data['image'])->move(public_path('images'), $myimage);
         }
 
         $decode = new DecodeService();
