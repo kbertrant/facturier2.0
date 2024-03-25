@@ -61,7 +61,7 @@
     <script src="{{ asset('assets/js/config.js')}}"></script>
     <style>
       .pageLoader{
-        background: url(assets/img/Iphone-spinner-2.gif) no-repeat center center;
+        background: url("/assets/img/Iphone-spinner-2.gif") no-repeat center center;
         position: fixed;
         top: 0;
         left: 0;
