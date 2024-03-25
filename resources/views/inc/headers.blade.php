@@ -49,7 +49,7 @@ id="layout-navbar">
       <a class="nav-link dropdown-toggle hide-arrow"  data-bs-toggle="dropdown">
         <div class="avatar avatar-online" >
           @auth
-          <img src="/storage/{{Auth::user()->image}}" alt class="w-px-40  rounded-circle" /> 
+          <img src="/images/{{Auth::user()->image}}" alt class="w-px-40  rounded-circle" /> 
       
          
         </div>
@@ -60,7 +60,7 @@ id="layout-navbar">
             <div class="d-flex">
               <div class="flex-shrink-0 me-3">
                 <div class="avatar avatar-online">
-                  <img src="/storage/{{Auth::user()->image}}" alt class="w-px-40  rounded-circle" />
+                  <img src="{{ URL::to('images/'.Auth::user()->image) }}" alt class="w-px-40  rounded-circle" />
                 </div>
               </div>
               <div class="flex-grow-1">
