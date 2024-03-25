@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-simple">
       <div class="modal-content p-0 p-md-2 p-xl-5">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Nouveau paiement</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ __('mypages.npa') }} </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('payment.store') }}">
                   @csrf
             <div class="mb-3">
-              <label for="num_fac" class="form-label">Numero Facture</label>
+              <label for="num_fac" class="form-label"> {{ __('mypages.numinv') }}</label>
               <input type="text" class="form-control" name="num_fac" list="datalistOptions" id="num_fac" placeholder="Saisir pour rechercher">
               <datalist id="datalistOptions">
                 @foreach ($facs as $fac)
@@ -24,7 +24,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="pay_mode" class="form-label">Mode de paiement </label>
+                <label for="pay_mode" class="form-label">{{ __('mypages.paymode') }} </label>
                 <select class="form-select" id="pay_mode" name="pay_mode" aria-label="Mode de paiement">
                     <option selected>Choisir mode de paiement</option>
                     <option value="CASH">CASH/ESPECES </option>
@@ -40,7 +40,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="mttc_pay" class="form-label">Montant à payer </label>
+                <label for="mttc_pay" class="form-label">{{ __('mypages.amountpay') }}  </label>
                 <input type="number" class="form-control @error('mttc_pay') is-invalid @enderror"
                     id="mttc_pay" name="mttc_pay" placeholder="Montant à payer" />
                 @error('mttc_pay')
@@ -49,7 +49,7 @@
                     </span>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary d-grid w-100">Encaisser </button>
+            <button type="submit" class="btn btn-primary d-grid w-100">{{ __('mypages.pay') }}  </button>
           </form>
         </div>
       </div>

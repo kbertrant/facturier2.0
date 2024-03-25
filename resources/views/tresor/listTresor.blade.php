@@ -40,7 +40,7 @@
                       </div>
                       <div class="user-progress d-flex align-items-center gap-1">
                         <h6 class="mb-0">{{$tresor->amount_tres}}</h6>
-                        <span class="text-muted">CFA</span>
+                        <span class="text-muted"> XAF</span>
                       </div>
                     </div>
                   </li>
