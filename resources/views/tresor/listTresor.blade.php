@@ -16,7 +16,7 @@
         <div class="row flex-grow-1 mt-3 mt-sm-5">
         
             <!-- Transactions -->
-        <div class="col-md-6 col-xs-6 col-lg-6 order-2 mb-4">
+        <div class="col-md-12 col-xs-12 col-lg-6 order-2 mb-4">
             <div class="card h-100">
               <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title m-0 me-2">{{ __('mypages.ltr') }}</h5>
@@ -67,10 +67,10 @@
                 <h2 class="fw-semibold d-block mb-1">{{ __('mypages.yccf') }}</h2>
                 <h1 class="card-title mb-2">{{$actuel->amount_tres}} <span class="text-muted"> XAF</span></h1>
                 @if($actuel->mouvement == "OUT")
-                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{$actuel->amount}}</small>
-                        @else
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{$actuel->amount}}</small>
-                        @endif
+                  <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{$actuel->amount}}</small>
+                @else
+                  <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{$actuel->amount}}</small>
+                @endif
               </div>
             </div>
           </div>
