@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-simple">
       <div class="modal-content p-0 p-md-2 p-xl-5">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Nouvelle proforma</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ __('mypages.np') }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -25,7 +25,7 @@
                   </div>
             
             <fieldset class="scheduler-border">
-              <legend class="scheduler-border">Liste des produits</legend>
+              <legend class="scheduler-border">{{ __('mypages.ldps') }}</legend>
               <div class="row">
                   <div class="col-lg-8 col-md-8 col-xs-8">
                       <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
@@ -42,7 +42,7 @@
                   
                   <div class="col-lg-2 col-md-2 col-xs-2">
                     <a href="javascript:void(0);" class="add_button" title="Ajouter">
-                    <img src="{{ asset('assets/img/add-icon.png') }}"/></a>
+                      <i class="bx bx-list-plus bx-md"></i></a>
                   </div>
               </div>
               <br/>
@@ -53,7 +53,7 @@
               </div>
             </fieldset>
             <div class="mb-3">
-              <label for="reduction" class="form-label">Reduction </label>
+              <label for="reduction" class="form-label">{{ __('mypages.remise') }}</label>
               <input type="number" class="form-control @error('reduction') is-invalid @enderror"
                     id="reduction" name="reduction" value="0" />
               @error('reduction')
@@ -65,7 +65,7 @@
             <div class="mb-3">
               <div class="form-check form-switch mb-2">
                 <input class="form-check-input" type="checkbox" id="tva_apply" name="tva_apply" checked="">
-                <label class="form-check-label" for="tva_apply">TVA appliquée</label>
+                <label class="form-check-label" for="tva_apply">{{ __('mypages.tva') }}</label>
               </div>
               
             </div>

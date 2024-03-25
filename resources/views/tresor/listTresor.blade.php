@@ -5,7 +5,7 @@
   
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">Vos transactions financieres</span>
+        <span class="text-muted fw-light">{{ __('mypages.ltr') }}</span>
     </h4>
     @if (session('success'))
       <div class="alert alert-danger" role="alert">
@@ -19,7 +19,7 @@
         <div class="col-md-6 col-xs-6 col-lg-6 order-2 mb-4">
             <div class="card h-100">
               <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2">Vos 5 dernieres transactions</h5>
+                <h5 class="card-title m-0 me-2">{{ __('mypages.ltr') }}</h5>
                 
               </div>
               <div class="card-body">
@@ -64,8 +64,8 @@
                   </div>
                   
                 </div>
-                <h2 class="fw-semibold d-block mb-1">Votre trésorerie actuelle </h2>
-                <h1 class="card-title mb-2">{{$actuel->amount_tres}} <span class="text-muted">CFA</span></h1>
+                <h2 class="fw-semibold d-block mb-1">{{ __('mypages.yccf') }}</h2>
+                <h1 class="card-title mb-2">{{$actuel->amount_tres}} <span class="text-muted"> XAF</span></h1>
                 @if($actuel->mouvement == "OUT")
                         <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{$actuel->amount}}</small>
                         @else

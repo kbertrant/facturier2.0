@@ -5,7 +5,7 @@
   
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">Vos types de</span> clients
+        <span class="text-muted fw-light">{{ __('mypages.y') }} </span> {{ __('mypages.ytc') }}
     </h4>
     @if (session('success'))
       <div class="alert alert-danger" role="alert">
