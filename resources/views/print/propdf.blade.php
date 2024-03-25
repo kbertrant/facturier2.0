@@ -98,9 +98,9 @@
             <th>Qty</th>
             <th>Price</th>
           </tr>
-          @foreach($eps as $ep)
+          @foreach($eps as $i=>$ep)
           <tr class="items">
-              <td>#</td>
+              <td>{{$i+1}}</td>
               <td>{{ $ep->name_prod }}</td>
               <td>{{ $ep->desc_prod }}</td>
               <td>{{ $ep->ep_pu }}</td>

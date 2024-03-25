@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Support\Facades\DB;
 
 class FactureController extends Controller
 {
@@ -90,47 +91,58 @@ class FactureController extends Controller
             'quantity' => ['required'],
             'reduction' => ['required']
         ]); 
-        $decode = new DecodeService();
-        
-        $date = now();
-        $result = $date->format('ymdHis');
-        $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
-        $fac = new FactureService();
-        $dcod_cli_id = $decode->DecodeId($cli->id);
-        //dd($cli->id);
-        $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
-        $dcod_fac_id = $decode->DecodeId($new_fac->id);
-
-        $s = 0;
-        foreach ($request->id_prod as $pr) {
-            $p = $decode->DecodeId($pr);
-            
-            $i = $s++;
-            if($p!=null){
-
-                $pro = new ProduitService();
-                $pro->decrementQteProduct($request->quantity[$i],$p);
-
-                $prix_unit = $pro->getPriceProduct($p);
-
-                $ef = new EltFactureService();
-                //$dcode_fac_id = Hashids::decode($new_fac->id);
-                $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+        try { 
+            DB::beginTransaction();
+            //formar date 
+            $decode = new DecodeService();
+            $date = now();
+            $result = $date->format('ymdHis');
+            //get client informations
+            $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
+            //create facture to null
+            $fac = new FactureService();
+            $dcod_cli_id = $decode->DecodeId($cli->id);
+            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
+            $dcod_fac_id = $decode->DecodeId($new_fac->id);
+            $s = 0;
+            //add elements facture
+            foreach ($request->id_prod as $pr) {
+                $p = $decode->DecodeId($pr);
                 
+                $i = $s++;
+                if($p!=null){
+
+                    $pro = new ProduitService();
+                    $pro->decrementQteProduct($request->quantity[$i],$p);
+
+                    $prix_unit = $pro->getPriceProduct($p);
+
+                    $ef = new EltFactureService();
+                    //$dcode_fac_id = Hashids::decode($new_fac->id);
+                    $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+                    
+                }
             }
-        }
-        $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
-        $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
+            //sum amount of elt facturation and quantity
+            $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
+            $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
+            //calcul reduction if exist
+            $red = $fac->GetReduction($mht, $request->reduction);
+            $amountRed = $mht - $red; 
+            if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($amountRed);}else{$tva = 0;} 
+            // set facture with prices
+            $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountRed,$mht,$tva,$all_qty,$red);
+
+            $historic = new HistoricService();
+            $historic->Add('Add new invoice');
+
+            DB::commit();
+
+        }catch(\Exception $e) {
         
-        $red = $fac->GetReduction($mht, $request->reduction);
-        $amountRed = $mht - $red; 
-        if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($amountRed);}else{$tva = 0;} 
-
-        $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountRed,$mht,$tva,$all_qty,$red);
-
-        $historic = new HistoricService();
-        $historic->Add('Add new invoice');
-
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->back()->with('success','Facture ajoutée');
     }
 

@@ -31,7 +31,7 @@
                       <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
                           <option value="">Choisir l'article ou la prestation</option>
                           @foreach ($produits as $produit)
-                              <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
+                              <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option>
                           @endforeach
                       </select>
                   </div>

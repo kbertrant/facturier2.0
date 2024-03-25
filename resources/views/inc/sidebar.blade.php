@@ -199,6 +199,13 @@
       </li>
       <!-- Cards -->
       <li class="menu-item">
+        <a href="{{route('user.admin')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-id-card"></i>
+          <div data-i18n="Basic">Tous les users</div>
+        </a>
+      </li>
+      <!-- Cards -->
+      <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">{{ __('sidebar.myEtat') }}</div>

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Support\Facades\DB;
 
 class ProformasController extends Controller
 {
@@ -105,44 +106,50 @@ class ProformasController extends Controller
             'quantity' => ['required'],
             'reduction' => ['required']
         ]);
+        try { 
+            DB::beginTransaction();
+            $decode = new DecodeService();
+            $date = now();
+            $result = $date->format('ymdHis');
+            $cli = Cliente::where('name_cli', 'like', $request->id_cli)->first();
+            //dd($cli);
+            $dcod_cli_id = $decode->DecodeId($cli->id);
+            $prof = new ProformaService();
+            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, $request->reduction);
+            $dcode_pro_id = $decode->DecodeId($new_prof->id);
+            $s = 0;
+            foreach ($request->id_prod as $pr) {
+                $p = $decode->DecodeId($pr);
+                $i = $s++;
+                if ($p != null) {
 
-        $decode = new DecodeService();
+                    $pro = new ProduitService();
+                    $pro->decrementQteProduct($request->quantity[$i], $p);
 
-        $date = now();
-        $result = $date->format('ymdHis');
-        $cli = Cliente::where('name_cli', 'like', $request->id_cli)->first();
-        //dd($cli);
-        $dcod_cli_id = $decode->DecodeId($cli->id);
-        $prof = new ProformaService();
-        $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, $request->reduction);
-        $dcode_pro_id = $decode->DecodeId($new_prof->id);
-        $s = 0;
-        foreach ($request->id_prod as $pr) {
-            $p = $decode->DecodeId($pr);
-            $i = $s++;
-            if ($p != null) {
+                    $prix_unit = $pro->getPriceProduct($p);
 
-                $pro = new ProduitService();
-                $pro->decrementQteProduct($request->quantity[$i], $p);
-
-                $prix_unit = $pro->getPriceProduct($p);
-
-                $ep = new EltProformaService();
-                $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
+                    $ep = new EltProformaService();
+                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
+                }
             }
+            $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
+            $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
+
+            $red = $prof->GetReduction($mht, $request->reduction);
+            $amountRed = $mht - $red; 
+            if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountRed);}else{$tva = 0;} 
+
+            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountRed, $mht, $tva, $all_qty, $red);
+
+            $historic = new HistoricService();
+            $historic->Add('Add new proforma');
+            DB::commit();
+
+        }catch(\Exception $e) {
+        
+            DB::rollback();
+            throw $e;
         }
-        $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
-        $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
-
-        $red = $prof->GetReduction($mht, $request->reduction);
-        $amountRed = $mht - $red; 
-        if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountRed);}else{$tva = 0;} 
-
-        $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountRed, $mht, $tva, $all_qty, $red);
-
-        $historic = new HistoricService();
-        $historic->Add('Add new proforma');
-
         return redirect()->back()->with('success', 'Proforma ajoutée');
     }
 
@@ -202,7 +209,7 @@ class ProformasController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -236,21 +243,30 @@ class ProformasController extends Controller
         ])->setPaper('a4')->setOption(['dpi' => 150, 'isRemoteEnabled' => true, 'defaultFont' => 'Ayuthaya', 'isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print proformas');
-        return $pdf->download('PRO_'.$pro->pro_ref);
+        return $pdf->stream('PRO_'.$pro->pro_ref);
+        //return redirect()->back()->with('success', 'Proforma generée');
     }
 
     public function validPro($id){
-        //decode receive is form http
-        $decode = new DecodeService();
-        $decoded_id = $decode->DecodeId($id);
-        //find proforma and test status
-        $pro = Proformas::find($decoded_id);
-        if($pro->stat_pro=="VALIDATED"){ return redirect()->back()->with('success', 'Proforma deja validée');}
+        try { 
+            DB::beginTransaction();
+            //decode receive is form http
+            $decode = new DecodeService();
+            $decoded_id = $decode->DecodeId($id);
+            //find proforma and test status
+            $pro = Proformas::find($decoded_id);
+            if($pro->stat_pro=="VALIDATED"){ return redirect()->back()->with('success', 'Proforma deja validée');}
 
-        //validate proforma
-        $proSvc = new ProformaService();
-        $mypro = $proSvc->ValidateProforma($decoded_id);
+            //validate proforma
+            $proSvc = new ProformaService();
+            $mypro = $proSvc->ValidateProforma($decoded_id);
+            DB::commit();
 
+        }catch(\Exception $e) {
+        
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->back()->with('success', 'Proforma validée');
     }
 }

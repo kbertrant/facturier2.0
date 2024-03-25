@@ -66,7 +66,7 @@
             var maxField = 10; //Input fields increment limitation
             var addButton = $('.add_buttonPP'); //Add button selector
             var wrapper = $('.field_wrapperPP'); //Input field wrapper
-            var fieldHTML = '<div class="row" style="margin:5px"><div class=" col-lg-8 col-md-8 col-xs-8 field"><select class="prod form-control shadow" id="id_prod[]" name="id_prod[]"><option value="">Choisir produit</option> @foreach ($produits as $produit) <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option> @endforeach</select></div><div class="col-lg-2 col-md-2 col-xs-2 field"><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" placeholder="Qte" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> <a href="javascript:void(0);" class=""><img src="{{ asset('assets/img/remove-icon.png') }}"/></a></div></div>';
+            var fieldHTML = '<div class="row" style="margin:5px"><div class=" col-lg-8 col-md-8 col-xs-8 field"><select class="prod form-control shadow" id="id_prod[]" name="id_prod[]"><option value="">Choisir produit</option> @foreach ($produits as $produit) <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option> @endforeach</select></div><div class="col-lg-2 col-md-2 col-xs-2 field"><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" placeholder="Qte" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> <a href="javascript:void(0);" class=""><img src="{{ asset('assets/img/remove-icon.png') }}"/></a></div></div>';
 
             var x = 1; //Initial field counter is 1
             

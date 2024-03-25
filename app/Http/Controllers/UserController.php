@@ -29,7 +29,8 @@ class UserController extends Controller
     public function index(){
         if(request()->ajax()) {
             $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat')
-            ->join('entreprises','entreprises.id','=','users.id_ent')->get();
+            ->join('entreprises','entreprises.id','=','users.id_ent')
+            ->where('id_ent','=',Auth::user()->id_ent)->get();
             
             return datatables()->of($tasks)
             ->addColumn('action', function($row){
@@ -53,6 +54,35 @@ class UserController extends Controller
         $historic->Add('List users');
         
        return view('user.listUser');
+    }
+
+    public function listAdmin(){
+        if(request()->ajax()) {
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat')
+            ->join('entreprises','entreprises.id','=','users.id_ent')->get();
+            
+            return datatables()->of($tasks)
+            ->addColumn('action', function($row){
+   
+                // Update Button
+                $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-2 viewdetails' href='/user/show/".$row->id."' ><i class='bx bxs-detail'></i></a>";
+                // Update Button
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/user/edit/".$row->id."' ><i class='bx bxs-edit'></i></a>";
+                // Delete Button
+                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/user/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
+
+                return $updateButton." ".$deleteButton." ".$showButton;
+                 
+         })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+
+        $historic = new HistoricService();
+        $historic->Add('List users');
+        
+       return view('user.listallusers');
     }
     
 

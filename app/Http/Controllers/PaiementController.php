@@ -17,6 +17,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PaiementController extends Controller
 {
@@ -85,28 +86,36 @@ class PaiementController extends Controller
             'pay_mode' => ['required'],
             'mttc_pay' => ['required']
         ]); 
-        $decode = new DecodeService();
+        try { 
+            DB::beginTransaction();
+            $decode = new DecodeService();
 
-        $date = now();
-        $ref_pay = $date->format('ymdHis');
+            $date = now();
+            $ref_pay = $date->format('ymdHis');
 
-        //update invoice before create receipt
-        $fac = Facture::where('ref_fac','LIKE',$request->num_fac)->first();
-        $fac->stat_fac = "Paid";
-        $fac->save();
-        $decode = new DecodeService();
-        $decoded_id = $decode->DecodeId($fac->id);
-        //dd($fac);
-        $solde_pay = $fac->mttc_fac - $request->mttc_pay;
-        $payment = new PaiementService();
-        $pay = $payment->Paid($ref_pay,$decoded_id,$request->mttc_pay,$request->pay_mode,$solde_pay,$fac->id_cli);
-        //dd($pay);
-        $tresor = new TresorService();
-        $tresor->transac($request->mttc_pay,"IN");
+            //update invoice before create receipt
+            $fac = Facture::where('ref_fac','LIKE',$request->num_fac)->first();
+            $fac->stat_fac = "Paid";
+            $fac->save();
+            $decode = new DecodeService();
+            $decoded_id = $decode->DecodeId($fac->id);
+            //dd($fac);
+            $solde_pay = $fac->mttc_fac - $request->mttc_pay;
+            $payment = new PaiementService();
+            $pay = $payment->Paid($ref_pay,$decoded_id,$request->mttc_pay,$request->pay_mode,$solde_pay,$fac->id_cli);
+            //dd($pay);
+            $tresor = new TresorService();
+            $tresor->transac($request->mttc_pay,"IN");
 
-        $historic = new HistoricService();
-        $historic->Add('Add new payment');
+            $historic = new HistoricService();
+            $historic->Add('Add new payment');
+            DB::commit();
+
+        }catch(\Exception $e) {
         
+            DB::rollback();
+            throw $e;
+        }
 
         return redirect()->back()->with('success','Nouveau paiement effectué!');
     }

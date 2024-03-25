@@ -16,7 +16,7 @@
         <div class="row flex-grow-1 mt-3 mt-sm-5">
         
             <!-- Transactions -->
-        <div class="col-md-6 col-lg-6 order-2 mb-4">
+        <div class="col-md-6 col-xs-6 col-lg-6 order-2 mb-4">
             <div class="card h-100">
               <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title m-0 me-2">Vos 5 dernieres transactions</h5>
@@ -51,7 +51,7 @@
           </div>
           <!--/ Transactions -->
         
-          <div class="col-lg-6 col-md-12 col-6 mb-4">
+          <div class="col-lg-6 col-md-12 col-xs-12 mb-4">
             <div class="card">
               <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
