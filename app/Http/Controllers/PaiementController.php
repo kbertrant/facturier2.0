@@ -175,13 +175,13 @@ class PaiementController extends Controller
         $cl = Cliente::find($pay->id_cli);
         $usr = User::find(Auth::user()->id);
 
-        $pdf = Pdf::loadView('print.paypdf', [
+        $pdf = Pdf::loadView('print.paypdfa6', [
             'pay' => $pay,
             'ent' => $ent,
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print receipt payment');
         return $pdf->download('PAY_'.$pay->ref_pay.'.pdf');

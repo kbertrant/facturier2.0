@@ -7,10 +7,12 @@ return [
     'loginRemember' => 'Se souvenir de moi',
     'loginForget'=>'Forgot password',
     'loginConnexion'=>'Connexion',
-
+    'wlc'=>'Bienvenue',
+    'hmsen'=>'Vous avez effectué 47 ventes ce mois. Voir les details plus bas.',
     'myDashboard'=>'Accueil',
     'yp' => 'proformas',
     'ypa' => 'paiement',
+    'ycl' => 'clients',
     'yf' => 'factures',
     'y' => 'Vos',
     'np' => 'Nouvelle proforma',

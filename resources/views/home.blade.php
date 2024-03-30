@@ -12,9 +12,9 @@
             <div class="d-flex align-items-end row">
               <div class="col-sm-7">
                 <div class="card-body">
-                  <h5 class="card-title text-primary">Bienvenue {{$user->name}}! 🎉</h5>
+                  <h5 class="card-title text-primary">{{ __('mypages.wlc') }} {{$user->name}}! 🎉</h5>
                   <p class="mb-4">
-                    Vous avez effectué <span class="fw-bold">72</span> ventes ce mois. Voir les details plus bas.
+                    {{ __('mypages.hmsen') }}
                   </p>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                     </div>
                   </div>
                   <span class="fw-semibold d-block mb-1">Articles</span>
-                  <h3 class="card-title mb-2">128</h3>
+                  <h3 class="card-title mb-2">{{$products}}</h3>
                   
                 </div>
               </div>
@@ -96,8 +96,8 @@
                       </div>
                     </div>
                   </div>
-                  <span>Ventes</span>
-                  <h6 class="card-title text-nowrap mb-1">123679 CFA</h6>
+                  <span>Depenses</span>
+                  <h6 class="card-title text-nowrap mb-1">{{$depenses}} CFA</h6>
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@
                     </div>
                   </div>
                   <span class="d-block mb-1">Paiements</span>
-                  <h6 class="card-title text-nowrap mb-2">2 456 353 CFA</h6>
+                  <h6 class="card-title text-nowrap mb-2">{{$paiements}} CFA</h6>
                 </div>
               </div>
             </div>
@@ -216,8 +216,8 @@
                       </div>
                     </div>
                   </div>
-                  <span class="fw-semibold d-block mb-1">Transactions</span>
-                  <h5 class="card-title mb-2">14,857 CFA</h5>
+                  <span class="fw-semibold d-block mb-1">TVA Collectée</span>
+                  <h6 class="card-title mb-2">{{$tva}} CFA</h6>
                 </div>
               </div>
             </div>

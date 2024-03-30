@@ -96,7 +96,7 @@
                 var addButton = $('.add_button'); //Add button selector
                 var wrapper = $('.field_wrapper'); //Input field wrapper
                 var fieldHTML =
-                    '<div class="row" style="margin:0px"><div class=" col-lg-8 col-md-8 col-xs-8 field"><select class="prod form-control" id="id_prod[]" name="id_prod[]"><option value="">Choisir produit</option> @foreach ($produits as $produit) <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option> @endforeach</select></div><div class="col-lg-2 col-md-2 col-xs-2 field"><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" placeholder="Qte" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-md" alt="chart danger"></i></a></div></div>';
+                    '<div class="row" style="margin:10px"><div class=" col-lg-8 col-md-8 col-xs-8 field"><select class="prod form-control" id="id_prod[]" name="id_prod[]"><option value="">Choisir produit</option> @foreach ($produits as $produit) <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option> @endforeach</select></div><div class="col-lg-2 col-md-2 col-xs-2 field"><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" placeholder="Qte" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-md"></i></a></div></div>';
 
                 var x = 1; //Initial field counter is 1
 
@@ -110,7 +110,7 @@
                 });
 
                 //Once remove button is clicked
-                $(wrapper).on('click', '.remove_button', function(e) {
+                $(wrapper).on('click', '.remove_buttonPP', function(e) {
                     e.preventDefault();
                     $(this).parent('div').remove(); //Remove field html
                     x--; //Decrement field counter

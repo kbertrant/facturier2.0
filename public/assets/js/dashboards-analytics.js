@@ -18,12 +18,12 @@
     totalRevenueChartOptions = {
       series: [
         {
-          name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          name: '2024',
+          data: [18, 7, 15, 29, 18, 12, 9, 15, 29, 18, 12, 9]
         },
         {
-          name: '2020',
-          data: [-13, -18, -9, -14, -5, -17, -15]
+          name: '2023',
+          data: [-13, -18, -9, -14, -5, -17, -15, -5, -17, -15, -17, -15]
         }
       ],
       chart: {
@@ -78,7 +78,7 @@
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
         labels: {
           style: {
             fontSize: '13px',
@@ -494,7 +494,7 @@
     incomeChartConfig = {
       series: [
         {
-          data: [24, 21, 30, 22, 42, 26, 35, 29]
+          data: "{{ route('home') }}"
         }
       ],
       chart: {
@@ -558,7 +558,7 @@
         }
       },
       xaxis: {
-        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
         axisBorder: {
           show: false
         },

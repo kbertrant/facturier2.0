@@ -11,6 +11,8 @@ return [
     'myDashboard'=>'Dashboard',
     'ytc' => 'type of clients',
     'ycl' => 'clients',
+    'wlc'=>'Welcome',
+    'hmsen'=>'You made 47 sales this month. See details below.',
     'yp' => 'proforma',
     'ypa' => 'payment',
     'yf' => 'invoices',

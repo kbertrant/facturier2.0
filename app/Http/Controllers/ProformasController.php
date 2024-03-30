@@ -243,8 +243,8 @@ class ProformasController extends Controller
         ])->setPaper('a4')->setOption(['dpi' => 150, 'isRemoteEnabled' => true, 'defaultFont' => 'Ayuthaya', 'isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print proformas');
-        return $pdf->stream('PRO_'.$pro->pro_ref);
-        //return redirect()->back()->with('success', 'Proforma generée');
+        $pdf->download('PRO_'.$pro->pro_ref);
+        return redirect()->back()->with('success', 'Proforma generée');
     }
 
     public function validPro($id){
