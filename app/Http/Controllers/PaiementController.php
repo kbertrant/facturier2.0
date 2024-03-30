@@ -175,7 +175,7 @@ class PaiementController extends Controller
         $cl = Cliente::find($pay->id_cli);
         $usr = User::find(Auth::user()->id);
 
-        $pdf = Pdf::loadView('print.paypdfa6', [
+        $pdf = Pdf::loadView('print.paypdf', [
             'pay' => $pay,
             'ent' => $ent,
             'efs' => $efs,
