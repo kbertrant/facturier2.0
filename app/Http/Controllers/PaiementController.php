@@ -181,7 +181,7 @@ class PaiementController extends Controller
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print receipt payment');
         return $pdf->download('PAY_'.$pay->ref_pay.'.pdf');
