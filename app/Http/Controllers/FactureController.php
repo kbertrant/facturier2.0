@@ -8,6 +8,7 @@ use App\Models\Entreprise;
 use App\Models\Facture;
 use App\Models\Produit;
 use App\Models\User;
+use App\Services\ClienteService;
 use App\Services\DecodeService;
 use App\Services\EltFactureService;
 use App\Services\FactureService;
@@ -99,6 +100,11 @@ class FactureController extends Controller
             $result = $date->format('ymdHis');
             //get client informations
             $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
+            if($cli == null){
+                $cliservice = new ClienteService();
+                $cli = $cliservice->CreateCliente($request->id_cli,'phone','Adresse',null,null,null,null,1);
+                //dd($cli);
+            }
             //create facture to null
             $fac = new FactureService();
             $dcod_cli_id = $decode->DecodeId($cli->id);

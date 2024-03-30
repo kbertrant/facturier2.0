@@ -9,6 +9,7 @@ use App\Models\Entreprise;
 use App\Models\Produit;
 use App\Models\Proformas;
 use App\Models\User;
+use App\Services\ClienteService;
 use App\Services\DecodeService;
 use App\Services\EltProformaService;
 use App\Services\HistoricService;
@@ -112,7 +113,12 @@ class ProformasController extends Controller
             $date = now();
             $result = $date->format('ymdHis');
             $cli = Cliente::where('name_cli', 'like', $request->id_cli)->first();
-            //dd($cli);
+            
+            if($cli == null){
+                $cliservice = new ClienteService();
+                $cli = $cliservice->CreateCliente($request->id_cli,'phone','Adresse',null,null,null,null,1);
+                //dd($cli);
+            }
             $dcod_cli_id = $decode->DecodeId($cli->id);
             $prof = new ProformaService();
             $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, $request->reduction);
