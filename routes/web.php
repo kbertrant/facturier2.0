@@ -25,6 +25,8 @@ Route::get('lang/change', [App\Http\Controllers\LangController::class, 'change']
 Auth::routes();
 
 Route::get('/my/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/my/home/list', [App\Http\Controllers\HomeController::class, 'index'])->name('year.list');
+
 
 // route use
 Route::get('/my/profile',  [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');

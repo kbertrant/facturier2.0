@@ -34,21 +34,25 @@ class HomeController extends Controller
         $paiements = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('mttc_pay');
         $tva = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('tva_pay');
         $depenses = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)->sum('amount_dep');
-        $year_paiements = array();
-        $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
-        foreach ($months as $month) {
-            
-            $time=strtotime(now());
-            $year=date("Y",$time);
-            $year_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
-            ->whereYear('paiements.date_pay','=',$year)
-            ->whereMonth('paiements.date_pay','=',$month)->sum('mttc_pay');
-            array_push($year_paiements,$year_pay);
-            
-        }
-        //dd($year_paiements);
+        //if (request()->ajax()) {
+            $data = [
+            'labels' =>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+            'data'=>[]];
+            $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
+            foreach ($months as $month) {
+                
+                $time=strtotime(now());
+                $year=date("Y",$time);
+                $year_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
+                ->whereYear('paiements.date_pay','=',$year)
+                ->whereMonth('paiements.date_pay','=',$month)->sum('mttc_pay');
+                array_push($data['data'],$year_pay);
+                
+            }
+        //}
+        //dd($data);
         return view('home',['user'=> $user,'products'=> $products,
-        'paiements'=> $paiements,'depenses'=> $depenses,'tva'=> $tva,'year_paiements'=>$year_paiements]);
+        'paiements'=> $paiements,'depenses'=> $depenses,'tva'=> $tva,'data'=>$data]);
     }
 
 
