@@ -60,7 +60,7 @@
                   { data: 'name_cli', name: 'name_cli' },
                   { data: 'stat_fac', name: 'stat_fac' },
                   {data: 'action', name: 'action', orderable: false}
-                    ],order: [[0, 'desc']]
+                    ],order: [[2, 'desc']]
            });
            $(document).ready(function(){
             var maxField = 10; //Input fields increment limitation

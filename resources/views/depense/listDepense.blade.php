@@ -59,7 +59,7 @@
                   { data: 'status', name: 'status' },
                   { data: 'amount_dep', name: 'amount_dep' },
                   {data: 'action', name: 'action', orderable: false}
-                    ],order: [[0, 'desc']]
+                    ],order: [[2, 'desc']]
            });
       });
   
