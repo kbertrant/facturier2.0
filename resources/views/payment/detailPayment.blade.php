@@ -64,13 +64,10 @@
                     <div>
                       <h4>Paiement #{{$pay->ref_pay}}</h4>
                       <div class="mb-2">
-                        <span class="me-1">Date Issues:</span>
+                        <span class="me-1">Date:</span>
                         <span class="fw-medium">{{$pay->date_pay}}</span>
                       </div>
-                      <div>
-                        <span class="me-1">Date Due:</span>
-                        <span class="fw-medium">{{$pay->date_pay}}</span>
-                      </div>
+                      
                       <div>
                         <span class="me-1">Status:</span>
                         @if($pay->stat_pay == 'Pending')
@@ -86,33 +83,14 @@
                 <div class="card-body">
                   <div class="row p-sm-3 p-0">
                     <div class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
-                      <h6 class="pb-2">Payment To:</h6>
+                      <h6 class="pb-2">Payment from:</h6>
                       <p class="mb-1">{{$cl->name_cli}}</p>
                       <p class="mb-1">{{$cl->raison_sociale}}</p>
                       <p class="mb-1">{{$cl->address_cli}}</p>
                       <p class="mb-1">{{$cl->phone_cli}}</p>
                       <p class="mb-0">{{$cl->cl_email}}</p>
                     </div>
-                    <div class="col-xl-6 col-md-12 col-sm-7 col-12">
-                      <h6 class="pb-2">Bill To:</h6>
-                      <table>
-                        <tbody>
-                            <tr>
-                                <td class="pe-3">Total Due:</td>
-                                <td>{{$pay->mttc_pay}} XAF</td>
-                            </tr>
-                            <tr>
-                                <td class="pe-3">Client:</td>
-                                <td>{{$cl->raison_sociale}}</td>
-                            </tr>
-                            <tr>
-                                <td class="pe-3">Registre commerce:</td>
-                                <td>{{$cl->cl_rccm}}</td>
-                            </tr>
-                          
-                        </tbody>
-                      </table>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="table-responsive">
