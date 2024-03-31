@@ -261,9 +261,9 @@
             data: {
                 labels: @json($data['labels']),
                 datasets: [{
-                    label: 'Data',
-                    data: @json($data['data']),
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    label: 'Payments income',
+                    data: @json($data['payments']),
+                    borderColor: 'rgba(127, 0, 255, 1)',
                     borderWidth: 1,
                     fill: false
                 }]

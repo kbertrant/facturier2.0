@@ -37,7 +37,7 @@ class HomeController extends Controller
         //if (request()->ajax()) {
             $data = [
             'labels' =>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
-            'data'=>[]];
+            'payments'=>[]];
             $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
             foreach ($months as $month) {
                 
@@ -46,7 +46,7 @@ class HomeController extends Controller
                 $year_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
                 ->whereYear('paiements.date_pay','=',$year)
                 ->whereMonth('paiements.date_pay','=',$month)->sum('mttc_pay');
-                array_push($data['data'],$year_pay);
+                array_push($data['payments'],$year_pay);
                 
             }
         //}
