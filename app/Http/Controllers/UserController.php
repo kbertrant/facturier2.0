@@ -88,7 +88,18 @@ class UserController extends Controller
 
     protected function store(Request $request)
     {
-    
+        $validator = Validator::make($request->all(), [
+            'name' => ['required','string','unique:users'],
+            'email' => ['required','string','unique:users'],
+            'password' => ['required','string'],
+            'ville' => ['required','string'],
+            'phone' => ['required','string','unique:users'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $user=User::create([
             'name' => $request->name,
             'email' => $request['email'],
@@ -110,7 +121,7 @@ class UserController extends Controller
     public function update(Request $request){
         
         
-          Validator::make($request->all(), [
+          $validator = Validator::make($request->all(), [
             'name' => ['required','string','unique:users'],
             'email' => ['required','string','unique:users'],
             'anc_password' => ['required','string'],
@@ -119,7 +130,11 @@ class UserController extends Controller
             'phone' => ['required','string','unique:users'],
             'image'=>['required']
         ]);
-
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $user =User::find($request->id) ;
     
         

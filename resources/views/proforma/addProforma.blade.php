@@ -11,7 +11,7 @@
                   @csrf
                   <div class="mb-3">
                     <label for="id_cli" class="form-label">Client</label>
-                    <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher">
+                    <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher" required>
                     <datalist id="datalistOptions">
                       @foreach ($clients as $client)
                         <option value="{{ $client->name_cli }}"></option>
@@ -55,7 +55,7 @@
             <div class="mb-3">
               <label for="reduction" class="form-label">{{ __('mypages.remise') }}</label>
               <input type="number" class="form-control @error('reduction') is-invalid @enderror"
-                    id="reduction" name="reduction" value="0" />
+                    id="reduction" name="reduction" value="0" required/>
               @error('reduction')
                 <span class="invalid-feedback" role="alert">
                   <strong class="strong">Reduction est deja aquis</strong>

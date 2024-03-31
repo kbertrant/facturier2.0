@@ -11,7 +11,7 @@
           @csrf
           <div class="mb-3">
             <label for="id_tc" class="form-label">Categorie du produit</label>
-            <select class="form-select" id="id_tc" name="id_tc" aria-label="Categorie du produit">
+            <select class="form-select" id="id_tc" name="id_tc" aria-label="Categorie du produit" required>
               <option selected>Choisir type client</option>
               @foreach ($list_tcs as $tc)
                 <option value="{{ $tc->id }}">{{ $tc->name_tc }}</option>
@@ -19,7 +19,7 @@
             </select>
             @error('id_tc')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Type est deja aquis</strong>
+							  <strong class="strong">Type est requis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -27,11 +27,10 @@
             <label for="code_prod" class="form-label">Noms & prenoms client </label>
             <input type="text" class="form-control @error('name_cli') is-invalid @enderror"
                   id="name_cli" name="name_cli" placeholder="Nom du client"
-                  autofocus
                   required />
             @error('name_cli')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Ce nom est deja aquis</strong>
+							  <strong class="strong">Ce nom est requis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -41,7 +40,7 @@
                   id="phone_cli" name="phone_cli" placeholder="Nom du produit"required />
             @error('phone_cli')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Ce telephone est deja aquis</strong>
+							  <strong class="strong">Ce telephone est requis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -59,10 +58,10 @@
           <div class="mb-3">
             <label for="address_cli" class="form-label">RAISON SOCIALE</label>
             <input type="text" class="form-control @error('raison_sociale') is-invalid @enderror"
-                  id="raison_sociale" name="raison_sociale" placeholder="Raison sociale"required />
+                  id="raison_sociale" name="raison_sociale" placeholder="Raison sociale" required />
             @error('raison_sociale')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Ce nom est deja aquis</strong>
+							  <strong class="strong">Ce nom est requis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -72,7 +71,7 @@
                   id="cl_email" name="cl_email" placeholder="Email"required />
             @error('cl_email')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Ce nom est deja aquis</strong>
+							  <strong class="strong">Ce nom est requis</strong>
 						  </span>
 				    @enderror
           </div>
@@ -83,7 +82,7 @@
                   id="cl_rccm" name="cl_rccm" placeholder="Registre commerce "required />
             @error('cl_rccm')
 						  <span class="invalid-feedback" role="alert">
-							  <strong class="strong">Ce nom est deja aquis</strong>
+							  <strong class="strong">Ce nom est requis</strong>
 						  </span>
 				    @enderror
           </div>

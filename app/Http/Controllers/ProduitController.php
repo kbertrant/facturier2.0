@@ -81,7 +81,7 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'code_prod' => ['required'],
             'name_prod' => ['required'],
             'desc_prod' => ['required'],
@@ -90,6 +90,11 @@ class ProduitController extends Controller
             'qty_prod' => ['required'],
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($request->id_cat);
 

@@ -66,7 +66,7 @@ class FournisseurController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+       $validator =  Validator::make($request->all(),[
             'four_name' => ['required'],
             'four_code' => ['required'],
             'resp_name' => ['required'],
@@ -75,7 +75,11 @@ class FournisseurController extends Controller
             'four_phone' => ['required'],
             'four_email' => ['required'],
         ]); 
-        
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $four = new FournisseurService();
         $four->CreateFournisseur($request->four_name,$request->four_code,$request->resp_name,
         $request->four_rccm,$request->four_nui,$request->four_phone,$request->four_email,

@@ -64,10 +64,14 @@ class TypeClientController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'name_tc' => ['required'],
         ]); 
-        
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $cli = new TypeCliente();
         $cli->name_tc = $request->name_tc;
         $cli->status = "A";

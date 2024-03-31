@@ -13,7 +13,6 @@
               <label for="code_prod" class="form-label">Libelle du type</label>
               <input type="text" class="form-control @error('name_tc') is-invalid @enderror"
                     id="name_tc" name="name_tc" placeholder="Libelle du type de client"
-                    autofocus
                     required />
               @error('name_tc')
                             <span class="invalid-feedback" role="alert">

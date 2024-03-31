@@ -81,11 +81,16 @@ class PaiementController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'num_fac' => ['required'],
             'pay_mode' => ['required'],
             'mttc_pay' => ['required']
         ]); 
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         try { 
             DB::beginTransaction();
             $decode = new DecodeService();

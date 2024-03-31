@@ -11,7 +11,7 @@
                   @csrf
             <div class="mb-3">
               <label for="num_fac" class="form-label"> {{ __('mypages.numinv') }}</label>
-              <input type="text" class="form-control" name="num_fac" list="datalistOptions" id="num_fac" placeholder="Saisir pour rechercher">
+              <input type="text" class="form-control" name="num_fac" list="datalistOptions" id="num_fac" placeholder="Saisir pour rechercher" required>
               <datalist id="datalistOptions">
                 @foreach ($facs as $fac)
                   <option value="{{ $fac->ref }}">{{ $fac->name_cli }} - {{ $fac->mttc }}</option>
@@ -19,14 +19,14 @@
               </datalist>
               @error('num_fac')
                 <span class="invalid-feedback" role="alert">
-                  <strong class="strong">Le client est deja aquis</strong>
+                  <strong class="strong">Le client est requis</strong>
                 </span>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="pay_mode" class="form-label">{{ __('mypages.paymode') }} </label>
-                <select class="form-select" id="pay_mode" name="pay_mode" aria-label="Mode de paiement">
-                    <option selected>Choisir mode de paiement</option>
+                <select class="form-select" id="pay_mode" name="pay_mode" aria-label="Mode de paiement" required>
+                    <option value="">Choisir mode de paiement</option>
                     <option value="CASH">CASH/ESPECES </option>
                     <option value="MTN MOMO">MTN MOMO</option>
                     <option value="ORANGE MONEY">ORANGE MONEY</option>
@@ -35,17 +35,17 @@
                 </select>
                 @error('pay_mode')
                     <span class="invalid-feedback" role="alert">
-                        <strong class="strong">Mode de paiement est deja aquis</strong>
+                        <strong class="strong">Mode de paiement est requis</strong>
                     </span>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="mttc_pay" class="form-label">{{ __('mypages.amountpay') }}  </label>
                 <input type="number" class="form-control @error('mttc_pay') is-invalid @enderror"
-                    id="mttc_pay" name="mttc_pay" placeholder="Montant à payer" />
+                    id="mttc_pay" name="mttc_pay" placeholder="Montant à payer" required/>
                 @error('mttc_pay')
                     <span class="invalid-feedback" role="alert">
-                        <strong class="strong">Montant a payer est deja aquis</strong>
+                        <strong class="strong">Montant a payer est requis</strong>
                     </span>
                 @enderror
             </div>

@@ -86,12 +86,17 @@ class FactureController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'id_cli' => ['required'],
             'id_prod' => ['required'],
             'quantity' => ['required'],
             'reduction' => ['required']
         ]); 
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         try { 
             DB::beginTransaction();
             //formar date 

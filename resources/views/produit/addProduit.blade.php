@@ -11,7 +11,7 @@
           @csrf
           <div class="mb-3">
             <label for="id_cat" class="form-label">Categorie du produit</label>
-            <select class="form-select" id="id_cat" name="id_cat" aria-label="Categorie du produit">
+            <select class="form-select" id="id_cat" name="id_cat" aria-label="Categorie du produit" required>
               <option selected>Choisir categorie</option>
               @foreach ($cats as $cat)
                 <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>

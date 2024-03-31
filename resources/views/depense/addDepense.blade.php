@@ -56,7 +56,7 @@
             </div>
             <div class="mb-3">
                 <label for="pay_mode" class="form-label">Mode de paiement </label>
-                <select class="form-select" id="mode_dep" name="mode_dep" aria-label="Mode de paiement">
+                <select class="form-select" id="mode_dep" name="mode_dep" aria-label="Mode de paiement" required>
                     <option selected>Choisir mode de paiement</option>
                     <option value="CASH">CASH/ESPECES </option>
                     <option value="MTN MOMO">MTN MOMO</option>

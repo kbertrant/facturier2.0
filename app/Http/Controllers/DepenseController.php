@@ -78,13 +78,18 @@ class DepenseController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'amount_dep' => ['required'],
             'label_dep' => ['required'],
             'solde_dep' => ['required'],
             'mode_dep' => ['required'],
             'id_four' => ['required'],
         ]); 
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $date = now();
         $ref_dep = $date->format('ymdHis');
         $decode = new DecodeService();
