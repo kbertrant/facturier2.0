@@ -97,10 +97,10 @@
           <div class="mb-3">
             <label for="detail" class="form-label">Detaillable</label>
             <input type="radio" class="form-check-input @error('detail') is-invalid @enderror"
-                  id="detail" name="detail" required />
+                  id="detail" name="detail" required value="on"/>
             <label for="detail" class="form-check-label">oui</label>
             <input type="radio" class="form-check-input @error('detail') is-invalid @enderror"
-                  id="detail" name="detail" required />
+                  id="detail" name="detail" required value="off"/>
             <label for="detail" class="form-check-label">non</label>
             @error('detail')
 						  <span class="invalid-feedback" role="alert">
@@ -111,10 +111,10 @@
           <div class="mb-3">
             <label for="neuf" class="form-label">Neuf</label>
             <input type="radio" class="form-check-input @error('neuf') is-invalid @enderror"
-                  id="neuf" name="neuf" required />
+                  id="neuf" name="neuf" required value="on"/>
             <label for="neuf" class="form-check-label">oui</label>
             <input type="radio" class="form-check-input @error('neuf') is-invalid @enderror"
-                  id="neuf" name="neuf" required />
+                  id="neuf" name="neuf" required value="off"/>
             <label for="neuf" class="form-check-label">non</label>
             @error('detail')
 						  <span class="invalid-feedback" role="alert">

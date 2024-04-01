@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\Models\Entreprise;
+use App\Models\Tresorerie;
 use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use App\Services\DecodeService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
@@ -75,35 +77,46 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    
-        $ent = Entreprise::create([
-            'name_ent'=> $data['name_ent'],
-            'rc_ent'=> $data['rc_ent'],
-        ]); 
+        try { 
+            DB::beginTransaction();
+            $ent = Entreprise::create([
+                'name_ent'=> $data['name_ent'],
+                'rc_ent'=> $data['rc_ent'],
+            ]); 
+            
+            $myimage = $data['image']->getClientOriginalName();
+            if($data['image']){
+            $imagePath = ($data['image'])->move(public_path('images'), $myimage);
+            }
+
+            $decode = new DecodeService();
+            $decoded_id = $decode->DecodeId($ent->id);
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'ville' => $data['ville'],
+                'image'=> $imagePath,
+                'role'=> 'admin',
+                'id_ent'=>$decoded_id,
+                'password' => Hash::make($data['password'])
+            ]);
+
+            $ep = new Tresorerie();
+            $ep->amount = 0;
+            $ep->amount_tres = 0;
+            $ep->mouvement = "IN";
+            $ep->date_tres = now();
+            $ep->id_ent = $user->id_ent;
+            $ep->save();
+            DB::commit();
+
+        }catch(\Exception $e) {
         
-        $myimage = $data['image']->getClientOriginalName();
-        if($data['image']){
-          $imagePath = ($data['image'])->move(public_path('images'), $myimage);
+            DB::rollback();
+            throw $e;
         }
-
-        $decode = new DecodeService();
-        $decoded_id = $decode->DecodeId($ent->id);
-         $user=User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'ville' => $data['ville'],
-            'image'=> $imagePath,
-            'role'=> 'admin',
-            'id_ent'=>$decoded_id,
-            'password' => Hash::make($data['password'])
-        ]);
-
-        
-        //$user->notify(new UserNotification());
-       
         return $user;
            
-         
     }
 }

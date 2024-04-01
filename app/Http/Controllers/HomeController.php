@@ -34,10 +34,25 @@ class HomeController extends Controller
         $paiements = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('mttc_pay');
         $tva = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('tva_pay');
         $depenses = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)->sum('amount_dep');
-        //if (request()->ajax()) {
+        $time=strtotime(now());
+        $year=date("Y",$time);
+        $month=date("m",$time);
+        $day=date("d",$time);
+        $day_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
+                ->whereYear('paiements.date_pay','=',$year)
+                ->whereMonth('paiements.date_pay','=',$month)
+                ->whereDay('paiements.date_pay','=',$day)
+                ->sum('mttc_pay');
+        $day_dep = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)
+                ->whereYear('depenses.date_dep','=',$year)
+                ->whereMonth('depenses.date_dep','=',$month)
+                ->whereDay('depenses.date_dep','=',$day)
+                ->whereMonth('depenses.date_dep','=',$month)->sum('amount_dep');
+        
             $data = [
             'labels' =>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
-            'payments'=>[]];
+            'payments'=>[],
+            'depenses'=>[]];
             $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
             foreach ($months as $month) {
                 
@@ -47,12 +62,17 @@ class HomeController extends Controller
                 ->whereYear('paiements.date_pay','=',$year)
                 ->whereMonth('paiements.date_pay','=',$month)->sum('mttc_pay');
                 array_push($data['payments'],$year_pay);
-                
+
+                $year_dep = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)
+                ->whereYear('depenses.date_dep','=',$year)
+                ->whereMonth('depenses.date_dep','=',$month)->sum('amount_dep');
+                array_push($data['depenses'],$year_dep);
             }
-        //}
+        
         //dd($data);
         return view('home',['user'=> $user,'products'=> $products,
-        'paiements'=> $paiements,'depenses'=> $depenses,'tva'=> $tva,'data'=>$data]);
+        'paiements'=> $paiements,'depenses'=> $depenses,'tva'=> $tva,
+        'data'=>$data,'day_dep'=>$day_dep,'day_pay'=>$day_pay]);
     }
 
 

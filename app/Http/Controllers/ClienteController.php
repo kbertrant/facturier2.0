@@ -76,7 +76,7 @@ class ClienteController extends Controller
     {
         //dd($request);
         Validator::make($request->all(),[
-            'name_cli' => ['required'],
+            'name_cli' => ['required','unique:clientes'],
             'phone_cli' => ['required'],
             'address_cli' => ['required'],
             'id_tc' => ['required'],

@@ -67,7 +67,7 @@ class FournisseurController extends Controller
     {
         //dd($request);
        $validator =  Validator::make($request->all(),[
-            'four_name' => ['required'],
+            'four_name' => ['required','unique:fournisseurs'],
             'four_code' => ['required'],
             'resp_name' => ['required'],
             'four_rccm' => ['required'],

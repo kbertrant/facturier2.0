@@ -156,15 +156,92 @@ class ProduitController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $prod = Produit::find($decoded_id);
+
+        $historic = new HistoricService();
+        $historic->Add('Edit product');
+
+        //dd($prod);
+        $cats = Cat_produit::all();
+        return view('produit.editProduit', ['prod' => $prod,'cats' => $cats]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request);
+        $validator = Validator::make($request->all(), [
+            'code_prod' => ['required'],
+            'name_prod' => ['required'],
+            'desc_prod' => ['required'],
+            'price_prod' => ['required'],
+            'id_cat' => ['required'],
+            'qty_prod' => ['required']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id_cat);
+        $decodprod_id = $decode->DecodeId($request->id);
+        if($request->file('img') !=null){
+            $image = $request->file('img');
+            $imageName = time() . '.' . $image->extension();
+
+            $destinationPathThumbnail = public_path('/thumbnail');
+            $img = Image::make($image->path());
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPathThumbnail . '/' . $imageName);
+
+            $destinationPath = public_path('/products/images');
+            $image->move($destinationPath, $imageName);
+        }else
+        //dd($request);
+
+        //update product datas
+
+        $pro = Produit::find($decodprod_id);
+        //dd($pro);
+            $pro->code_prod = $request->code_prod;
+            $pro->name_prod = $request->name_prod;
+            $pro->desc_prod = $request->desc_prod;
+            $pro->price_prod = $request->price_prod;
+            $pro->qty_prod = $request->qty_prod;
+            $pro->color_prod = $request->color_prod;
+            $pro->size_prod = $request->size_prod;
+            $pro->detail = $request->detail;
+            $pro->volume = $request->volume;
+            $pro->poids = $request->poids;
+            $pro->is_stock = $request->is_stock;
+            $pro->neuf = $request->neuf;
+            $pro->id_cat = $decoded_id;
+            if($request->file('img') !=null){
+            $pro->img = $request->$imageName;}
+            $pro->save();
+
+        $historic = new HistoricService();
+        $historic->Add('update a product');
+
+        return redirect()->route('produit.main')->with('success','Produit modifié avec succes');
+
     }
 
     /**

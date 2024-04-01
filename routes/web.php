@@ -61,6 +61,8 @@ Route::get('/produit/list',[App\Http\Controllers\ProduitController::class, 'inde
 Route::get('/produit/show/{id}',[App\Http\Controllers\ProduitController::class, 'show'])->name('produit.show');
 Route::post('/addProduit',[App\Http\Controllers\ProduitController::class, 'create'])->name('addProduit');
 Route::post('/produit/store',[App\Http\Controllers\ProduitController::class, 'store'])->name('produit.store');
+Route::get('/produit/edit/{id}', [App\Http\Controllers\ProduitController::class, 'edit'])->name('produit.edit');
+Route::post('/produit/update',[App\Http\Controllers\ProduitController::class, 'update'])->name('produit.update');
 Route::get('/produit/destroy/{id}',[App\Http\Controllers\ProduitController::class,'destroy'])->name('produit.destroy');
 
 // route cat_produit
@@ -68,6 +70,7 @@ Route::post('/cat/produit/store',[Cat_produitController::class, 'store'])->name(
 Route::get('/my/cat/produit', [Cat_produitController::class, 'index'])->name('catproduit.main');
 Route::get('/cat/produit/list', [Cat_produitController::class, 'index'])->name('catproduit.list');
 Route::get('/cat/produit/destroy/{id}',[Cat_produitController::class,'destroy'])->name('catproduit.destroy');
+
 
 
 // route facture
