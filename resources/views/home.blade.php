@@ -107,37 +107,9 @@
         <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
           <div class="card">
             <div class="row row-bordered g-0">
-              <div class="col-md-8">
+              <div class="col-md-12">
                 <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
                 <canvas id="lineChart"></canvas>
-              </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <div class="text-center">
-                    TODAY
-                  </div>
-                </div>
-                <div id="growthChart"></div>
-                <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                  <div class="d-flex">
-                    <div class="me-2">
-                      <span class="badge bg-label-success p-2"><i class="bx bx-dollar text-success"></i></span>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <small>Ventes</small>
-                      <small class="mb-0">{{$day_pay}}</small>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <div class="me-2">
-                      <span class="badge bg-label-danger p-2"><i class="bx bx-wallet text-danger"></i></span>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <small>Achats</small>
-                      <small class="mb-0">{{$day_dep}}</small>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -152,22 +124,7 @@
                     <div class="avatar flex-shrink-0">
                       <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
                     </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt4"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
+                    
                   </div>
                   <span class="d-block mb-1">Paiements</span>
                   <h6 class="card-title text-nowrap mb-2">{{$paiements}} CFA</h6>
@@ -181,51 +138,43 @@
                     <div class="avatar flex-shrink-0">
                       <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
                     </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt1"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
+                    
                   </div>
                   <span class="fw-semibold d-block mb-1">TVA Collectée</span>
                   <h6 class="card-title mb-2">{{$tva}} CFA</h6>
                 </div>
               </div>
             </div>
-            <!-- </div>
-<div class="row"> -->
-            <div class="col-12 mb-4">
+            <div class="col-6 mb-4">
               <div class="card">
                 <div class="card-body">
-                  <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                      <div class="card-title">
-                        <h5 class="text-nowrap mb-2">Profile Report</h5>
-                        <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                      </div>
-                      <div class="mt-sm-auto">
-                        <small class="text-success text-nowrap fw-semibold"
-                          ><i class="bx bx-chevron-up"></i> 68.2%</small
-                        >
-                        <h3 class="mb-0">$84,686k</h3>
-                      </div>
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt bx-lg"></i></small>
                     </div>
-                    <div id="profileReportChart"></div>
+                    
                   </div>
+                  <span class="fw-semibold d-block mb-1">Ventes/jour</span>
+                  <h6 class="card-title mb-2">{{$day_pay}} XAF</h6>
                 </div>
               </div>
             </div>
+            <div class="col-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt bx-lg"></i></small>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1">Depenses/jour</span>
+                  <h6 class="card-title mb-2">{{$day_dep}} XAF</h6>
+                </div>
+              </div>
+            </div>
+            <!-- </div>
+<div class="row"> -->
+            
           </div>
         </div>
       </div>
