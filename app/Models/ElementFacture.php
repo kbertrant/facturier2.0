@@ -14,6 +14,7 @@ class ElementFacture extends Model
         'ef_pu',
         'ef_ttval',
         'ef_stat',
+        'ef_lib',
         'id_fac',
         'id_prod',
         'id_ent' 

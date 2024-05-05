@@ -118,19 +118,17 @@ class FactureController extends Controller
             $s = 0;
             //add elements facture
             foreach ($request->id_prod as $pr) {
-                $p = $decode->DecodeId($pr);
-                
                 $i = $s++;
-                if($p!=null){
-
+                if($pr!=null){
+                    $p = $decode->DecodeId($pr);
                     $pro = new ProduitService();
                     $pro->decrementQteProduct($request->quantity[$i],$p);
 
                     $prix_unit = $pro->getPriceProduct($p);
-
+                    $ef_lib = Produit::find();
                     $ef = new EltFactureService();
                     //$dcode_fac_id = Hashids::decode($new_fac->id);
-                    $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit);
+                    $ef->CreateEltFacture($p,$dcod_fac_id,$request->quantity[$i],$prix_unit,$request->quantity[$i]*$prix_unit,$ef_lib);
                     
                 }
             }

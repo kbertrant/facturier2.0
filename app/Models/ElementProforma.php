@@ -15,6 +15,7 @@ class ElementProforma extends Model
         'ep_ttc',
         'ep_mht',
         'ep_tva',
+        'ep_lib',
         'ep_stat',
         'id_pro',
         'id_prod',

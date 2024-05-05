@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cat_produit;
+use App\Services\DecodeService;
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class Cat_produitController extends Controller
                 // Update Button
                 $showButton = "<a class='btn btn-sm btn-warning mr-1 mb-1 viewdetails' data-id='".$row->id."' ><i class='bx bxs-detail'></i></a>";
                 // Update Button
-                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-1' href='/categories/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
+                $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-1' href='/cat/produit/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
                 // Delete Button
                 $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-1' href='/cat/produit/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
@@ -63,9 +64,14 @@ class Cat_produitController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator =Validator::make($request->all(),[
             'cat_name' => ['required'],
         ]); 
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $catpro = new Cat_produit();
         $catpro->cat_name = $request->cat_name;
         $catpro->cat_stat = 'A';
@@ -78,15 +84,35 @@ class Cat_produitController extends Controller
         return redirect()->back()->with('success','Categorie ajoutée');
     }
 
+    public function show($id)
+    {
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $cat = Cat_produit::find($decoded_id);
+
+        $historic = new HistoricService();
+        $historic->Add('Edit categorie product');
+
+        return view('cat_produit.detailCat_Produit', ['cat' => $cat]);
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function edit($id)
     {
-        //
+        
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $cat = Cat_produit::find($decoded_id);
+
+        $historic = new HistoricService();
+        $historic->Add('Edit categorie product');
+
+        return view('cat_produit.editCat_Produit', ['cat' => $cat]);
     }
 
     /**
@@ -96,9 +122,31 @@ class Cat_produitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request);
+        $validator = Validator::make($request->all(), [
+            'cat_name' => ['required'],
+            'id' => ['required']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id);
+
+        $cat = Cat_produit::find($decoded_id);
+        $cat->cat_name = $request->cat_name;
+        $cat->save();
+
+        $historic = new HistoricService();
+        $historic->Add('update a cat produit');
+
+        return redirect()->route('catproduit.main')->with('success','Categorie Produit modifiée avec succes');
+
     }
 
     /**

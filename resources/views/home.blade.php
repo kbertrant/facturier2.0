@@ -79,25 +79,10 @@
                         class="rounded"
                       />
                     </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt6"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
+                    
                   </div>
                   <span>Depenses</span>
-                  <h6 class="card-title text-nowrap mb-1">{{$depenses}} CFA</h6>
+                  <h6 class="card-title text-nowrap mb-1">{{$depenses}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -127,7 +112,7 @@
                     
                   </div>
                   <span class="d-block mb-1">Paiements</span>
-                  <h6 class="card-title text-nowrap mb-2">{{$paiements}} CFA</h6>
+                  <h6 class="card-title text-nowrap mb-2">{{$paiements}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -141,7 +126,7 @@
                     
                   </div>
                   <span class="fw-semibold d-block mb-1">TVA Collectée</span>
-                  <h6 class="card-title mb-2">{{$tva}} CFA</h6>
+                  <h6 class="card-title mb-2">{{$tva}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -150,7 +135,7 @@
                 <div class="card-body">
                   <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt bx-lg"></i></small>
+                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt bx-lg bx-fade-up"></i></small>
                     </div>
                     
                   </div>
@@ -164,7 +149,7 @@
                 <div class="card-body">
                   <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                      <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt bx-lg"></i></small>
+                      <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt bx-lg bx-fade-down"></i></small>
                     </div>
                   </div>
                   <span class="fw-semibold d-block mb-1">Depenses/jour</span>

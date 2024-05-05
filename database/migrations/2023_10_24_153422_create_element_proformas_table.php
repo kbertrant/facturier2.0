@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('ep_qty')->nullable();
             $table->float('ep_pu')->nullable();
             $table->float('ep_ttc')->nullable();
+            $table->string('ep_lib')->nullable();
             $table->decimal('ep_mht')->nullable();
             $table->decimal('ep_tva')->nullable();
             $table->string('ep_stat')->default('Pending');

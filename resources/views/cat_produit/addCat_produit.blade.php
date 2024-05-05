@@ -1,5 +1,5 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-simple">
+  <div class="modal-dialog modal-md modal-simple">
     <div class="modal-content p-0 p-md-2 p-xl-5">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter une categorie de produit</h1>

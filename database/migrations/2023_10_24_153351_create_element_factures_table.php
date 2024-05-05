@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('ef_qty')->nullable();
             $table->decimal('ef_pu')->nullable();
             $table->decimal('ef_mht')->nullable();
+            $table->string('ef_lib')->nullable();
             $table->decimal('ef_ttc')->nullable();
             $table->decimal('ef_tva')->nullable();
             $table->string('ef_stat')->default('Pending');

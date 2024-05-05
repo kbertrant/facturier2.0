@@ -75,12 +75,18 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Validator::make($request->all(),[
+        $validator =Validator::make($request->all(),[
             'name_cli' => ['required','unique:clientes'],
             'phone_cli' => ['required'],
             'address_cli' => ['required'],
             'id_tc' => ['required'],
         ]); 
+        
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($request->id_tc);
         $cli = new ClienteService();
@@ -117,6 +123,18 @@ class ClienteController extends Controller
    
     }
 
+    public function edit($id)
+    {
+        //dd($id);
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $cl = Cliente::find($decoded_id);
+        //dd($cl);
+        $list_tcs = TypeCliente::all();
+        return view('client.editClient',['cl'=>$cl,'list_tcs'=>$list_tcs]);
+   
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -124,9 +142,43 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request);
+        $validator = Validator::make($request->all(), [
+            'name_cli' => ['required'],
+            'phone_cli' => ['required'],
+            'address_cli' => ['required'],
+            'id_tc' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($request->id);
+        $idtc = $decode->DecodeId($request->id_tc);
+
+        $cl = Cliente::find($decoded_id);
+        $cl->name_cli = $request->name_cli;
+        $cl->phone_cli = $request->phone_cli;
+        $cl->address_cli = $request->address_cli;
+        $cl->rs_cli = $request->rs_cli;
+        $cl->raison_sociale= $request->raison_sociale;
+        $cl->cl_rccm = $request->cl_rccm;
+        $cl->cl_nui = $request->cl_nui;
+        $cl->cl_email = $request->cl_email;
+        //$cl->status= $request->status;
+        $cl->id_tc = $idtc;
+        $cl->save();
+
+        $historic = new HistoricService();
+        $historic->Add('update a client');
+
+        return redirect()->route('cliente.main')->with('success','Client modifié avec succes');
+
     }
 
     /**

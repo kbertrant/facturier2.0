@@ -44,6 +44,8 @@ Route::get('/cliente/list', [App\Http\Controllers\ClienteController::class, 'ind
 Route::post('/cliente/store',[App\Http\Controllers\ClienteController::class, 'store'])->name('cliente.store');
 Route::get('/cliente/destroy/{id}',[App\Http\Controllers\ClienteController::class,'destroy'])->name('cliente.destroy');
 Route::get('/cliente/show/{id}',[App\Http\Controllers\ClienteController::class, 'show'])->name('cliente.show');
+Route::get('/cliente/edit/{id}', [App\Http\Controllers\ClienteController::class, 'edit'])->name('cliente.edit');
+Route::post('/cliente/update',[App\Http\Controllers\ClienteController::class, 'update'])->name('cliente.update');
 
 
 // route type client
@@ -70,6 +72,8 @@ Route::post('/cat/produit/store',[Cat_produitController::class, 'store'])->name(
 Route::get('/my/cat/produit', [Cat_produitController::class, 'index'])->name('catproduit.main');
 Route::get('/cat/produit/list', [Cat_produitController::class, 'index'])->name('catproduit.list');
 Route::get('/cat/produit/destroy/{id}',[Cat_produitController::class,'destroy'])->name('catproduit.destroy');
+Route::get('/cat/produit/edit/{id}', [App\Http\Controllers\Cat_produitController::class, 'edit'])->name('catproduit.edit');
+Route::post('/cat/produit/update',[App\Http\Controllers\Cat_produitController::class, 'update'])->name('catproduit.update');
 
 
 
