@@ -125,16 +125,10 @@
                                 
                                 <div class="row">
                                     <div class="col-lg-8 col-md-8 col-xs-8">
-                                        <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
-                                            <option value="">Choisir l'article ou la prestation</option>
-                                            @foreach ($produits as $produit)
-                                                <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
-                                            @endforeach
-                                        </select>
+                                        
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2">
-                                      <input type="number" class="form-control @error('quantity') is-invalid @enderror"
-                                      id="quantity[]" name="quantity[]" placeholder="Qte" required />
+                                      
                                     </div>
                                     
                                     <div class="col-lg-2 col-md-2 col-xs-2">
@@ -144,33 +138,33 @@
                                 </div>
                                 <div class="row">
                                     <div class="field_wrapper" style="width: 100%;">
-                                        
-                                    <div>
-                                </div>
-                                @foreach ($eps as $ep)
+                                        @foreach ($eps as $ep)
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-xs-8">
                                                     <label for="Designation" class="form-label">Designation </label>
                                                     <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
                                                         @foreach ($produits as $produit)
-                                                        
+                                                                
                                                             <option value="{{ $produit->id }}" {{($ep->name_prod === $produit->name_prod ) ? 'Selected' : ''}}>{{ $produit->name_prod }} - {{ $produit->code_prod }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
                                                     <label for="quantity" class="form-label">Quantity </label>
-                                                <input type="number" class="form-control @error('quantity') is-invalid @enderror"
-                                                id="quantity[]" name="quantity[]" value="{{$ep->ep_qty}}" required />
+                                                    <input type="number" class="form-control @error('quantity') is-invalid @enderror"
+                                                    id="quantity[]" name="quantity[]" value="{{$ep->ep_qty}}" required />
                                                 </div>
-                                                
+                                                        
                                                 <div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"> 
                                                     <a href="javascript:void(0);" class="">
                                                         <img src="{{ asset('assets/img/remove-icon.png') }}"/>
                                                     </a>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                        @endforeach
+                                    <div>
+                                </div>
+                                
                                 <div class="mb-3">
                                     <label for="reduction" class="form-label">Reduction </label>
                                     <input type="number" class="form-control @error('reduction') is-invalid @enderror"
