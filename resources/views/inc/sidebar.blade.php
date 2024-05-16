@@ -211,12 +211,24 @@
           <div data-i18n="Basic">{{ __('sidebar.myEtat') }}</div>
         </a>
       </li>
-
-      <li class="menu-item">
-        <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">{{ __('sidebar.myParam') }}</div>
+      <li class="menu-item {{ request()->is('log-viewer') ? 'active open' : '' }} {{ request()->is('') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Clients">{{ __('sidebar.myParam') }}</div>
         </a>
+
+        <ul class="menu-sub ">
+          <li class="menu-item {{ request()->is('log-viewer') ? 'active' : 'hidden' }}">
+            <a href="/log-viewer" class="menu-link">
+              <div data-i18n="Types de client">Logs</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('') ? 'active' : '' }}">
+            <a href="{{route('listClient')}}" class="menu-link">
+              <div data-i18n="Liste de client">{{ __('sidebar.myListClient') }}</div>
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
   </aside>
