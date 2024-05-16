@@ -64,7 +64,7 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
+      <li class="menu-item {{ request()->is('my/home') ? 'active' : '' }}">
         <a href="{{route('home')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">{{ __('sidebar.myAccueil') }}</div>
@@ -76,28 +76,28 @@
         <span class="menu-header-text">{{ __('sidebar.sideFacturation') }}</span>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/proforma') ? 'active' : '' }}">
         <a href="{{route('proforma.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-receipt"></i>
           <div data-i18n="Basic">{{ __('sidebar.myProformas') }}</div>
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/facture') ? 'active' : '' }}">
         <a href="{{route('facture.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cart"></i>
           <div data-i18n="Basic">{{ __('sidebar.myFactures') }}</div>
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/depense') ? 'active' : '' }}">
         <a href="{{route('depense.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-credit-card"></i>
           <div data-i18n="Basic">{{ __('sidebar.myDepenses') }}</div>
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/payment') ? 'active' : '' }}">
         <a href="{{route('payment.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-money"></i>
           <div data-i18n="Basic">{{ __('sidebar.myPaiements') }}</div>
@@ -111,7 +111,7 @@
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/tresor') ? 'active' : '' }}">
         <a href="{{route('tresor.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-buildings"></i>
           <div data-i18n="Basic">{{ __('sidebar.myTersorerie') }}</div>
@@ -120,38 +120,38 @@
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideCommerce') }}</span></li>
       <!-- Layouts -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/type/client/list') ? 'active open' : '' }} {{ request()->is('my/client/list') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Clients">Clients</div>
         </a>
 
-        <ul class="menu-sub">
-          <li class="menu-item">
+        <ul class="menu-sub ">
+          <li class="menu-item {{ request()->is('my/type/client/list') ? 'active' : 'hidden' }}">
             <a href="{{route('listTypeClient')}}" class="menu-link">
               <div data-i18n="Types de client">{{ __('sidebar.myTypeClient') }}</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('my/client/list') ? 'active' : '' }}">
             <a href="{{route('listClient')}}" class="menu-link">
               <div data-i18n="Liste de client">{{ __('sidebar.myListClient') }}</div>
             </a>
           </li>
         </ul>
       </li>
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/cat/produit') ? 'active open' : '' }} {{ request()->is('my/produit') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Produits">{{ __('sidebar.myProduits') }}</div>
         </a>
 
-        <ul class="menu-sub">
-          <li class="menu-item">
+        <ul class="menu-sub ">
+          <li class="menu-item {{ request()->is('my/cat/produit') ? 'active' : '' }}">
             <a href="{{route('catproduit.main')}}" class="menu-link">
               <div data-i18n="Categories de produit">{{ __('sidebar.myCategory') }}</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{ request()->is('my/produit') ? 'active' : '' }}">
             <a href="{{route('produit.main')}}" class="menu-link">
               <div data-i18n="Liste de produits">{{ __('sidebar.myListProduit') }}</div>
             </a>
@@ -160,7 +160,7 @@
       </li>
       
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/fournisseur') ? 'active' : '' }}">
         <a href="{{route('fournisseur.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-store"></i>
           <div data-i18n="Basic">{{ __('sidebar.myFournisseurs') }}</div>
@@ -177,7 +177,7 @@
       <!-- Forms & Tables -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideParametre') }}</span></li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/user') ? 'active' : '' }}">
         <a href="{{route('user.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-id-card"></i>
           <div data-i18n="Basic">{{ __('sidebar.myUser') }}</div>
@@ -191,14 +191,14 @@
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('my/entreprise') ? 'active' : '' }}">
         <a href="{{route('entreprise')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">{{ __('sidebar.myEntreprise') }}</div>
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
+      <li class="menu-item {{ request()->is('user/admin/list') ? 'active' : '' }}">
         <a href="{{route('user.admin')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-id-card"></i>
           <div data-i18n="Basic">Tous les users</div>

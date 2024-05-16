@@ -28,7 +28,7 @@
               <legend class="scheduler-border">{{ __('mypages.ldps') }} </legend>
               <div class="row">
                   <div class="col-lg-8 col-md-8 col-xs-8">
-                      <select id="id_prod[]" name="id_prod[]" class="form-control prod shadow" required>
+                      <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
                           <option value="">Choisir produit</option>
                           @foreach ($produits as $produit)
                               <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }} </option>
@@ -70,6 +70,30 @@
               </div>
               
             </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-12"></div>
+              <div class="col-lg-6 col-md-6 col-xs-12">
+                <table>
+                  <tr>
+                    <td>Total HT :</td>
+                    <td>23400000 XAF</td>
+                  </tr>
+                  <tr>
+                    <td>T.V.A :</td>
+                    <td>120000 XAF</td>
+                  </tr>
+                  <tr>
+                    <td>Discount (%):</td>
+                    <td>12000</td>
+                  </tr>
+                  <tr>
+                    <td>Total TC :</td>
+                    <td>15000000 XAF</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
             <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
           </form>
         </div>
