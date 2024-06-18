@@ -21,7 +21,7 @@
           <h5 class="card-header">{{ __('mypages.ldpa') }}</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="paytable">
+              <table class="table table-striped table-bordered" id="paytable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

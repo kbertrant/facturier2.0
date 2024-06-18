@@ -24,7 +24,7 @@
                     <h5 class="card-header">{{ __('mypages.ldp') }}</h5>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
-                            <table class="table" id="protable">
+                            <table class="table table-striped table-bordered" id="protable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

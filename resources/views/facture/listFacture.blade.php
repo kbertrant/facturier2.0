@@ -22,7 +22,7 @@
           <h5 class="card-header">{{ __('mypages.ldf') }}</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="factable">
+              <table class="table table-striped table-bordered" id="factable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -46,8 +46,16 @@
 @endsection
 <script type="text/javascript">
   window.onload = function(){
-    
-       $(document).ready(function(){
+    $('select').change(function(){
+      const num = $(this).val()
+      console.log(num);
+      let html = '';
+      
+      
+      
+      
+    });
+      $(document).ready(function(){
               $('#factable').DataTable({
               serverSide: true,
               ajax: '{{ route('facture.list') }}',

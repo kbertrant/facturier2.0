@@ -130,11 +130,15 @@
       $(window).on('beforeunload', function(){
           $('#pageLoader').show();
       });
+
       $(function () {
           $('#pageLoader').hide();
       });
+      $(window).bind("pageshow", function(event) {
+        $("#pageLoader").hide();
+      });
         var url = "{{ route('changeLang') }}";
-        $(".changeLang").change(function(){
+      $(".changeLang").change(function(){
             window.location.href = url + "?lang="+ $(this).val();
         });
         

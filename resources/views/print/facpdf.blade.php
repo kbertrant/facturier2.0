@@ -21,9 +21,13 @@
           width: 100%;
       }
       .footer {
-          font-size: 0.875rem;
-          padding: 1rem;
-          background-color: rgb(241 245 249);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2.5rem;   
+        font-size: 0.875rem;
+        padding: 1rem;
+        background-color: rgb(241 245 249);
       }
       table {
           width: 100%;
@@ -65,7 +69,7 @@
             </td>
         </tr>
     </table>
- 
+    <br>
     <div class="margin-top">
         <table class="w-full">
             <tr>
@@ -87,7 +91,7 @@
             </tr>
         </table>
     </div>
- 
+    <br><br>
     <div class="margin-top">
         <table class="products">
           <tr>
@@ -110,7 +114,7 @@
           @endforeach
         </table>
     </div>
- 
+    <br>
     <div class="total">
       Montant H.T: {{$fac->mht_fac}} XAF
     </div>
@@ -123,8 +127,7 @@
     <div class="total">
       Montant TTC: {{$fac->mttc_fac}} XAF
     </div>
- 
-    <div class="footer margin-top">
+    <div class="footer margin-bottom">
         <div>Executé par: {{$usr->name}} </div>
         <div>&copy; Thank you for your business!</div>
     </div>

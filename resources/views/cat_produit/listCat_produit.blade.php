@@ -22,7 +22,7 @@
             <h5 class="card-header">Liste des categories</h5>
             <div class="card-body">
               <div class="table-responsive text-nowrap">
-                <table class="table" id="catproduitable">
+                <table class="table table-striped table-bordered" id="catproduitable">
                   <thead>
                     <tr>
                       <th scope="col">#</th>

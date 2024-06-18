@@ -87,8 +87,8 @@
     $(window).on('beforeunload', function(){
           $('#pageLoaders').show();
       });
-      $(function () {
-          $('#pageLoaders').hide();
+      $(window).bind("pageshow", function(event) {
+        $("#pageLoaders").hide();
       });
    $(document).ready(function() { 
         let token = $('#csrf').html();

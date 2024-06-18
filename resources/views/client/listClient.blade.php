@@ -22,7 +22,7 @@
           <h5 class="card-header">Liste des clients</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="clientable">
+              <table class="table table-striped table-bordered" id="clientable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

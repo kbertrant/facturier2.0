@@ -48,9 +48,9 @@ class ClienteController extends Controller
                 // Update Button
                 $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/cliente/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/cliente/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
+                //$deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/cliente/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
-                return $updateButton." ".$deleteButton." ".$showButton;
+                return $updateButton." ".$showButton;
                  
          })
          

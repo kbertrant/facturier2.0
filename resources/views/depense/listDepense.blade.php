@@ -22,7 +22,7 @@
           <h5 class="card-header">Liste des charges</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="deptable">
+              <table class="table table-striped table-bordered" id="deptable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

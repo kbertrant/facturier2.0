@@ -21,10 +21,14 @@
             width: 100%;
         }
         .footer {
-            font-size: 0.875rem;
-            padding: 1rem;
-            background-color: rgb(241 245 249);
-        }
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2.5rem;   
+        font-size: 0.875rem;
+        padding: 1rem;
+        background-color: rgb(241 245 249);
+      }
         table {
             width: 100%;
             border-spacing: 0;

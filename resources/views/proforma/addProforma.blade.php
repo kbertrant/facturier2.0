@@ -27,13 +27,17 @@
             <fieldset class="scheduler-border">
               <legend class="scheduler-border">{{ __('mypages.ldps') }}</legend>
               <div class="row">
-                  <div class="col-lg-8 col-md-8 col-xs-8">
+                  <div class="col-lg-6 col-md-6 col-xs-8">
                       <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
                           <option value="">Choisir l'article ou la prestation</option>
                           @foreach ($produits as $produit)
                               <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option>
                           @endforeach
                       </select>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-xs-2">
+                    <input type="number" class="form-control @error('your_price') is-invalid @enderror"
+                    id="your_price[]" name="your_price[]" value="0" required />
                   </div>
                   <div class="col-lg-2 col-md-2 col-xs-2">
                     <input type="number" class="form-control @error('quantity') is-invalid @enderror"
@@ -68,6 +72,29 @@
                 <label class="form-check-label" for="tva_apply">{{ __('mypages.tva') }}</label>
               </div>
               
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-12"></div>
+              <div class="col-lg-6 col-md-6 col-xs-12">
+                <table>
+                  <tr>
+                    <td>Total HT :</td>
+                    <td id="ht">0 XAF</td>
+                  </tr>
+                  <tr>
+                    <td>T.V.A :</td>
+                    <td id="taxes">0 XAF</td>
+                  </tr>
+                  <tr>
+                    <td>Discount (%):</td>
+                    <td id="discount">0</td>
+                  </tr>
+                  <tr>
+                    <td>Total TC :</td>
+                    <td id="ttc">0 XAF</td>
+                  </tr>
+                </table>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
           </form>

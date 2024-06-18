@@ -22,7 +22,7 @@
           <h5 class="card-header">Liste des Utilisateurs</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="usertable">
+              <table class="table table-striped table-bordered" id="usertable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

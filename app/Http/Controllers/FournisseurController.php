@@ -41,9 +41,9 @@ class FournisseurController extends Controller
                 // Update Button
                 $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-2' href='/fournisseur/edit/".$row->id."' data-bs-toggle='modal' data-bs-target='#updateModal' ><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                $deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/fournisseur/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
+                //$deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-2' href='/fournisseur/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
-                return $updateButton." ".$deleteButton." ".$showButton;
+                return $updateButton." ".$showButton;
                  
          })
             ->rawColumns(['action'])

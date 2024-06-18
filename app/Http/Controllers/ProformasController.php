@@ -133,14 +133,16 @@ class ProformasController extends Controller
                 $p = $decode->DecodeId($pr);
                 $i = $s++;
                 if ($p != null) {
-
+                    
                     $pro = new ProduitService();
                     $pro->decrementQteProduct($request->quantity[$i], $p);
 
-                    $prix_unit = $pro->getPriceProduct($p);
-
+                    if($request->your_price[$i] == 0){
+                        $prix_unit = $pro->getPriceProduct($p);
+                    }else{ $prix_unit = $request->your_price[$i]; }
+                    
                     $ep = new EltProformaService();
-                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i] * $prix_unit,$request->tva_apply);
+                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i]*$prix_unit, $request->tva_apply, $prix_unit);
                 }
             }
             $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');

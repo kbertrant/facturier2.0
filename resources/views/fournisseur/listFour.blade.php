@@ -22,7 +22,7 @@
           <h5 class="card-header">Liste des fournisseurs</h5>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <table class="table" id="fourtable">
+              <table class="table table-striped table-bordered" id="fourtable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
