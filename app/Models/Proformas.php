@@ -19,6 +19,7 @@ class Proformas extends Model
         'mttc_pro',
         'mht_pro',
         'tva_pro',
+        'rs_pro',
         'qty_pro',
         'reduction',
         'status',

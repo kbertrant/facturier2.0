@@ -154,12 +154,14 @@
                                                 <p class="mb-2">Subtotal :</p>
                                                 <p class="mb-2">Discount ({{round(100*($pro->reduction/$pro->mht_pro))}}%) :</p>
                                                 <p class="mb-2">Tax (19,25%) :</p>
+                                                <p class="mb-2">IR/IS (%) :</p>
                                                 <p class="mb-0">Total :</p>
                                             </td>
                                             <td class="px-4 py-5">
                                                 <p class="fw-medium mb-2">{{ $pro->mht_pro }} </p>
                                                 <p class="fw-medium mb-2">{{ $pro->reduction }}</p>
                                                 <p class="fw-medium mb-2">{{ $pro->tva_pro }}</p>
+                                                <p class="fw-medium mb-2">{{ $pro->rs_pro }}</p>
                                                 <p class="fw-medium mb-0">{{ $pro->mttc_pro }} XAF</p>
                                             </td>
                                         </tr>

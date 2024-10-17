@@ -61,6 +61,8 @@ Route::get('/type/cliente/destroy/{id}',[App\Http\Controllers\TypeClientControll
 Route::get('/my/produit',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.main');
 Route::get('/produit/list',[App\Http\Controllers\ProduitController::class, 'index'])->name('produit.list');
 Route::get('/produit/show/{id}',[App\Http\Controllers\ProduitController::class, 'show'])->name('produit.show');
+
+Route::get('/produit/ajax/{id}',[App\Http\Controllers\ProduitController::class, 'ajaxShow'])->name('produit.ajax');
 Route::post('/addProduit',[App\Http\Controllers\ProduitController::class, 'create'])->name('addProduit');
 Route::post('/produit/store',[App\Http\Controllers\ProduitController::class, 'store'])->name('produit.store');
 Route::get('/produit/edit/{id}', [App\Http\Controllers\ProduitController::class, 'edit'])->name('produit.edit');

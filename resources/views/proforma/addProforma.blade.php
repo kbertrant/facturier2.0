@@ -56,23 +56,40 @@
               </div>
               </div>
             </fieldset>
-            <div class="mb-3">
-              <label for="reduction" class="form-label">{{ __('mypages.remise') }}</label>
-              <input type="number" class="form-control @error('reduction') is-invalid @enderror"
-                    id="reduction" name="reduction" value="0" required/>
-              @error('reduction')
-                <span class="invalid-feedback" role="alert">
-                  <strong class="strong">Reduction est deja aquis</strong>
-                </span>
-              @enderror
-            </div>
-            <div class="mb-3">
-              <div class="form-check form-switch mb-2">
-                <input class="form-check-input" type="checkbox" id="tva_apply" name="tva_apply" checked="">
-                <label class="form-check-label" for="tva_apply">{{ __('mypages.tva') }}</label>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-xs-4">
+                <div class="mb-3">
+                  <label for="reduction" class="form-label">{{ __('mypages.remise') }} (%)</label>
+                  <input type="number" class="form-control @error('reduction') is-invalid @enderror"
+                    id="reduction" name="reduction" value="0" required oninput="calculateTotal()"/>
+                    @error('reduction')
+                    <span class="invalid-feedback" role="alert">
+                      <strong class="strong">Reduction est deja aquis</strong>
+                    </span>
+                    @enderror
+                </div>
               </div>
-              
+              <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="form-check form-switch mb-3">
+                  <label class="form-check-label" for="tva_apply">{{ __('mypages.tva') }} </label>
+                  <select id="tva_apply" name="tva_apply" class="form-control" onchange="calculateTotal()">
+                    <option value="off">OFF</option>
+                    <option value="on">ON</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="form-check form-switch mb-3">
+                  <label class="form-check-label" for="rs_apply">{{ __('mypages.rs') }} </label>
+                  <select id="rs_apply" name="rs_apply" class="form-control" onchange="calculateTotal()">
+                    <option value="off">OFF</option>
+                    <option value="on">ON</option>
+                  </select>
+                </div>
+              </div>
             </div>
+
+
             <div class="row">
               <div class="col-lg-6 col-md-6 col-xs-12"></div>
               <div class="col-lg-6 col-md-6 col-xs-12">
@@ -86,6 +103,10 @@
                     <td id="taxes">0 XAF</td>
                   </tr>
                   <tr>
+                    <td>Deducted at source :</td>
+                    <td id="rs">0 XAF</td>
+                  </tr>
+                  <tr>
                     <td>Discount (%):</td>
                     <td id="discount">0</td>
                   </tr>
@@ -96,7 +117,7 @@
                 </table>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary d-grid w-100">Facturer </button>
+            <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>
       </div>

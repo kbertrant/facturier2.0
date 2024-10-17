@@ -45,4 +45,10 @@ class ProduitService
         //dd($prod);
         return $prod->price_prod;
     }
+
+    public function getLabelroduct($id_prod){
+        $prod = Produit::find($id_prod);
+        //dd($prod);
+        return $prod->name_prod.' - '.$prod->desc_prod;
+    }
 }

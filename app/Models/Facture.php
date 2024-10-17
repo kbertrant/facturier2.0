@@ -19,6 +19,7 @@ class Facture extends Model
            'mttc_fac',
            'mht_fac',
            'tva_fac',
+           'rs_fac',
            'qty_fac',
            'reduction',
            'status',

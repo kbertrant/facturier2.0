@@ -30,6 +30,7 @@ return [
     'ldps' => 'List of products',
     'remise' => 'Discount',
     'tva' => 'Tax applied',
+    'rs' => 'Deduction taxes',
     'yccf'=>'Your current cash flow',
     'ltr'=>'Your last transactions',
 ]; 

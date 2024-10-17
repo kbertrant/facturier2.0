@@ -25,6 +25,7 @@ class CreateProformasTable extends Migration
             $table->decimal('tva_pro');
             $table->integer('reduction');
             $table->decimal('mht_pro');
+            $table->integer('rs_pro')->default(0);
             $table->string('status');
             $table->string('stat_pro');
             $table->timestamps();

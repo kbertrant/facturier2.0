@@ -15,18 +15,17 @@ class EltProformaService
         $ep->id_pro = $id_pro;
         $ep->ep_qty = $ep_qty;
         $ep->ep_pu = $ep_pu;
-        $ep->$ep_lib = $ep_lib;
         if($tva_apply=="on"){
             $ep->ep_tva = $ep_pu*$ep_qty*0.1925;  
             $ep->ep_mht = $ep_mht;
         }else{
             $ep->ep_tva = 0;  
             $ep->ep_mht = $ep_mht;
-        }
         
         $ep->ep_ttc = $ep_mht + $ep->ep_tva;
         $ep->ep_stat = 'Pending';
         $ep->id_ent = Auth::user()->id_ent;
+        //$ep->$ep_lib = $ep_lib;
         $ep->save();
 
         return $ep;

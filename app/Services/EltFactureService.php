@@ -14,7 +14,7 @@ class EltFactureService
         $ef->id_fac = $id_fac;
         $ef->ef_qty = $ef_qty;
         $ef->ef_pu = $ef_pu;
-        $ef->ef_lib = $ef_lib;
+        
         if($tva_apply=="on"){
             $ef->ef_tva = $ef_pu*$ef_qty*0.1925;  
             $ef->ef_mht = $ep_mht;
@@ -25,6 +25,7 @@ class EltFactureService
         $ef->ef_ttc = $ep_mht + $ef->ef_tva;
         $ef->ef_stat = 'Pending';
         $ef->id_ent = Auth::user()->id_ent;
+        //$ef->ef_lib = $ef_lib;
         $ef->save();
 
         return $ef;

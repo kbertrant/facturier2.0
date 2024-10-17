@@ -113,7 +113,7 @@ class FactureController extends Controller
             //create facture to null
             $fac = new FactureService();
             $dcod_cli_id = $decode->DecodeId($cli->id);
-            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,$request->reduction);
+            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,0,$request->reduction);
             $dcod_fac_id = $decode->DecodeId($new_fac->id);
             $s = 0;
             //add elements facture
@@ -135,15 +135,26 @@ class FactureController extends Controller
                     
                 }
             }
+
             //sum amount of elt facturation and quantity
             $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
             $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
             //calcul reduction if exist
             $red = $fac->GetReduction($mht, $request->reduction);
             $amountRed = $mht - $red; 
-            if($request->tva_apply=="on"){$tva = $fac->GetTVAValue($amountRed);}else{$tva = 0;} 
+            //set value of deducted at source
+            if($request->rs_apply=="on"){
+                $rs = $fac->GetRSValue($amountRed,$request->tva_apply);
+            }else{$rs = 0;}
+            //amount ht IR deducted
+            $amountIR = $amountRed - $rs;
+            //apply TVA if existed
+            if($request->tva_apply=="on"){
+                $tva = $fac->GetTVAValue($amountIR);
+            }else{$tva = 0;} 
+            
             // set facture with prices
-            $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountRed,$mht,$tva,$all_qty,$red);
+            $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountIR,$mht,$tva,$all_qty,$red,$rs);
 
             $historic = new HistoricService();
             $historic->Add('Add new invoice');

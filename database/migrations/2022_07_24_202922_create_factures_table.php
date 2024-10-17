@@ -25,6 +25,7 @@ class CreateFacturesTable extends Migration
             $table->decimal('mttc_fac');
             $table->integer('qty_fac');
             $table->integer('tva_fac');
+            $table->integer('rs_fac');
             $table->decimal('reduction');
             $table->string('status')->default('A');
             $table->string('stat_fac');

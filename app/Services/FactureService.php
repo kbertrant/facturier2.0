@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FactureService
 {
-    public function CreateFacture($id_cli,$id_pro,$ref_fac,$mttc_fac,$mht_fac,$tva_fac,$qty_fac,$reduction){
+    public function CreateFacture($id_cli,$id_pro,$ref_fac,$mttc_fac,$mht_fac,$tva_fac,$rs_fac,$qty_fac,$reduction){
 
         $fac = new Facture();
         $fac->id_cli = $id_cli;
@@ -18,6 +18,7 @@ class FactureService
         $fac->mttc_fac = $mttc_fac;
         $fac->mht_fac = $mht_fac;
         $fac->tva_fac = $tva_fac;
+        $fac->rs_fac = $rs_fac;
         $fac->qty_fac = $qty_fac;
         $fac->reduction = $reduction;
         $fac->status = 'A';
@@ -29,14 +30,15 @@ class FactureService
         return $fac;
     }
 
-    public function SetPriceFacture($id_fac,$amountRed,$mht,$tva,$qty,$reduct){
+    public function SetPriceFacture($id_fac,$amountRed,$mht,$tva,$qty,$reduct,$rs){
         //dd($id_fac);
         $fac = Facture::find($id_fac);
-        $fac->mttc_fac = ($amountRed+$tva);
+        $fac->mttc_fac = ($amountRed+$tva-$rs);
         $fac->mht_fac = $mht;
         $fac->qty_fac = $qty;
         $fac->tva_fac = $tva;
         $fac->reduction = $reduct;
+        $fac->rs_fac = $rs;
         $fac->save();
         
         return $fac;
@@ -44,6 +46,13 @@ class FactureService
 
     public function GetTVAValue($somme){
         return $tva = $somme * 0.1925;
+    }
+
+    public function GetRSValue($somme,$tva){
+        if($tva=="on"){
+            $rs = $somme * 0.022;
+        }else{$rs = $somme * 0.055;}
+        return $rs;
     }
 
     public function GetReduction($somme,$reduction){

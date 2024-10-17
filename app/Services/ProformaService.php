@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProformaService
 {
-    public function CreateProforma($id_cli,$pro_ref,$mttc_pro,$mht_pro,$tva_pro,$qty_pro,$reduction){
+    public function CreateProforma($id_cli,$pro_ref,$mttc_pro,$mht_pro,$tva_pro,$rs_pro,$qty_pro,$reduction){
 
         $pro = new Proformas();
         $pro->id_cli = $id_cli;
@@ -19,6 +19,7 @@ class ProformaService
         $pro->mttc_pro = $mttc_pro;
         $pro->mht_pro = $mht_pro;
         $pro->tva_pro = $tva_pro;
+        $pro->rs_pro = $rs_pro;
         $pro->qty_pro = $qty_pro;
         $pro->reduction = $reduction;
         $pro->status = 'A';
@@ -30,13 +31,14 @@ class ProformaService
         return $pro;
     }
 
-    public function SetPriceProforma($id_pro,$amountRed,$mht,$tva,$qty,$reduct){
+    public function SetPriceProforma($id_pro,$amountRed,$tva,$qty,$reduct,$rs){
 
         $pro = Proformas::find($id_pro);
         $pro->mttc_pro = ($amountRed + $tva);
         $pro->qty_pro = $qty;
-        $pro->mht_pro = $mht;
+        $pro->mht_pro = $amountRed;
         $pro->tva_pro = $tva;
+        $pro->rs_pro = $rs;
         $pro->reduction = $reduct;
         $pro->save();
 
@@ -65,7 +67,7 @@ class ProformaService
         $date = now();
         $result = $date->format('YmdHis');
         $facSvc = new FactureService();
-        $fac = $facSvc->CreateFacture($pro->id_cli,$idpro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->qty_pro,$pro->reduction);
+        $fac = $facSvc->CreateFacture($pro->id_cli,$idpro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->rs_pro,$pro->qty_pro,$pro->reduction,$pro->rs_pro);
         //decode receive is form http
         
         $dcd_fac_id = $decode->DecodeId($fac->id);
@@ -85,5 +87,12 @@ class ProformaService
             $ef->id_ent = $ep->id_ent;
             $ef->save();
         }
+    }
+
+    public function GetRSValue($somme,$tva){
+        if($tva=="on"){
+            $rs = $somme * 0.022;
+        }else{$rs = $somme * 0.055;}
+        return $rs;
     }
 }

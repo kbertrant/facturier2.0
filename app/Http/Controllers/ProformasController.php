@@ -126,7 +126,7 @@ class ProformasController extends Controller
             }
             $dcod_cli_id = $decode->DecodeId($cli->id);
             $prof = new ProformaService();
-            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, $request->reduction);
+            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, 0, $request->reduction);
             $dcode_pro_id = $decode->DecodeId($new_prof->id);
             $s = 0;
             foreach ($request->id_prod as $pr) {
@@ -150,9 +150,16 @@ class ProformasController extends Controller
 
             $red = $prof->GetReduction($mht, $request->reduction);
             $amountRed = $mht - $red; 
-            if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountRed);}else{$tva = 0;} 
+            //set value of deducted at source
+            if($request->rs_apply=="on"){
+                $rs = $prof->GetRSValue($amountRed,$request->tva_apply);
+            }else{$rs = 0;}
+            //amount ht IR deducted
+            $amountIR = $amountRed - $rs;
+            //set tva value
+            if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountIR);}else{$tva = 0;} 
 
-            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountRed, $mht, $tva, $all_qty, $red);
+            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountIR, $tva, $all_qty, $red,$rs);
 
             $historic = new HistoricService();
             $historic->Add('Add new proforma');

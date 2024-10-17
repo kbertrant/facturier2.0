@@ -109,9 +109,7 @@
                     <li class="nav-item">
                       <a class="page-scroll" href="#why">Pourquoi ?</a>
                     </li>
-                    <li class="nav-item">
-                      <a href="javascript:void(0)">Pricing</a>
-                    </li>
+                    
                     @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -202,7 +200,7 @@
                 <i class="lni lni-bootstrap"></i>
               </div>
               <div class="content">
-                <h3>Factures normalisée </h3>
+                <h3>Factures normalisées </h3>
                 <p>
                   Toutes vos factures sont enregistrées par statut et sécurisées. 
                 </p>
@@ -215,10 +213,9 @@
                 <i class="lni lni-layout"></i>
               </div>
               <div class="content">
-                <h3>Gestion des articles et stock </h3>
+                <h3>Gestion de stock et tresorerie</h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore
+                  Suivez votre stock de vos articles et vos paiements, depenses en temps reel.
                 </p>
               </div>
             </div>
@@ -264,10 +261,10 @@
             <div class="about-content">
               <div class="section-title mb-30">
                 <h2 class="mb-25 wow fadeInUp" data-wow-delay=".2s">
-                  Parfaite solution pour le suivi client 
+                  Parfaite solution pour le suivi client, 
                 </h2>
                 <p class="wow fadeInUp" data-wow-delay=".4s">
-                  Les informations de vos clients sont visibles en temps reels.
+                  Les relances clients sont plus faciles.
                    Verifiez leurs impayés et consultez ce que vous leur reclamez.
                 </p>
               </div>
@@ -292,24 +289,22 @@
             <div class="about-content">
               <div class="section-title mb-30">
                 <h2 class="mb-25 wow fadeInUp" data-wow-delay=".2s">
-                  Easy to Use with Tons of Awesome Features
+                  Facile à utiliser 
                 </h2>
                 <p class="wow fadeInUp" data-wow-delay=".4s">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua.
+                  Emettre une facture n'a jamais été aussi simple. Faites vos prévisions avec le tableau de bord intuitif et suivi vos clients.
                 </p>
               </div>
               <ul>
-                <li>Quick Access</li>
-                <li>Easily to Manage</li>
+                <li>Accès rapide et sécurisé </li>
+                <li>Facile à utiliser</li>
                 <li>24/7 Support</li>
               </ul>
               <a
                 href="javascript:void(0)"
                 class="main-btn btn-hover border-btn wow fadeInUp"
                 data-wow-delay=".6s"
-                >Learn More</a
+                >Plus</a
               >
             </div>
           </div>
@@ -341,7 +336,7 @@
             <div class="col-xxl-5 col-xl-6 col-lg-8 col-md-9">
               <div class="section-title text-center mb-60">
                 <h2 class="mb-25 wow fadeInUp" data-wow-delay=".2s">
-                  Why Choose SaaSpal
+                  Choisir mon facturier2.0 ?
                 </h2>
                 <p class="wow fadeInUp" data-wow-delay=".4s">
                   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -358,7 +353,7 @@
                   <i class="lni lni-display"></i>
                 </div>
                 <div class="content">
-                  <h3>SaaS Focused</h3>
+                  <h3>SaaS integré</h3>
                   <p>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                     diam nonumy eirmod tempor invidunt ut labore
@@ -372,10 +367,10 @@
                   <i class="lni lni-leaf"></i>
                 </div>
                 <div class="content">
-                  <h3>Awesome Design</h3>
+                  <h3>Interface responive</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Le Responsive Web Design (RWD) est une technique d'intégration qui permet d'ajuster automatiquement l'affichage d'une page web à la taille. 
+                    Téléphones, tablettes et ordinateurs sont des écrans disponibles. 
                   </p>
                 </div>
               </div>
@@ -386,10 +381,9 @@
                   <i class="lni lni-grid-alt"></i>
                 </div>
                 <div class="content">
-                  <h3>Ready to Use</h3>
+                  <h3>Pret à l'utilisation</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Ouvrez votre compte, configurez votre commerce et apres validation du compte, vous pouvez commencez à vendre.
                   </p>
                 </div>
               </div>
@@ -428,7 +422,7 @@
                   <i class="lni lni-rocket"></i>
                 </div>
                 <div class="content">
-                  <h3>Highly Optimized</h3>
+                  <h3>Solutions parametrables </h3>
                   <p>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                     diam nonumy eirmod tempor invidunt ut labore
@@ -449,10 +443,9 @@
           <div class="row align-items-center">
             <div class="col-xl-6 col-lg-7">
               <div class="section-title mb-15">
-                <h2 class="text-white mb-25">Subscribe Our Newsletter</h2>
+                <h2 class="text-white mb-25">Souscrire à notre boite d'informations</h2>
                 <p class="text-white pr-5">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor
+                  Rejoignez notre communauté et ne ratez aucune de nos mises à jour.
                 </p>
               </div>
             </div>
@@ -462,10 +455,10 @@
                   type="email"
                   name="subs-email"
                   id="subs-email"
-                  placeholder="Your Email"
+                  placeholder="Votre adresse e-mail"
                 />
                 <button type="submit" class="main-btn btn-hover">
-                  Subscribe
+                  Souscrire
                 </button>
               </form>
             </div>

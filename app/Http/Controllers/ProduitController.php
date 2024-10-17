@@ -155,6 +155,16 @@ class ProduitController extends Controller
         return view('produit.detailProduit', ['prod' => $prod]);
     }
 
+    public function ajaxShow($id)
+    {
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $prod = Produit::find($decoded_id);
+
+        //dd($ent);
+        return json_decode($prod);
+    }
+
     /**
      * Display the specified resource.
      *

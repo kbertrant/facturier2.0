@@ -125,6 +125,9 @@
       Tax(19,25%): {{$pro->tva_pro}} XAF
     </div>
     <div class="total">
+        Deducted at source: {{$pro->rs_pro}} XAF
+      </div>
+    <div class="total">
       Montant TTC: {{$pro->mttc_pro}} XAF
     </div>
  

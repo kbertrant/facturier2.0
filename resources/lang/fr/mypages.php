@@ -28,6 +28,7 @@ return [
     'ldps' => 'Liste des produits',
     'remise' => 'Remise',
     'tva' => 'TVA appliquée',
+    'rs' => 'Retenue IS',
     'yccf'=>'Votre trésorerie actuelle ',
     'ltr'=>'Vos dernières transactions',
 ];

@@ -20,6 +20,10 @@
           margin-top: 1.25rem;
           width: 100%;
       }
+      .signature {
+          margin-right: 50px;
+          left:  0;
+      }
       .footer {
         position: absolute;
         bottom: 0;
@@ -62,22 +66,30 @@
     <table class="w-full">
         <tr>
             <td class="w-half">
-              {{$ent->name_ent}}
+                <h2>{{$ent->name_ent}}</h2>
             </td>
             <td class="w-half">
-                <h2>Invoice #{{$fac->ref_fac}}</h2>
+                <h3>Invoice #{{$fac->ref_fac}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-half">
+            </td>
+            <td class="w-half">
+                <h4>Le {{date('j F, Y', strtotime($fac->date_fac))}}</h4>
             </td>
         </tr>
     </table>
-    <br>
-    <div class="margin-top">
+    <div class="">
         <table class="w-full">
             <tr>
                 <td class="w-half">
                     <div><h4>DE:</h4></div>
+                    <div>{{$ent->rc_ent}}</div>
                     <div>{{$ent->nc_ent}}</div>
                     <div>{{$ent->phone_ent}}</div>
                     <div>{{$ent->address_ent}}</div>
+                    <div>{{$ent->bank_ent}}</div>
                 </td>
                 <td class="w-half">
                     <div><h4>A:</h4></div>
@@ -125,7 +137,18 @@
       Tax(19,25%): {{$fac->tva_fac}} XAF
     </div>
     <div class="total">
+        Deducted at source: {{$fac->rs_fac}} XAF
+      </div>
+    <div class="total">
       Montant TTC: {{$fac->mttc_fac}} XAF
+    </div>
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <p class="">Arreté la presente facture à la somme de <b>{{$fac->mttc_fac}} XAF</b></p>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    
+    <div class="signature"> 
+        La direction
     </div>
     <div class="footer margin-bottom">
         <div>Executé par: {{$usr->name}} </div>
