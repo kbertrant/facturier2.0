@@ -5,7 +5,7 @@
   
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">Details </span> Paiement #{{$pay->ref_pay}}
+        <span class="text-muted fw-light">Details </span> PaYment #{{$pay->ref_pay}}
     </h4>
     @if (session('success'))
       <div class="alert alert-danger" role="alert">
@@ -109,9 +109,9 @@
                         <tr>
                             <td class="text-nowrap">{{ $ef->name_prod }}</td>
                             <td class="text-nowrap">{{ $ef->desc_prod }}</td>
-                            <td>{{ $ef->ef_pu }}</td>
+                            <td>{{ number_format($ef->ef_pu,2) }}</td>
                             <td>{{ $ef->ef_qty }}</td>
-                            <td>{{ $ef->ef_ttc }}</td>
+                            <td>{{ number_format($ef->ef_ttc,2) }}</td>
                         </tr>
                         @endforeach
                     <tr>
@@ -128,10 +128,10 @@
                           <p class="mb-0">Total:</p>
                         </td>
                         <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$pay->mht_pay}}</p>
-                          <p class="fw-medium mb-2">{{$pay->reduction}}</p>
-                          <p class="fw-medium mb-2">{{$pay->tva_pay}}</p>
-                          <p class="fw-medium mb-0">{{$pay->mttc_pay}} XAF</p> 
+                          <p class="fw-medium mb-2"><b>{{number_format($pay->mht_pay,2)}} XAF<b></p>
+                          <p class="fw-medium mb-2"><b>{{number_format($pay->reduction,2)}} XAF<b></p>
+                          <p class="fw-medium mb-2"><b>{{number_format($pay->tva_pay,2)}} XAF<b></p>
+                          <p class="fw-medium mb-0"><b>{{number_format($pay->mttc_pay,2)}} XAF<b></p> 
                         </td>
                       </tr>
                     </tbody>

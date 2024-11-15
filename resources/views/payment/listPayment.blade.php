@@ -52,7 +52,7 @@
                   { data: 'id', name: 'id','visible':false },
                   { data: 'ref_pay', name: 'ref_pay' },
                   { data: 'date_pay', name: 'date_pay' },
-                  { data: 'mttc_pay', name: 'mttc_pay' },
+                  { data: 'mttc_pay', name: 'mttc_pay' , render: $.fn.dataTable.render.number( ',', '.', 2, 'XAF ' )},
                   { data: 'stat_pay', name: 'stat_pay' },
                   { data: 'name_cli', name: 'name_cli' },
                   {data: 'action', name: 'action', orderable: true}

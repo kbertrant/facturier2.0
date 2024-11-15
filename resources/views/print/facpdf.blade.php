@@ -60,6 +60,9 @@
           margin-top: 1rem;
           font-size: 0.875rem;
       }
+      #signature{
+        margin-left:80%;
+      }
     </style>
 </head>
 <body>
@@ -76,7 +79,7 @@
             <td class="w-half">
             </td>
             <td class="w-half">
-                <h4>Le {{date('j F, Y', strtotime($fac->date_fac))}}</h4>
+                <h4>Douala {{date('j F, Y', strtotime($fac->date_fac))}}</h4>
             </td>
         </tr>
     </table>
@@ -84,7 +87,7 @@
         <table class="w-full">
             <tr>
                 <td class="w-half">
-                    <div><h4>DE:</h4></div>
+                    <div><h4>For :</h4></div>
                     <div>{{$ent->rc_ent}}</div>
                     <div>{{$ent->nc_ent}}</div>
                     <div>{{$ent->phone_ent}}</div>
@@ -92,9 +95,8 @@
                     <div>{{$ent->bank_ent}}</div>
                 </td>
                 <td class="w-half">
-                    <div><h4>A:</h4></div>
+                    <div><h4>To :</h4></div>
                     <div>{{$cl->name_cli}}</div>
-                    <div>{{$cl->raison_sociale}}</div>
                     <div>{{$cl->address_cli}}</div>
                     <div>{{$cl->phone_cli}}</div>
                     <div>{{$cl->cl_email}}</div>
@@ -108,47 +110,45 @@
         <table class="products">
           <tr>
             <th>#</th>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Qty</th>
+            <th>Designations</th>
             <th>Price</th>
+            <th>Qty</th>
+            <th>Price HT</th>
           </tr>
           @foreach($efs as $i=>$ef)
-          <tr class="items">
+            <tr class="items">
               <td>{{$i+1}}</td>
               <td>{{ $ef->name_prod }}</td>
-              <td>{{ $ef->desc_prod }}</td>
-              <td>{{ $ef->ef_pu }}</td>
+              <td>{{ number_format($ef->ef_pu,2) }}</td>
               <td>{{ $ef->ef_qty }}</td>
-              <td>{{ $ef->ef_ttc }}</td>
+              <td>{{ number_format($ef->ef_ttc,2) }}</td>
             </tr>
           @endforeach
         </table>
     </div>
     <br>
     <div class="total">
-      Montant H.T: {{$fac->mht_fac}} XAF
+       H.T: <b>{{$fac->mht_fac}} XAF</b>
     </div>
     <div class="total">
-      Remise : {{$fac->reduction}} XAF
+      Discount : <b>{{number_format($fac->reduction,2)}} XAF</b>
     </div>
     <div class="total">
-      Tax(19,25%): {{$fac->tva_fac}} XAF
+      Tax (19,25%): <b>{{number_format($fac->tva_fac,2)}} XAF</b>
     </div>
     <div class="total">
-        Deducted at source: {{$fac->rs_fac}} XAF
+        Deducted at source: <b>{{number_format($fac->rs_fac,2)}} XAF</b>
       </div>
     <div class="total">
-      Montant TTC: {{$fac->mttc_fac}} XAF
+    TTC: <b>{{$fac->mttc_fac}} XAF</b>
     </div>
     <div class="col-lg-12 col-md-12 col-xs-12">
-        <p class="">Arreté la presente facture à la somme de <b>{{$fac->mttc_fac}} XAF</b></p>
+        <p class="">Arrested this invoice at the sum of <b>{{number_format($fac->mttc_fac,2)}} XAF</b></p>
     </div>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     
-    <div class="signature"> 
-        La direction
+    <div id="signature"> 
+        The manager
     </div>
     <div class="footer margin-bottom">
         <div>Executé par: {{$usr->name}} </div>

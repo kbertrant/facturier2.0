@@ -107,22 +107,22 @@
                 <td>#</td>
                 <td>{{ $ef->name_prod }}</td>
                 <td>{{ $ef->desc_prod }}</td>
-                <td>{{ $ef->ef_pu }}</td>
+                <td>{{ number_format($ef->ef_pu,2) }}</td>
                 <td>{{ $ef->ef_qty }}</td>
-                <td>{{ $ef->ef_ttc }}</td>
+                <td>{{ number_format($ef->ef_ttc,2) }}</td>
               </tr>
             @endforeach
           </table>
       </div>
    
       <div class="total">
-        Montant H.T: {{$pay->mht_pay}} XAF
+        Montant H.T: {{number_format($pay->mht_pay,2)}} XAF
       </div>
       <div class="total">
-        Tax(19,25%): {{$pay->tva_pay}} XAF
+        Tax(19,25%): {{number_format($pay->tva_pay,2)}} XAF
       </div>
       <div class="total">
-        Montant TTC: {{$pay->mttc_pay}} XAF
+        Montant TTC: {{number_format($pay->mttc_pay,2)}} XAF
       </div>
    
       <div class="footer margin-top">

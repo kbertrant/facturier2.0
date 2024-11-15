@@ -245,7 +245,7 @@ class ProformasController extends Controller
     
     public function generatePDF($id)
     {
-
+        //dd($id);
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($id);
         $pro = Proformas::find($decoded_id);
@@ -264,7 +264,8 @@ class ProformasController extends Controller
         $historic = new HistoricService();
         $historic->Add('Print proformas');
         $pdf->download('PRO_'.$pro->pro_ref);
-        return redirect()->back()->with('success', 'Proforma generée');
+        return $pdf->download('PRO_'.$pro->pro_ref.'.pdf');
+        //return redirect()->back()->with('success', 'Proforma generée');
     }
 
     public function validPro($id){

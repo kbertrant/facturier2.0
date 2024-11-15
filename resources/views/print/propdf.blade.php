@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Proforma_{{$pro->pro_ref}}</title>
+    <title>{{ __('mypages.yp') }} #{{$pro->pro_ref}}</title>
     <style>
       h4 {
         margin: 0;
@@ -65,7 +65,7 @@
               {{$ent->name_ent}}
             </td>
             <td class="w-half">
-                <h2>Proforma #{{$pro->pro_ref}}</h2>
+                <h2>{{ __('mypages.yp') }} #{{$pro->pro_ref}}</h2>
             </td>
         </tr>
     </table>
@@ -107,30 +107,34 @@
               <td>{{$i+1}}</td>
               <td>{{ $ep->name_prod }}</td>
               <td>{{ $ep->desc_prod }}</td>
-              <td>{{ $ep->ep_pu }}</td>
+              <td>{{ number_format($ep->ep_pu,2) }}</td>
               <td>{{ $ep->ep_qty }}</td>
-              <td>{{ $ep->ep_ttc }}</td>
+              <td>{{ number_format($ep->ep_ttc,2) }}</td>
             </tr>
           @endforeach
         </table>
     </div>
  
     <div class="total">
-      Montant H.T: {{$pro->mht_pro}} XAF
+      Montant H.T: <b>{{number_format($pro->mht_pro,2)}}</b> XAF
     </div>
     <div class="total">
-      Remise : {{$pro->reduction}} XAF
+      Remise : <b>{{number_format($pro->reduction,2)}}</b> XAF
     </div>
     <div class="total">
-      Tax(19,25%): {{$pro->tva_pro}} XAF
+      Tax(19,25%): <b>{{number_format($pro->tva_pro,2)}}</b> XAF
     </div>
     <div class="total">
-        Deducted at source: {{$pro->rs_pro}} XAF
+        Deducted at source: <b>{{number_format($pro->rs_pro,2)}}</b> XAF
       </div>
     <div class="total">
-      Montant TTC: {{$pro->mttc_pro}} XAF
+      Montant TTC: <b>{{number_format($pro->mttc_pro,2)}}</b> XAF
     </div>
- 
+    <br><br><br><br><br><br>
+    
+    <div id="signature"> 
+        The manager
+    </div>
     <div class="footer margin-top">
         <div>Executé par: {{$usr->name}} </div>
         <div>&copy; Thank you for your business!</div>

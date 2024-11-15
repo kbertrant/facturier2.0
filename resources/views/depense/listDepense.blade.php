@@ -57,7 +57,7 @@
                   { data: 'label_dep', name: 'label_dep' },
                   { data: 'four_name', name: 'four_name' },
                   { data: 'status', name: 'status' },
-                  { data: 'amount_dep', name: 'amount_dep' },
+                  { data: 'amount_dep', name: 'amount_dep' , render: $.fn.dataTable.render.number( ',', '.', 2, 'XAF ' )},
                   {data: 'action', name: 'action', orderable: false}
                     ],order: [[2, 'desc']]
            });

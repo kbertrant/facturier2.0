@@ -122,9 +122,9 @@
                                 <tr class="service">
                                     <td class="tableitem"><p class="itemtext">{{$i+1}}</p></td>
                                     <td class="tableitem"><p class="itemtext">{{ $ef->name_prod }} - {{ $ef->desc_prod }}</p></td>
-                                    <td class="tableitem"><p class="itemtext">{{ $ef->ef_pu }}</p></td>
+                                    <td class="tableitem"><p class="itemtext">{{ number_format($ef->ef_pu,2) }}</p></td>
                                     <td class="tableitem"><p class="itemtext">{{ $ef->ef_qty }}</p></td>
-                                    <td class="tableitem"><p class="itemtext">{{ $ef->ef_ttc }}</p></td>
+                                    <td class="tableitem"><p class="itemtext">{{ number_format($ef->ef_ttc,2) }}</p></td>
                                 </tr>
                                 @endforeach
     
@@ -133,7 +133,7 @@
                                     <td></td>
                                     <td></td>
                                     <td class="Rate"><h2>Tax :</h2></td>
-                                    <td class="payment"><h2>{{$pay->tva_pay}}</h2></td>
+                                    <td class="payment"><h2>{{number_format($pay->tva_pay,2)}}</h2></td>
                                 </tr>
     
                                 <tr class="tabletitle">
@@ -141,7 +141,7 @@
                                     <td></td>
                                     <td></td>
                                     <td class="Rate"><h2>Total: </h2></td>
-                                    <td class="payment"><h2> {{$pay->mttc_pay}}</h2></td>
+                                    <td class="payment"><h2> {{number_format($pay->mttc_pay,2)}}</h2></td>
                                 </tr>
     
                             </table>

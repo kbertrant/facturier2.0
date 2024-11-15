@@ -5,7 +5,7 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4">
-            <span class="text-muted fw-light">Details </span> Proforma #{{ $pro->pro_ref }}
+            <span class="text-muted fw-light">Details </span> {{ __('mypages.yp') }} #{{ $pro->pro_ref }}
         </h4>
         @if (session('success'))
             <div class="alert alert-danger" role="alert">
@@ -82,15 +82,12 @@
                                         <p class="mb-0">{{ $ent->address_ent }}</p>
                                     </div>
                                     <div>
-                                        <h4>Proforma #{{ $pro->pro_ref }}</h4>
+                                        <h4>{{ __('mypages.yp') }} #{{ $pro->pro_ref }}</h4>
                                         <div class="mb-2">
                                             <span class="me-1">Date Issues:</span>
                                             <span class="fw-medium">{{ $pro->date_pro }}</span>
                                         </div>
-                                        <div>
-                                            <span class="me-1">Date Due:</span>
-                                            <span class="fw-medium">{{ $pro->date_pro }}</span>
-                                        </div>
+                                        
                                         <div>
                                             <span class="me-1">Status:</span>
                                             @if ($pro->stat_pro == 'Pending')
@@ -148,7 +145,7 @@
                                                     <span class="me-1 fw-medium">Executé par:</span>
                                                     <span><b>{{ $usr->name }}</b></span>
                                                 </p>
-                                                <span>Thanks for your business. Nous restons à votre disposition</span>
+                                                <span>Thanks for your business.</span>
                                             </td>
                                             <td class="text-end px-4 py-5">
                                                 <p class="mb-2">Subtotal :</p>
@@ -158,11 +155,11 @@
                                                 <p class="mb-0">Total :</p>
                                             </td>
                                             <td class="px-4 py-5">
-                                                <p class="fw-medium mb-2">{{ $pro->mht_pro }} </p>
-                                                <p class="fw-medium mb-2">{{ $pro->reduction }}</p>
-                                                <p class="fw-medium mb-2">{{ $pro->tva_pro }}</p>
-                                                <p class="fw-medium mb-2">{{ $pro->rs_pro }}</p>
-                                                <p class="fw-medium mb-0">{{ $pro->mttc_pro }} XAF</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->mht_pro,2) }} </p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->reduction,2) }}</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->tva_pro,2) }}</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->rs_pro,2) }}</p>
+                                                <p class="fw-medium mb-0">{{ number_format($pro->mttc_pro,2) }} XAF</p>
                                             </td>
                                         </tr>
                                     </tbody>

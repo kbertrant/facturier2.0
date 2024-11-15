@@ -28,9 +28,9 @@
                   <li class="d-flex mb-4 pb-1">
                     <div class="d-flex flex-shrink-5 me-5">
                         @if($tresor->mouvement == "OUT")
-                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{$tresor->amount}}</small>
+                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{number_format($tresor->amount,0)}}</small>
                         @else
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{$tresor->amount}}</small>
+                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{number_format($tresor->amount,0)}}</small>
                         @endif
                     </div>
                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -39,7 +39,7 @@
                         <h6 class="mb-0">{{$tresor->date_tres}}</h6>
                       </div>
                       <div class="user-progress d-flex align-items-center gap-1">
-                        <h6 class="mb-0">{{$tresor->amount_tres}}</h6>
+                        <h6 class="mb-0">{{number_format($tresor->amount_tres,0)}}</h6>
                         <span class="text-muted"> XAF</span>
                       </div>
                     </div>
@@ -65,11 +65,11 @@
                   
                 </div>
                 <h2 class="fw-semibold d-block mb-1">{{ __('mypages.yccf') }}</h2>
-                <h1 class="card-title mb-2">{{$actuel->amount_tres}} <span class="text-muted"> XAF</span></h1>
+                <h1 class="card-title mb-2">{{number_format($actuel->amount_tres,0)}} <span class="text-muted"> XAF</span></h1>
                 @if($actuel->mouvement == "OUT")
-                  <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{$actuel->amount}}</small>
+                  <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -{{number_format($actuel->amount,0)}}</small>
                 @else
-                  <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{$actuel->amount}}</small>
+                  <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +{{number_format($actuel->amount,0)}}</small>
                 @endif
               </div>
             </div>

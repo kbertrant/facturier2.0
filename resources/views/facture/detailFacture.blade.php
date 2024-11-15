@@ -104,21 +104,21 @@
       <table class="table border-top m-0">
         <thead>
           <tr>
+            <th>#</th>
             <th>Item</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Qty</th>
             <th>Price</th>
+            <th>Qty</th>
+            <th>Price HT</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($efs as $ef)
+          @foreach($efs as $i=>$ef)
           <tr>
+            <td>{{$i+1}}</td>
             <td class="text-nowrap">{{ $ef->name_prod }}</td>
-            <td class="text-nowrap">{{ $ef->desc_prod }}</td>
-            <td>{{ $ef->ef_pu }}</td>
+            <td>{{ number_format($ef->ef_pu,2) }}</td>
             <td>{{ $ef->ef_qty }}</td>
-            <td>{{ $ef->ef_ttc }}</td>
+            <td>{{ number_format($ef->ef_ttc,2) }}</td>
           </tr>
           @endforeach
           <tr>
@@ -137,11 +137,11 @@
               <p class="mb-0">Total :</p>
             </td>
             <td class="px-4 py-5">
-                          <p class="fw-medium mb-2">{{$fac->mht_fac }}</p>
-                          <p class="fw-medium mb-2">{{$fac->reduction}}</p>
-                          <p class="fw-medium mb-2">{{$fac->tva_fac}}</p>
-                          <p class="fw-medium mb-2">{{$fac->rs_fac}}</p>
-                          <p class="fw-medium mb-0">{{$fac->mttc_fac}} XAF</p> 
+                          <p class="fw-medium mb-2">{{number_format($fac->mht_fac,2) }}</p>
+                          <p class="fw-medium mb-2">{{number_format($fac->reduction,2)}}</p>
+                          <p class="fw-medium mb-2">{{number_format($fac->tva_fac,2)}}</p>
+                          <p class="fw-medium mb-2">{{number_format($fac->rs_fac,2)}}</p>
+                          <p class="fw-medium mb-0">{{number_format($fac->mttc_fac,2)}} XAF</p> 
                         </td>
                       </tr>
                     </tbody>
@@ -151,7 +151,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                      <p class="">Arreté la presente facture à la somme de <b>{{$fac->mttc_fac}} XAF</b></p>
+                      <p class="">Arreté la presente facture à la somme de <b>{{number_format($fac->mttc_fac,2)}} XAF</b></p>
                     </div>
                     <div class="col-12">
                       <span class="fw-medium">Note:</span>

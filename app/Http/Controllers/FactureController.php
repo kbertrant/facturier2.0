@@ -139,20 +139,24 @@ class FactureController extends Controller
             //sum amount of elt facturation and quantity
             $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
             $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
+            //dd($mht);
             //calcul reduction if exist
             $red = $fac->GetReduction($mht, $request->reduction);
             $amountRed = $mht - $red; 
+            //dd($amountRed);
             //set value of deducted at source
             if($request->rs_apply=="on"){
                 $rs = $fac->GetRSValue($amountRed,$request->tva_apply);
+                //dd($rs);
             }else{$rs = 0;}
             //amount ht IR deducted
             $amountIR = $amountRed - $rs;
+            //dd($amountIR);
             //apply TVA if existed
             if($request->tva_apply=="on"){
                 $tva = $fac->GetTVAValue($amountIR);
             }else{$tva = 0;} 
-            
+            //dd($tva);
             // set facture with prices
             $up_fac = $fac->SetPriceFacture($dcod_fac_id,$amountIR,$mht,$tva,$all_qty,$red,$rs);
 

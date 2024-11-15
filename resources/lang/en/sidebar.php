@@ -16,7 +16,7 @@ return [
     'myFactures'=>'Invoices',
     'myEtat'=>'States',
     'myParam'=>'Settings',
-    'myProformas'=>'Proformas',
+    'myProformas'=>'Quotations',
     'myRemboursement'=>'Refunds',
     'myDepenses'=>'Expenses',
     'myTersorerie'=>'Treasure',
