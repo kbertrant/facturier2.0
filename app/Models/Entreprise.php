@@ -20,6 +20,7 @@ class Entreprise extends Model
         'address_ent',
         'owner_ent',
         'bank_ent',
+        'regim_fiscal_ent',
         'logo_ent',
     ];
 

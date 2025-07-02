@@ -34,7 +34,7 @@ class ProformaService
     public function SetPriceProforma($id_pro,$amountRed,$tva,$qty,$reduct,$rs){
 
         $pro = Proformas::find($id_pro);
-        $pro->mttc_pro = ($amountRed + $tva);
+        $pro->mttc_pro = ($amountRed + $tva - $rs);
         $pro->qty_pro = $qty;
         $pro->mht_pro = $amountRed;
         $pro->tva_pro = $tva;
@@ -72,11 +72,12 @@ class ProformaService
         
         $dcd_fac_id = $decode->DecodeId($fac->id);
         //set elements facturation
-        //dd($fac);
+        //dd($eps);
         foreach ($eps as $ep) {
             
             $ef = new ElementFacture();
-            $ef->id_prod =$ep->id_prod;
+            if($ep->id_prod != null)
+            {$ef->id_prod =$ep->id_prod;}
             $ef->id_fac = $dcd_fac_id;
             $ef->ef_qty = $ep->ep_qty;
             $ef->ef_pu = $ep->ep_pu;
@@ -85,6 +86,7 @@ class ProformaService
             $ef->ef_ttc = $ep->ep_ttc;
             $ef->ef_stat = 'Pending';
             $ef->id_ent = $ep->id_ent;
+            $ef->ef_lib = $ep->ep_lib;
             $ef->save();
         }
     }

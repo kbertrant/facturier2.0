@@ -132,8 +132,8 @@
                                     <tbody>
                                         @foreach ($eps as $ep)
                                             <tr>
-                                                <td class="text-nowrap">{{ $ep->name_prod }}</td>
-                                                <td class="text-nowrap">{{ $ep->desc_prod }}</td>
+                                                <td class="text-nowrap">{{ $ep->ep_lib }}</td>
+                                                <td class="text-nowrap">{{ $ep->ep_lib }}</td>
                                                 <td>{{ $ep->ep_pu }}</td>
                                                 <td>{{ $ep->ep_qty }}</td>
                                                 <td>{{ $ep->ep_ttc }}</td>
@@ -155,11 +155,11 @@
                                                 <p class="mb-0">Total :</p>
                                             </td>
                                             <td class="px-4 py-5">
-                                                <p class="fw-medium mb-2">{{ number_format($pro->mht_pro,2) }} </p>
-                                                <p class="fw-medium mb-2">{{ number_format($pro->reduction,2) }}</p>
-                                                <p class="fw-medium mb-2">{{ number_format($pro->tva_pro,2) }}</p>
-                                                <p class="fw-medium mb-2">{{ number_format($pro->rs_pro,2) }}</p>
-                                                <p class="fw-medium mb-0">{{ number_format($pro->mttc_pro,2) }} XAF</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->mht_pro,0) }} </p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->reduction,0) }}</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->tva_pro,0) }}</p>
+                                                <p class="fw-medium mb-2">{{ number_format($pro->rs_pro,0) }}</p>
+                                                <p class="fw-medium mb-0">{{ number_format($pro->mttc_pro,0) }} XAF</p>
                                             </td>
                                         </tr>
                                     </tbody>

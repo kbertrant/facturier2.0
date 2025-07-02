@@ -107,8 +107,8 @@
                     <tbody>
                         @foreach($efs as $ef)
                         <tr>
-                            <td class="text-nowrap">{{ $ef->name_prod }}</td>
-                            <td class="text-nowrap">{{ $ef->desc_prod }}</td>
+                            <td class="text-nowrap">{{ $ef->ef_lib }}</td>
+                            <td class="text-nowrap">{{ $ef->ef_lib }}</td>
                             <td>{{ number_format($ef->ef_pu,2) }}</td>
                             <td>{{ $ef->ef_qty }}</td>
                             <td>{{ number_format($ef->ef_ttc,2) }}</td>

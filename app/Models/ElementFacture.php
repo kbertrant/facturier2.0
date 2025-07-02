@@ -16,6 +16,7 @@ class ElementFacture extends Model
         'ef_stat',
         'ef_lib',
         'id_fac',
+        'id_pro',
         'id_prod',
         'id_ent' 
         
@@ -26,10 +27,11 @@ class ElementFacture extends Model
         return $this->belongsTo(Facture::class,'id_fac');
     }
 
-    public function produit(){
+    public function Proforma(){
         
-        return $this->belongsTo(Produit::class,'id_prod');
+        return $this->belongsTo(Proformas::class,'id_pro');
     }
+
 
     public function entreprise(){
         

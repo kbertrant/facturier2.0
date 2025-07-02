@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PaiementController extends Controller
 {
@@ -137,7 +139,7 @@ class PaiementController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $pay = Paiement::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$pay->id_fac)->get();
+        $efs = ElementFacture::where('id_fac','=',$pay->id_fac)->get();
         $cl = Cliente::find($pay->id_cli);
         $usr = User::find($pay->id_usr);
 
@@ -176,9 +178,12 @@ class PaiementController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $pay = Paiement::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$pay->id_fac)->get();
+        $efs = ElementFacture::where('id_fac','=',$pay->id_fac)->get();
         $cl = Cliente::find($pay->id_cli);
         $usr = User::find(Auth::user()->id);
+
+        //generate QR Code
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/payment/show/').'/'.$id)); 
 
         $pdf = Pdf::loadView('print.paypdf', [
             'pay' => $pay,
@@ -186,6 +191,7 @@ class PaiementController extends Controller
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
+            'qrcode'=>$qrcode
         ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print receipt payment');

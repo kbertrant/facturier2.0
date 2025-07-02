@@ -26,11 +26,11 @@ class HistoricService
     }
 
     public function HistoricsEnt($ident){
-        $tasks = Historic::select('historics.id','lib_histo','date_histo','mttc_fac',
+        $tasks = Historic::select('historics.id','lib_histo','date_histo',
             'name')
             ->join('users','users.id','=','historics.id_usr')
             ->join('entreprises','entreprises.id','=','historics.id_ent')
-            ->where('historics.id_ent','=',$ident)->take(10)->orderBy('date_histo', 'desc')->get();
+            ->where('historics.id_ent','=',$ident)->take(5)->orderBy('date_histo', 'desc')->get();
         return $tasks;
     }
 }

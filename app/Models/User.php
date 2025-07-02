@@ -28,7 +28,9 @@ class User extends Authenticatable
         'ville',
         'role',
         'id_ent',
-        'image'
+        'image',
+        'regim_fiscal_ent',
+        'exp_date'
     ];
 
     /**

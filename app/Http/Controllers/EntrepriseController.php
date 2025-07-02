@@ -26,18 +26,16 @@ class EntrepriseController extends Controller
     {
        /** @var Application $application */
          
-          $user= Auth::user();
+        $user= Auth::user();
 
-        //  $entreprise = DB::table('entreprises')
-        //                 ->select()
-        //                 ->join($user,'entrprises.id','=',$user->ent_id)
-        //                 ;
        $entreprise =Entreprise::where('id','=',$user->id_ent)->first();
        $historic = new HistoricService();
-       $historic->Add('List entreprises');
+       $historic->Add('Detail entreprise '.$entreprise->name_ent);
+        
+       $acts = $historic->HistoricsEnt($user->id_ent);
+        
         return view('entreprise.ent',[
-            
-            'entreprise'=>$entreprise
+            'entreprise'=>$entreprise,'acts'=>$acts
         ]);
 
     }
@@ -55,6 +53,7 @@ class EntrepriseController extends Controller
             'address_ent' => ['required'],
             'owner_ent' => ['required'],
             'bank_ent' => ['required'],
+            'regim_fisc_ent' => ['required'],
             'logo_ent' => ['required'],
 
         ]); 
@@ -78,6 +77,7 @@ class EntrepriseController extends Controller
              'address_ent'=>$request->address_ent,
              'owner_ent'=>$request->owner_ent,
              'bank_ent'=>$request->bank_ent,
+             'regim_fisc_ent'=>$request->regim_fisc,
              'logo_ent'=>$logoPath
 
         ]);

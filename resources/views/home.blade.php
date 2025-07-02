@@ -82,7 +82,7 @@
                     
                   </div>
                   <span>Depenses</span>
-                  <h6 class="card-title text-nowrap mb-1">{{$depenses}} XAF</h6>
+                  <h6 class="card-title text-nowrap mb-1">{{number_format($depenses,0)}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -112,7 +112,7 @@
                     
                   </div>
                   <span class="d-block mb-1">Paiements</span>
-                  <h6 class="card-title text-nowrap mb-2">{{$paiements}} XAF</h6>
+                  <h6 class="card-title text-nowrap mb-2">{{number_format($paiements,0)}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@
                     
                   </div>
                   <span class="fw-semibold d-block mb-1">TVA Collectée</span>
-                  <h6 class="card-title mb-2">{{$tva}} XAF</h6>
+                  <h6 class="card-title mb-2">{{number_format($tva,0)}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@
                     
                   </div>
                   <span class="fw-semibold d-block mb-1">Ventes/jour</span>
-                  <h6 class="card-title mb-2">{{$day_pay}} XAF</h6>
+                  <h6 class="card-title mb-2">{{number_format($day_pay,0)}} XAF</h6>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
                     </div>
                   </div>
                   <span class="fw-semibold d-block mb-1">Depenses/jour</span>
-                  <h6 class="card-title mb-2">{{$day_dep}} XAF</h6>
+                  <h6 class="card-title mb-2">{{number_format($day_dep,0)}} XAF</h6>
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function index(){
         if(request()->ajax()) {
-            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat')
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date')
             ->join('entreprises','entreprises.id','=','users.id_ent')
             ->where('id_ent','=',Auth::user()->id_ent)->get();
             
@@ -58,7 +58,7 @@ class UserController extends Controller
 
     public function listAdmin(){
         if(request()->ajax()) {
-            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat')
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date')
             ->join('entreprises','entreprises.id','=','users.id_ent')->get();
             
             return datatables()->of($tasks)
@@ -94,6 +94,8 @@ class UserController extends Controller
             'password' => ['required','string'],
             'ville' => ['required','string'],
             'phone' => ['required','string','unique:users'],
+            'exp_date'=>['required'],
+            'regim_fisc'=>['required']
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -107,7 +109,9 @@ class UserController extends Controller
             'ville' => $request['ville'],
             'role' => $request['role'],
             'id_ent'=> Auth::user()->id_ent,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'exp_date'=> $request->exp_date,
+            'regim_fiscal_ent'=>$request->regim_fisc
         ]);
 
         $historic = new HistoricService();
@@ -128,7 +132,7 @@ class UserController extends Controller
             'new_password' => ['required','min:6','string'],
             'ville' => ['required','string'],
             'phone' => ['required','string','unique:users'],
-            'image'=>['required']
+            'image'=>['required'],'exp_date'=>['required']
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -160,6 +164,7 @@ class UserController extends Controller
                 'phone'=>$request->phone,
                 'image'=>$imagePath,
                 'role' => $request->role,
+                'exp_date' => $request->exp_date,
             ]);
         } 
 

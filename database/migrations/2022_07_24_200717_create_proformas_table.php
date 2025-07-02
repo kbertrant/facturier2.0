@@ -20,9 +20,9 @@ class CreateProformasTable extends Migration
             $table->unsignedBigInteger('id_usr')->nullable();
             $table->datetime('date_pro');
             $table->string('pro_ref')->unique();
-            $table->decimal('mttc_pro');
+            $table->integer('mttc_pro');
             $table->integer('qty_pro');
-            $table->decimal('tva_pro');
+            $table->integer('tva_pro');
             $table->integer('reduction');
             $table->decimal('mht_pro');
             $table->integer('rs_pro')->default(0);

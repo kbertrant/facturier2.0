@@ -62,7 +62,16 @@
                 </span>
               @enderror
             </div>
-            
+            <div class="mb-3">
+              <label for="phone" class="form-label">ABONNEMENT EXPIRATION </label>
+              <input type="date" class="form-control @error('exp_date') is-invalid @enderror"
+                    id="exp_date" name="exp_date" placeholder="Date expiration"required />
+              @error('exp_date')
+                <span class="invalid-feedback" role="alert">
+                  <strong class="strong">Ce date expiration est deja requise</strong>
+                </span>
+              @enderror
+            </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>

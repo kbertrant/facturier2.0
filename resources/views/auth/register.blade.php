@@ -160,7 +160,7 @@
                 <input type="text" required class="form-control  @error('ville') is-invalid @enderror" id="ville" value="{{ old('ville') }}" name="ville" placeholder="Entrer votre ville" />
               </div>
               <div class="mb-3">
-                <label for="name_ent" class="form-label">Le nom de votre entrreprise</label>
+                <label for="name_ent" class="form-label">Le nom de votre entreprise</label>
                 <input type="text"  required class="form-control @error('name_ent') is-invalid @enderror" id="name_ent" value="{{ old('name_ent') }}" name="name_ent" placeholder="Entrer votre entreprise" />
                 @error('name_ent')
 							   <span class="invalid-feedback" role="alert">
@@ -169,11 +169,24 @@
 							  @enderror
               </div>
               <div class="mb-3">
-                <label for="rc_ent" class="form-label">Registre commerce entrreprise</label>
-                <input type="text" required class="form-control @error('rc_ent') is-invalid @enderror" id="rc_ent" value="{{ old('name_ent') }}" name="rc_ent" placeholder="Entrer votre registre de commerce" />
+                <label for="rc_ent" class="form-label">Registre commerce entreprise</label>
+                <input type="text" required class="form-control @error('rc_ent') is-invalid @enderror" id="rc_ent" value="{{ old('rc_ent') }}" name="rc_ent" placeholder="Entrer votre registre de commerce" />
                 @error('rc_ent')
 							   <span class="invalid-feedback" role="alert">
 								<strong class="strong">Se champ est deja aquis</strong>
+							   </span>
+							  @enderror
+              </div>
+              <div class="mb-3">
+                <label for="rc_ent" class="form-label">Regime fiscal entreprise</label>
+                <select class="form-control name="regime_fisc" id="regime_fisc">
+                  <option value="">Selectionner votre regime fiscal</option>
+                  <option value="Simplifie">SIMPLIFIE</option>
+                  <option value="Reel">REEL</option>
+                </select>
+                @error('regime_fisc')
+							   <span class="invalid-feedback" role="alert">
+								  <strong class="strong">Se champ est deja aquis</strong>
 							   </span>
 							  @enderror
               </div>

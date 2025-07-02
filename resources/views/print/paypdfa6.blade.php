@@ -42,48 +42,48 @@
         #bot{ min-height: 50px;}
 
         #top .logo{
-        //float: left;
+            float: left;
             height: 60px;
             width: 60px;
             background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
             background-size: 60px 60px;
         }
         .clientlogo{
-        float: left;
+            float: left;
             height: 60px;
             width: 60px;
             background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
             background-size: 60px 60px;
-        border-radius: 50px;
+            border-radius: 50px;
         }
         .info{
-        display: block;
-        //float:left;
-        margin-left: 0;
+            display: block;
+            float:left;
+            margin-left: 0;
         }
         .title{
-        float: right;
+            float: right;
         }
         .title p{text-align: right;} 
         table{
-        width: 100%;
-        border-collapse: collapse;
+            width: 100%;
+            border-collapse: collapse;
         }
         td{
-        //padding: 5px 0 5px 15px;
-        //border: 1px solid #ffffff
+            padding: 5px 0 5px 15px;
+            border: 1px solid #ffffff
         }
         .tabletitle{
-        //padding: 5px;
-        font-size: .5em;
-        background: #100770;
+            padding: 5px;
+            font-size: .5em;
+            background: #100770;
         }
         .service{border-bottom: 1px solid #000000;}
         .item{width: 24mm;}
         .itemtext{font-size: .5em;}
 
         #legalcopy{
-        margin-top: 5mm;
+            margin-top: 5mm;
         }    
     }
     </style>
@@ -95,7 +95,7 @@
             <div class="info"> 
             <h1>{{$ent->name_ent}}</h1>
             </div><!--End Info-->
-          </center><!--End InvoiceTop-->
+        </center><!--End InvoiceTop-->
         <div id="mid">
           <div class="info">
             <p> 

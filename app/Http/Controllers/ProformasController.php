@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProformasController extends Controller
 {
@@ -125,10 +127,12 @@ class ProformasController extends Controller
                 //dd($cli);
             }
             $dcod_cli_id = $decode->DecodeId($cli->id);
+            //dd($cli);
             $prof = new ProformaService();
             $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, 0, $request->reduction);
             $dcode_pro_id = $decode->DecodeId($new_prof->id);
             $s = 0;
+            //dd($new_prof);
             foreach ($request->id_prod as $pr) {
                 $p = $decode->DecodeId($pr);
                 $i = $s++;
@@ -137,19 +141,24 @@ class ProformasController extends Controller
                     $pro = new ProduitService();
                     $pro->decrementQteProduct($request->quantity[$i], $p);
 
+                    $pro = new ProduitService();
+                    $lib = $pro->getLibProduct($p);
+
                     if($request->your_price[$i] == 0){
                         $prix_unit = $pro->getPriceProduct($p);
                     }else{ $prix_unit = $request->your_price[$i]; }
                     
                     $ep = new EltProformaService();
-                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i]*$prix_unit, $request->tva_apply, $prix_unit);
+                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i]*$prix_unit, $request->tva_apply, $prix_unit,$lib);
                 }
             }
+            //dd();
             $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
             $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
-
+            //dd($all_qty);
             $red = $prof->GetReduction($mht, $request->reduction);
             $amountRed = $mht - $red; 
+            
             //set value of deducted at source
             if($request->rs_apply=="on"){
                 $rs = $prof->GetRSValue($amountRed,$request->tva_apply);
@@ -159,7 +168,7 @@ class ProformasController extends Controller
             //set tva value
             if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountIR);}else{$tva = 0;} 
 
-            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$amountIR, $tva, $all_qty, $red,$rs);
+            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$mht, $tva, $all_qty, $red,$rs);
 
             $historic = new HistoricService();
             $historic->Add('Add new proforma');
@@ -185,7 +194,7 @@ class ProformasController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $pro = Proformas::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $eps = ElementProforma::join('produits', 'produits.id', '=', 'element_proformas.id_prod')->where('id_pro', '=', $decoded_id)->get();
+        $eps = ElementProforma::where('id_pro', '=', $decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find($pro->id_usr);
 
@@ -250,9 +259,12 @@ class ProformasController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $pro = Proformas::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $eps = ElementProforma::join('produits', 'produits.id', '=', 'element_proformas.id_prod')->where('id_pro', '=', $decoded_id)->get();
+        $eps = ElementProforma::where('id_pro', '=', $decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find(Auth::user()->id);
+
+        //generate QR Code
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/proforma/show/').'/'.$id)); 
 
         $pdf = Pdf::loadView('print.propdf', [
             'pro' => $pro,
@@ -260,11 +272,12 @@ class ProformasController extends Controller
             'eps' => $eps,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a4')->setOption(['dpi' => 150, 'isRemoteEnabled' => true, 'defaultFont' => 'Ayuthaya', 'isPhpEnabled' => true]);
+            'qrcode'=>$qrcode
+        ])->setPaper('a4')->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print proformas');
-        $pdf->download('PRO_'.$pro->pro_ref);
-        return $pdf->download('PRO_'.$pro->pro_ref.'.pdf');
+        $pdf->download('QUOT_'.$pro->pro_ref);
+        return $pdf->download('QUOT_'.$pro->pro_ref.'.pdf');
         //return redirect()->back()->with('success', 'Proforma generée');
     }
 
@@ -289,5 +302,84 @@ class ProformasController extends Controller
             throw $e;
         }
         return redirect()->back()->with('success', 'Proforma validée');
+    }
+
+    public function storePres(Request $request)
+    {
+        //dd($request);
+        $validator = Validator::make($request->all(), [
+            'id_cli' => ['required'],
+            'id_prod' => ['required'],
+            'quantity' => ['required'],
+            'reduction' => ['required']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        try { 
+            DB::beginTransaction();
+            $decode = new DecodeService();
+            $date = now();
+            $result = $date->format('ymdHis');
+            $cli = Cliente::where('name_cli', 'like', $request->id_cli)->first();
+            
+            if($cli == null){
+                $cliservice = new ClienteService();
+                $cli = $cliservice->CreateCliente($request->id_cli,'phone','Adresse',null,null,null,null,1);
+                //dd($cli);
+            }
+            $dcod_cli_id = $decode->DecodeId($cli->id);
+            //dd($cli);
+            $prof = new ProformaService();
+            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, 0, $request->reduction);
+            $dcode_pro_id = $decode->DecodeId($new_prof->id);
+            $s = 0;
+            //dd($new_prof);
+            foreach ($request->id_prod as $pr) {
+                $p = $decode->DecodeId($pr);
+                $i = $s++;
+                if ($p != null) {
+                    
+                    $pro = new ProduitService();
+                    $pro->decrementQteProduct($request->quantity[$i], $p);
+
+                    if($request->your_price[$i] == 0){
+                        $prix_unit = $pro->getPriceProduct($p);
+                    }else{ $prix_unit = $request->your_price[$i]; }
+                    
+                    $ep = new EltProformaService();
+                    $ep->CreateEltProforma($p, $dcode_pro_id, $request->quantity[$i], $prix_unit, $request->quantity[$i]*$prix_unit, $request->tva_apply, $prix_unit);
+                }
+            }
+            //dd();
+            $mht = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_mht');
+            $all_qty = ElementProforma::where('id_pro', '=', $dcode_pro_id)->sum('ep_qty');
+            //dd($all_qty);
+            $red = $prof->GetReduction($mht, $request->reduction);
+            $amountRed = $mht - $red; 
+            
+            //set value of deducted at source
+            if($request->rs_apply=="on"){
+                $rs = $prof->GetRSValue($amountRed,$request->tva_apply);
+            }else{$rs = 0;}
+            //amount ht IR deducted
+            $amountIR = $amountRed - $rs;
+            //set tva value
+            if($request->tva_apply=="on"){$tva = $prof->GetTVAValue($amountIR);}else{$tva = 0;} 
+
+            $up_pro = $prof->SetPriceProforma($dcode_pro_id,$mht, $tva, $all_qty, $red,$rs);
+
+            $historic = new HistoricService();
+            $historic->Add('Add new proforma');
+            DB::commit();
+
+        }catch(\Exception $e) {
+        
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->back()->with('success', 'Proforma ajoutée');
     }
 }

@@ -24,7 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('ville')->nullable();
             $table->string('image')->default('employee.jpg');
             $table->string('role')->nullable();
+            $table->string('regim_fiscal_ent')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
+            $table->date('exp_date');
             $table->rememberToken();
             $table->timestamps();
 

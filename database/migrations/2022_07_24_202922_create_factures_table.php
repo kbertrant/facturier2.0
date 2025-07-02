@@ -21,12 +21,12 @@ class CreateFacturesTable extends Migration
             $table->unsignedBigInteger('id_usr')->nullable();
             $table->datetime('date_fac');
             $table->string('ref_fac')->unique();
-            $table->decimal('mht_fac');
-            $table->decimal('mttc_fac');
+            $table->integer('mht_fac');
+            $table->integer('mttc_fac');
             $table->integer('qty_fac');
             $table->integer('tva_fac');
             $table->integer('rs_fac');
-            $table->decimal('reduction');
+            $table->integer('reduction');
             $table->string('status')->default('A');
             $table->string('stat_fac');
             $table->timestamps();

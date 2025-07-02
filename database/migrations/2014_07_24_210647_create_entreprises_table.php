@@ -22,6 +22,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('address_ent')->nullable();
             $table->string('owner_ent')->nullable();
             $table->string('bank_ent')->nullable();
+            $table->string('regim_fiscal_ent')->nullable();
             $table->string('logo_ent')->nullable();
             $table->timestamps();
         });

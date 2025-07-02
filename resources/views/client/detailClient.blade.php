@@ -36,7 +36,7 @@
                           </div>
                           <div>
                             <h5 class="mb-0">{{$count}}</h5>
-                            <span>Commandes</span>
+                            <span>Orders</span>
                           </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -55,7 +55,7 @@
                         <small class="d-block pt-4 border-top fw-normal text-uppercase text-muted my-3">DETAILS</small>
                         <ul class="list-unstyled">
                           <li class="mb-3">
-                            <span class="fw-medium me-2">Username:</span>
+                            <span class="fw-medium me-2">Nmae:</span>
                             <span>{{$cl->name_cli}}</span>
                           </li>
                           <li class="mb-3">
@@ -77,7 +77,7 @@
                           </li>
                         </ul>
                         <div class="d-flex justify-content-center">
-                          <a href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser" data-bs-toggle="modal">Modifier</a>
+                          <a href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser" data-bs-toggle="modal">Update</a>
               
                         </div>
                       </div>
@@ -109,12 +109,12 @@
                             </div>
                           </div>
                           <div class="card-danger">
-                            <h4 class="card-title mb-3">Montants impayés</h4>
+                            <h4 class="card-title mb-3">Unpaid amounts</h4>
                             <div class="d-flex align-items-end mb-1 gap-1">
                               <h4 class="text-danger mb-0">{{$sum_to_pay}} XAF</h4>
-                              <p class="mb-0">A payer</p>
+                              <p class="mb-0">To pay</p>
                             </div>
-                            <p class="text-muted mb-0 text-truncate">Solde du compte avant le prochain achat</p>
+                            <p class="text-muted mb-0 text-truncate">Account balance before next purchase</p>
                           </div>
                         </div>
                       </div>
@@ -129,9 +129,9 @@
                             </div>
                           </div>
                           <div class="card-info">
-                            <h4 class="card-title mb-3">Nombre de factures impayées </h4>
+                            <h4 class="card-title mb-3">Number of unpaid invoices </h4>
                             <span class="badge bg-label-success mb-1">Platinum member</span>
-                            <p class="text-muted mb-0">{{$count}} factures</p>
+                            <p class="text-muted mb-0">{{$count}} invoices</p>
                           </div>
                         </div>
                       </div>
@@ -147,11 +147,11 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">NUMERO</th>
+                          <th scope="col">REF</th>
                           <th scope="col">DATE</th>
-                          <th scope="col">MONTANT</th>
+                          <th scope="col">AMOUNT</th>
                           <th scope="col">STATUS</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">ACTION</th>
                         </tr>
                       </thead>
                       
@@ -181,7 +181,7 @@
                 { data: 'id', name: 'id','visible':false },
                   { data: 'ref_fac', name: 'ref_fac' },
                   { data: 'date_fac', name: 'date_fac' },
-                  { data: 'mttc_fac', name: 'mttc_fac' },
+                  { data: 'mttc_fac', name: 'mttc_fac' , render: $.fn.dataTable.render.number( ',', '.', 0, 'XAF ' )},
                   { data: 'stat_fac', name: 'stat_fac' },
                   {data: 'action', name: 'action', orderable: true}
                     ],order: [[0, 'desc']]

@@ -68,7 +68,7 @@
                     },
                     {
                         data: 'mttc_pro',
-                        name: 'mttc_pro', render: $.fn.dataTable.render.number( ',', '.', 2, 'XAF ' )
+                        name: 'mttc_pro', render: $.fn.dataTable.render.number( ',', '.', 0, 'XAF ' )
                     },
                     {
                         data: 'qty_pro',

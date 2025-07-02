@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class FactureController extends Controller
 {
@@ -137,7 +139,7 @@ class FactureController extends Controller
             }
 
             //sum amount of elt facturation and quantity
-            $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_ttc');
+            $mht = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_mht');
             $all_qty = ElementFacture::where('id_fac','=',$dcod_fac_id)->sum('ef_qty');
             //dd($mht);
             //calcul reduction if exist
@@ -185,7 +187,7 @@ class FactureController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $fac = Facture::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
+        $efs = ElementFacture::where('id_fac','=',$decoded_id)->get();
         
         $usr = User::find($fac->id_usr);
         $cl = Cliente::find($fac->id_cli);
@@ -221,9 +223,12 @@ class FactureController extends Controller
         $decoded_id = $decode->DecodeId($id);
         $fac = Facture::find($decoded_id);
         $ent = Entreprise::find(Auth::user()->id_ent);
-        $efs = ElementFacture::join('produits','produits.id','=','element_factures.id_prod')->where('id_fac','=',$decoded_id)->get();
+        $efs = ElementFacture::where('id_fac','=',$decoded_id)->get();
         $cl = Cliente::find($fac->id_cli);
         $usr = User::find(Auth::user()->id);
+
+        //generate QR Code
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/facture/show/').'/'.$id)); 
 
         $pdf = Pdf::loadView('print.facpdf', [
             'fac' => $fac,
@@ -231,7 +236,8 @@ class FactureController extends Controller
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
-        ])->setPaper('a4')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
+            'qrcode'=>$qrcode
+        ])->setPaper('a4')->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
         
         return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
         //return $pdf->stream();

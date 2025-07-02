@@ -62,6 +62,7 @@
             <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Noms:</span> <span>{{$user->name}}</span></li>
             <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Status:</span> <span>{{$user->stat}}</span></li>
             <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Ville:</span> <span>{{$user->ville}}</span></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Abonnement expiration:</span> <span>{{$user->exp_date}}</span></li>
           </ul>
           <small class="text-muted text-uppercase">Contacts</small>
           <ul class="list-unstyled mb-4 mt-3">

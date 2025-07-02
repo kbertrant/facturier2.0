@@ -32,6 +32,7 @@
                     <th scope="col">VILLE</th>
                     <th scope="col">ENTREPRISE</th>
                     <th scope="col">STATUS</th>
+                    <th scope="col">ABONNEMENT EXPIRATION</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -58,6 +59,7 @@
                   { data: 'ville', name: 'ville' },
                   { data: 'name_ent', name: 'name_ent' },
                   { data: 'stat', name: 'stat' },
+                  { data: 'exp_date', name: 'exp_date' },
                   {data: 'action', name: 'action', orderable: false}
                     ],order: [[0, 'desc']]
            });

@@ -28,11 +28,7 @@ class ElementProforma extends Model
         return $this->belongsTo(Proformas::class,'id_pro');
     }
 
-    public function produit(){
-        
-        return $this->belongsTo(Produit::class,'id_prod');
-    }
-
+    
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');

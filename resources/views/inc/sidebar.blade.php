@@ -75,6 +75,25 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">{{ __('sidebar.sideFacturation') }}</span>
       </li>
+      <li class="menu-item {{ request()->is('my/pres/quotation') ? 'active open' : '' }} {{ request()->is('my/pres/invoice') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Clients">Prestations</div>
+        </a>
+
+        <ul class="menu-sub ">
+          <li class="menu-item {{ request()->is('my/pres/quotation') ? 'active' : 'hidden' }}">
+            <a href="{{route('pres.formQuotation')}}" class="menu-link">
+              <div data-i18n="Ajouter proforma de service">{{ __('sidebar.myProformas') }}</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('my/pres/invoice') ? 'active' : '' }}">
+            <a href="{{route('pres.formInvoice')}}" class="menu-link">
+              <div data-i18n="Ajouter une facture service">{{ __('sidebar.myFactures') }}</div>
+            </a>
+          </li>
+        </ul>
+      </li>
       <!-- Cards -->
       <li class="menu-item {{ request()->is('my/proforma') ? 'active' : '' }}">
         <a href="{{route('proforma.main')}}" class="menu-link">

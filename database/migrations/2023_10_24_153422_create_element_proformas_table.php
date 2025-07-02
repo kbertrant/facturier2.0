@@ -19,16 +19,15 @@ return new class extends Migration
             $table->unsignedBigInteger('id_prod')->nullable();
             $table->unsignedBigInteger('id_pro')->nullable();
             $table->integer('ep_qty')->nullable();
-            $table->float('ep_pu')->nullable();
-            $table->float('ep_ttc')->nullable();
+            $table->integer('ep_pu')->nullable();
+            $table->integer('ep_ttc')->nullable();
             $table->string('ep_lib')->nullable();
-            $table->decimal('ep_mht')->nullable();
-            $table->decimal('ep_tva')->nullable();
+            $table->integer('ep_mht')->nullable();
+            $table->integer('ep_tva')->nullable();
             $table->string('ep_stat')->default('Pending');
             $table->timestamps();
 
             $table->foreign('id_ent')->references('id')->on('entreprises');
-            $table->foreign('id_prod')->references('id')->on('produits');
             $table->foreign('id_pro')->references('id')->on('proformas');
         });
     }

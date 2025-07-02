@@ -46,6 +46,11 @@ class ProduitService
         return $prod->price_prod;
     }
 
+    public function getLibProduct($id_prod){
+        $prod = Produit::find($id_prod);
+        return $prod->name_prod;
+    }
+
     public function getLabelroduct($id_prod){
         $prod = Produit::find($id_prod);
         //dd($prod);

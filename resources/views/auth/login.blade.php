@@ -119,6 +119,11 @@
                 <span>Créer votre compte</span>
               </a>
             </p>
+            @if (session('success'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('success') }}
+            </div>
+          @endif
           </div>
         </div>
         <!-- /Register -->

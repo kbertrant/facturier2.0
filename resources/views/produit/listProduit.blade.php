@@ -72,7 +72,7 @@
                     },
                     {
                         data: 'price_prod',
-                        name: 'price_prod'
+                        name: 'price_prod', render: $.fn.dataTable.render.number( ',', '.', 0, ' ' )
                     },
                     {
                         data: 'qty_prod',

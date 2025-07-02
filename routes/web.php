@@ -142,5 +142,11 @@ Route::get('/tresor/list',[App\Http\Controllers\TresorerieController::class, 'in
 Route::post('/tresor/store',[App\Http\Controllers\TresorerieController::class, 'store'])->name('tresor.store');
 Route::get('/tresor/generate/{id}', [App\Http\Controllers\TresorerieController::class, 'generatePDF'])->name('tresor.generate');
 
+Route::get('/my/pres/quotation',[App\Http\Controllers\PrestationController::class, 'formQuotation'])->name('pres.formQuotation');
+Route::get('/my/pres/invoice',[App\Http\Controllers\PrestationController::class, 'formInvoice'])->name('pres.formInvoice');
+Route::post('/my/save/quotation',[App\Http\Controllers\PrestationController::class, 'saveQuotation'])->name('pres.saveQuotation');
+Route::post('/my/save/invoice',[App\Http\Controllers\PrestationController::class, 'saveInvoice'])->name('pres.saveInvoice');
+
+
 
 
