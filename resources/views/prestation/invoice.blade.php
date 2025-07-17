@@ -22,7 +22,7 @@
                         <form class="mb-3" method="POST" action="{{ route('pres.saveInvoice') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="id_cli" class="form-label">Client</label>
+                                <label for="id_cli" class="form-label">Client <span class="red-star">*</span></label>
                                 <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher" required>
                                     <datalist id="datalistOptions">
                                         @foreach ($clients as $client)
@@ -40,19 +40,23 @@
                                 <legend class="scheduler-border">Services</legend>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-xs-8">
+                                        <label for="id_cli" class="form-label">Designation <span class="red-star">*</span></label>
                                         <input type="text" class="form-control @error('id_prod') is-invalid @enderror"
                                                 id="id_prod[]" name="id_prod[]" placeholder="Saisir un prestation..." required />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2">
+                                        <label for="id_cli" class="form-label">price <span class="red-star">*</span></label>
                                         <input type="number" class="form-control @error('your_price') is-invalid @enderror"
                                                 id="your_price[]" name="your_price[]" value="0" required />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2">
+                                        <label for="id_cli" class="form-label">Quantite <span class="red-star">*</span></label>
                                         <input type="number" class="form-control @error('quantity') is-invalid @enderror"
                                                 id="quantity[]" name="quantity[]" placeholder="Qte" required />
                                     </div>
                                         
-                                    <div class="col-lg-2 col-md-2 col-xs-2">
+                                    <div class="col-lg-1 col-md-1 col-xs-2">
+                                        <label for="id_cli" class="form-label">Ajouter </label>
                                         <a href="javascript:void(0);" class="add_button" title="Ajouter">
                                         <i class="bx bx-list-plus bx-md"></i></a>
                                     </div>
@@ -138,6 +142,13 @@
 <script type="text/javascript">
     window.onload = function() {
         $(document).ready(function() {
+            $(document).ready(function(){
+                $(".input[name="your_price[]"]").on("input", function(){
+                    // Code to execute when the input value changes
+                    var currentValue = $(this).val();
+                    console.log("Input value changed to: " + currentValue);
+                });
+            });
             $(document).ready(function() {
                 var maxField = 10; //Input fields increment limitation
                 var addButton = $('.add_button'); //Add button selector
@@ -154,6 +165,19 @@
                         
                         $(wrapper).append(fieldHTML); //Add field html
                     }
+                    var totalSum = 0;
+
+                    // Select elements by their name attribute (e.g., "item_value")
+                    $('input[name="your_price"]').each(function() {
+                        // Get the value of the current element
+                        var value = parseFloat($(this).val()) || 0; // Use parseFloat for numbers, handle potential non-numeric values
+
+                        // Add the value to the total sum
+                        totalSum += value;
+
+                        console.log(totalSum);
+                        
+                    });
                 });
 
                 //Once remove button is clicked

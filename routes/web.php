@@ -126,6 +126,8 @@ Route::get('/user/admin/list',[App\Http\Controllers\UserController::class, 'list
 Route::post('/user/add',[App\Http\Controllers\UserController::class, 'create'])->name('addUser');
 Route::post('/user/store',[App\Http\Controllers\UserController::class, 'store'])->name('user.store');
 Route::get('/user/destroy/{id}',[App\Http\Controllers\UserController::class,'destroy'])->name('user.destroy');
+Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+Route::post('/user/update',[App\Http\Controllers\UserController::class, 'update'])->name('user.update');
 
 //depenses
 Route::get('/my/depense',[App\Http\Controllers\DepenseController::class, 'index'])->name('depense.main');

@@ -74,7 +74,7 @@
                         </g>
                       </svg>
                     </span>
-                    <span class="app-brand-text demo menu-text fw-bold ms-2">Facturier 2.0</span>
+                    <span class="app-brand-text demo menu-text fw-bold ms-2">Facturier2.0</span>
                   </a>
                 </div>
                 <button
@@ -105,11 +105,12 @@
                     <li class="nav-item">
                       <a class="page-scroll" href="#about">Facturier2.0</a>
                     </li>
-
                     <li class="nav-item">
                       <a class="page-scroll" href="#why">Pourquoi ?</a>
                     </li>
-                    
+                    <li class="nav-item">
+                      <a class="page-scroll" href="#tarif">Tarification</a>
+                    </li>
                     @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -164,10 +165,11 @@
           <div class="col-lg-6">
             <div class="hero-content">
               <h1 class="wow fadeInUp" data-wow-delay=".4s">
-                Propulsez votre commerce 
+                La gestion commerciale simple, puissante et rapide
               </h1>
               <p class="wow fadeInUp" data-wow-delay=".6s">
-                Changez la vision de vos finances ou que vous soyez.
+                Facturier2.0 vous propose toutes les fonctionnalités nécessaires au
+                 fonctionnement de votre entreprise en passant de la facturation électronique au CRM.
               </p>
               <a
                 href="javascript:void(0)"
@@ -194,20 +196,33 @@
     <section id="features" class="feature-section pt-120">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-4 col-md-8 col-sm-10">
+          <div class="col-lg-3 col-md-6 col-sm-10">
             <div class="single-feature">
               <div class="icon">
-                <i class="lni lni-bootstrap"></i>
+                <i class="lni lni-codepen"></i>
               </div>
               <div class="content">
-                <h3>Factures normalisées </h3>
+                <h3>Tableau de bord</h3>
                 <p>
-                  Toutes vos factures sont enregistrées par statut et sécurisées. 
+                  Toutes vos informations sont accessibles en temps reel. Graphe interactif entre revenus et depenses de votre commerce.
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
+          <div class="col-lg-3 col-md-6 col-sm-10">
+            <div class="single-feature">
+              <div class="icon">
+                <i class="lni lni-anchor"></i>
+              </div>
+              <div class="content">
+                <h3>Factures sécurisées </h3>
+                <p>
+                  Toutes vos factures sont enregistrées sécurisées et authentifiables. 
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-10">
             <div class="single-feature">
               <div class="icon">
                 <i class="lni lni-layout"></i>
@@ -220,15 +235,15 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
+          <div class="col-lg-3 col-md-6 col-sm-10">
             <div class="single-feature">
               <div class="icon">
                 <i class="lni lni-coffee-cup"></i>
               </div>
               <div class="content">
-                <h3>Gardez vos états à jour</h3>
+                <h3>Gestion des clients et sociétés</h3>
                 <p>
-                  Gardez vos finances à jour, grace à des rapports et graphes en temps reel.
+                  Un véritable CRM au sein de votre outil de facturation gratuit. Ajoutez, supprimez et modifiez vos clients.
                 </p>
               </div>
             </div>
@@ -298,14 +313,9 @@
               <ul>
                 <li>Accès rapide et sécurisé </li>
                 <li>Facile à utiliser</li>
-                <li>24/7 Support</li>
+                <li>24/7 Support au support@monfacturier.pro</li>
               </ul>
-              <a
-                href="javascript:void(0)"
-                class="main-btn btn-hover border-btn wow fadeInUp"
-                data-wow-delay=".6s"
-                >Plus</a
-              >
+              
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 order-first order-lg-last">
@@ -339,8 +349,8 @@
                   Choisir mon facturier2.0 ?
                 </h2>
                 <p class="wow fadeInUp" data-wow-delay=".4s">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore
+                  Générez devis et factures gratuitement. Dupliquez les documents ou transformez-les. 
+                  Exportez-les sous différents formats. Chaque document est rattaché à un client. Obtenez facilement une vision d'ensemble !
                 </p>
               </div>
             </div>
@@ -355,8 +365,8 @@
                 <div class="content">
                   <h3>SaaS integré</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Votre Facturier2.0 est accessible via un navigateur, aucun telechargement n'est requis.
+                     Il est donc disponible partout avec une connexion internet.
                   </p>
                 </div>
               </div>
@@ -394,10 +404,9 @@
                   <i class="lni lni-javascript"></i>
                 </div>
                 <div class="content">
-                  <h3>Vanilla JS</h3>
+                  <h3>1400+ utilisateurs actifs</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Plus de 1 400 clients (TPE, PME, micro-entreprise) réalisent chaque mois leurs factures et leurs devis avec notre outil gratuit.
                   </p>
                 </div>
               </div>
@@ -408,10 +417,9 @@
                   <i class="lni lni-layers"></i>
                 </div>
                 <div class="content">
-                  <h3>Essential Sections</h3>
+                  <h3>Noté 4.9/5 sur 500+ avis</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Monfacturier.pro est le logiciel de création de facture gratuit le mieux noté pour générer des factures, envoyer des devis et piloter votre entreprise.
                   </p>
                 </div>
               </div>
@@ -422,13 +430,97 @@
                   <i class="lni lni-rocket"></i>
                 </div>
                 <div class="content">
-                  <h3>Solutions parametrables </h3>
+                  <h3>Conforme loi TVA,retenue à la source et facture électronique</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore
+                    Créez vos factures en ligne simplement et gratuitement avec un outil conforme à la loi Anti-Fraude TVA et aux normes de facturation électronique.
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ======== feature-section end ======== -->
+
+    <!-- ======== feature-section start ======== -->
+    <section class="price_plan_area section_padding_130_80 about-section pt-150" id="tarif">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-8 col-lg-6">
+            <!-- Section Heading-->
+            <div class="section-heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+              
+              <h3>Tarification</h3>
+              <p>Commencez gratuitement, puis choisissez le meilleur plan pour votre entreprise</p>
+              <div class="line"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <!-- Single Price Plan Area-->
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+              <div class="title">
+                <h3>ESSENTIEL</h3>
+                <p>Pour les entrepreneurs, il est facile d'envoyer des devis, des factures, des reçus et de recevoir des paiements.</p>
+                <div class="line"></div>
+              </div>
+              <div class="price">
+                <h4>4 900 XAF/mois</h4>
+              </div>
+              <div class="description">
+                <p><i class="lni lni-checkmark-circle"></i>Jusqu'à 3 factures par mois</p>
+                <p><i class="lni lni-checkmark-circle"></i>Remplissage automatique des informations sur le client et l'article</p>
+                <p><i class="lni lni-close"></i>Reçus de lecture en temps réel</p>
+                <p><i class="lni lni-close"></i>Impression des reçus de paiement</p>
+                <p><i class="lni lni-close"></i>Suivi client</p>
+              </div>
+              <div class="button"><a class="btn btn-success btn-2" href="#">Commencez maintenant</a></div>
+            </div>
+          </div>
+          <!-- Single Price Plan Area-->
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="single_price_plan active wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+              <!-- Side Shape-->
+              <div class="side-shape"><img src="https://bootdey.com/img/popular-pricing.png" alt=""></div>
+              <div class="title"><span>Populaire</span>
+                <h3>STANDARD </h3>
+                <p>Pour les petites entreprises qui souhaitent envoyer des documents attrayants et faciles à créer en déplacement.</p>
+                <div class="line"></div>
+              </div>
+              <div class="price">
+                <h4>13 800 XAF/mois</h4>
+              </div>
+              <div class="description">
+                <p><i class="lni lni-checkmark-circle"></i>Jusqu'à 14 factures par mois</p>
+                <p><i class="lni lni-checkmark-circle"></i>Ajouter des photos des articles</p>
+                <p><i class="lni lni-checkmark-circle"></i>Impression des factures et paiement</p>
+                <p><i class="lni lni-checkmark-circle"></i>Suivi clients</p>
+                <p><i class="lni lni-close"></i>Tresorerie</p>
+              </div>
+              <div class="button"><a class="btn btn-warning" href="#">Commencez maintenant</a></div>
+            </div>
+          </div>
+          <!-- Single Price Plan Area-->
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+              <div class="title">
+                <h3>PRIVILEGE</h3>
+                <p>Pour les petites entreprises, afin d'améliorer l'organisation des factures et de faciliter les paiements en ligne. </p>
+                <div class="line"></div>
+              </div>
+              <div class="price">
+                <h4>18 700 XAF/mois</h4>
+              </div>
+              <div class="description">
+                <p><i class="lni lni-checkmark-circle"></i>Nombre illimité de factures par mois</p>
+                <p><i class="lni lni-checkmark-circle"></i>Suivi client</p>
+                <p><i class="lni lni-checkmark-circle"></i>Authentification des documents</p>
+                <p><i class="lni lni-checkmark-circle"></i>Tresorerie</p>
+                <p><i class="lni lni-checkmark-circle"></i>Importer vers les logiciels comptables (SAGE)</p>
+              </div>
+              <div class="button"><a class="btn btn-info" href="#">Commencez maintenant</a></div>
             </div>
           </div>
         </div>
@@ -532,7 +624,7 @@
                         </g>
                       </svg>
                     </span>
-                    <span class="app-brand-text demo menu-text fw-bold ms-1">Facturier 2.0</span>
+                    <span class="app-brand-text demo menu-text fw-bold ms-1">Facturier2.0</span>
                   </a>
                 </div>
                 <p class="desc mb-30 text-white">
@@ -553,18 +645,19 @@
               </div>
             </div>
 
-            <div class="col-xl-2 col-lg-2 col-md-6">
+            <div class="col-xl-4 col-lg-4 col-md-6">
               <div class="footer-widget">
                 <h3>About Us</h3>
                 <ul class="links">
                   <li><a href="javascript:void(0)">Accueil</a></li>
                   <li><a href="javascript:void(0)">Fonctionnalités</a></li>
-                  <li><a href="javascript:void(0)">Pourquoi facturier2.0 ?</a></li>
+                  <li><a href="javascript:void(0)">Facturier2.0 ?</a></li>
+                  <li><a href="javascript:void(0)">Tarification</a></li>
                 </ul>
               </div>
             </div>
 
-            <div class="col-xl-3 col-lg-3 col-md-6">
+            <div class="col-xl-4 col-lg-4 col-md-6">
               <div class="footer-widget">
                 <h3>Fonctionnalités</h3>
                 <ul class="links">
@@ -576,17 +669,6 @@
               </div>
             </div>
 
-            <div class="col-xl-3 col-lg-3 col-md-6">
-              <div class="footer-widget">
-                <h3>Autres Produits</h3>
-                <ul class="links">
-                  <li><a href="jvascript:void(0)">Gestion d'un patient hospitalier</a></li>
-                  <li><a href="jvascript:void(0)">Gestion d'un client hotellier </a></li>
-                  <li><a href="jvascript:void(0)">Gestion du processus de recrutement </a></li>
-                  <li><a href="jvascript:void(0)">Gestion des visites sur site </a></li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>

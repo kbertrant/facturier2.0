@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('produit.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
-            <label for="id_cat" class="form-label">Categorie du produit</label>
+            <label for="id_cat" class="form-label">Categorie du produit <span class="red-star">*</span></label>
             <select class="form-select" id="id_cat" name="id_cat" aria-label="Categorie du produit" required>
               <option selected>Choisir categorie</option>
               @foreach ($cats as $cat)
@@ -24,7 +24,7 @@
             @enderror
           </div>
           <div class="mb-3">
-            <label for="code_prod" class="form-label">Code produit</label>
+            <label for="code_prod" class="form-label">Code produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('code_prod') is-invalid @enderror"
                   id="code_prod" name="code_prod" placeholder="Code du produit" autofocus required />
             @error('code_prod')
@@ -34,7 +34,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="name_prod" class="form-label">Nom produit</label>
+            <label for="name_prod" class="form-label">Nom produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('name_prod') is-invalid @enderror"
                   id="name_prod" name="name_prod" placeholder="Nom du produit" required />
             @error('name_prod')
@@ -44,7 +44,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="desc_prod" class="form-label">Description produit</label>
+            <label for="desc_prod" class="form-label">Description produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('desc_prod') is-invalid @enderror"
                   id="desc_prod" name="desc_prod" placeholder="Description du produit" required />
             @error('desc_prod')
@@ -54,7 +54,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="price_prod" class="form-label">Prix du produit</label>
+            <label for="price_prod" class="form-label">Prix du produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('price_prod') is-invalid @enderror"
                   id="price_prod" name="price_prod" placeholder="Prix du produit" required />
             @error('price_prod')
@@ -64,7 +64,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="qty_prod" class="form-label">Qte du produit</label>
+            <label for="qty_prod" class="form-label">Qte du produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('qty_prod') is-invalid @enderror"
                   id="qty_prod" name="qty_prod" placeholder="Quantite du produit" required />
             @error('qty_prod')
@@ -74,7 +74,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="color_prod" class="form-label">Couleur du produit</label>
+            <label for="color_prod" class="form-label">Couleur du produit <span class="red-star">*</span></label>
             <input type="text"  />
                   <input type="color" value="#666EE8" class="form-control @error('color_prod') is-invalid @enderror"
                   id="color_prod" name="color_prod" placeholder="Couleur du produit" required>
@@ -85,7 +85,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="size_prod" class="form-label">Dimension du produit</label>
+            <label for="size_prod" class="form-label">Dimension du produit <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('color_prod') is-invalid @enderror"
                   id="size_prod" name="size_prod" placeholder="en cm..." required />
             @error('size_prod')
@@ -95,7 +95,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="detail" class="form-label">Detaillable</label>
+            <label for="detail" class="form-label">Detaillable <span class="red-star">*</span></label>
             <input type="radio" class="form-check-input @error('detail') is-invalid @enderror"
                   id="detail" name="detail" required value="on"/>
             <label for="detail" class="form-check-label">oui</label>
@@ -109,7 +109,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="neuf" class="form-label">Neuf</label>
+            <label for="neuf" class="form-label">Neuf <span class="red-star">*</span></label>
             <input type="radio" class="form-check-input @error('neuf') is-invalid @enderror"
                   id="neuf" name="neuf" required value="on"/>
             <label for="neuf" class="form-check-label">oui</label>
@@ -123,7 +123,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="volume" class="form-label">Volume</label>
+            <label for="volume" class="form-label">Volume <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('volume') is-invalid @enderror"
                   id="volume" name="volume" placeholder="en cm3" required />
             @error('volume')
@@ -133,7 +133,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="poids" class="form-label">Poids</label>
+            <label for="poids" class="form-label">Poids <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('poids') is-invalid @enderror"
                   id="poids" name="poids" placeholder="Poids du produit" required />
             @error('poids')
@@ -143,7 +143,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="img" class="form-label">Image</label>
+            <label for="img" class="form-label">Image <span class="red-star">*</span></label>
             <input type="file" class="form-control @error('img') is-invalid @enderror" name="img" id="img">
             @error('img')
 						  <span class="invalid-feedback" role="alert">
@@ -152,7 +152,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="is_stock" class="form-label">Produit stockable</label>
+            <label for="is_stock" class="form-label">Produit stockable <span class="red-star">*</span></label>
             <select class="form-select" id="is_stock" name="is_stock">
               <option value="N" selected>NON</option>
               <option value="Y" selected>YES</option>

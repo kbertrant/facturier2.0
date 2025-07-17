@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('payment.store') }}">
                   @csrf
             <div class="mb-3">
-              <label for="num_fac" class="form-label"> {{ __('mypages.numinv') }}</label>
+              <label for="num_fac" class="form-label"> {{ __('mypages.numinv') }} <span class="red-star">*</span></label>
               <input type="text" class="form-control" name="num_fac" list="datalistOptions" id="num_fac" placeholder="Saisir pour rechercher" required>
               <datalist id="datalistOptions">
                 @foreach ($facs as $fac)
@@ -24,7 +24,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="pay_mode" class="form-label">{{ __('mypages.paymode') }} </label>
+                <label for="pay_mode" class="form-label">{{ __('mypages.paymode') }} <span class="red-star">*</span></label>
                 <select class="form-select" id="pay_mode" name="pay_mode" aria-label="Mode de paiement" required>
                     <option value="">Choisir mode de paiement</option>
                     <option value="CASH">CASH/ESPECES </option>
@@ -40,7 +40,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="mttc_pay" class="form-label">{{ __('mypages.amountpay') }}  </label>
+                <label for="mttc_pay" class="form-label">{{ __('mypages.amountpay') }} <span class="red-star">*</span></label>
                 <input type="number" class="form-control @error('mttc_pay') is-invalid @enderror"
                     id="mttc_pay" name="mttc_pay" placeholder="Montant à payer" required/>
                 @error('mttc_pay')

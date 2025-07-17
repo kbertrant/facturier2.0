@@ -10,7 +10,7 @@
           <form class="mb-3" method="POST" action="{{ route('user.store') }}">
             @csrf
             <div class="mb-3">
-              <label for="name" class="form-label">Noms & prenoms  </label>
+              <label for="name" class="form-label">Noms & prenoms <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('name') is-invalid @enderror"
                     id="name" name="name" placeholder="Noms et prenom"
                     autofocus
@@ -22,7 +22,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Adresse email </label>
+              <label for="email" class="form-label">Adresse email <span class="red-star">*</span></label>
               <input type="email" class="form-control @error('email') is-invalid @enderror"
                     id="email" name="email" placeholder="Email" required />
               @error('email')
@@ -32,7 +32,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Mot de passe</label>
+              <label for="password" class="form-label">Mot de passe <span class="red-star">*</span></label>
               <input type="password" class="form-control @error('password') is-invalid @enderror"
                     id="password" name="password" placeholder="Mot de passe" required />
               @error('password')
@@ -43,7 +43,7 @@
             </div>
   
             <div class="mb-3">
-              <label for="ville" class="form-label">Ville </label>
+              <label for="ville" class="form-label">Ville <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('ville') is-invalid @enderror"
                     id="ville" name="ville" placeholder="Ville"required />
               @error('ville')
@@ -53,7 +53,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="phone" class="form-label">TELEPHONE </label>
+              <label for="phone" class="form-label">TELEPHONE <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('phone') is-invalid @enderror"
                     id="phone" name="phone" placeholder="Telephone"required />
               @error('phone')
@@ -63,7 +63,7 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="phone" class="form-label">ABONNEMENT EXPIRATION </label>
+              <label for="phone" class="form-label">ABONNEMENT EXPIRATION <span class="red-star">*</span></label>
               <input type="date" class="form-control @error('exp_date') is-invalid @enderror"
                     id="exp_date" name="exp_date" placeholder="Date expiration"required />
               @error('exp_date')

@@ -11,7 +11,7 @@
             @csrf
             
             <div class="mb-3">
-                <label for="four_name" class="form-label">Nom fournisseur </label>
+                <label for="four_name" class="form-label">Nom fournisseur <span class="red-star">*</span></label>
                 <input type="text" class="form-control @error('name_cli') is-invalid @enderror"
                     id="four_name" name="four_name" placeholder="Nom du fournisseur"
                     autofocus
@@ -23,7 +23,7 @@
               @enderror
             </div>
             <div class="mb-3">
-                <label for="four_code" class="form-label">Code fournisseur </label>
+                <label for="four_code" class="form-label">Code fournisseur <span class="red-star">*</span></label>
                 <input type="text" class="form-control @error('four_code') is-invalid @enderror"
                     id="four_code" name="four_code" placeholder="Code fournisseur" required />
                 @error('four_code')
@@ -33,7 +33,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-              <label for="adress_four" class="form-label">Adresse fournisseur</label>
+              <label for="adress_four" class="form-label">Adresse fournisseur <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('address_cli') is-invalid @enderror"
                     id="adress_four" name="adress_four" placeholder="Adresse fournisseur"required />
               @error('adress_four')
@@ -44,7 +44,7 @@
             </div>
   
             <div class="mb-3">
-              <label for="four_phone" class="form-label">Telephone</label>
+              <label for="four_phone" class="form-label">Telephone <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('four_phone') is-invalid @enderror"
                     id="four_phone" name="four_phone" placeholder="Telephone..."required />
                 @error('four_phone')
@@ -54,7 +54,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="resp_name" class="form-label">NOM DU RESPONSABLE</label>
+                <label for="resp_name" class="form-label">NOM DU RESPONSABLE <span class="red-star">*</span></label>
                 <input type="text" class="form-control @error('resp_name') is-invalid @enderror"
                     id="resp_name" name="resp_name" placeholder="Nom du responsable"required />
                 @error('resp_name')
@@ -65,7 +65,7 @@
             </div>
   
             <div class="mb-3">
-              <label for="four_rccm" class="form-label">Registre commerce</label>
+              <label for="four_rccm" class="form-label">Registre commerce <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('four_rccm') is-invalid @enderror"
                     id="four_rccm" name="four_rccm" placeholder="Registre commerce "required />
               @error('four_rccm')
@@ -75,7 +75,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="four_nui" class="form-label"> Identifiant unique</label>
+                <label for="four_nui" class="form-label"> Identifiant unique <span class="red-star">*</span></label>
                 <input type="text" class="form-control @error('four_nui') is-invalid @enderror"
                       id="four_nui" name="four_nui" placeholder="Identifiant unique"required />
                 @error('four_nui')
@@ -85,7 +85,7 @@
                         @enderror
               </div>
               <div class="mb-3">
-                <label for="four_email" class="form-label">Email fournisseur</label>
+                <label for="four_email" class="form-label">Email fournisseur <span class="red-star">*</span></label>
                 <input type="email" class="form-control @error('four_email') is-invalid @enderror"
                       id="four_email" name="four_email" placeholder="Identifiant unique"required />
                 @error('four_email')

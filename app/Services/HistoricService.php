@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\Auth;
 class HistoricService
 {
     public function Add($libelle){
+        $decode = new DecodeService();
+        $usr_id = $decode->DecodeId(Auth::user()->id);
+        
         $hist = new Historic();
         $hist->lib_histo = $libelle;
         $hist->date_histo = now();
-        $hist->id_usr = Auth::user()->id;
+        $hist->id_usr = $usr_id;
         $hist->id_ent = Auth::user()->id_ent;
         $hist->save();
         return $hist;

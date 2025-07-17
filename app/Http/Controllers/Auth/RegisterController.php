@@ -82,13 +82,16 @@ class RegisterController extends Controller
             $ent = Entreprise::create([
                 'name_ent'=> $data['name_ent'],
                 'rc_ent'=> $data['rc_ent'],
+                'logo_ent'=>'logo_ent.jpeg'
             ]); 
             
             $myimage = $data['image']->getClientOriginalName();
             if($data['image']){
-            $imagePath = ($data['image'])->move(public_path('images'), $myimage);
+            $imagePath = ($data['image'])->move(public_path('entreprises'), $myimage);
             }
 
+            $startDate = time();
+            
             $decode = new DecodeService();
             $decoded_id = $decode->DecodeId($ent->id);
             $user = User::create([
@@ -99,6 +102,7 @@ class RegisterController extends Controller
                 'image'=> $imagePath,
                 'role'=> 'admin',
                 'id_ent'=>$decoded_id,
+                'exp_date'=> date('Y-m-d H:i:s', strtotime('+7 days', $startDate)),
                 'password' => Hash::make($data['password'])
             ]);
 

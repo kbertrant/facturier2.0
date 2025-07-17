@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('facture.store') }}">
                   @csrf
             <div class="mb-3">
-              <label for="exampleDataList" class="form-label">Client</label>
+              <label for="exampleDataList" class="form-label">Client <span class="red-star">*</span></label>
               <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="search" placeholder="Saisir pour rechercher" required>
               <datalist id="datalistOptions">
                 @foreach ($clients as $client)
@@ -28,7 +28,7 @@
               <legend class="scheduler-border">{{ __('mypages.ldps') }} </legend>
               <div class="row">
                   <div class="col-lg-6 col-md-6 col-xs-8">
-                    <label for="id_prod1" class="form-label">DESIGNATION</label>
+                    <label for="id_prod1" class="form-label">DESIGNATION <span class="red-star">*</span></label>
                       <select id="id_prod1" name="id_prod[]" class="form-control prod" required onselect="updateInvoice()">
                           <option value="">Choisir produit</option>
                           @foreach ($produits as $produit)
@@ -37,12 +37,12 @@
                       </select>
                   </div>
                   <div class="col-lg-2 col-md-2 col-xs-2">
-                    <label for="your_price1" class="form-label">Your price</label>
+                    <label for="your_price1" class="form-label">Your price <span class="red-star">*</span></label>
                     <input type="number" class="form-control @error('your_price') is-invalid @enderror"
                     id="your_price1" name="your_price[]" value="0" required  />
                   </div>
                   <div class="col-lg-2 col-md-2 col-xs-2">
-                    <label for="quantity1" class="form-label">Quantité</label>
+                    <label for="quantity1" class="form-label">Quantité <span class="red-star">*</span></label>
                     <input type="number" class="form-control @error('quantity') is-invalid @enderror"
                     id="quantity1" name="quantity[]" value="1" required oninput="updateInvoice()"/>
                   </div>

@@ -10,7 +10,7 @@
           <form class="mb-3" method="POST" action="{{ route('typecliente.store') }}">
                   @csrf
             <div class="mb-3">
-              <label for="code_prod" class="form-label">Libelle du type</label>
+              <label for="code_prod" class="form-label">Libelle du type <span class="red-star">*</span></label>
               <input type="text" class="form-control @error('name_tc') is-invalid @enderror"
                     id="name_tc" name="name_tc" placeholder="Libelle du type de client"
                     required />

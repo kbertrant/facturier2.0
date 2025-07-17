@@ -71,6 +71,9 @@
         background-color: #ffffff8c;
 
       }
+      .red-star {
+        color: red;
+      }
     </style>
   </head>
 

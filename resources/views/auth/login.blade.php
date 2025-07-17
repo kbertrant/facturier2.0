@@ -75,31 +75,21 @@
             <form class="mb-4" method="POST" action="{{ route('login') }}">
                 @csrf
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  autocomplete="off"
-                />
+                <label for="email" class="form-label">Email <span class="red-star">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" autocomplete="off" />
+                
               </div>
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Mot de passe</label>
+                  <label class="form-label" for="password">Mot de passe <span class="red-star">*</span></label>
                   <a href="{{ route('password.request') }}">
                     <small>Mot de passe oublié ?</small>
                   </a>
                 </div>
                 <div class="input-group input-group-merge">
-                  <input
-                    type="password"
-                    id="password"
-                    class="form-control"
-                    name="password"
-                    placeholder="Mot de passe ici"
-                  />
+                  <input type="password" id="password" class="form-control" name="password" placeholder="Mot de passe ici" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  
                 </div>
               </div>
               <div class="mb-3">
@@ -119,6 +109,12 @@
                 <span>Créer votre compte</span>
               </a>
             </p>
+            @if ($errors->has('email'))
+              <span class="text-danger text-left">{{ $errors->first('email') }}</span>
+            @endif
+            @if ($errors->has('password'))
+              <span class="text-danger text-left">{{ $errors->first('password') }}</span>
+            @endif
             @if (session('success'))
             <div class="alert alert-danger" role="alert">
                 {{ session('success') }}

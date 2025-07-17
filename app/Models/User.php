@@ -62,5 +62,17 @@ class User extends Authenticatable
         return $this->hasMany(Historic::class);
     }
 
+    /**
+     * Hash the blog ids
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function id(): Attribute
+    {
+        return  Attribute::make(
+            get: fn ($value) => Hashids::encode($value)
+        );
+    }
+
     
 }

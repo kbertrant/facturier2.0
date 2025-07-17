@@ -75,7 +75,7 @@
             <form class="mb-3" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                <label for="name" class="form-label">Noms</label>
+                <label for="name" class="form-label">Noms <span class="red-star">*</span></label>
                 <input
                   type="text"
                   class="form-control @error('name') is-invalid @enderror"
@@ -93,7 +93,7 @@
 							  @enderror
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">Email <span class="red-star">*</span></label>
                 <input type="email" 
                 required 
                 class="form-control @error('email') is-invalid @enderror" 
@@ -108,7 +108,7 @@
 							  @enderror
               </div>
               <div class="mb-3 form-password-toggle">
-                <label class="form-label" for="password">Mot de passe</label>
+                <label class="form-label" for="password">Mot de passe <span class="red-star">*</span></label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="mb-3 form-password-toggle">
-                <label class="form-label " for="password">Confirmer mot de passe</label>
+                <label class="form-label " for="password">Confirmer mot de passe <span class="red-star">*</span></label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
@@ -147,7 +147,7 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="phone" class="form-label ">Telephone</label>
+                <label for="phone" class="form-label ">Telephone <span class="red-star">*</span></label>
                 <input type="text" required class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone" name="phone" placeholder="Entrer votre numero" />
                 @error('phone')
 							   <span class="invalid-feedback" role="alert">
@@ -156,11 +156,11 @@
 							  @enderror
               </div>
               <div class="mb-3">
-                <label for="ville" class="form-label">Ville</label>
+                <label for="ville" class="form-label">Ville <span class="red-star">*</span></label>
                 <input type="text" required class="form-control  @error('ville') is-invalid @enderror" id="ville" value="{{ old('ville') }}" name="ville" placeholder="Entrer votre ville" />
               </div>
               <div class="mb-3">
-                <label for="name_ent" class="form-label">Le nom de votre entreprise</label>
+                <label for="name_ent" class="form-label">nom de votre entreprise <span class="red-star">*</span></label>
                 <input type="text"  required class="form-control @error('name_ent') is-invalid @enderror" id="name_ent" value="{{ old('name_ent') }}" name="name_ent" placeholder="Entrer votre entreprise" />
                 @error('name_ent')
 							   <span class="invalid-feedback" role="alert">
@@ -169,7 +169,7 @@
 							  @enderror
               </div>
               <div class="mb-3">
-                <label for="rc_ent" class="form-label">Registre commerce entreprise</label>
+                <label for="rc_ent" class="form-label">Registre commerce entreprise <span class="red-star">*</span></label>
                 <input type="text" required class="form-control @error('rc_ent') is-invalid @enderror" id="rc_ent" value="{{ old('rc_ent') }}" name="rc_ent" placeholder="Entrer votre registre de commerce" />
                 @error('rc_ent')
 							   <span class="invalid-feedback" role="alert">
@@ -178,8 +178,8 @@
 							  @enderror
               </div>
               <div class="mb-3">
-                <label for="rc_ent" class="form-label">Regime fiscal entreprise</label>
-                <select class="form-control name="regime_fisc" id="regime_fisc">
+                <label for="rc_ent" class="form-label">Regime fiscal entreprise <span class="red-star">*</span></label>
+                <select class="form-control" name="regime_fisc" id="regime_fisc">
                   <option value="">Selectionner votre regime fiscal</option>
                   <option value="Simplifie">SIMPLIFIE</option>
                   <option value="Reel">REEL</option>
@@ -199,7 +199,7 @@
                   <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
                   <label class="form-check-label" for="terms-conditions">
                     J'accepte les
-                    <a href="javascript:void(0);">conditions et accords</a>
+                    <a href="javascript:void(0);">conditions et accords <span class="red-star">*</span></a>
                   </label>
                 </div>
               </div>
@@ -212,6 +212,9 @@
                 <span>Connectez-vous</span>
               </a>
             </p>
+            @if ($errors->has('email'))
+              <span class="text-danger text-left">{{ $errors->first('email') }}</span>
+            @endif
           </div>
         </div>
         <!-- Register Card -->

@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('proforma.store') }}">
                   @csrf
                   <div class="mb-3">
-                    <label for="id_cli" class="form-label">Client</label>
+                    <label for="id_cli" class="form-label">Client <span class="red-star">*</span></label>
                     <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher" required>
                     <datalist id="datalistOptions">
                       @foreach ($clients as $client)
@@ -28,23 +28,27 @@
               <legend class="scheduler-border">{{ __('mypages.ldps') }}</legend>
               <div class="row">
                   <div class="col-lg-6 col-md-6 col-xs-8">
+                    <label for="qty_prod" class="form-label">DESIGNATION <span class="red-star">*</span></label>
                       <select id="id_prod[]" name="id_prod[]" class="form-control prod" required>
-                          <option value="">Choisir l'article ou la prestation</option>
+                          <option value="">Choisir l'article</option>
                           @foreach ($produits as $produit)
                               <option value="{{ $produit->id }}">{{ $produit->name_prod }} - {{ $produit->price_prod }}</option>
                           @endforeach
                       </select>
                   </div>
                   <div class="col-lg-2 col-md-2 col-xs-2">
+                    <label for="qty_prod" class="form-label">Price <span class="red-star">*</span></label>
                     <input type="number" class="form-control @error('your_price') is-invalid @enderror"
                     id="your_price[]" name="your_price[]" value="0" required />
                   </div>
                   <div class="col-lg-2 col-md-2 col-xs-2">
+                    <label for="qty_prod" class="form-label">Quantite <span class="red-star">*</span></label>
                     <input type="number" class="form-control @error('quantity') is-invalid @enderror"
                     id="quantity[]" name="quantity[]" placeholder="Qte" required />
                   </div>
                   
                   <div class="col-lg-2 col-md-2 col-xs-2">
+                    <label for="qty_prod" class="form-label">Ajouter</label>
                     <a href="javascript:void(0);" class="add_button" title="Ajouter">
                       <i class="bx bx-list-plus bx-md"></i></a>
                   </div>

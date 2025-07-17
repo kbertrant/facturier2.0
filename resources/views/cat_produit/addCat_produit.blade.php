@@ -10,7 +10,7 @@
       <form class="mb-3" method="POST" action="{{ route('catproduit.store') }}">
                 @csrf
         <div class="mb-3">
-          <label for="name" class="form-label">Nom categorie</label>
+          <label for="name" class="form-label">Nom categorie <span class="red-star">*</span></label>
           <input type="text" class="form-control @error('cat_name') is-invalid @enderror"
                   id="cat_name" name="cat_name" placeholder="Nom de la categorie"
                   autofocus

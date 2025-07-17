@@ -10,7 +10,7 @@
           <form class="mb-3" method="POST" action="{{ route('depense.store') }}">
             @csrf
             <div class="mb-3">
-              <label for="id_four" class="form-label">Fournisseur</label>
+              <label for="id_four" class="form-label">Fournisseur <span class="red-star">*</span></label>
               <select class="form-select" id="id_four" name="id_four" aria-label="Fournisseur">
                 <option selected>Choisir fournisseur</option>
                 @foreach ($fours as $four)
@@ -24,7 +24,7 @@
               @enderror
             </div>
             <div class="mb-3">
-                <label for="label_dep" class="form-label">Intitule de la depense</label>
+                <label for="label_dep" class="form-label">Intitule de la depense <span class="red-star">*</span></label>
                 <input type="text" class="form-control @error('label_dep') is-invalid @enderror"
                     id="label_dep" name="label_dep" placeholder="Objet de la depense" required />
                 @error('label_dep')
@@ -34,7 +34,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-              <label for="amount_dep" class="form-label">Montant à payer </label>
+              <label for="amount_dep" class="form-label">Montant à payer <span class="red-star">*</span></label>
               <input type="number" class="form-control @error('amount_dep') is-invalid @enderror"
                     id="amount_dep" name="amount_dep" placeholder="Montant à payer" required />
                 @error('amount_dep')
@@ -45,7 +45,7 @@
             </div>
             
             <div class="mb-3">
-              <label for="solde_dep" class="form-label">Solde</label>
+              <label for="solde_dep" class="form-label">Solde <span class="red-star">*</span></label>
               <input type="number" class="form-control @error('solde_dep') is-invalid @enderror"
                     id="solde_dep" name="solde_dep" placeholder="Dimension du produit" required />
                 @error('solde_dep')

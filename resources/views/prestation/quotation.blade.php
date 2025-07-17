@@ -22,7 +22,7 @@
                         <form class="mb-3" method="POST" action="{{ route('pres.saveQuotation') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="id_cli" class="form-label">Client</label>
+                                <label for="id_cli" class="form-label">Client <span class="red-star">*</span></label>
                                 <input type="text" class="form-control" name="id_cli" list="datalistOptions" id="id_cli" placeholder="Saisir pour rechercher" required>
                                     <datalist id="datalistOptions">
                                         @foreach ($clients as $client)
@@ -40,14 +40,17 @@
                                 <legend class="scheduler-border">Services</legend>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-xs-8">
+                                        <label for="id_cli" class="form-label">Designation <span class="red-star">*</span></label>
                                         <input type="text" class="form-control @error('id_prod') is-invalid @enderror"
                                                 id="id_prod[]" name="id_prod[]" placeholder="Saisir un prestation..." required />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2">
+                                        <label for="id_cli" class="form-label">price <span class="red-star">*</span></label>
                                         <input type="number" class="form-control @error('your_price') is-invalid @enderror"
                                                 id="your_price[]" name="your_price[]" value="0" required />
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-xs-2">
+                                        <label for="id_cli" class="form-label">Quantite <span class="red-star">*</span></label>
                                         <input type="number" class="form-control @error('quantity') is-invalid @enderror"
                                                 id="quantity[]" name="quantity[]" placeholder="Qte" required />
                                     </div>
@@ -149,7 +152,7 @@
                 $(addButton).click(function() {
                     //Check maximum number of input fields
                     if (x < maxField) {
-                        var fieldHTML = '<div class="row" style="margin:10px"><div class=" col-lg-6 col-md-6 col-xs-6 field"><label for="qty_prod" class="form-label">DESIGNATION</label><input type="text" class=" form-control" id="id_prod" name="id_prod[]"></div><div class="col-lg-2 col-md-2 col-xs-2"><label for="qty_prod" class="form-label">YOUR PRICE</label><input type="number" class="form-control @error('your_price') is-invalid @enderror" id="your_price" name="your_price[]" value="0" required /></div><div class="col-lg-2 col-md-2 col-xs-2 field"><label for="qty_prod" class="form-label">QUANTITE</label><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"><label for="qty_prod" class="form-label"></label> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-red bx-md"></i></a></div></div>';
+                        var fieldHTML = '<div class="row" style="margin:10px"><div class=" col-lg-6 col-md-6 col-xs-6 field"><label for="qty_prod" class="form-label">DESIGNATION <span class="red-star">*</span></label><input type="text" class=" form-control" id="id_prod" name="id_prod[]"></div><div class="col-lg-2 col-md-2 col-xs-2"><label for="qty_prod" class="form-label">PRICE <span class="red-star">*</span></label><input type="number" class="form-control @error('your_price') is-invalid @enderror" id="your_price" name="your_price[]" value="0" required /></div><div class="col-lg-2 col-md-2 col-xs-2 field"><label for="qty_prod" class="form-label">QUANTITE <span class="red-star">*</span></label><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"><label for="qty_prod" class="form-label"></label> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-red bx-md"></i></a></div></div>';
                         x++; //Increment field counter
                         
                         $(wrapper).append(fieldHTML); //Add field html

@@ -85,8 +85,24 @@ class UserController extends Controller
        return view('user.listallusers');
     }
     
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $decode = new DecodeService();
+        $decoded_id = $decode->DecodeId($id);
+        $user = User::find($decoded_id);
+        $ent = Entreprise::find($user->id_ent);
+        
+        //dd($ent);
+        return view('user.editUser',['ent'=>$ent,'user'=>$user]);
+    }
 
-    protected function store(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required','string','unique:users'],
@@ -153,7 +169,6 @@ class UserController extends Controller
         $anc_password= $request->anc_password;
         $new_password= $request->new_password;
         
-
         if(password_verify($anc_password, $hashedpassword)){
 
             $user->update([

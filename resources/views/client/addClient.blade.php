@@ -10,7 +10,7 @@
         <form class="mb-3" method="POST" action="{{ route('cliente.store') }}">
           @csrf
           <div class="mb-3">
-            <label for="id_tc" class="form-label">Categorie du produit</label>
+            <label for="id_tc" class="form-label">Categorie du produit <span class="red-star">*</span></label>
             <select class="form-select" id="id_tc" name="id_tc" aria-label="Categorie du produit" required>
               <option selected>Choisir type client</option>
               @foreach ($list_tcs as $tc)
@@ -24,7 +24,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="code_prod" class="form-label">Noms & prenoms client </label>
+            <label for="code_prod" class="form-label">Noms & prenoms client <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('name_cli') is-invalid @enderror"
                   id="name_cli" name="name_cli" placeholder="Nom du client"
                   required />
@@ -35,7 +35,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="phone_cli" class="form-label">Telephone client</label>
+            <label for="phone_cli" class="form-label">Telephone client <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('phone_cli') is-invalid @enderror"
                   id="phone_cli" name="phone_cli" placeholder="Nom du produit"required />
             @error('phone_cli')
@@ -45,7 +45,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="address_cli" class="form-label">Adresse du client</label>
+            <label for="address_cli" class="form-label">Adresse du client <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('address_cli') is-invalid @enderror"
                   id="address_cli" name="address_cli" placeholder="Adresse du client"required />
             @error('address_cli')
@@ -56,7 +56,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="address_cli" class="form-label">RAISON SOCIALE</label>
+            <label for="address_cli" class="form-label">RAISON SOCIALE <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('raison_sociale') is-invalid @enderror"
                   id="raison_sociale" name="raison_sociale" placeholder="Raison sociale" required />
             @error('raison_sociale')
@@ -66,7 +66,7 @@
 				    @enderror
           </div>
           <div class="mb-3">
-            <label for="cl_email" class="form-label">EMAIL</label>
+            <label for="cl_email" class="form-label">EMAIL <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('cl_email') is-invalid @enderror"
                   id="cl_email" name="cl_email" placeholder="Email"required />
             @error('cl_email')
@@ -77,7 +77,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="cl_rccm" class="form-label">Registre commerce</label>
+            <label for="cl_rccm" class="form-label">Registre commerce <span class="red-star">*</span></label>
             <input type="text" class="form-control @error('cl_rccm') is-invalid @enderror"
                   id="cl_rccm" name="cl_rccm" placeholder="Registre commerce "required />
             @error('cl_rccm')

@@ -177,7 +177,7 @@
                           </div>
                           <button type="submit" class="btn btn-primary d-grid w-100">Modifier </button>
                         </form>
-                      </div>
+                  </div>
                 </div>
             </div>
         </div>
