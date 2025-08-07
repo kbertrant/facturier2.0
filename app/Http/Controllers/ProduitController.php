@@ -127,7 +127,8 @@ class ProduitController extends Controller
             $request->poids,
             $request->is_stock,
             $request->neuf,
-            $imageName
+            $imageName,
+            $request->id_shop
         );
 
         $historic = new HistoricService();

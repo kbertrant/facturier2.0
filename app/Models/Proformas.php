@@ -26,6 +26,7 @@ class Proformas extends Model
         'stat_pro',
         'id_cli',
         'id_usr',
+        'id_shop',
         'id_ent'
         
     ];
@@ -33,6 +34,11 @@ class Proformas extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
 
     public function cliente(){

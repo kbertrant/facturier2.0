@@ -27,6 +27,7 @@ class Paiement extends Model
         'id_cli',
         'id_exe',
         'id_fac',
+        'id_shop',
         'id_ent' 
     ];
 
@@ -34,6 +35,11 @@ class Paiement extends Model
         
         return $this->belongsTo(Entreprise::class,'id_ent');
         }
+
+        public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
+    }
     
     public function cliente(){
         

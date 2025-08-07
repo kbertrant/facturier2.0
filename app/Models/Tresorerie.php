@@ -17,11 +17,16 @@ class Tresorerie extends Model
         'amount_tres',
         'date_tres',
         'mouvement',
+        'id_shop',
         'id_ent'
     ];
 
     public function entreprise(){
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        return $this->belongsTo(Shop::class,'id_shop');
     }
 
     /**

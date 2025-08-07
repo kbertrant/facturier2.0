@@ -24,6 +24,7 @@ class Depense extends Model
         'id_exe',
         'id_four',
         'id_usr',
+        'id_shop',
         'id_ent' 
         
     ];
@@ -31,6 +32,11 @@ class Depense extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
     
     public function year_exercice(){

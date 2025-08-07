@@ -21,6 +21,7 @@ class Remboursement extends Model
         'status',
         'id_cli',
         'id_ent',
+        'id_shop',
         'id_fac',
         'id_usr',
         'id_pay'        
@@ -28,6 +29,11 @@ class Remboursement extends Model
 
     public function entreprise(){
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
 
     public function cliente(){

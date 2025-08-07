@@ -27,12 +27,18 @@ class Facture extends Model
            'id_cli',
            'id_ent',
            'id_pro',
+           'id_shop',
            'id_usr'
     ];
 
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
 
     public function cliente(){

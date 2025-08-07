@@ -29,6 +29,7 @@ class Produit extends Model
         'status',
         'img',
         'id_cat',
+        'id_shop',
         'id_ent'
 
     ];
@@ -36,6 +37,11 @@ class Produit extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
 
     public function cat_produit(){

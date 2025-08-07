@@ -31,10 +31,12 @@ class CreateProduitsTable extends Migration
             $table->string('img')->default('product.png');
             $table->unsignedBigInteger('id_cat')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
+            $table->unsignedBigInteger('id_shop')->nullable();
             $table->timestamps();
 
             $table->foreign('id_cat')->references('id')->on('cat_produits');
             $table->foreign('id_ent')->references('id')->on('entreprises');
+            $table->foreign('id_shop')->references('id')->on('shops');
         });
     }
 

@@ -21,9 +21,11 @@ class CreateTresoreriesTable extends Migration
             $table->dateTime('date_tres');
             $table->string('mouvement');
             $table->unsignedBigInteger('id_ent')->nullable();
+            $table->unsignedBigInteger('id_shop')->nullable();
             $table->timestamps();
 
             $table->foreign('id_ent')->references('id')->on('entreprises');
+            $table->foreign('id_shop')->references('id')->on('shops');
         });
     }
 

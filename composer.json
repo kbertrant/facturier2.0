@@ -15,6 +15,7 @@
         "laravel/ui": "^4.2",
         "opcodesio/log-viewer": "^3.9",
         "simplesoftwareio/simple-qrcode": "^4.2",
+        "spatie/laravel-permission": "^6.20",
         "vinkla/hashids": "^10.0",
         "yajra/laravel-datatables-oracle": "^10.8"
     },

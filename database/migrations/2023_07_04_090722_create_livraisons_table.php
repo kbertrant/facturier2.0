@@ -24,11 +24,13 @@ class CreateLivraisonsTable extends Migration
             $table->unsignedBigInteger('id_prod');
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->unsignedBigInteger('id_usr')->nullable();
+            $table->unsignedBigInteger('id_shop')->nullable();
             $table->timestamps();
             $table->foreign('id_four')->references('id')->on('fournisseurs');
             $table->foreign('id_prod')->references('id')->on('produits');
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_usr')->references('id')->on('users');
+            $table->foreign('id_shop')->references('id')->on('shops');
             
         });
     }

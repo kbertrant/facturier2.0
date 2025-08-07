@@ -19,6 +19,7 @@ class CreatePaiementsTable extends Migration
             $table->unsignedBigInteger('id_exe')->nullable();
             $table->unsignedBigInteger('id_fac')->nullable();
             $table->unsignedBigInteger('id_usr')->nullable();
+            $table->unsignedBigInteger('id_shop')->nullable();
             $table->string('ref_pay')->unique();
             $table->datetime('date_pay');
             $table->decimal('mttc_pay');
@@ -35,6 +36,7 @@ class CreatePaiementsTable extends Migration
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_fac')->references('id')->on('factures');
             $table->foreign('id_usr')->references('id')->on('users');
+            $table->foreign('id_shop')->references('id')->on('shops');
             
         });
     }

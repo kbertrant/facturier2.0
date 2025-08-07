@@ -72,6 +72,15 @@
                 </span>
               @enderror
             </div>
+            <div class="mb-3">
+              <label for="roles" class="form-label">ROLE  <span class="red-star">*</span></label>
+              <select name="roles[]" class="form-control" required multiple>
+                <option>Select Role</option>
+                @foreach ($roles as $role)
+                  <option value="{{$role}}">{{$role}}</option>
+                @endforeach
+              </select>
+            </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Ajouter </button>
           </form>
         </div>

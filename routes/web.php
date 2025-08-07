@@ -149,6 +149,40 @@ Route::get('/my/pres/invoice',[App\Http\Controllers\PrestationController::class,
 Route::post('/my/save/quotation',[App\Http\Controllers\PrestationController::class, 'saveQuotation'])->name('pres.saveQuotation');
 Route::post('/my/save/invoice',[App\Http\Controllers\PrestationController::class, 'saveInvoice'])->name('pres.saveInvoice');
 
+//Role
+Route::get('/my/role/list',[App\Http\Controllers\RoleController::class, 'index'])->name('listRole');
+//Route::post('/add/role',[App\Http\Controllers\RoleController::class, 'create'])->name('addRole');
+Route::get('/my/role', [App\Http\Controllers\RoleController::class, 'index'])->name('role.main');
+Route::get('/role/list', [App\Http\Controllers\RoleController::class, 'index'])->name('role.list');
+//Route::post('/role/store',[App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
+//Route::get('/role/destroy/{id}',[App\Http\Controllers\RoleController::class,'destroy'])->name('role.destroy');
+//Route::get('/role/show/{id}',[App\Http\Controllers\RoleController::class, 'show'])->name('role.show');
+//Route::get('/role/edit/{id}', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
+//Route::post('/role/update',[App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
+//
+////Permission
+Route::get('/my/perm/list',[App\Http\Controllers\PermissionController::class, 'index'])->name('listPerm');
+//Route::post('/add/perm',[App\Http\Controllers\PermissionController::class, 'create'])->name('addPerm');
+Route::get('/my/perm', [App\Http\Controllers\PermissionController::class, 'index'])->name('perm.main');
+Route::get('/perm/list', [App\Http\Controllers\PermissionController::class, 'index'])->name('perm.list');
+//Route::post('/perm/store',[App\Http\Controllers\PermissionController::class, 'store'])->name('perm.store');
+//Route::get('/perm/destroy/{id}',[App\Http\Controllers\PermissionController::class,'destroy'])->name('perm.destroy');
+//Route::get('/perm/show/{id}',[App\Http\Controllers\PermissionController::class, 'show'])->name('perm.show');
+//Route::get('/perm/edit/{id}', [App\Http\Controllers\PermissionController::class, 'edit'])->name('perm.edit');
+//Route::post('/perm/update',[App\Http\Controllers\PermissionController::class, 'update'])->name('perm.update');
+
+// route shops
+Route::get('/my/shop',[App\Http\Controllers\ShopController::class, 'index'])->name('shop.main');
+Route::get('/shop/my/list',[App\Http\Controllers\ShopController::class, 'index'])->name('shop.list');
+Route::post('/shop/add',[App\Http\Controllers\ShopController::class, 'create'])->name('addShop');
+Route::post('/shop/store',[App\Http\Controllers\ShopController::class, 'store'])->name('shop.store');
+Route::get('/shop/destroy/{id}',[App\Http\Controllers\ShopController::class,'destroy'])->name('shop.destroy');
+Route::get('/shop/edit/{id}', [App\Http\Controllers\ShopController::class, 'edit'])->name('shop.edit');
+Route::post('/shop/update',[App\Http\Controllers\ShopController::class, 'update'])->name('shop.update');
+
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+
 
 
 

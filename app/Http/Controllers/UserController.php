@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Entreprise;
 use App\Models\User;
 use App\Notifications\UserNotification;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -52,8 +54,9 @@ class UserController extends Controller
 
         $historic = new HistoricService();
         $historic->Add('List users');
+        $roles = Role::pluck('name','name')->all();
         
-       return view('user.listUser');
+       return view('user.listUser',compact('roles'));
     }
 
     public function listAdmin(){
@@ -95,11 +98,13 @@ class UserController extends Controller
     {
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($id);
-        $user = User::find($decoded_id);
+        $user = Employee::find($decoded_id);
         $ent = Entreprise::find($user->id_ent);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
         
         //dd($ent);
-        return view('user.editUser',['ent'=>$ent,'user'=>$user]);
+        return view('user.editUser',['ent'=>$ent,'user'=>$user,'roles'=>$roles,'userRole'=>$userRole]);
     }
 
     public function store(Request $request)
@@ -118,7 +123,7 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $user=User::create([
+        $user=Employee::create([
             'name' => $request->name,
             'email' => $request['email'],
             'phone' => $request['phone'],
@@ -129,6 +134,7 @@ class UserController extends Controller
             'exp_date'=> $request->exp_date,
             'regim_fiscal_ent'=>$request->regim_fisc
         ]);
+        $user->assignRole($request->input('roles'));
 
         $historic = new HistoricService();
         $historic->Add('Add new user');
@@ -155,7 +161,7 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $user =User::find($request->id) ;
+        $user =Employee::find($request->id) ;
     
         
         if($user->image){Storage::disk('public')->delete($user->image);}

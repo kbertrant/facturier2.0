@@ -89,7 +89,15 @@
                                         </span>
                                     @enderror
                                 </div>
-                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">ROLE  <span class="red-star">*</span></label>
+                                    <select name="roles[]" class="form-control" required multiple>
+                                        <option value="">Select Role</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{$role}}"{{ in_array($role,$userRole) ? 'selected' : '' }}>{{$role}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-primary d-grid w-100">Modifier </button>
                             </form>
                         </div>

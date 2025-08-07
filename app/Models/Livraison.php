@@ -22,6 +22,7 @@ class Livraison extends Model
         'id_four',
         'id_prod',
         'id_usr',
+        'id_shop',
         'id_ent'
         
     ];
@@ -29,6 +30,11 @@ class Livraison extends Model
     public function entreprise(){
         
         return $this->belongsTo(Entreprise::class,'id_ent');
+    }
+
+    public function shop(){
+        
+        return $this->belongsTo(Shop::class,'id_shop');
     }
     
     public function fournisseur(){

@@ -192,7 +192,13 @@
           <div data-i18n="Basic">{{ __('sidebar.myLivraisons') }}</div>
         </a>
       </li>
-     
+     <!-- Cards -->
+      <li class="menu-item {{ request()->is('my/shop') ? 'active' : '' }}">
+        <a href="{{route('shop.main')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-store"></i>
+          <div data-i18n="Basic">Boutiques</div>
+        </a>
+      </li>
       <!-- Forms & Tables -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideParametre') }}</span></li>
       <!-- Cards -->
@@ -203,11 +209,25 @@
         </a>
       </li>
       <!-- Cards -->
-      <li class="menu-item">
-        <a href="#" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Roles</div>
+       <!-- Layouts -->
+      <li class="menu-item {{ request()->is('my/role/list') ? 'active open' : '' }} {{ request()->is('my/perm/list') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Clients">Roles</div>
         </a>
+
+        <ul class="menu-sub ">
+          <li class="menu-item {{ request()->is('my/role/list') ? 'active' : 'hidden' }}">
+            <a href="{{route('listRole')}}" class="menu-link">
+              <div data-i18n="Role">Roles</div>
+            </a>
+          </li>
+          <li class="menu-item {{ request()->is('my/perm/list') ? 'active' : '' }}">
+            <a href="{{route('listPerm')}}" class="menu-link">
+              <div data-i18n="Permission">Permissions</div>
+            </a>
+          </li>
+        </ul>
       </li>
       <!-- Cards -->
       <li class="menu-item {{ request()->is('my/entreprise') ? 'active' : '' }}">
