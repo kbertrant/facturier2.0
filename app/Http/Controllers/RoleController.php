@@ -31,7 +31,7 @@ class RoleController extends Controller
                 // Update Button
                 $updateButton = "<a class='btn btn-sm btn-info mr-1 mb-1' href='/role/edit/".$row->id."'><i class='bx bxs-edit'></i></a>";
                 // Delete Button
-                //$deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-1' href='/cat/produit/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
+                //$deleteButton = "<a class='btn btn-sm btn-danger mr-1 mb-1' href='/roles/destroy/".$row->id."'><i class='bx bxs-trash'></i></a>";
 
                 return $updateButton." ".$showButton;
                  

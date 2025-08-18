@@ -53,17 +53,17 @@
         <div class="card-body">
           <small class="text-muted text-uppercase">A propos</small>
           <ul class="list-unstyled mb-4 mt-3">
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Nom complet:</span> <span>{{$entreprise->name_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Registre Comm.:</span> <span>{{$entreprise->rc_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Numero Contribuable:</span> <span>{{$entreprise->nc_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Owner:</span> <span>{{$entreprise->owner_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Bank:</span> <span>{{$entreprise->bank_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Regime fiscal:</span> <span>{{$entreprise->regim_fisc_ent}}</span></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Nom complet:</span> <h4>{{$entreprise->name_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Registre Comm.:</span> <h4>{{$entreprise->rc_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Numero Contribuable:</span> <h4>{{$entreprise->nc_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Owner:</span> <h4>{{$entreprise->owner_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Bank:</span> <h4>{{$entreprise->bank_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Regime fiscal:</span> <h4>{{$entreprise->regim_fiscal_ent}}</h4></li>
           </ul>
           <small class="text-muted text-uppercase">Contacts</small>
           <ul class="list-unstyled mb-4 mt-3">
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span class="fw-medium mx-2">Contact:</span> <span> {{$entreprise->phone_ent}}</span></li>
-            <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span class="fw-medium mx-2">Adresse:</span> <span>{{$entreprise->address_ent}}</span></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span class="fw-medium mx-2">Contact:</span> <h4> {{$entreprise->phone_ent}}</h4></li>
+            <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span class="fw-medium mx-2">Adresse:</span> <h4>{{$entreprise->address_ent}}</h4></li>
           </ul>
         </div>
       </div>
@@ -96,7 +96,7 @@
                 <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
                 <div class="timeline-event">
                   <div class="timeline-header mb-1">
-                    <h1 class="mb-0">{{$act->lib_histo}}</h1>
+                    <h4 class="mb-0">{{$act->lib_histo}}</h4>
                     <small class="text-muted">{{$act->date_histo}}</small>
                   </div>
                   <h6 class="mb-0">{{$act->name}}</h6>

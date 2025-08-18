@@ -29,7 +29,7 @@
           <input type="text" name ="id" value="{{$entreprise->id}}" style="display:none" class="form-control" >
 
               <div class="mb-3">
-                <label  class="form-label">Nom de l'entreprise</label>
+                <label  class="form-label">Nom de l'entreprise <span class="red-star">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -42,11 +42,11 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="rc_ent" class="form-label">R_c</label>
+                <label for="rc_ent" class="form-label">Registre commerce</label>
                 <input type="text" class="form-control" id="rc_ent" required value="{{$entreprise->rc_ent}}" name="rc_ent" placeholder="Entrer votre rc" />
               </div>
               <div class="mb-3 ">
-                <label class="form-label">NC</label>
+                <label class="form-label">Identifiant Unique <span class="red-star">*</span></label>
                   <input
                     type="text"
                     id="nc_ent"
@@ -59,24 +59,32 @@
               </div>
               
               <div class="mb-3">
-                <label  class="form-label">Telephone</label>
+                <label  class="form-label">Telephone <span class="red-star">*</span></label>
                 <input type="text"  value="{{$entreprise->phone_ent}}" required class="form-control" id="phone_ent" name="phone_ent" placeholder="Entrer votre numero" />
               </div>
               <div class="mb-3">
-                <label  value="{{$entreprise->address_ent}}" class="form-label">Adress</label>
+                <label  value="{{$entreprise->address_ent}}" class="form-label">Adresse <span class="red-star">*</span></label>
                 <input type="text" value="{{$entreprise->address_ent}}" class="form-control" id="address_ent" required name="address_ent" placeholder="Entrer votre adress" />
               </div>
 
               <div class="mb-3">
-                <label  value="{{$entreprise->owner_ent}}" class="form-label">Owner</label>
+                <label  value="{{$entreprise->owner_ent}}" class="form-label">Gerant <span class="red-star">*</span></label>
                 <input type="text" value="{{$entreprise->owner_ent}}" class="form-control" id="owner_ent" required name="owner_ent" placeholder="Entrer votre owner" />
               </div>
 
               <div class="mb-3">
-                <label  value="{{$entreprise->bank_ent}}" class="form-label">Bank</label>
+                <label  value="{{$entreprise->bank_ent}}" class="form-label">Banque <span class="red-star">*</span></label>
                 <input type="text" class="form-control" value="{{$entreprise->bank_ent}}" id="bank_ent" required name="bank_ent" placeholder="Entrer votre bank" />
               </div>
-              
+              <div class="mb-3">
+                <label for="rc_ent" class="form-label">Regime fiscal  <span class="red-star">*</span></label>
+                <select class="form-control" name="regim_fisc_ent" id="regim_fisc_ent">
+                  <option value="">Selectionner votre regime fiscal</option>
+                  <option value="Simplifie">SIMPLIFIE</option>
+                  <option value="Reel">REEL</option>
+                </select>
+                
+              </div>
               <div class="mb-3">
                 <div class="form-check">
                  
@@ -85,10 +93,7 @@
               <button type="submit" class="btn btn-primary d-grid w-100">Modifier </button>
             </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-       
-      </div>
+      
     </div>
   </div>
 </div>

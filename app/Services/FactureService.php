@@ -24,6 +24,7 @@ class FactureService
         $fac->status = 'A';
         $fac->stat_fac = 'Pending';
         $fac->id_ent = Auth::user()->id_ent;
+        $fac->id_shop = Auth::user()->id_shop;
         $fac->id_usr = Auth::user()->id;
         $fac->save();
 

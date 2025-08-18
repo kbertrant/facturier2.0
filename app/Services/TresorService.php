@@ -10,7 +10,8 @@ class TresorService
 {
     public function transac($amount,$sens){
         //get last row insert in table
-        $tresor =  Tresorerie::where('id_ent','=',Auth::user()->id_ent)->orderBy('date_tres', 'DESC')->first();
+        $tresor =  Tresorerie::where('id_ent','=',Auth::user()->id_ent)
+            ->orderBy('date_tres', 'DESC')->first();
         //dd($tresor);
         $t = 0;
         if($tresor==null){$t = 0;}else{$t = $tresor->amount_tres;}

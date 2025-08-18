@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', ' - Proforma')
+@section('title', ' - Update role')
 @section('main-content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">

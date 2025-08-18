@@ -30,20 +30,22 @@ class HomeController extends Controller
     public function index()
     { 
         $user = Auth::user();
-        $products = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->count();
-        $paiements = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('mttc_pay');
-        $tva = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('tva_pay');
-        $depenses = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)->sum('amount_dep');
-        $time=strtotime(now());
-        $year=date("Y",$time);
-        $month=date("m",$time);
-        $day=date("d",$time);
-        $day_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
+        if(Auth::user()->role == 'admin'){
+            $products = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->count();
+            $paiements = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('mttc_pay');
+            $tva = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)->sum('tva_pay');
+            $depenses = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)->sum('amount_dep');
+
+            $time=strtotime(now());
+            $year=date("Y",$time);
+            $month=date("m",$time);
+            $day=date("d",$time);
+            $day_pay = Paiement::where('paiements.id_ent','=',Auth::user()->id_ent)
                 ->whereYear('paiements.date_pay','=',$year)
                 ->whereMonth('paiements.date_pay','=',$month)
                 ->whereDay('paiements.date_pay','=',$day)
                 ->sum('mttc_pay');
-        $day_dep = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)
+            $day_dep = Depense::where('depenses.id_ent','=',Auth::user()->id_ent)
                 ->whereYear('depenses.date_dep','=',$year)
                 ->whereMonth('depenses.date_dep','=',$month)
                 ->whereDay('depenses.date_dep','=',$day)
@@ -68,7 +70,47 @@ class HomeController extends Controller
                 ->whereMonth('depenses.date_dep','=',$month)->sum('amount_dep');
                 array_push($data['depenses'],$year_dep);
             }
+        }else{
+            $products = Produit::where('produits.id_shop', '=', Auth::user()->id_shop)->count();
+            $paiements = Paiement::where('paiements.id_shop','=',Auth::user()->id_shop)->sum('mttc_pay');
+            $tva = Paiement::where('paiements.id_ent','=',Auth::user()->id_shop)->sum('tva_pay');
+            $depenses = Depense::where('depenses.id_shop','=',Auth::user()->id_shop)->sum('amount_dep');
+
+            $time=strtotime(now());
+            $year=date("Y",$time);
+            $month=date("m",$time);
+            $day=date("d",$time);
+            $day_pay = Paiement::where('paiements.id_shop','=',Auth::user()->id_shop)
+                ->whereYear('paiements.date_pay','=',$year)
+                ->whereMonth('paiements.date_pay','=',$month)
+                ->whereDay('paiements.date_pay','=',$day)
+                ->sum('mttc_pay');
+            $day_dep = Depense::where('depenses.id_shop','=',Auth::user()->id_shop)
+                ->whereYear('depenses.date_dep','=',$year)
+                ->whereMonth('depenses.date_dep','=',$month)
+                ->whereDay('depenses.date_dep','=',$day)
+                ->whereMonth('depenses.date_dep','=',$month)->sum('amount_dep');
         
+            $data = [
+            'labels' =>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+            'payments'=>[],
+            'depenses'=>[]];
+            $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
+            foreach ($months as $month) {
+                
+                $time=strtotime(now());
+                $year=date("Y",$time);
+                $year_pay = Paiement::where('paiements.id_shop','=',Auth::user()->id_shop)
+                ->whereYear('paiements.date_pay','=',$year)
+                ->whereMonth('paiements.date_pay','=',$month)->sum('mttc_pay');
+                array_push($data['payments'],$year_pay);
+
+                $year_dep = Depense::where('depenses.id_shop','=',Auth::user()->id_shop)
+                ->whereYear('depenses.date_dep','=',$year)
+                ->whereMonth('depenses.date_dep','=',$month)->sum('amount_dep');
+                array_push($data['depenses'],$year_dep);
+            }
+        }
         //dd($data);
         return view('home',['user'=> $user,'products'=> $products,
         'paiements'=> $paiements,'depenses'=> $depenses,'tva'=> $tva,

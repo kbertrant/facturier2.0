@@ -104,12 +104,15 @@ class PaiementController extends Controller
             $fac = Facture::where('ref_fac','LIKE',$request->num_fac)->first();
             $fac->stat_fac = "Paid";
             $fac->save();
+
             $decode = new DecodeService();
             $decoded_id = $decode->DecodeId($fac->id);
             //dd($fac);
             $solde_pay = $fac->mttc_fac - $request->mttc_pay;
-            $payment = new PaiementService();
-            $pay = $payment->Paid($ref_pay,$decoded_id,$request->mttc_pay,$request->pay_mode,$solde_pay,$fac->id_cli);
+            if($solde_pay == 0){
+                $payment = new PaiementService();
+                $pay = $payment->Paid($ref_pay,$decoded_id,$fac->mttc_fac,$fac->mht_fac,$fac->tva_fac,$request->pay_mode,$solde_pay,$fac->id_cli);
+            }else{return redirect()->back()->with('success','Fond insuffisant!');}
             //dd($pay);
             $tresor = new TresorService();
             $tresor->transac($request->mttc_pay,"IN");

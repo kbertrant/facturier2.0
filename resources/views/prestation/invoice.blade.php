@@ -74,7 +74,7 @@
                                         <div class="mb-3">
                                         <label for="reduction" class="form-label">{{ __('mypages.remise') }} (%)</label>
                                         <input type="number" class="form-control @error('reduction') is-invalid @enderror"
-                                            id="reduction" name="reduction" value="0" required oninput="calculateTotal()"/>
+                                            id="reduction" name="reduction" value="0" required />
                                             @error('reduction')
                                             <span class="invalid-feedback" role="alert">
                                             <strong class="strong">Reduction est deja aquis</strong>
@@ -85,7 +85,7 @@
                                     <div class="col-lg-4 col-md-4 col-xs-12">
                                         <div class="form-check form-switch mb-3">
                                         <label class="form-check-label" for="tva_apply">{{ __('mypages.tva') }} </label>
-                                        <select id="tva_apply" name="tva_apply" class="form-control" onchange="calculateTotal()">
+                                        <select id="tva_apply" name="tva_apply" class="form-control" >
                                             <option value="off">OFF</option>
                                             <option value="on">ON</option>
                                         </select>
@@ -94,7 +94,7 @@
                                 <div class="col-lg-4 col-md-4 col-xs-12">
                                     <div class="form-check form-switch mb-3">
                                         <label class="form-check-label" for="rs_apply">{{ __('mypages.rs') }} </label>
-                                        <select id="rs_apply" name="rs_apply" class="form-control" onchange="calculateTotal()">
+                                        <select id="rs_apply" name="rs_apply" class="form-control" >
                                             <option value="off">OFF</option>
                                             <option value="on">ON</option>
                                         </select>
@@ -142,13 +142,6 @@
 <script type="text/javascript">
     window.onload = function() {
         $(document).ready(function() {
-            $(document).ready(function(){
-                $(".input[name="your_price[]"]").on("input", function(){
-                    // Code to execute when the input value changes
-                    var currentValue = $(this).val();
-                    console.log("Input value changed to: " + currentValue);
-                });
-            });
             $(document).ready(function() {
                 var maxField = 10; //Input fields increment limitation
                 var addButton = $('.add_button'); //Add button selector
@@ -160,24 +153,11 @@
                 $(addButton).click(function() {
                     //Check maximum number of input fields
                     if (x < maxField) {
-                        var fieldHTML = '<div class="row" style="margin:10px"><div class=" col-lg-6 col-md-6 col-xs-6 field"><label for="qty_prod" class="form-label">DESIGNATION</label><input type="text" class=" form-control" id="id_prod" name="id_prod[]"></div><div class="col-lg-2 col-md-2 col-xs-2"><label for="qty_prod" class="form-label">YOUR PRICE</label><input type="number" class="form-control @error('your_price') is-invalid @enderror" id="your_price" name="your_price[]" value="0" required /></div><div class="col-lg-2 col-md-2 col-xs-2 field"><label for="qty_prod" class="form-label">QUANTITE</label><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"><label for="qty_prod" class="form-label"></label> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-red bx-md"></i></a></div></div>';
+                        var fieldHTML = '<div class="row" style="margin:10px"><div class=" col-lg-6 col-md-6 col-xs-6 field"><label for="qty_prod" class="form-label">DESIGNATION <span class="red-star">*</span></label><input type="text" class=" form-control" id="id_prod" name="id_prod[]"></div><div class="col-lg-2 col-md-2 col-xs-2"><label for="qty_prod" class="form-label">PRICE <span class="red-star">*</span></label><input type="number" class="form-control @error('your_price') is-invalid @enderror" id="your_price" name="your_price[]" value="0" required /></div><div class="col-lg-2 col-md-2 col-xs-2 field"><label for="qty_prod" class="form-label">QUANTITE <span class="red-star">*</span></label><input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity[]" required /></div><div class="col-lg-2 col-md-2 col-xs-2 remove_buttonPP"><label for="qty_prod" class="form-label"></label> <a href="javascript:void(0);" class=""><i class="bx bx-comment-x bx-red bx-md"></i></a></div></div>';
                         x++; //Increment field counter
                         
                         $(wrapper).append(fieldHTML); //Add field html
                     }
-                    var totalSum = 0;
-
-                    // Select elements by their name attribute (e.g., "item_value")
-                    $('input[name="your_price"]').each(function() {
-                        // Get the value of the current element
-                        var value = parseFloat($(this).val()) || 0; // Use parseFloat for numbers, handle potential non-numeric values
-
-                        // Add the value to the total sum
-                        totalSum += value;
-
-                        console.log(totalSum);
-                        
-                    });
                 });
 
                 //Once remove button is clicked

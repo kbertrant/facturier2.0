@@ -43,10 +43,12 @@ class ProduitController extends Controller
                 'cat_name',
                 'detail',
                 'status',
-                'img'
+                'img',
+                'name_shop'
             )
                 ->join('cat_produits', 'cat_produits.id', '=', 'produits.id_cat')
-                ->where('produits.id_ent', '=', Auth::user()->id_ent)->get();
+                ->join('shops', 'shops.id', '=', 'produits.id_shop')
+                ->where('produits.id_ent', '=', Auth::user()->id_ent)->where('produits.id_shop', '=', Auth::user()->id_shop)->get();
 
             return datatables()->of($tasks)
                 ->addColumn('action', function ($row) {
@@ -245,7 +247,9 @@ class ProduitController extends Controller
             $pro->neuf = $request->neuf;
             $pro->id_cat = $decoded_id;
             if($request->file('img') !=null){
-            $pro->img = $request->$imageName;}
+                $pro->img = $request->$imageName;
+            }
+            $pro->id_shop = $request->id_shop;
             $pro->save();
 
         $historic = new HistoricService();

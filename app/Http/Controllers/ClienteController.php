@@ -12,6 +12,7 @@ use App\Services\DecodeService;
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Ui\Presets\Vue;
 
@@ -110,7 +111,7 @@ class ClienteController extends Controller
         
         $decode = new DecodeService();
         $decoded_id = $decode->DecodeId($id);
-        $count = Facture::where('id_cli','=',$decoded_id)->count();
+        $count = Facture::where('id_cli','=',$decoded_id)->where('stat_fac','=','PENDING')->count();
         $sum_pay = Facture::where('id_cli','=',$decoded_id)->where('stat_fac','=','PAID')->sum('mttc_fac');
         $sum_to_pay = Facture::where('id_cli','=',$decoded_id)->where('stat_fac','=','PENDING')->sum('mttc_fac');
         $fac = Facture::where('id_cli','=',$decoded_id)->get();
@@ -192,6 +193,33 @@ class ClienteController extends Controller
         $cli = Cliente::find($id);
         $cli->delete();
         return redirect()->back()->with('success','client supprimé');
+    }
+
+    public function creances()
+    {
+        if(request()->ajax()) {
+            $tasks = Cliente::select('clientes.id','name_cli','phone_cli','address_cli','name_tc',DB::raw('count(*) as num'),DB::raw('SUM(mttc_fac) as ttc'))
+            ->join('type_clientes','type_clientes.id','=','clientes.id_tc')
+            ->join('factures','factures.id_cli','=','clientes.id')
+            ->where('clientes.id_ent','=',Auth::user()->id_ent)
+            ->where('stat_fac','=','PENDING')
+            ->groupBy('clientes.id')
+            ->get();
+            
+            return datatables()->of($tasks)
+            ->addColumn('ttc', function ($row) {
+                if($row->ttc >= 1000000){
+                $span = "<span class='badge bg-label-danger'>".$row->ttc."</span>";
+                }else{$span = "<span class='badge bg-label-warning'>".$row->ttc."</span>";}
+                return  $span;})
+            ->rawColumns(['ttc'])
+            ->make(true);
+        }
+        
+        $historic = new HistoricService();
+        $historic->Add('List creances');
+        
+       return view('client.creance');
     }
     
 }

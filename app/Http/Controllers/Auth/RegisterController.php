@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\Models\Entreprise;
+use App\Models\Setting;
 use App\Models\Shop;
 use App\Models\Tresorerie;
 use App\Notifications\UserNotification;
@@ -80,40 +81,53 @@ class RegisterController extends Controller
     {
         try { 
             DB::beginTransaction();
-            $ent = Entreprise::create([
-                'name_ent'=> $data['name_ent'],
-                'rc_ent'=> $data['rc_ent'],
-                'logo_ent'=>'logo_ent.jpeg'
-            ]); 
 
-            $shop = Shop::create([
-                'name_shop'=> 'Shop 1',
-                'address_shop'=> $data['name_ent'],
-                'id_ent'=> $ent->id
-            ]); 
-            
             $myimage = $data['image']->getClientOriginalName();
             if($data['image']){
             $imagePath = ($data['image'])->move(public_path('entreprises'), $myimage);
             }
 
-            $startDate = time();
-            
+            $ent = Entreprise::create([
+                'name_ent'=> $data['name_ent'],
+                'rc_ent'=> $data['rc_ent'],
+                'phone' => $data['phone'],
+                'regim_fiscal_ent'=> $data['regime_fisc'],
+                'logo_ent'=>'logo_ent.jpeg'
+            ]); 
             $decode = new DecodeService();
             $ent_id = $decode->DecodeId($ent->id);
+
+            $shop = Shop::create([
+                'name_shop'=> 'Shop 1',
+                'address_shop'=> $data['name_ent'],
+                'id_ent'=> $ent_id
+            ]); 
+
+            $shop = Setting::create([
+                'template_inv'=> 'default',
+                'print_format'=> 'A4',
+                'id_ent'=> $ent_id
+            ]); 
+            
+            
+
+            $startDate = time();
+            
+            
             $shop_id = $decode->DecodeId($shop->id);
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'ville' => $data['ville'],
-                'image'=> $imagePath,
                 'role'=> 'admin',
                 'id_ent'=>$ent_id,
                 'id_shop'=>$shop_id,
                 'exp_date'=> date('Y-m-d H:i:s', strtotime('+7 days', $startDate)),
                 'password' => Hash::make($data['password'])
             ]);
+
+            $user->assignRole('admin');
 
             $ep = new Tresorerie();
             $ep->amount = 0;

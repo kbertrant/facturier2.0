@@ -74,10 +74,19 @@
             </div>
             <div class="mb-3">
               <label for="roles" class="form-label">ROLE  <span class="red-star">*</span></label>
-              <select name="roles[]" class="form-control" required multiple>
+              <select name="roles[]" class="form-control" required >
                 <option>Select Role</option>
                 @foreach ($roles as $role)
                   <option value="{{$role}}">{{$role}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="id_shop" class="form-label">Shop  <span class="red-star">*</span></label>
+              <select name="id_shop" class="form-control" required>
+                <option>Select shop</option>
+                @foreach ($shops as $shop)
+                  <option value="{{$shop->id}}">{{$shop->name_shop}}</option>
                 @endforeach
               </select>
             </div>

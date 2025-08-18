@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class ProduitService
 {
     public function CreateProduit($code_prod,$name_prod,$desc_prod,$price_prod,$qty_prod,$color_prod,
-    $size_prod,$detail,$id_cat,$volume,$poids,$is_stock,$neuf,$img,$id_shop){
+    $size_prod,$detail,$id_cat,$volume,$poids,$is_stock,$neuf,$img){
 
         //var_dump($account_num,$balance,$type_acc_id,$cus_id);
         $catpro = new Produit();
@@ -28,7 +28,7 @@ class ProduitService
         $catpro->id_cat = $id_cat;
         $catpro->img = $img;
         $catpro->id_ent = Auth::user()->id_ent;
-        $catpro->id_shop = $id_shop;
+        $catpro->id_shop = Auth::user()->id_shop;
 
         $catpro->save();
 

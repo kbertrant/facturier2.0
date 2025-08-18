@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
+use App\Services\DecodeService;
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class EntrepriseController extends Controller
        $historic->Add('Detail entreprise '.$entreprise->name_ent);
         
        $acts = $historic->HistoricsEnt($user->id_ent);
-        
+        //dd($entreprise);
         return view('entreprise.ent',[
             'entreprise'=>$entreprise,'acts'=>$acts
         ]);
@@ -57,18 +58,19 @@ class EntrepriseController extends Controller
             'logo_ent' => ['required'],
 
         ]); 
-
-        $entreprise =Entreprise::find($request->id) ;
+            $decode = new DecodeService();
+            $ent_id = $decode->DecodeId($request->id);
+        $entreprise =Entreprise::find($ent_id) ;
     
         
-        if($entreprise->logo_ent){Storage::disk('public')->delete($entreprise->logo_ent);}
+        //if($entreprise->logo_ent==null){Storage::disk('public')->delete($entreprise->logo_ent);}
         
-        if($request->logo_ent){
+        if($request->logo_ent==null){
         $logoPath = $request->file('logo_ent')->store('logo','public');
-        $entreprise->logo_ent=$logoPath;
+        $entreprise->logo_ent=$request->logo_ent;
         }
         
-
+//dd($request);
         $entreprise->update([
              'name_ent'=>$request->name_ent,
              'rc_ent'=>$request->rc_ent,
@@ -78,7 +80,8 @@ class EntrepriseController extends Controller
              'owner_ent'=>$request->owner_ent,
              'bank_ent'=>$request->bank_ent,
              'regim_fisc_ent'=>$request->regim_fisc,
-             'logo_ent'=>$logoPath
+             'logo_ent'=>$request->logo_ent,
+             'regim_fiscal_ent'=>$request->regim_fisc_ent
 
         ]);
         
@@ -143,6 +146,7 @@ class EntrepriseController extends Controller
         $ent->address_ent = $request->get('address_ent');
         $ent->owner_ent = $request->get('owner_ent');
         $ent->bank_ent = $request->get('bank_ent');
+        $ent->regim_fisc_ent = $request->get('regim_fisc_ent');
         $ent->save();
         //return $product;
         return redirect('ent')->with('success','Entreprise modifiée !');

@@ -75,76 +75,94 @@
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">{{ __('sidebar.sideFacturation') }}</span>
       </li>
+      @can('add-prestation-invoice')
       <li class="menu-item {{ request()->is('my/pres/quotation') ? 'active open' : '' }} {{ request()->is('my/pres/invoice') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Clients">Prestations</div>
         </a>
-
         <ul class="menu-sub ">
+          @can('add-prestation-quotation')
           <li class="menu-item {{ request()->is('my/pres/quotation') ? 'active' : 'hidden' }}">
             <a href="{{route('pres.formQuotation')}}" class="menu-link">
               <div data-i18n="Ajouter proforma de service">{{ __('sidebar.myProformas') }}</div>
             </a>
           </li>
+          @endcan
+          
           <li class="menu-item {{ request()->is('my/pres/invoice') ? 'active' : '' }}">
             <a href="{{route('pres.formInvoice')}}" class="menu-link">
               <div data-i18n="Ajouter une facture service">{{ __('sidebar.myFactures') }}</div>
             </a>
           </li>
+          
         </ul>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-quotation')
       <li class="menu-item {{ request()->is('my/proforma') ? 'active' : '' }}">
         <a href="{{route('proforma.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-receipt"></i>
           <div data-i18n="Basic">{{ __('sidebar.myProformas') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-invoice')
       <li class="menu-item {{ request()->is('my/facture') ? 'active' : '' }}">
         <a href="{{route('facture.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-cart"></i>
           <div data-i18n="Basic">{{ __('sidebar.myFactures') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-expense')
       <li class="menu-item {{ request()->is('my/depense') ? 'active' : '' }}">
         <a href="{{route('depense.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-credit-card"></i>
           <div data-i18n="Basic">{{ __('sidebar.myDepenses') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-payment')
       <li class="menu-item {{ request()->is('my/payment') ? 'active' : '' }}">
         <a href="{{route('payment.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-money"></i>
           <div data-i18n="Basic">{{ __('sidebar.myPaiements') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-refunds')
       <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-coin-stack"></i>
           <div data-i18n="Basic">{{ __('sidebar.myRemboursement') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+       @can('list-treasure')
       <li class="menu-item {{ request()->is('my/tresor') ? 'active' : '' }}">
         <a href="{{route('tresor.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-buildings"></i>
           <div data-i18n="Basic">{{ __('sidebar.myTersorerie') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideCommerce') }}</span></li>
       <!-- Layouts -->
-      <li class="menu-item {{ request()->is('my/type/client/list') ? 'active open' : '' }} {{ request()->is('my/client/list') ? 'active open' : '' }}">
+      @can('list-client')
+      <li class="menu-item {{ request()->is('my/type/client/list') ? 'active open' : '' }} {{ request()->is('my/client/creance') ? 'active open' : '' }} {{ request()->is('my/client/list') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Clients">Clients</div>
         </a>
-
+         
         <ul class="menu-sub ">
           <li class="menu-item {{ request()->is('my/type/client/list') ? 'active' : 'hidden' }}">
             <a href="{{route('listTypeClient')}}" class="menu-link">
@@ -156,8 +174,15 @@
               <div data-i18n="Liste de client">{{ __('sidebar.myListClient') }}</div>
             </a>
           </li>
+          <li class="menu-item {{ request()->is('my/client/creance') ? 'active' : '' }}">
+            <a href="{{route('listCreance')}}" class="menu-link">
+              <div data-i18n="Creances">Liste de creances</div>
+            </a>
+          </li>
         </ul>
+        @endcan
       </li>
+       @can('list-product')
       <li class="menu-item {{ request()->is('my/cat/produit') ? 'active open' : '' }} {{ request()->is('my/produit') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -177,39 +202,48 @@
           </li>
         </ul>
       </li>
-      
+      @endcan
       <!-- Cards -->
+       @can('list-supplier')
       <li class="menu-item {{ request()->is('my/fournisseur') ? 'active' : '' }}">
         <a href="{{route('fournisseur.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-store"></i>
           <div data-i18n="Basic">{{ __('sidebar.myFournisseurs') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+      @can('list-deliveries')
       <li class="menu-item">
         <a href="#" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">{{ __('sidebar.myLivraisons') }}</div>
         </a>
       </li>
+      @endcan
      <!-- Cards -->
+      @can('list-shop')
       <li class="menu-item {{ request()->is('my/shop') ? 'active' : '' }}">
         <a href="{{route('shop.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-store"></i>
           <div data-i18n="Basic">Boutiques</div>
         </a>
       </li>
+      @endcan
       <!-- Forms & Tables -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">{{ __('sidebar.sideParametre') }}</span></li>
       <!-- Cards -->
+       @can('list-user')
       <li class="menu-item {{ request()->is('my/user') ? 'active' : '' }}">
         <a href="{{route('user.main')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-id-card"></i>
           <div data-i18n="Basic">{{ __('sidebar.myUser') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
        <!-- Layouts -->
+        @can('list-role')
       <li class="menu-item {{ request()->is('my/role/list') ? 'active open' : '' }} {{ request()->is('my/perm/list') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -229,20 +263,25 @@
           </li>
         </ul>
       </li>
+      @endcan
       <!-- Cards -->
+       @can('detail-enterprise')
       <li class="menu-item {{ request()->is('my/entreprise') ? 'active' : '' }}">
         <a href="{{route('entreprise')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-collection"></i>
           <div data-i18n="Basic">{{ __('sidebar.myEntreprise') }}</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
+       @can('list-all-users')
       <li class="menu-item {{ request()->is('user/admin/list') ? 'active' : '' }}">
         <a href="{{route('user.admin')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-id-card"></i>
           <div data-i18n="Basic">Tous les users</div>
         </a>
       </li>
+      @endcan
       <!-- Cards -->
       <li class="menu-item">
         <a href="#" class="menu-link">
@@ -250,6 +289,7 @@
           <div data-i18n="Basic">{{ __('sidebar.myEtat') }}</div>
         </a>
       </li>
+      @can('list-setting')
       <li class="menu-item {{ request()->is('log-viewer') ? 'active open' : '' }} {{ request()->is('') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -257,18 +297,23 @@
         </a>
 
         <ul class="menu-sub ">
+           @can('list-log')
           <li class="menu-item {{ request()->is('log-viewer') ? 'active' : 'hidden' }}">
             <a href="/log-viewer" class="menu-link">
               <div data-i18n="Types de client">Logs</div>
             </a>
           </li>
+          @endcan
+           
           <li class="menu-item {{ request()->is('') ? 'active' : '' }}">
-            <a href="{{route('listClient')}}" class="menu-link">
-              <div data-i18n="Liste de client">{{ __('sidebar.myListClient') }}</div>
+            <a href="{{route('setting.list')}}" class="menu-link">
+              <div data-i18n="Liste des parametres">Parametres</div>
             </a>
           </li>
+          
         </ul>
       </li>
+      @endcan
     </ul>
   </aside>
   

@@ -7,6 +7,7 @@ use App\Models\ElementFacture;
 use App\Models\Entreprise;
 use App\Models\Facture;
 use App\Models\Produit;
+use App\Models\Setting;
 use App\Models\User;
 use App\Services\ClienteService;
 use App\Services\DecodeService;
@@ -226,6 +227,7 @@ class FactureController extends Controller
         $efs = ElementFacture::where('id_fac','=',$decoded_id)->get();
         $cl = Cliente::find($fac->id_cli);
         $usr = User::find(Auth::user()->id);
+        $setting = Setting::where('id_ent','=',)->get(Auth::user()->id_ent);
 
         //generate QR Code
         $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/facture/show/').'/'.$id)); 
@@ -237,7 +239,7 @@ class FactureController extends Controller
             'cl' => $cl,
             'usr' => $usr,
             'qrcode'=>$qrcode
-        ])->setPaper('a4')->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
+        ])->setPaper($setting->print_format)->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
         
         return $pdf->download('FAC_'.$fac->ref_fac.'.pdf');
         //return $pdf->stream();

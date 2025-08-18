@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Entreprise;
+use App\Models\Shop;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use App\Services\DecodeService;
@@ -30,9 +31,10 @@ class UserController extends Controller
 
     public function index(){
         if(request()->ajax()) {
-            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date')
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date','name_shop')
             ->join('entreprises','entreprises.id','=','users.id_ent')
-            ->where('id_ent','=',Auth::user()->id_ent)->get();
+            ->join('shops','shops.id','=','users.id_shop')
+            ->where('users.id_ent','=',Auth::user()->id_ent)->get();
             
             return datatables()->of($tasks)
             ->addColumn('action', function($row){
@@ -54,15 +56,17 @@ class UserController extends Controller
 
         $historic = new HistoricService();
         $historic->Add('List users');
+
         $roles = Role::pluck('name','name')->all();
+        $shops = Shop::where('id_ent',Auth::user()->id_ent)->get();
         
-       return view('user.listUser',compact('roles'));
+       return view('user.listUser',['roles'=>$roles,'shops'=>$shops]);
     }
 
     public function listAdmin(){
         if(request()->ajax()) {
-            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date')
-            ->join('entreprises','entreprises.id','=','users.id_ent')->get();
+            $tasks = User::select('users.id','name','email','ville','phone','name_ent','users.stat','exp_date','name_shop')
+            ->join('entreprises','entreprises.id','=','users.id_ent')->join('shops','shops.id','=','users.id_shop')->get();
             
             return datatables()->of($tasks)
             ->addColumn('action', function($row){
@@ -109,30 +113,33 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         $validator = Validator::make($request->all(), [
             'name' => ['required','string','unique:users'],
             'email' => ['required','string','unique:users'],
             'password' => ['required','string'],
             'ville' => ['required','string'],
             'phone' => ['required','string','unique:users'],
-            'exp_date'=>['required'],
-            'regim_fisc'=>['required']
+            'exp_date'=>['required']
         ]);
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
+        $decode = new DecodeService();
+        $decoded_id_shop = $decode->DecodeId($request['id_shop']);
+
         $user=Employee::create([
             'name' => $request->name,
             'email' => $request['email'],
             'phone' => $request['phone'],
             'ville' => $request['ville'],
-            'role' => $request['role'],
+            'role' => $request->roles[0],
             'id_ent'=> Auth::user()->id_ent,
+            'id_shop'=> $decoded_id_shop,
             'password' => Hash::make($request->password),
-            'exp_date'=> $request->exp_date,
-            'regim_fiscal_ent'=>$request->regim_fisc
+            'exp_date'=> $request->exp_date
         ]);
         $user->assignRole($request->input('roles'));
 

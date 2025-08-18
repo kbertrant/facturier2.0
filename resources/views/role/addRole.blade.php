@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
       
-      <form class="mb-3" method="POST" action="{{ route('role.store') }}">
+      <form class="mb-3" method="POST" action="{{ route('roles.store') }}">
                 @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nom du role <span class="red-star">*</span></label>

@@ -25,6 +25,7 @@ class ProformaService
         $pro->status = 'A';
         $pro->stat_pro = 'Pending';
         $pro->id_ent = Auth::user()->id_ent;
+        $pro->id_shop = Auth::user()->id_shop;
         $pro->id_usr = Auth::user()->id;
         $pro->save();
 

@@ -46,7 +46,7 @@
                           </div>
                           <div>
                             <h5 class="mb-0">{{$sum_pay}} XAF</h5>
-                            <span>Depenses</span>
+                            <span>Payments</span>
                           </div>
                         </div>
                       </div>
@@ -129,9 +129,9 @@
                             </div>
                           </div>
                           <div class="card-info">
-                            <h4 class="card-title mb-3">Number of unpaid invoices </h4>
+                            <h4 class="card-title mb-3">Unpaid invoice(s) </h4>
                             <span class="badge bg-label-success mb-1">Platinum member</span>
-                            <p class="text-muted mb-0">{{$count}} invoices</p>
+                            <p class="text-muted mb-0">{{$count}} invoice(s)</p>
                           </div>
                         </div>
                       </div>
@@ -141,6 +141,7 @@
                   <!-- / customer cards -->
                   <!-- Invoice table -->
                   <div class="card mb-4">
+                    <div class="card-body">
                     <div class="table-responsive mb-3">
                     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="card-header d-flex flex-wrap py-3 py-sm-2"><div class="head-label text-center me-4 ms-1"><h5 class="card-title mb-10 text-nowrap">Factures</h5></div></div>
                     <table class="table" id="clientfacture">
@@ -157,6 +158,7 @@
                       
                     </table>
                     </div>
+                  </div>
                   </div>
                   <!-- /Invoice table -->
                 </div>

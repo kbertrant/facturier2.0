@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('template_inv')->default('default');
+            $table->string('print_format')->default('A4');
+            $table->unsignedBigInteger('id_ent')->nullable();
             $table->timestamps();
+            $table->foreign('id_ent')->references('id')->on('entreprises');
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('settings');
     }
 };

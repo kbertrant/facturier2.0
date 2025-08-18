@@ -47,7 +47,7 @@ class PermissionController extends Controller
 
     public function create()
     {
-        return view('permissions.create');
+        return view('permission.create');
     }
 
     public function store(Request $request)
@@ -62,12 +62,13 @@ class PermissionController extends Controller
 
     public function show(Permission $permission)
     {
-        return view('permissions.show', compact('permission'));
+        return view('permission.show', compact('permission'));
     }
 
-    public function edit(Permission $permission)
+    public function edit($id)
     {
-        return view('permissions.edit', compact('permission'));
+        $permission = Permission::find($id);
+        return view('permission.editPerm', compact('permission'));
     }
 
     public function update(Request $request, Permission $permission)
@@ -78,12 +79,12 @@ class PermissionController extends Controller
     
         $permission->name = $request->input('name');
         $permission->save();
-        return redirect()->route('permissions.index')->with('message', 'Permission updated successfully.');
+        return redirect()->route('permission.index')->with('message', 'Permission updated successfully.');
     }
 
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return redirect()->route('permissions.index')->with('message', 'Permission deleted successfully');
+        return redirect()->route('permission.index')->with('message', 'Permission deleted successfully');
     }
 }
