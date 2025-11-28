@@ -23,6 +23,7 @@ class PaiementService
         $pay->id_ent = Auth::user()->id_ent;
         $pay->id_shop = Auth::user()->id_shop;
         $pay->id_usr = Auth::user()->id;
+        $pay->id_cur = Auth::user()->id_cur;
         $pay->save();
         return $pay;
     }

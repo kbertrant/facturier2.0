@@ -33,7 +33,8 @@ class User extends Authenticatable
         'id_shop',
         'image',
         'regim_fiscal_ent',
-        'exp_date'
+        'exp_date',
+        'id_cur'
     ];
 
     /**

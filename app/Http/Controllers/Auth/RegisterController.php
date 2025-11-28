@@ -123,6 +123,7 @@ class RegisterController extends Controller
                 'role'=> 'admin',
                 'id_ent'=>$ent_id,
                 'id_shop'=>$shop_id,
+                'id_cur'=>$data['id_cur'],
                 'exp_date'=> date('Y-m-d H:i:s', strtotime('+7 days', $startDate)),
                 'password' => Hash::make($data['password'])
             ]);
@@ -135,6 +136,7 @@ class RegisterController extends Controller
             $ep->mouvement = "IN";
             $ep->date_tres = now();
             $ep->id_ent = $user->id_ent;
+            $ep->id_cur = $data['id_cur'];
             $ep->save();
             DB::commit();
 

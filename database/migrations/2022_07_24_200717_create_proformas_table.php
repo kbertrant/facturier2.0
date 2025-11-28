@@ -19,6 +19,7 @@ class CreateProformasTable extends Migration
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->unsignedBigInteger('id_shop')->nullable();
             $table->unsignedBigInteger('id_usr')->nullable();
+            $table->unsignedInteger('id_cur');
             $table->datetime('date_pro');
             $table->string('pro_ref')->unique();
             $table->integer('mttc_pro');
@@ -35,6 +36,7 @@ class CreateProformasTable extends Migration
             $table->foreign('id_usr')->references('id')->on('users');
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_shop')->references('id')->on('shops');
+            $table->foreign('id_cur')->references('id')->on('currencies');
 
         });
     }

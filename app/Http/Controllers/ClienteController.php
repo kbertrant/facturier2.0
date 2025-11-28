@@ -203,7 +203,7 @@ class ClienteController extends Controller
             ->join('factures','factures.id_cli','=','clientes.id')
             ->where('clientes.id_ent','=',Auth::user()->id_ent)
             ->where('stat_fac','=','PENDING')
-            ->groupBy('clientes.id')
+            ->groupBy('clientes.id','name_cli','phone_cli','address_cli','name_tc')
             ->get();
             
             return datatables()->of($tasks)

@@ -32,11 +32,13 @@ class CreateProduitsTable extends Migration
             $table->unsignedBigInteger('id_cat')->nullable();
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->unsignedBigInteger('id_shop')->nullable();
+            $table->unsignedInteger('id_cur');
             $table->timestamps();
 
             $table->foreign('id_cat')->references('id')->on('cat_produits');
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_shop')->references('id')->on('shops');
+            $table->foreign('id_cur')->references('id')->on('currencies');
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_ent')->nullable();
             $table->unsignedBigInteger('id_prod')->nullable();
             $table->unsignedBigInteger('id_fac')->nullable();
+            $table->unsignedInteger('id_cur');
             $table->integer('ef_qty')->nullable();
             $table->integer('ef_pu')->nullable();
             $table->integer('ef_mht')->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration
 
             $table->foreign('id_ent')->references('id')->on('entreprises');
             $table->foreign('id_fac')->references('id')->on('factures');
+            $table->foreign('id_cur')->references('id')->on('currencies');
         });
     }
 

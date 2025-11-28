@@ -25,6 +25,7 @@ class EltProformaService
         $ep->ep_ttc = $ep_mht + $ep->ep_tva;
         $ep->ep_stat = 'Pending';
         $ep->id_ent = Auth::user()->id_ent;
+        $ep->id_cur = Auth::user()->id_cur;
         $ep->ep_lib = $ep_lib;
         $ep->save();
 
@@ -48,6 +49,7 @@ class EltProformaService
         $ep->ep_ttc = $ep_mht + $ep->ep_tva;
         $ep->ep_stat = 'Pending';
         $ep->id_ent = Auth::user()->id_ent;
+        $ep->id_cur = Auth::user()->id_cur;
         $ep->ep_lib = $ep_lib;
         $ep->save();
         //dd($ep);

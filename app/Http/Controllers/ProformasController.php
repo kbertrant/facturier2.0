@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Currency;
 use App\Models\ElementFacture;
 use App\Models\ElementProforma;
 use App\Models\Entreprise;
@@ -85,13 +86,19 @@ class ProformasController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        $clients = Cliente::where('clientes.id_ent', '=', Auth::user()->id_ent)->get();
-        $produits = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->get();
+        if(Auth::user()->role=="admin"){
+            $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
+            $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();
 
+        }else{
+             $clients = Cliente::where('clientes.id_shop','=',Auth::user()->id_shop)->get();
+            $produits = Produit::where('produits.id_shop','=',Auth::user()->id_shop)->get();
+        }
         $historic = new HistoricService();
         $historic->Add('List proformas');
+        $cur = Currency::find(Auth::user()->id_cur);
 
-        return view('proforma.listProforma', ['clients' => $clients, 'produits' => $produits]);
+        return view('proforma.listProforma', ['clients' => $clients, 'produits' => $produits,'cur'=>$cur]);
     }
 
     /**
@@ -123,7 +130,7 @@ class ProformasController extends Controller
             
             if($cli == null){
                 $cliservice = new ClienteService();
-                $cli = $cliservice->CreateCliente($request->id_cli,'phone','Adresse',null,null,null,null,1);
+                $cli = $cliservice->CreateCliente($request->id_cli,'+xxx xxx xxx xxx','Number Street Town Country',null,null,null,null,1);
                 //dd($cli);
             }
             $dcod_cli_id = $decode->DecodeId($cli->id);
@@ -197,10 +204,12 @@ class ProformasController extends Controller
         $eps = ElementProforma::where('id_pro', '=', $decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find($pro->id_usr);
-
+        $cur = Currency::find($pro->id_cur);
+        $mycur = Currency::find(Auth::user()->id_cur);
         $historic = new HistoricService();
+        //dd($mycur,$cur);
         $historic->Add('Detail proforma ');
-        return view('proforma.detailProforma', ['pro' => $pro, 'eps' => $eps, 'cl' => $cl, 'ent' => $ent, 'usr' => $usr]);
+        return view('proforma.detailProforma', ['pro' => $pro, 'eps' => $eps, 'cl' => $cl, 'ent' => $ent, 'usr' => $usr, 'cur' => $cur, 'mycur' => $mycur]);
     }
 
 
@@ -220,13 +229,14 @@ class ProformasController extends Controller
         ->where('id_pro', '=', $decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find($pro->id_usr);
+        $cur = Currency::find(Auth::user()->id_cur);
         $clients = Cliente::where('clientes.id_ent', '=', Auth::user()->id_ent)->get();
         $produits = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->get();
         //dd($produits);
         $historic = new HistoricService();
         $historic->Add('Edit proforma');
         return view('proforma.editProforma', ['pro' => $pro, 'eps' => $eps, 'cl' => $cl, 
-        'ent' => $ent, 'usr' => $usr, 'clients' => $clients, 'produits' => $produits]);
+        'ent' => $ent, 'usr' => $usr, 'clients' => $clients, 'produits' => $produits,'cur'=>$cur]);
     }
 
     /**
@@ -262,6 +272,7 @@ class ProformasController extends Controller
         $eps = ElementProforma::where('id_pro', '=', $decoded_id)->get();
         $cl = Cliente::find($pro->id_cli);
         $usr = User::find(Auth::user()->id);
+        $cur = Currency::find($pro->id_cur);
 
         //generate QR Code
         $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/proforma/show/').'/'.$id)); 
@@ -272,6 +283,7 @@ class ProformasController extends Controller
             'eps' => $eps,
             'cl' => $cl,
             'usr' => $usr,
+            'cur'=>$cur,
             'qrcode'=>$qrcode
         ])->setPaper('a4')->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
         $historic = new HistoricService();

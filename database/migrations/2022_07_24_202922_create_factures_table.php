@@ -20,6 +20,7 @@ class CreateFacturesTable extends Migration
             $table->unsignedBigInteger('id_pro')->nullable();
             $table->unsignedBigInteger('id_usr')->nullable();
             $table->unsignedBigInteger('id_shop')->nullable();
+            $table->unsignedInteger('id_cur');
             $table->datetime('date_fac');
             $table->string('ref_fac')->unique();
             $table->integer('mht_fac');
@@ -37,6 +38,7 @@ class CreateFacturesTable extends Migration
             $table->foreign('id_pro')->references('id')->on('proformas');
             $table->foreign('id_usr')->references('id')->on('users');
             $table->foreign('id_shop')->references('id')->on('shops');
+            $table->foreign('id_cur')->references('id')->on('currencies');
             
         });
     }

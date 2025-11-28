@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EltFactureService
 {
-    public function CreateEltFacture($id_prod,$id_fac,$ef_qty,$ef_pu,$ep_mht,$tva_apply,$ef_lib){
+    public function CreateEltFacture($id_prod,$id_fac,$ef_qty,$ef_pu,$ef_mht,$tva_apply,$ef_lib){
 
         $ef = new ElementFacture();
         $ef->id_prod = $id_prod;
@@ -17,14 +17,15 @@ class EltFactureService
         
         if($tva_apply=="on"){
             $ef->ef_tva = $ef_pu*$ef_qty*0.1925;  
-            $ef->ef_mht = $ep_mht;
+            $ef->ef_mht = $ef_mht;
         }else{
             $ef->ef_tva = 0;  
-            $ef->ef_mht = $ep_mht;
+            $ef->ef_mht = $ef_mht;
         }
-        $ef->ef_ttc = $ep_mht + $ef->ef_tva;
+        $ef->ef_ttc = $ef_mht + $ef->ef_tva;
         $ef->ef_stat = 'Pending';
         $ef->id_ent = Auth::user()->id_ent;
+        $ef->id_cur = Auth::user()->id_cur;
         $ef->ef_lib = $ef_lib;
         $ef->save();
 
@@ -48,6 +49,7 @@ class EltFactureService
         $ef->ef_ttc = $ef_mht + $ef->ef_tva;
         $ef->ef_stat = 'Pending';
         $ef->id_ent = Auth::user()->id_ent;
+        $ef->id_cur = Auth::user()->id_cur;
         $ef->ef_lib = $ef_lib;
         $ef->save();
         //dd($ep);

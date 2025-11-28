@@ -118,7 +118,7 @@
             <td class="text-nowrap">{{ $ef->ef_lib }}</td>
             <td>{{ number_format($ef->ef_pu,2) }}</td>
             <td>{{ $ef->ef_qty }}</td>
-            <td>{{ number_format($ef->ef_ttc,2) }}</td>
+            <td>{{ number_format($ef->ef_mht,2) }}</td>
           </tr>
           @endforeach
           <tr>
@@ -141,7 +141,7 @@
                           <p class="fw-medium mb-2">{{number_format($fac->reduction,2)}}</p>
                           <p class="fw-medium mb-2">{{number_format($fac->tva_fac,2)}}</p>
                           <p class="fw-medium mb-2">{{number_format($fac->rs_fac,2)}}</p>
-                          <p class="fw-medium mb-0">{{number_format($fac->mttc_fac,2)}} XAF</p> 
+                          <p class="fw-medium mb-0">{{number_format(($fac->mttc_fac),2)}} XAF</p> 
                         </td>
                       </tr>
                     </tbody>
@@ -151,7 +151,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                      <p class="">Arreté la presente facture à la somme de <b>{{number_format($fac->mttc_fac,2)}} XAF</b></p>
+                      <p class="">Arretée la presente facture à la somme de <b>{{number_format(($fac->mttc_fac),2)}} XAF</b></p>
                     </div>
                     <div class="col-12">
                       <span class="fw-medium">Note:</span>

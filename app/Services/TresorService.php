@@ -12,9 +12,17 @@ class TresorService
         //get last row insert in table
         $tresor =  Tresorerie::where('id_ent','=',Auth::user()->id_ent)
             ->orderBy('date_tres', 'DESC')->first();
-        //dd($tresor);
+        
         $t = 0;
-        if($tresor==null){$t = 0;}else{$t = $tresor->amount_tres;}
+        if($tresor==null){$t = 0;}
+        else{$t = $tresor->amount_tres;}
+
+        $cur = new CurrencyService();
+        $fac_cur = $cur->MyUsrCurrency(Auth::user()->id_cur);
+        $tres_cur = $cur->MyUsrCurrency($tresor->id_cur);
+
+        $cur_amount = currency($amount, $fac_cur, $tres_cur);
+        
         $ep = new Tresorerie();
         if($sens=="IN"){
             $ep->amount = $amount;
@@ -22,6 +30,7 @@ class TresorService
             $ep->mouvement = $sens;
             $ep->date_tres = now();
             $ep->id_ent = Auth::user()->id_ent;
+            $ep->id_cur = Auth::user()->id_cur;
             $ep->save();
         }else if($sens=="OUT" || $tresor >= $amount){
             $ep->amount = $amount;
@@ -29,6 +38,7 @@ class TresorService
             $ep->mouvement = $sens;
             $ep->date_tres = now();
             $ep->id_ent = Auth::user()->id_ent;
+            $ep->id_cur = Auth::user()->id_cur;
             $ep->save();
         }else{
             throw ValidationException::withMessages(['tresorerie' => 'Vos fonds sont insuffisants']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cat_produit;
 use App\Models\Cliente;
+use App\Models\Currency;
 use App\Models\ElementFacture;
 use App\Models\ElementProforma;
 use App\Services\ClienteService;
@@ -41,13 +42,15 @@ class PrestationController extends Controller
     {
         
         $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
-        return view('prestation.quotation',['clients'=>$clients]);
+        $cur= Currency::find(Auth::user()->id_cur);
+        return view('prestation.quotation',['clients'=>$clients,'cur'=>$cur]);
     }
 
     public function formInvoice(Request $request)
     {
         $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
-        return view('prestation.invoice',['clients'=>$clients]);
+        $cur= Currency::find(Auth::user()->id_cur);
+        return view('prestation.invoice',['clients'=>$clients,'cur'=>$cur]);
     }
 
     public function saveQuotation(Request $request)
@@ -82,7 +85,7 @@ class PrestationController extends Controller
             $dcod_cli_id = $decode->DecodeId($cli->id);
             //dd($cli);
             $prof = new ProformaService();
-            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, 0, $request->reduction);
+            $new_prof = $prof->CreateProforma($dcod_cli_id, $result, 0, 0, 0, 0, 0, $request->reduction,Auth::user()->id_cur);
             $dcode_pro_id = $decode->DecodeId($new_prof->id);
             $s = 0;
             //dd($new_prof);
@@ -154,7 +157,7 @@ class PrestationController extends Controller
             $dcod_cli_id = $decode->DecodeId($cli->id);
             //dd($cli);
             $fac = new FactureService();
-            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,0,$request->reduction);
+            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,0,$request->reduction,Auth::user()->id_cur);
             $dcode_fac_id = $decode->DecodeId($new_fac->id);
             $s = 0;
             //dd($new_prof);

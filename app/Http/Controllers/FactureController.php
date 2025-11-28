@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Currency;
 use App\Models\ElementFacture;
 use App\Models\Entreprise;
 use App\Models\Facture;
@@ -71,13 +72,20 @@ class FactureController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
-        $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
-        $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();
+        if(Auth::user()->role=="admin"){
+            $clients = Cliente::where('clientes.id_ent','=',Auth::user()->id_ent)->get();
+            $produits = Produit::where('produits.id_ent','=',Auth::user()->id_ent)->get();
 
+        }else{
+             $clients = Cliente::where('clientes.id_shop','=',Auth::user()->id_shop)->get();
+            $produits = Produit::where('produits.id_shop','=',Auth::user()->id_shop)->get();
+        }
+        
         $historic = new HistoricService();
         $historic->Add('List invoices');
+        $cur = Currency::find(Auth::user()->id_cur);
         
-        return view('facture.listFacture',['clients'=>$clients,'produits'=>$produits]);
+        return view('facture.listFacture',['clients'=>$clients,'produits'=>$produits,'cur'=>$cur]);
     }
 
     /**
@@ -110,13 +118,13 @@ class FactureController extends Controller
             $cli = Cliente::where('name_cli','LIKE',$request->id_cli)->first();
             if($cli == null){
                 $cliservice = new ClienteService();
-                $cli = $cliservice->CreateCliente($request->id_cli,'phone','Adresse',null,null,null,null,1);
+                $cli = $cliservice->CreateCliente($request->id_cli,'+xxx xxx xxx xxx','Number Street Town Country',null,null,null,null,1);
                 //dd($cli);
             }
             //create facture to null
             $fac = new FactureService();
             $dcod_cli_id = $decode->DecodeId($cli->id);
-            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,0,$request->reduction);
+            $new_fac = $fac->CreateFacture($dcod_cli_id,null,$result,0,0,0,0,0,$request->reduction,Auth::user()->id_cur);
             $dcod_fac_id = $decode->DecodeId($new_fac->id);
             $s = 0;
             //add elements facture
@@ -192,8 +200,9 @@ class FactureController extends Controller
         
         $usr = User::find($fac->id_usr);
         $cl = Cliente::find($fac->id_cli);
+        $cur = Currency::find($fac->id_cur);
         //dd($efs);
-        return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
+        return view('facture.detailFacture',['fac'=>$fac,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr,'cur'=>$cur]);
     }
 
     /**
@@ -227,7 +236,8 @@ class FactureController extends Controller
         $efs = ElementFacture::where('id_fac','=',$decoded_id)->get();
         $cl = Cliente::find($fac->id_cli);
         $usr = User::find(Auth::user()->id);
-        $setting = Setting::where('id_ent','=',)->get(Auth::user()->id_ent);
+        $cur = Currency::find($fac->id_cur);
+        $setting = Setting::where('id_ent','=',Auth::user()->id_ent)->first();
 
         //generate QR Code
         $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(URL::to('/facture/show/').'/'.$id)); 
@@ -238,6 +248,7 @@ class FactureController extends Controller
             'efs' => $efs,
             'cl' => $cl,
             'usr' => $usr,
+            'cur' => $cur,
             'qrcode'=>$qrcode
         ])->setPaper($setting->print_format)->setOption(['dpi' => 130,'isRemoteEnabled' => true,'defaultFont' => 'SourceSansPro','Georgia','isPhpEnabled' => true]);
         

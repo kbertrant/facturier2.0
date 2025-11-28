@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Currency;
 use App\Models\Tresorerie;
 use App\Services\HistoricService;
 use Illuminate\Http\Request;
@@ -34,8 +35,9 @@ class TresorerieController extends Controller
         
         $historic = new HistoricService();
         $historic->Add('List Treasure');
+        $cur = Currency::find(Auth::user()->id_cur);
 
-        return view('tresor.listTresor',['tresors'=>$tresors,'actuel'=>$actuel]);
+        return view('tresor.listTresor',['tresors'=>$tresors,'actuel'=>$actuel,'cur'=>$cur]);
     }
 
     /**

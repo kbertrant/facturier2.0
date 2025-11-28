@@ -88,8 +88,13 @@ class UserController extends Controller
 
         $historic = new HistoricService();
         $historic->Add('List users');
+        $historic = new HistoricService();
+        $historic->Add('List users');
+
+        $roles = Role::pluck('name','name')->all();
+        $shops = Shop::where('id_ent',Auth::user()->id_ent)->get();
         
-       return view('user.listallusers');
+       return view('user.listallusers',['roles'=>$roles,'shops'=>$shops]);
     }
     
     /**
@@ -100,9 +105,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $decode = new DecodeService();
-        $decoded_id = $decode->DecodeId($id);
-        $user = Employee::find($decoded_id);
+        //$decode = new DecodeService();
+        //$decoded_id = $decode->DecodeId($id);
+        $user = Employee::find($id);
         $ent = Entreprise::find($user->id_ent);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();

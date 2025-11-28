@@ -191,6 +191,22 @@
 							  @enderror
               </div>
               <div class="mb-3">
+                <label for="rc_ent" class="form-label">Devise souhaitée <span class="red-star">*</span></label>
+                <select class="form-control" name="id_cur" id="id_cur">
+                  <option value="">Selectionner une devise au choix</option>
+                  <option value="1">US Dollar</option>
+                  <option value="2">Pound Sterling</option>
+                  <option value="3">CAN Dollar </option>
+                  <option value="5">Euro</option>
+                  <option value="6">Franc CFA (XAF)</option>
+                </select>
+                @error('regime_fisc')
+							   <span class="invalid-feedback" role="alert">
+								  <strong class="strong">Se champ est deja aquis</strong>
+							   </span>
+							  @enderror
+              </div>
+              <div class="mb-3">
                 <label for="image" class="form-label">image</label>
                 <input type="file"  accept="image/png, image/jpg, image/jpeg" class="form-control" id="image" required name="image" placeholder="Entrer votre image" />   
               </div>

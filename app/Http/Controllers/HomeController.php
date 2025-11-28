@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Depense;
 use App\Models\Paiement;
 use App\Models\Produit;
+use App\Services\CurrencyService;
 use App\Services\HistoricService;
 use Faker\Provider\ar_EG\Payment;
 use Illuminate\Http\Request;
@@ -29,6 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     { 
+        currency()->clearCache();
+       
         $user = Auth::user();
         if(Auth::user()->role == 'admin'){
             $products = Produit::where('produits.id_ent', '=', Auth::user()->id_ent)->count();

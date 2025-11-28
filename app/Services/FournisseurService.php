@@ -22,7 +22,7 @@ class FournisseurService
         $four->four_nui = $four_nui;
         $four->four_email = $four_email;
         $four->id_ent = Auth::user()->id_ent;
-        $four->id_shop = Auth::user()->id_shop;
+        //$four->id_shop = Auth::user()->id_shop;
         $four->save();
 
         return $four;

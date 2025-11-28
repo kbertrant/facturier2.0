@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FactureService
 {
-    public function CreateFacture($id_cli,$id_pro,$ref_fac,$mttc_fac,$mht_fac,$tva_fac,$rs_fac,$qty_fac,$reduction){
+    public function CreateFacture($id_cli,$id_pro,$ref_fac,$mttc_fac,$mht_fac,$tva_fac,$rs_fac,$qty_fac,$reduction,$id_cur){
 
         $fac = new Facture();
         $fac->id_cli = $id_cli;
@@ -26,6 +26,7 @@ class FactureService
         $fac->id_ent = Auth::user()->id_ent;
         $fac->id_shop = Auth::user()->id_shop;
         $fac->id_usr = Auth::user()->id;
+        $fac->id_cur = $id_cur;
         $fac->save();
 
         return $fac;
@@ -34,7 +35,7 @@ class FactureService
     public function SetPriceFacture($id_fac,$amountRed,$mht,$tva,$qty,$reduct,$rs){
         //dd($id_fac);
         $fac = Facture::find($id_fac);
-        $fac->mttc_fac = $amountRed;
+        $fac->mttc_fac = $amountRed+$tva-$rs;
         $fac->mht_fac = $mht;
         $fac->qty_fac = $qty;
         $fac->tva_fac = $tva;

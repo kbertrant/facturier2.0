@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Currency;
 use App\Models\ElementFacture;
 use App\Models\Entreprise;
 use App\Models\Facture;
@@ -71,7 +72,10 @@ class PaiementController extends Controller
         
         $historic = new HistoricService();
         $historic->Add('List paiement');
-        return view('payment.listPayment',['facs'=>$facs]);
+
+        $cur = Currency::find(Auth::user()->id_cur);
+        
+        return view('payment.listPayment',['facs'=>$facs,'cur'=>$cur]);
     }
 
     /**
@@ -145,10 +149,10 @@ class PaiementController extends Controller
         $efs = ElementFacture::where('id_fac','=',$pay->id_fac)->get();
         $cl = Cliente::find($pay->id_cli);
         $usr = User::find($pay->id_usr);
-
+        $cur = Currency::find($pay->id_cur);
         $historic = new HistoricService();
         $historic->Add('Detail payment ');
-        return view('payment.detailPayment',['pay'=>$pay,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr]);
+        return view('payment.detailPayment',['pay'=>$pay,'efs'=>$efs,'cl'=>$cl,'ent'=>$ent,'usr'=>$usr,'cur'=>$cur]);
     
     }
 

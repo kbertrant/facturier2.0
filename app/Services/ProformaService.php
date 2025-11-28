@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProformaService
 {
-    public function CreateProforma($id_cli,$pro_ref,$mttc_pro,$mht_pro,$tva_pro,$rs_pro,$qty_pro,$reduction){
+    public function CreateProforma($id_cli,$pro_ref,$mttc_pro,$mht_pro,$tva_pro,$rs_pro,$qty_pro,$reduction,){
 
         $pro = new Proformas();
         $pro->id_cli = $id_cli;
@@ -27,6 +27,7 @@ class ProformaService
         $pro->id_ent = Auth::user()->id_ent;
         $pro->id_shop = Auth::user()->id_shop;
         $pro->id_usr = Auth::user()->id;
+        $pro->id_cur = Auth::user()->id_cur;
         $pro->save();
 
         return $pro;
@@ -68,7 +69,7 @@ class ProformaService
         $date = now();
         $result = $date->format('YmdHis');
         $facSvc = new FactureService();
-        $fac = $facSvc->CreateFacture($pro->id_cli,$idpro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->rs_pro,$pro->qty_pro,$pro->reduction,$pro->rs_pro);
+        $fac = $facSvc->CreateFacture($pro->id_cli,$idpro,$result,$pro->mttc_pro,$pro->mht_pro,$pro->tva_pro,$pro->rs_pro,$pro->qty_pro,$pro->reduction,$pro->rs_pro,$pro->id_cur);
         //decode receive is form http
         
         $dcd_fac_id = $decode->DecodeId($fac->id);

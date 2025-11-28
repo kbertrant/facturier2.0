@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Currency;
 use App\Models\Depense;
 use App\Models\Entreprise;
 use App\Models\Fournisseur;
@@ -62,11 +63,11 @@ class DepenseController extends Controller
             ->make(true);
         }
         $fours = Fournisseur::where('fournisseurs.id_ent','=',Auth::user()->id_ent)->get();
-        
+        $cur = Currency::find(Auth::user()->id_cur);
         $historic = new HistoricService();
         $historic->Add('List Expenses');
         
-        return view('depense.listDepense',['fours'=>$fours]);
+        return view('depense.listDepense',['fours'=>$fours,'cur'=>$cur]);
     }
 
     /**
@@ -123,9 +124,10 @@ class DepenseController extends Controller
         $four = Fournisseur::find($dep->id_four);
         $usr = User::find($dep->id_usr);
 
+        $cur = Currency::find($dep->id_cur);
         $historic = new HistoricService();
         $historic->Add('Detail expense ');
-        return view('depense.detailDepense',['dep'=>$dep,'four'=>$four,'ent'=>$ent,'usr'=>$usr]);
+        return view('depense.detailDepense',['dep'=>$dep,'four'=>$four,'ent'=>$ent,'usr'=>$usr,'cur' =>$cur]);
     
     }
 
@@ -160,12 +162,14 @@ class DepenseController extends Controller
         $ent = Entreprise::find(Auth::user()->id_ent);
         $four = Fournisseur::find($dep->id_four);
         $usr = User::find(Auth::user()->id);
+        $cur = Currency::find($dep->id_cur);
 
         $pdf = Pdf::loadView('print.deppdf', [
             'dep' => $dep,
             'ent' => $ent,
             'four' => $four,
             'usr' => $usr,
+            'cur' => $cur,
         ])->setPaper('a6')->setOption(['dpi' => 150,'isRemoteEnabled' => true,'defaultFont' => 'Ayuthaya','isPhpEnabled' => true]);
         $historic = new HistoricService();
         $historic->Add('Print depense');

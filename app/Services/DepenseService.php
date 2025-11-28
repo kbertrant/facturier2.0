@@ -23,6 +23,7 @@ class DepenseService
         $dep->id_ent = Auth::user()->id_ent;
         $dep->id_usr = Auth::user()->id;
         $dep->id_shop = Auth::user()->id_shop;
+        $dep->id_cur = Auth::user()->id_cur;
         $dep->save();
 
         return $dep;
